@@ -9,6 +9,7 @@
 		echo "<ul><li>Kai Kleefisch</li></ul>";
 		echo "<ul><li>Florian Fay</li></lu>";
 		echo "<ul><li>Alex</li></lu>";
+		echo "<ul><li>Kai Bücking</li></lu>";
 	?>
 
 </body>
