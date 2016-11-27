@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script type="text/javascript" src="javaScriptFiles/FirstJavaScriptFile.js"></script>
 </head>
 <body>
 	<?php
@@ -12,8 +11,7 @@
 		echo "<ul><li>Alex</li></ul>";
 		echo "<ul><li>Kai Bücking</li></ul>";
 	?>
-<!--  	<a href="javascript:ausgabeHalloWelt()">Sag Hallo!</a>
--->
+
 </body>
 
 </html>
