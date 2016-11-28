@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on branch 'master' of https://github.com/Futureflo/FotoprojektSemester5.git
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +21,7 @@
             echo "<ul><li>Florian Fay</li></ul>";
             echo "<ul><li>Alex</li></ul>";
             echo "<ul><li>Kai Bücking</li></ul>";
+            echo "<ul><li>Severin Klug</li></ul>";
             echo "<ul><li>Tim Deisser</li></ul>";
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
@@ -37,6 +39,7 @@
             echo "<ul><li>Florian Fay</li></ul>";
             echo "<ul><li>Alex</li></ul>";
             echo "<ul><li>Kai Bücking</li></ul>";
+            echo "<ul><li>Severin Klug</li></ul>";
             echo "<ul><li>Tim Deisser</li></ul>";
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
@@ -54,5 +57,6 @@
     <script src="bootstrap-4.0.0-alpha.5/dist/js/jquery-3.1.1.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
     <script src="bootstrap-4.0.0-alpha.5/dist/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+
   </body>
 </html>
