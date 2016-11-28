@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 col-xl-6">
             
              <?php
             echo "<h1>Liste Entwickler mit Zugriff auf das Projekt</h1><br>";
@@ -29,7 +29,7 @@
             
         </div>
         
-         <div class="col-md-6">
+         <div class="col-md-12 col-xl-6">
             
              <?php
             echo "<h1>Und hier die weiteren Entwickler</h1><br>";
