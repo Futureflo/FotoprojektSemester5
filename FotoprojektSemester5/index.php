@@ -21,6 +21,7 @@
             echo "<ul><li>Alex</li></ul>";
             echo "<ul><li>Kai Bücking</li></ul>";
             echo "<ul><li>Tim Deisser</li></ul>";
+            echo "<ul><li>Melanie Müller</li></ul>";
         ?>
             
         </div>
@@ -34,6 +35,7 @@
             echo "<ul><li>Alex</li></ul>";
             echo "<ul><li>Kai Bücking</li></ul>";
             echo "<ul><li>Tim Deisser</li></ul>";
+            echo "<ul><li>Melanie Müller</li></ul>";
         ?>
             
         </div>
