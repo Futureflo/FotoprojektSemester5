@@ -39,6 +39,7 @@
             echo "<ul><li>Tim Deisser</li></ul>";
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
+			echo "<ul><li>Simone Gregg</li></ul>";
         ?>
             
         </div>
