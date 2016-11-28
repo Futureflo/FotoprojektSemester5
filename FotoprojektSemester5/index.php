@@ -1,4 +1,3 @@
-<<<<<<< Upstream, based on branch 'master' of https://github.com/Futureflo/FotoprojektSemester5.git
 <!DOCTYPE html>
 <html lang="en">
   <head>
