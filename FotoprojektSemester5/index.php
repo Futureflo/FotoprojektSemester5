@@ -24,6 +24,7 @@
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
 			echo "<ul><li>Simone Gregg</li></ul>";
+			echo "<ul><li>Raphael Fehrenbach</li></ul>";
         ?>
             
         </div>
@@ -40,6 +41,7 @@
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
 			echo "<ul><li>Simone Gregg</li></ul>";
+			echo "<ul><li>Raphael Fehrenbach</li></ul>";
         ?>
             
         </div>
