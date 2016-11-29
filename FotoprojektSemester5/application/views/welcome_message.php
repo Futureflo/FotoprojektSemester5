@@ -64,12 +64,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		box-shadow: 0 0 8px #D0D0D0;
 	}
 	</style>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="_sonstiges/bootstrap-4.0.0-alpha.5/dist/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+	
 </head>
 <body>
 
 <div id="container">
 	<h1>Welcome to CodeIgniter!</h1>
-    <div class="container">
+
+	<div id="body">
+		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+
+		<p>If you would like to edit this page you'll find it located at:</p>
+		<code>application/views/welcome_message.php</code>
+
+		<p>The corresponding controller for this page is found at:</p>
+		<code>application/controllers/Welcome.php</code>
+
+		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+	
+	    <div class="container">
       <div class="row">
 
         <div class="col-md-7">
@@ -101,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo "<ul><li>Melanie Müller</li></ul>";
 			echo "<ul><li>David Fankhänel</li></ul>";
 			echo "<ul><li>Simone Gregg</li></ul>";
-			echo "<ul><li>Raphael Fehrenbach</li></ul>";
+			echo "<ul><li><a href=\"_sonstiges\">Raphael Fehrenbach</a></li></ul>";
         ?>
             
         </div>
@@ -111,9 +126,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
     </div>    
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="bootstrap-4.0.0-alpha.5/dist/js/jquery-3.1.1.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+    <script src="_sonstiges/bootstrap-4.0.0-alpha.5/dist/js/jquery-3.1.1.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-    <script src="bootstrap-4.0.0-alpha.5/dist/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <script src="_sonstiges/bootstrap-4.0.0-alpha.5/dist/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+	
+	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
