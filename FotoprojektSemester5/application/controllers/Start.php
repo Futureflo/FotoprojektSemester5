@@ -6,9 +6,9 @@ class Start extends CI_Controller {
 	public function index()
 	{	
 
-		$this->load->view('general/header');
-		$this->load->view('general/navbar_visitor');
-		$this->load->view('start');
-		$this->load->view('general/footer');
+		$this->load->view('general/header_view');
+		$this->load->view('general/navbar_visitor_view');
+		$this->load->view('start_view');
+		$this->load->view('general/footer_view');
 	}
 }

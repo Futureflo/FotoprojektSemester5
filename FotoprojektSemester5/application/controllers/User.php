@@ -7,10 +7,10 @@
       	$data['users'] = $this->user_model->getAllUsers();
       	
 
-      	$this->load->view('general/header');
-      	$this->load->view('general/navbar_visitor');
-		$this->load->view('user/allUsers', $data);
-      	$this->load->view('general/footer');
+      	$this->load->view('general/header_view');
+      	$this->load->view('general/navbar_visitor_view');
+		$this->load->view('user/allUsers_view', $data);
+      	$this->load->view('general/footer_view');
       	
       } 
 
