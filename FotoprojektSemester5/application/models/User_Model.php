@@ -22,7 +22,7 @@
       // get user
       function get_user_by_id($id)
       {
-      	$this->db->where('id', $id);
+      	$this->db->where('user_id', $id);
       	$query = $this->db->get('user');
       	return $query->result();
       }

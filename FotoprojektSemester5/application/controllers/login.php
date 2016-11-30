@@ -12,12 +12,12 @@ class login extends CI_Controller
     public function index()
     {
 		// get form input
-		$email = $this->input->post("email");
-        $password = $this->input->post("password");
+		$email = $this->input->post("user_email");
+        $password = $this->input->post("user_password");
 
 		// form validation
-		$this->form_validation->set_rules("email", "Email-ID", "trim|required|xss_clean");
-		$this->form_validation->set_rules("password", "Password", "trim|required|xss_clean");
+		$this->form_validation->set_rules("user_email", "Email-ID", "trim|required|xss_clean");
+		$this->form_validation->set_rules("user_password", "Password", "trim|required|xss_clean");
 		
 		if ($this->form_validation->run() == FALSE)
         {
