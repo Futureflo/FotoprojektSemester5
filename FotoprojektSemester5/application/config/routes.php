@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'start';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['event/(:any)'] = 'event/showSingleEvent/$1';
+$route['picture/(:any)'] = 'picture/showSinglePicture/$1';
+$route['user/(:num)'] = 'user/showSingleUser/$1';

@@ -1,7 +1,7 @@
 
 <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">Album example</h1>
+		<h1 class="jumbotron-heading"><?php echo $event[0]->even_name;?></h1>
 		<p class="lead text-muted">Something short and leading about the
 			collection below—its contents, the creator, etc. Make it short and
 			sweet, but not too short so folks don't simply skip over it entirely.</p>
@@ -97,7 +97,7 @@
 					data-holder-rendered="true">
 				<p class="card-text">This is a wider card with supporting text below
 					as a natural lead-in to additional content. This content is a
-					little bit longer Kai Läuft.</p>
+					little bit longer.</p>
 			</div>
 		</div>
 

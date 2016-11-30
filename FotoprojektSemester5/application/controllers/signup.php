@@ -39,13 +39,21 @@ class signup extends CI_Controller
 			if ($this->user_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
+<<<<<<< HEAD
 				redirect('login');
+=======
+				redirect('signup/index');
+>>>>>>> branch 'master' of https://github.com/Futureflo/FotoprojektSemester5.git
 			}
 			else
 			{
 				// error
 				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
+<<<<<<< HEAD
 				redirect('login');
+=======
+				redirect('signup/index');
+>>>>>>> branch 'master' of https://github.com/Futureflo/FotoprojektSemester5.git
 			}
 		}
 	}
