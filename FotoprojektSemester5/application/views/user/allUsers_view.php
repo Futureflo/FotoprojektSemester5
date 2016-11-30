@@ -12,12 +12,12 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>user_id</th>
-					<th>user_name</th>
-					<th>user_firstname</th>
-					<th>user_email</th>
-					<th>user_password</th>
-					<th>user_role_id</th>
+					<th>ID</th>
+					<th>Nachname</th>
+					<th>Vorname</th>
+					<th>e-Mail</th>
+					<th>Passwort</th>
+					<th>Rolle</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +29,7 @@
 				echo "<th>" . $user->user_firstname . "</th>";
 				echo "<th>" . $user->user_email . "</th>";
 				echo "<th>" . $user->user_password . "</th>";
-				echo "<th>" . $user->user_role_id . "</th>";
+				echo "<th>" . $user->usro_name . "</th>";
 				echo "<tr>";
 			}
 			?>

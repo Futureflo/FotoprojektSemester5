@@ -6,6 +6,7 @@
       } 
             
       Public function getAllUsers(){
+      	$this->db->join('user_role', 'usro_id = user_role_id', 'LEFT OUTER');
       	$query = $this->db->get("user");
       	return $query->result();
       }
