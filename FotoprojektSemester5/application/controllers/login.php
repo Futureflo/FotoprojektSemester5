@@ -16,8 +16,8 @@ class login extends CI_Controller
         $password = $this->input->post("user_password");
 
 		// form validation
-		$this->form_validation->set_rules("user_email", "Email-ID", "trim|required|xss_clean");
-		$this->form_validation->set_rules("user_password", "Password", "trim|required|xss_clean");
+		$this->form_validation->set_rules("user_email", "Email-ID", "trim|required");
+		$this->form_validation->set_rules("user_password", "Password", "trim|required");
 		
 		if ($this->form_validation->run() == FALSE)
         {

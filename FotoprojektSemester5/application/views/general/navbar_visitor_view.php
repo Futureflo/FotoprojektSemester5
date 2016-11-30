@@ -47,26 +47,12 @@
 		<li class="nav-item"><a class="nav-link"
 			href="<?php echo base_url();?>signup/">Registrierung</a></li>
 		<li class="nav-item"><a class="nav-link"
+			href="<?php echo base_url();?>login/">Login</a></li>
+		<li class="nav-item"><a class="nav-link"
 			href="<?php echo base_url();?>checkout/">Warenkorb</a></li>
 		<li class="nav-item"><a class="nav-link"
 			href="<?php echo base_url();?>printers/">Eigene Druckereien</a></li>
-		
-		
-		<?php if ($this->session->userdata('login')){ ?>
-		
-		<li><p class="nav-item">Hello <?php echo $this->session->userdata('uname'); ?></p></li>
-		<li class="nav-item"><a href="<?php echo base_url(); ?>user/logout">Log
-				Out</a></li>
-				<?php } else { ?>
-<<<<<<< HEAD
-				<li class="nav-item"><a href="<?php echo base_url(); ?>login/index">Login</a></li>
-		<li class="nav-item"><a href="<?php echo base_url(); ?>signup/index">Signup</a></li>
-=======
-				<li class="nav-item"><a href="<?php echo base_url(); ?>login">Login</a></li>
-				<li class="nav-item"><a href="<?php echo base_url(); ?>signup">Signup</a></li>
->>>>>>> origin/master
-				<?php } ?>
-				
+					
 		
 	</ul>
 </nav>

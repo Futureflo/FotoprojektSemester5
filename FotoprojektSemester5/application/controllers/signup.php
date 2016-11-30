@@ -13,10 +13,10 @@ class signup extends CI_Controller
 	function index()
 	{
 		// set form validation rules
-		$this->form_validation->set_rules('user_fname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]|xss_clean');
-		$this->form_validation->set_rules('user_lname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]|xss_clean');
+		$this->form_validation->set_rules('user_firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('user_name', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
 		$this->form_validation->set_rules('user_email', 'Email ID', 'trim|required|valid_email|is_unique[user.user_email]');
-		$this->form_validation->set_rules('user_password', 'Password', 'trim|required|matches[cpassword]|md5');
+		$this->form_validation->set_rules('user_password', 'Password', 'trim|required|matches[user_cpassword]');
 		$this->form_validation->set_rules('user_cpassword', 'Confirm Password', 'trim|required');
 		
 		// submit
@@ -29,22 +29,27 @@ class signup extends CI_Controller
 		{
 			//insert user details into db
 			$data = array(
-				'user_fname' => $this->input->post('user_fname'),
-				'user_lname' => $this->input->post('user_lname'),
+				'user_firstname' => $this->input->post('user_firstname'),
+				'user_name' => $this->input->post('user_name'),
 				'user_email' => $this->input->post('user_email'),
-				'user_password' => $this->input->post('user_password')
+				'user_password' => $this->input->post('user_password'),
+				'user_role_id' => 2
 			);
 			
 			if ($this->user_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
-				redirect('signup/index');
+
+				redirect('login');
+				
 			}
 			else
 			{
 				// error
 				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
-				redirect('signup/index');
+
+				redirect('login');
+
 			}
 		}
 	}
