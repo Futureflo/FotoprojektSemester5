@@ -1,6 +1,12 @@
 <?php 
    class User extends CI_Controller {
   
+   	public function __construct()
+   	{
+   		parent::__construct();
+   		$this->load->library('session');
+   	}
+   	
       public function index() { 
 
       	$this->load->model('user_model');
@@ -14,5 +20,13 @@
       	
       } 
 
+      function logout()
+      {
+      	// destroy session
+      	$data = array('login' => '', 'uname' => '', 'uid' => '');
+      	$this->session->unset_userdata($data);
+      	$this->session->sess_destroy();
+      	redirect('home/index');
+      }
    } 
 ?>
