@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>User Signup Form | KodingMadeSimple.com</title>
+	<title>User Signup Form</title>
 </head>
 <body>
 <div class="container">
@@ -14,18 +14,18 @@
 			
 			<div class="form-group">
 				<label for="name">First Name</label>
-				<input class="form-control" name="user_fname" placeholder="Your First Name" type="text" value="<?php echo set_value('user_fname'); ?>" />
-				<span class="text-danger"><?php echo form_error('user_fname'); ?></span>
+				<input class="form-control" name="user_firstname" placeholder="Your First Name" type="text" value="<?php echo set_value('user_firstname'); ?>" />
+				<span class="text-danger"><?php echo form_error('user_firstname'); ?></span>
 			</div>			
 		
 			<div class="form-group">
 				<label for="name">Last Name</label>
-				<input class="form-control" name="user_lname" placeholder="Last Name" type="text" value="<?php echo set_value('user_lname'); ?>" />
-				<span class="text-danger"><?php echo form_error('user_lname'); ?></span>
+				<input class="form-control" name="user_name" placeholder="Last Name" type="text" value="<?php echo set_value('user_name'); ?>" />
+				<span class="text-danger"><?php echo form_error('user_name'); ?></span>
 			</div>
 		
 			<div class="form-group">
-				<label for="user_email">Email ID</label>
+				<label for="email">Email ID</label>
 				<input class="form-control" name="user_email" placeholder="Email-ID" type="text" value="<?php echo set_value('user_email'); ?>" />
 				<span class="text-danger"><?php echo form_error('user_email'); ?></span>
 			</div>
