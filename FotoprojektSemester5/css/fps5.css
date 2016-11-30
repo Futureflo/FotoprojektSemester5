@@ -1,0 +1,39 @@
+.form-control {
+    border-radius: 20px;
+}
+
+h4 { 
+ border:0 solid #000000; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}
+
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+
+.login-btn-wrapper {
+    text-align: center;
+}
+
+.new-user-ref {
+	padding: 15px 20px;
+    text-align: center;
+    border: 1px solid #d8dee2;
+    border-radius: 15px;
+    margin-top: 16px !important;
+}
+
+.login-center {
+	position: relative;
+	transform: translateY(65%);
+}
