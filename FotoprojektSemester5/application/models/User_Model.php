@@ -13,7 +13,7 @@
 		
       function get_user($email, $pwd)
       {
-      	$this->db->where('user_email', $email);
+       	$this->db->where('user_email', $email);
       	$this->db->where('user_password', md5($pwd));
       	$query = $this->db->get('user');
       	return $query->result();
