@@ -52,7 +52,8 @@
 			href="<?php echo base_url();?>checkout/">Warenkorb</a></li>
 		<li class="nav-item"><a class="nav-link"
 			href="<?php echo base_url();?>printers/">Eigene Druckereien</a></li>
-					
+			
+		<li class="nav-item active"><button type="button" class="nav-link btn btn-success btn-md" data-toggle="modal" data-target="#loginModal">Login</button></li>			
 		
 	</ul>
 </nav>
