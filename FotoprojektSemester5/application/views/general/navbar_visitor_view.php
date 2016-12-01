@@ -55,7 +55,7 @@
 			href="<?php echo base_url();?>signup/">Registrierung</a></li>
 
 		
-		<li class="nav-item active"><button type="button" class="nav-link btn btn-success btn-md" data-toggle="modal" data-target="#loginModal">Login/Signup</button></li>			
+		<li class="nav-item active float-xs-right"><button type="button" class="nav-link btn btn-success btn-md" data-toggle="modal" data-target="#loginModal">Login/Signup</button></li>			
 		
 
 
