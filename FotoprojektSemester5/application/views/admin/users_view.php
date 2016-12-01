@@ -12,7 +12,8 @@
 	</div>
 </section>
 
-<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
+<div class="col-md-12">
+<div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
 	<h1>Users</h1>
 	<div class="table-responsive">
 		<table class="table table-striped">
@@ -39,9 +40,8 @@
 				echo "<tr>";
 			}
 			?>
-
-				
 			</tbody>
 		</table>
 	</div>
+</div>
 </div>
