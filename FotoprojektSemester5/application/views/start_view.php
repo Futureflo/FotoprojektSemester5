@@ -12,6 +12,61 @@
 	</div>
 </section>
 
+<!-- Modal -->
+<div id="loginModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="container">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+					<?php  $attributes = array("name" => "loginform");
+							 echo form_open("login/index", $attributes);?>
+			
+					<div class="form-login">
+		                    <h4>FPS5</h4>
+		                    <input type="text" class="form-control input-sm chat-input" placeholder="Enter Email-ID" name="user_email" value="<?php // echo set_value('user_email'); ?>"/>
+		                    <span class="text-danger"><?php  echo form_error('user_email'); ?></span>
+		                    </br>
+		                    <input type="password" class="form-control input-sm chat-input" placeholder="password" name="user_password" value="<?php // echo set_value('user_password'); ?>"/>
+		                    <span class="text-danger"><?php  echo form_error('user_password'); ?></span>
+		                    </br>
+		                    <div class="login-btn-wrapper">
+		                    <span class="group-btn">    
+		                    	<button name="submit" type="submit" class="btn btn-primary btn-md">login</button>
+		                    </span>
+		                    </div>
+		               </div>
+				<?php  echo form_close(); ?>
+				<?php  echo $this->session->flashdata('msg'); ?>
+				
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">			
+						<p class="new-user-ref">New User? <a href="<?php  echo base_url(); ?>index.php/signup">Sign Up Here</a></p>
+				</div>
+			</div>
+		</div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div class="album text-muted">
 	<div class="container">
 
