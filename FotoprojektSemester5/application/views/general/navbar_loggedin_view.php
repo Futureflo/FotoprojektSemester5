@@ -50,10 +50,11 @@
 			href="<?php echo base_url();?>printers/">Eigene Druckereien</a></li>
 
 
-		<li class="nav-item"><a href="<?php echo base_url(); ?>login">Login</a></li>
-		<li class="nav-item"><a class="nav-link"
-			href="<?php echo base_url();?>signup/">Registrierung</a></li>
 
+
+		<li><p class="nav-item">Hello <?php echo $this->session->userdata('uname'); ?></p></li>
+		<li class="nav-item"><a href="<?php echo base_url(); ?>user/logout">Log
+				Out</a></li>
 
 
 
