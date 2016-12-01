@@ -2,13 +2,6 @@
     border-radius: 20px;
 }
 
-h4 { 
- border:0 solid #000000; 
- border-bottom-width:1px;
- padding-bottom:10px;
- text-align: center;
-}
-
 .form-login {
     background-color: #EDEDED;
     padding-top: 10px;
@@ -31,14 +24,4 @@ h4 {
     border: 1px solid #d8dee2;
     border-radius: 15px;
     margin-top: 16px !important;
-}
-
-.login-center {
-	position: relative;
-	padding-top: 15px;
-}
-
-.signup-center {
-	position: relative;
-	padding-top: 15px;
 }
