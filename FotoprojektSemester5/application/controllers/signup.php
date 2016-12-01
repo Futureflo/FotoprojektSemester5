@@ -4,8 +4,8 @@ class signup extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form'));
-		$this->load->library(array('session', 'form_validation'));
+		$this->load->helper(array('form', 'hash_helper'));
+		$this->load->library(array('form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
 	}
@@ -27,12 +27,16 @@ class signup extends CI_Controller
         }
 		else
 		{
+			$salt = generate_salt(10);
+			$algo = 'sha256';
+			$hashpw = generate_hash($salt, $this->input->post('user_password'),$algo);
+			
 			//insert user details into db
 			$data = array(
 				'user_firstname' => $this->input->post('user_firstname'),
 				'user_name' => $this->input->post('user_name'),
 				'user_email' => $this->input->post('user_email'),
-				'user_password' => $this->input->post('user_password'),
+				'user_password' => $hashpw,
 				'user_role_id' => 2
 			);
 			

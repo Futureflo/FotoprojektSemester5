@@ -33,12 +33,12 @@ class login extends CI_Controller
 				// set session
 				$sess_data = array('login' => TRUE, 'uname' => $uresult[0]->fname, 'uid' => $uresult[0]->id);
 				$this->session->set_userdata($sess_data);
-				redirect("profile/index");
+				redirect("user/");
 			}
 			else
 			{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Email-ID or Password!</div>');
-				redirect('login/index');
+				redirect('login/');
 			}
 		}
     }
