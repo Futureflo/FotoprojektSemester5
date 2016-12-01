@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-md-4 offset-md-4">
 		<?php $attributes = array("name" => "loginform");
-			echo form_open("login/index", $attributes);?>
+			echo form_open("login/", $attributes);?>
 			
 			<div class="form-login">
                     <h4>FPS5</h4>
