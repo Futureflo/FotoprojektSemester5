@@ -32,7 +32,6 @@ class login extends CI_Controller
 			{
 				// set session
 				
-// 				$sess_data = array('login' => TRUE, 'user_firstname' => $userdata[1], 'user_id' => $userdata[0]);
 				
  				$sess_data = array('login' => TRUE, 'uname' => $userdata->user_firstname, 'uid' => $userdata->user_id);
 				$this->session->set_userdata($sess_data);
@@ -41,7 +40,7 @@ class login extends CI_Controller
 			else
 			{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Email-ID or Password!</div>');
-				redirect('login/');
+				
 			}
 		}
     }

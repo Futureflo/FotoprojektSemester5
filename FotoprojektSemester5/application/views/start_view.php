@@ -33,7 +33,7 @@
 			<div class="row">
 				<div class="col-md-10 offset-md-1">
 					<?php  $attributes = array("name" => "loginform");
-							 echo form_open("login/index", $attributes);?>
+							 echo form_open("login/", $attributes);?>
 			
 					<div class="form-login">
 		                    <input type="text" class="form-control input-sm chat-input" placeholder="Enter Email-ID" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
