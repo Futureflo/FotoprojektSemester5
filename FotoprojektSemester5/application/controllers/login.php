@@ -27,13 +27,16 @@ class login extends CI_Controller
 		else
 		{
 			// check for user credentials
-			$uresult = $this->user_model->get_user($email, $password);
-			if (count($uresult) > 0)
+			$userdata = $this->user_model->get_user($email, $password);
+			if (count($userdata) > 0)
 			{
 				// set session
-				$sess_data = array('login' => TRUE, 'uname' => $uresult[0]->fname, 'uid' => $uresult[0]->id);
+				
+// 				$sess_data = array('login' => TRUE, 'user_firstname' => $userdata[1], 'user_id' => $userdata[0]);
+				
+ 				$sess_data = array('login' => TRUE, 'uname' => $userdata->user_firstname, 'uid' => $userdata->user_id);
 				$this->session->set_userdata($sess_data);
-				redirect("user/");
+				redirect("profile/");
 			}
 			else
 			{
