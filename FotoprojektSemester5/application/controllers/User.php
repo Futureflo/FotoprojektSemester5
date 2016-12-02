@@ -17,12 +17,12 @@ class User extends CI_Controller {
 		// destroy session
 		$data = array (
 				'login' => '',
-				'uname' => '',
-				'uid' => '' 
+				'user_name' => '',
+				'user_id' => '' 
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();
-		redirect ( 'home/index' );
+		redirect ( 'start' );
 	}
 }
 ?>
