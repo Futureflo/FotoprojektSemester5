@@ -11,10 +11,9 @@
       	return $query->result();
       }
 		
-      function get_user($email, $pwd)
+      function get_user($email)
       {
        	$this->db->where('user_email', $email);
-      	$this->db->where('user_password', $pwd);
       	$query = $this->db->get('user');
       	return $query->result();
       }

@@ -4,8 +4,8 @@ class login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form','url','html'));
-		$this->load->library(array('session', 'form_validation'));
+		$this->load->helper(array('form','html'));
+		$this->load->library(array( 'form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
 	}
@@ -26,9 +26,13 @@ class login extends CI_Controller
 		}
 		else
 		{
-			// check for user credentials
-			$uresult = $this->user_model->get_user($email, $password);
-			if (count( $uresult) > 0)
+			// check for user credentials 
+			$uresult = $this->user_model->get_user($email);
+			$user_salt = $uresult[0]-> user_salt;
+			$hashpw = generate_hash($salt, $password, $algo);
+			$user_password =  $uresult[0]->user_passowrd;
+			
+			if (strcmp($hashpw , $user_password) == 0) 
 			{
 				// set session
  				$sess_data = array('login' => TRUE, 'user_name' =>  $uresult[0]->user_firstname, 'user_id' =>  $uresult[0]->user_id);			
