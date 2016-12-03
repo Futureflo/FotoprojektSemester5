@@ -19,6 +19,8 @@
 	href="<?php echo base_url();?>css/bootstrap.min.css">
 
 <link rel="stylesheet" href="<?php echo base_url();?>css/fps5.css"> 
+<link rel="stylesheet" href="<?php echo base_url();?>_sonstiges/bootstrap-4.0.0-alpha.5/dist/font-awesome-4.7.0/css/font-awesome.min.css">
+
 
 </head>
 <body>

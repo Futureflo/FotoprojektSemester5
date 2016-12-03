@@ -43,9 +43,9 @@
 
 
 		<li class="nav-item"><a class="nav-link"
-			href="<?php echo base_url();?>picture/asd/">Einzelnes Bild</a></li>
+			href="<?php echo base_url();?>picture/asd/"><i class="fa fa-camera" aria-hidden="true"></i> Einzelnes Bild <i class="fa fa-picture-o" aria-hidden="true"></i></a></li>
 		<li class="nav-item"><a class="nav-link"
-			href="<?php echo base_url();?>checkout/">Warenkorb</a></li>
+			href="<?php echo base_url();?>checkout/"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
 		<li class="nav-item"><a class="nav-link"
 			href="<?php echo base_url();?>printers/">Eigene Druckereien</a></li>
 

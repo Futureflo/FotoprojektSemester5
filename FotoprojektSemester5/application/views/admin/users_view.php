@@ -16,7 +16,7 @@
 <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
 	<h1>Users</h1>
 	<div class="table-responsive">
-		<table class="table table-striped">
+		<table class="table table-striped table-bordered sortable">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -45,3 +45,5 @@
 	</div>
 </div>
 </div>
+
+<script src="<?php echo base_url();?>js/sorttable.js"></script>
