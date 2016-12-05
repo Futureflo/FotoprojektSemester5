@@ -16,4 +16,5 @@ class Profile extends CI_Controller
 		$data['user_email'] = $details[0]->user_email;
 		$this->load->view('user/profile_view', $data);
 	}
+	
 }

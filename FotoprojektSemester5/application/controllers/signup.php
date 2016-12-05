@@ -30,7 +30,6 @@ class signup extends CI_Controller
 			$salt = generate_salt(10);
 			$algo = 'sha256';
 			$hashpw = generate_hash($salt, $this->input->post('user_password'),$algo);
-			
 			//insert user details into db
 			$data = array(
 				'user_firstname' => $this->input->post('user_firstname'),

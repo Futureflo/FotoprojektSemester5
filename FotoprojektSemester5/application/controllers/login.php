@@ -4,7 +4,7 @@ class login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form','html'));
+		$this->load->helper(array('form','html','hash_helper'));
 		$this->load->library(array( 'form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
@@ -29,8 +29,10 @@ class login extends CI_Controller
 			// check for user credentials 
 			$uresult = $this->user_model->get_user($email);
 			$user_salt = $uresult[0]-> user_salt;
-			$hashpw = generate_hash($salt, $password, $algo);
-			$user_password =  $uresult[0]->user_passowrd;
+			$algo = 'sha256';
+			
+			$hashpw = generate_hash($user_salt, $password, $algo);
+			$user_password =  $uresult[0]->user_password;
 			
 			if (strcmp($hashpw , $user_password) == 0) 
 			{
@@ -42,7 +44,6 @@ class login extends CI_Controller
 			else
 			{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Email-ID or Password!</div>');
-				
 			}
 		}
     }
