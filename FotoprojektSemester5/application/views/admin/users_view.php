@@ -13,10 +13,18 @@
 </section>
 
 <div class="col-md-12">
-	<div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
-		<h1>Users</h1>
-		<input type="text" id="searchTerm" class="search_box"
-			onkeyup="search()" />
+	<div class="container">
+		<div class="row">
+		<div class="col-md-9">
+		<p class="h1">Users</p>
+		</div>
+		<div class="col-md-3">
+		<input type="text" id="searchTerm" class="form-control"
+			onkeyup="search()" placeholder="Search for user..."/>
+		</div>
+		</div>
+		</div>
+		<div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
 		<div class="table-responsive">
 			<table id="dataTable"
 				class="table table-striped table-bordered sortable">
@@ -50,6 +58,9 @@
 </div>
 
 <script type="text/javascript">
+    /**
+        Alle Inhalte der Reihen einer Tabelle werden auf die Eingabe abgeglichen. Bei Nicht Übereinstimmung wird die Reihe ausgeblendet.
+    */
     function search() {
         var input, table, tr, td, i;
         input = document.getElementById('searchTerm').value;
@@ -60,11 +71,16 @@
           for (i = 0; i < tr.length; i++) {
               for(var x = 0; x < tr[0].getElementsByTagName("td").length; x++){
                 td = tr[i].getElementsByTagName("td")[x].innerHTML;
-                if (td) {
-                  if (td.toLowerCase().includes(input.toLowerCase())) {
-                    tr[i].style.display = "";
-                  } else {
+                if (td) {                    
+                    //Make case sensitive
+                    input = input.toLowerCase();
+                    td = td.toLowerCase();
+                                        
+                  if (td.indexOf(input) == -1) {
                     tr[i].style.display = "none";
+                  } else {
+                    tr[i].style.display = "";
+                    x = tr[0].getElementsByTagName("td").length;
                   }
                 }
             } 
