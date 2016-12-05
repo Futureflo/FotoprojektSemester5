@@ -44,6 +44,7 @@ class login extends CI_Controller
 			else
 			{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Email-ID or Password!</div>');
+				redirect("login/");
 			}
 		}
     }

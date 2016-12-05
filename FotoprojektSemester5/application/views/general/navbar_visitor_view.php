@@ -50,10 +50,6 @@
 			href="<?php echo base_url();?>printers/">Eigene Druckereien</a></li>
 
 
-		<li class="nav-item"><a href="<?php echo base_url(); ?>login">Login</a></li>
-		<li class="nav-item"><a class="nav-link"
-			href="<?php echo base_url();?>signup/">Registrierung</a></li>
-
 		
 		<li class="nav-item active float-xs-right"><button type="button" class="nav-link btn btn-success btn-md" data-toggle="modal" data-target="#loginModal">Login/Signup</button></li>			
 		
