@@ -32,7 +32,7 @@
       	return $this->db->insert('user', $data);
       }
       //delete user
-      function get_delete_user($id)
+      function delete_user($user_id)
       {
       	return $this->db->delete('user', $user_id);
       }

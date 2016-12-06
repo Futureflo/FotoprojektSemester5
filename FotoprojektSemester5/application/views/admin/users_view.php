@@ -74,8 +74,8 @@
        
       </div>
         <div class="modal-footer ">
-        <form action="<?php echo base_url();?>application/models/user_model/deleteUser/" method="post">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Ja</button>
+        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Ja</button>
         <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
         </form>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Nein</button>
