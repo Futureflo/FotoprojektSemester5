@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row">
 		<div class="col-md-9">
-		<p class="h1">Users</p>
+		<p class="h1" id="test">Users</p>
 		</div>
 		<div class="col-md-3">
 		<input type="text" id="searchTerm" class="form-control"
@@ -50,8 +50,8 @@
 				//echo "<td>" . $user->user_password . "</td>";
 				echo "<td>" . $user->usro_name . "</td>";
 				echo "<td>";
-				echo "<center><a class='btn btn-danger' href='path/to/settings' aria-label='Delete'>";
-					echo "<i class='fa fa-trash-o' aria-hidden='true'></i></a></center></td>";
+				echo "<center><a class='btn btn-danger' data-toggle='tooltip' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='Delete' onclick=\"deleteUser()\">";
+					echo "<i class='fa fa-trash-o' aria-hidden='True' style='color:white;'></i></a></center></td>";
 				echo "<tr>";
 			}
 			?>
@@ -89,6 +89,13 @@
                 }
             } 
           }
+         function deleteUser(){
+             alert("Works");
+             console.log("work");
+        	 document.getElementById.innerHTML="Kai ist Geil" + id;
+             $.get("../models/user_model.php", deleteUser(id));
+             
+         }
     }
 </script>
 <script src="<?php echo base_url();?>js/sorttable.js"></script>
