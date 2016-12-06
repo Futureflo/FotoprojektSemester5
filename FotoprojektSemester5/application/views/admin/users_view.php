@@ -34,8 +34,9 @@
 						<th>Nachname</th>
 						<th>Vorname</th>
 						<th>e-Mail</th>
-						<th>Passwort</th>
+						<!-- <th>Passwort</th> -->
 						<th>Rolle</th>
+						<th>Aktion</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,8 +47,11 @@
 				echo "<td>" . $user->user_name . "</td>";
 				echo "<td>" . $user->user_firstname . "</td>";
 				echo "<td>" . $user->user_email . "</td>";
-				echo "<td>" . $user->user_password . "</td>";
+				//echo "<td>" . $user->user_password . "</td>";
 				echo "<td>" . $user->usro_name . "</td>";
+				echo "<td>";
+				echo "<center><a class='btn btn-danger' href='path/to/settings' aria-label='Delete'>";
+					echo "<i class='fa fa-trash-o' aria-hidden='true'></i></a></center></td>";
 				echo "<tr>";
 			}
 			?>
