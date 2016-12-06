@@ -34,7 +34,7 @@
       //delete user
       function delete_user($user_id)
       {
-      	return $this->db->delete('user', array('id' => $id));
+      	return $this->db->delete('user', array('user_id' => $user_id));
       }
    } 
 ?>
