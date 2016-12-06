@@ -8,6 +8,7 @@
 	</div>
 </section>
 <div class="container">
+<div style="overflow-x:auto;">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -63,4 +64,5 @@
 						</tr>
 					</tfoot>
 				</table>
+				</div>
 </div>
