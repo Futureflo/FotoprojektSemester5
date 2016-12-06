@@ -25,11 +25,16 @@
       	$query = $this->db->get('user');
       	return $query->result();
       }
-      
+     
       // insert
       function insert_user($data)
       {
       	return $this->db->insert('user', $data);
+      }
+      //delete user
+      function get_delete_user($id)
+      {
+      	return $this->db->delete('user', $user_id);
       }
    } 
 ?>
