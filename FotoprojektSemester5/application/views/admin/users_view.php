@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row">
 		<div class="col-md-9">
-		<p class="h1">Users</p>
+		<p class="h1" id="test">Users</p>
 		</div>
 		<div class="col-md-3">
 		<input type="text" id="searchTerm" class="form-control"
@@ -34,8 +34,9 @@
 						<th>Nachname</th>
 						<th>Vorname</th>
 						<th>e-Mail</th>
-						<th>Passwort</th>
+						<!-- <th>Passwort</th> -->
 						<th>Rolle</th>
+						<th>Aktion</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,8 +47,11 @@
 				echo "<td>" . $user->user_name . "</td>";
 				echo "<td>" . $user->user_firstname . "</td>";
 				echo "<td>" . $user->user_email . "</td>";
-				echo "<td>" . $user->user_password . "</td>";
+				//echo "<td>" . $user->user_password . "</td>";
 				echo "<td>" . $user->usro_name . "</td>";
+				echo "<td>";
+				echo "<center><a class='btn btn-danger btn-xs' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='Delete' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';>";
+					echo "<i class='fa fa-trash-o' aria-hidden='True' style='color:white;'></i></a></center></td>";
 				echo "<tr>";
 			}
 			?>
@@ -56,6 +60,31 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>Sind Sie sicher den User <p id="user"></p>zu löschen?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Ja</button>
+        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
+        </form>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Nein</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
 
 <script type="text/javascript">
     /**
@@ -85,6 +114,11 @@
                 }
             } 
           }
+    }
+
+    function whichUser(vorname, nachname, id){
+        document.getElementById("user").innerHTML = vorname + " " + nachname;
+        document.getElementById("user_hidden_field").value = id;
     }
 </script>
 <script src="<?php echo base_url();?>js/sorttable.js"></script>
