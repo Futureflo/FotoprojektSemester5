@@ -1,9 +1,17 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Checkout extends CI_Controller {
-	// 	https://www.tutorialspoint.com/codeigniter/codeigniter_tempdata.htm
-	// 'item' will be erased after 300 seconds(5 minutes)
-	// 	$this->session->mark_as_temp('item',300);
+/*
+ * - Nutzer wählt Bilder zum Kauf aus.
+ * - Bilder liegen im Warenkorb.
+ * - Sobald "gekauft" wird, wird aus den Bildern im Warenkorb eine Order erstellt
+ * - Die Order enthält alle Bilder-IDs und wird in der Datenbank abgelegt.
+ * - Es wird ein individueller Downloadlink zur Verfügung gestellt.
+ * - Der Aufruf des Downloadlinks erstellt eine Zip und läd diese herunter.
+ * - Der Link muss entsprechend auf die Order in der Datenbank verweisen.
+ * - Die Zip-Funktion erhält also die Info für die zu zippende Order aus dem Link.
+ * 
+ */
 	
 	public function index() {
 		$this->load->template ( 'checkout/checkout_view' );
@@ -19,24 +27,49 @@ class Checkout extends CI_Controller {
 	 * @param string $sourcePath Path of directory to be zip.
 	 * @param string $outZipPath Path of output zip file.
 	 */
-	public static function zipDir($sourcePath, $outZipPath) {
-		$pathInfo = pathInfo($sourcePath);
-		$parentPath = $pathInfo['dirname'];
-		$dirName = $pathInfo['basename'];
+// 	public static function zipDir($sourcePath, $outZipPath) {
+// 		$pathInfo = pathInfo($sourcePath);
+// 		echo $pathInfo;
+// 		$parentPath = $pathInfo['dirname'];
+// 		$dirName = $pathInfo['basename'];
 	
-		$z = new ZipArchive();
-		$z->open($outZipPath, ZIPARCHIVE::CREATE);
-		$z->addEmptyDir($dirName);
-		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
-		$z->close();
-	}
+// 		$z = new ZipArchive();
+// 		$z->open($outZipPath, ZIPARCHIVE::CREATE);
+// 		$z->addEmptyDir($dirName);
+// 		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
+// 		$z->close();
+// 	}
 	
 	/**
 	 * Method to unpack Zip.
 	 * #Author: Severin
 	 */
-	public function unpackZip() {
-		// Mehtod
+	public function unpackZip($sourcePath) {
+		echo "allright";
+	}
+	
+	public function setImageArray(){
+		$this->session->set_flashdata('arrayImages', '/*get Images and pack them into an array*/');
+	}
+	
+	////////////////////////////////////////////////////////////////////
+	// TEST SECTION //
+	////////////////////////////////////////////////////////////////////
+	public static function zipDir($sourcePath, $outZipPath) {
+		$images = $this->session->flashdata('arrayImages');
+		echo "sourcePath: ". $sourcePath;
+		echo "</br>";
+		echo "outZipPath: ". $outZipPath;
+// 		$pathInfo = pathInfo($sourcePath);
+// 		echo "pathInfo: ". $pathInfo;
+		// 		$parentPath = $pathInfo['dirname'];
+		// 		$dirName = $pathInfo['basename'];
+	
+		// 		$z = new ZipArchive();
+		// 		$z->open($outZipPath, ZIPARCHIVE::CREATE);
+		// 		$z->addEmptyDir($dirName);
+		// 		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
+		// 		$z->close();
 	}
 }
 ?>
