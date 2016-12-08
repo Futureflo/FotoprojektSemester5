@@ -29,5 +29,11 @@ class Admin extends CI_Controller {
 		$this->user_model->delete_user($user_id);
 		redirect("admin/users");
 	}
+	public function product_types()
+	{
+		$this->load->model('product_type_model');
+		$data['product_types'] = $this->product_type_model->getAllProductType();
+		$this->load->template ( 'admin/product_type_view', $data );
+	}
 }
 ?>
