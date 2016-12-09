@@ -12,6 +12,17 @@
 	</div>
 </section>
 
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<form action="" method="post" enctype="multipart/form-data">
+			    <input type="file" name="dateiupload" class="btn">
+			    <input type="submit" name="btn[upload]" class="btn btn-success">
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="table-responsive">
 	
 	<table class="table table-striped">
