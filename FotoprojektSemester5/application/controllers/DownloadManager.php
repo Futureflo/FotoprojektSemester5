@@ -1,11 +1,11 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-class Zip extends CI_Controller {
+class DownloadManager extends CI_Controller {
 
 
 	public function index() {
-		echo "index //Zip";
+		echo "indexseite des DownloadManager";
 	}
 	
 	/*
@@ -56,7 +56,41 @@ class Zip extends CI_Controller {
 	////////////////////////////////////////////////////////////////////
 	// TEST SECTION //
 	////////////////////////////////////////////////////////////////////
-	public static function zipDir($sourcePath, $outZipPath) {
+	
+	/**
+	 * Metod to convert a paid order from customers cart into a downloadlink.
+	 * @param unknown $orderID
+	 * @return downloadLink
+	 */
+	public static function manageDownload($orderID) {
+		$pathArray = orderIDtoImagePathArray($orderID);
+		$zipPath =  zipDir($pathArray);
+		$downloadLink = createDownloadLink($orderID, $userID);
+		return $downloadLink;
+	}
+	
+	
+	public static function createDownloadLink($orderID, $userID) {
+		// Mehtod um einen sicheren und einzigartigen downloadlink zu erstellen
+		// soll orderID und nutzerID enthalten sowie "verschlüsselung"
+	}
+	
+	/**
+	 * Unravels the cryptic downloadlink into a simple path where the zip-archiv is stored.
+	 * @param unknown $downloadLink
+	 * @return zipPath
+	 */
+	public static function getZipArchiveByDownloadLink($downloadLink) {
+		// methode zum auflösen des downloadlinks zu einem auffindbaren zipPfad
+		return $zipPath;
+	}
+	
+	
+	/**
+	 * Zips a new archive file containing files from given arary.
+	 * Returns zip-archive-path.
+	 */
+	public static function zipDir(array $imagePath) {
 		$images = $this->session->flashdata('arrayImages');
 		echo "sourcePath: ". $sourcePath;
 		echo "</br>";
@@ -71,6 +105,24 @@ class Zip extends CI_Controller {
 		// 		$z->addEmptyDir($dirName);
 		// 		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
 		// 		$z->close();
+		return $zipPath;
+	}
+	
+
+	
+	/**
+	 * Returns an Array containing all image-paths from the orderID.
+	 * @param unknown $orderID
+	 */
+	public static function orderIDtoImagePathArray($orderID) {
+		$this->load->database();
+		$this->load->model('order_model');
+		// Methode getOrderID result --> alle bildpfade geladen
+		$uresult = $this->order_model->get_order($orderID);
+		// neues array mit bildpfaden erstellen
+		$imagePathArray = array();
+		// return bildpfad array
+		return $imagePathArray;
 	}
 
 }
