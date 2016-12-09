@@ -32,16 +32,11 @@
 										Fotograf</p>
 										<h6>Einzelpreis: 1.99€</h6>
 									</div>
-								</div>
-							<td>
-							<p>
-							<h5>Größe</h5>
-							</p>
-							<p>
-							<h5>Anzahl</h5>
-							</td>
-							<td>
-							 <div class="form-group">
+									<div class="col-sm-3">
+									<h5>Größe</h5>
+									<p>
+									<h5>Anzahl</h5></div>
+							 <div class="form-group col-sm-3">
                 <select id="Anzahl" class="form-control">
                     <option>XS</option>
                     <option>S</option>
@@ -49,13 +44,16 @@
                     <option>L</option>
                     <option>XL</option>
                 </select>
-            </div>
                         <p><input type="number" class="form-control"></p>
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+							</div>
+							<td>
+							<p></p>
+							Preis 1.99€
 							</td>
-							
 						</tr>
+						</div>
 					</tbody>
 					<tfoot>
 						<tr>
@@ -64,6 +62,7 @@
 							<td class="text-center"><strong>Gesamtpreis 1.99€</strong></td>
 							<td><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a></td>
 						</tr>
+						
 					</tfoot>
 				</table>
 				</div>
