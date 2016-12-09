@@ -30,7 +30,7 @@ class Login extends CI_Controller
 			// ceck E-Mail-Confirmation
 			if (1 == $uresult[0]-> user_status){
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen</div>');
-				redirect("login/");
+				redirect("start/");
 			}
 			else{
 				// check for user credentials
