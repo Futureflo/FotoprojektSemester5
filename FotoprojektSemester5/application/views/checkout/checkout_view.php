@@ -53,6 +53,7 @@
 </div>
 
 <script>
+
 function preisaktualisieren()
 {
 var einzelpreis = document.getElementById("einzelpreis").innerHTML;
