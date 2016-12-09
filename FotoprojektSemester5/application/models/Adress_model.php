@@ -1,5 +1,5 @@
 	<?php
-	class adress_model extends CI_Model {
+	Class Adress_model extends CI_Model {
 		
 		// TODO:
 		// Prefered Adress? Muss beim Update (neu setzten wenn Prefered Adress bearbeitet wird), Add (option neue adresse als bevorzugte direkt einzutragen), Delete(Falls Adresse als prefered eingetragen -> austragen)

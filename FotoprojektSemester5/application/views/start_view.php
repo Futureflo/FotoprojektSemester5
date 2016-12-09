@@ -13,100 +13,66 @@
 </section>
 
 <!-- Modal -->
-<div id="loginModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div id="loginModal" class="modal-md fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
+    
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       
-      <div class="modal-body">
-      
-       <ul class="nav nav-tabs">
-        	<li class="nav-item active"><a data-toggle="tab" class="nav-link" href="#login-tab">Login</a></li>
-        	<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#signup-tab">Signup</a></li>
-       </ul>
+      <div class="modal-body">        
         
-        <div class="tab-content" style="padding-top: 15px;"> 
-        
-        <div class="tab-pane active" id="login-tab">
-        <div class="container">
-			<div class="row">
-				<div class="col-md-10 offset-md-1">
+       
 					<?php  $attributes = array("name" => "loginform");
 							 echo form_open("login/", $attributes);?>
 			
-					<div class="form-login">
-		                    <input type="text" class="form-control input-sm chat-input" placeholder="Enter Email-ID" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
+		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_email'); ?></span>
 		                    </br>
-		                    <input type="password" class="form-control input-sm chat-input" placeholder="password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
+		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_password'); ?></span>
 		                    </br>
+		                    <div class="container">
+					            <div class="row">
+					                <div class="col-md-6 offset-md-3">
 		                    <div class="login-btn-wrapper">
 		                    <span class="group-btn">    
-		                    	<button name="submit" type="submit" class="btn btn-primary btn-md">login</button>
+		                    	<button name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
 		                    </span>
 		                    </div>
-		               </div>
+		                    </div>
+					            </div>
+					       </div>
+		                    <div class="container">
+					            <div class="row">
+					                <div class="col-md-8 offset-md-2">
+					                    <a href="#">Passwort vergessen?</a>
+					                </div>
+					            </div>
+					       </div>
 				<?php  echo form_close(); ?>
 				<?php  echo $this->session->flashdata('msg'); ?>
 				
-				</div>
-			</div>
-		</div>
+				
 		</div>
 		
-		<div class="tab-pane" id="signup-tab">
-		<div class="container">
-	<div class="row">
-		<div class="col-md-10 offset-md-1">
-			<?php $attributes = array("name" => "signupform");
-			echo form_open("signup/index", $attributes);?>
-			
-			<div class="form-login">
-                    <div class="row">
-                    	<div class="col-xs-6 col-md-6">
-                    		<input type="text" class="form-control input-sm chat-input" placeholder="First Name" name="user_firstname" value="<?php echo set_value('user_firstname'); ?>"/>
-                    		<span class="text-danger"><?php echo form_error('user_firstname'); ?></span>
-                    	</div>
-                    	<div class="col-xs-6 col-md-6">
-                    		<input type="text" class="form-control input-sm chat-input" placeholder="Last Name" name="user_name" value="<?php echo set_value('user_name'); ?>"/>
-                    		<span class="text-danger"><?php echo form_error('user_name'); ?></span>
-                    	</div>
-                    </div>
-                    <br>
-                    	<input type="text" class="form-control input-sm chat-input" placeholder="Email-ID" name="user_email" value="<?php echo set_value('user_email'); ?>"/>
-                    	<span class="text-danger"><?php echo form_error('user_email'); ?></span>
-                    <br>
-                   		<input type="password" class="form-control input-sm chat-input" placeholder="Password" name="user_password" value="<?php echo set_value('user_password'); ?>"/>
-                    	<span class="text-danger"><?php echo form_error('user_password'); ?></span>
-                    <br>
-                    	<input type="password" class="form-control input-sm chat-input" placeholder="Confirm Password" name="user_cpassword" value="<?php echo set_value('user_cpassword'); ?>"/>
-                    	<span class="text-danger"><?php echo form_error('user_cpassword'); ?></span>
-                    <br>
-                    <div class="login-btn-wrapper">
-                    <span class="group-btn">    
-                    	<button name="submit" type="submit" class="btn btn-success btn-md">Signup</button>
-                    </span>
-                    </div>
-               </div>
-			
-			<?php echo form_close(); ?>
-			<?php echo $this->session->flashdata('msg'); ?>
-		</div>
-	</div>
-
-</div>
-</div>
-		
- </div>       
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      <div class="modal-footer text-center">
+       <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <button name="submit" type="submit" class="btn btn-success btn-md btn-block">Registrieren</button>
+                </div>
+            </div>
+       </div>
       </div>
     </div>
-
-  </div>
+    </div>
 </div>
 
 <div class="album text-muted">
