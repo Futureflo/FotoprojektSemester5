@@ -31,7 +31,7 @@
                     <option>L</option>
                     <option>XL</option>
                 </select>
-                        <p><input type="number" class="form-control" id="anzahl" onclick="preisaktualisieren()"></p>
+                        <p><input type="text" class="form-control" id="anzahl" onclick="preisaktualisieren()"></p>
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</div>
