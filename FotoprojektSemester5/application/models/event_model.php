@@ -1,5 +1,5 @@
 <?php 
-   Class event_model extends CI_Model {
+   Class Event_model extends CI_Model {
 	
       Public function __construct() { 
          parent::__construct(); 
