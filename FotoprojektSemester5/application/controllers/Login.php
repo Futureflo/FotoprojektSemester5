@@ -1,5 +1,5 @@
 <?php
-class login extends CI_Controller
+class Login extends CI_Controller
 {
 	public function __construct()
 	{
@@ -26,8 +26,14 @@ class login extends CI_Controller
 		}
 		else
 		{
-			// check for user credentials 
 			$uresult = $this->user_model->get_user($email);
+			// ceck E-Mail-Confirmation
+			if (1 == $uresult[0]-> user_status){
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen</div>');
+				redirect("login/");
+			}
+			else{
+				// check for user credentials
 			$user_salt = $uresult[0]-> user_salt;
 			$algo = 'sha256';
 			
@@ -43,9 +49,10 @@ class login extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Wrong Email-ID or Password!</div>');
-				redirect("login/");
+				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
+				redirect("start/");
 			}
+		}
 		}
     }
 }

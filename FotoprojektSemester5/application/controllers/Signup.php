@@ -1,5 +1,5 @@
 <?php
-class signup extends CI_Controller
+class Signup extends CI_Controller
 {
 	public function __construct()
 	{
@@ -44,8 +44,8 @@ class signup extends CI_Controller
 			if ($this->user_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
-				$this->sendConfirmEmail($email);
-				redirect('login/');	
+				$this->sendConfirmEmail($this->input->post('user_email'));
+// 				redirect('login/');	
 			}
 			else
 			{
@@ -57,16 +57,17 @@ class signup extends CI_Controller
 		}
 	}
 	
-	function sendConfirmEmail($email){
+	function sendConfirmEmail($user_email){
 
 		$this->load->library('email');
 		
 		$this->email->from('noReply@FPS5.com', 'FPS5');
-		$this->email->to($email);
-		
+		$this->email->to($user_email);
+		$hashSurfix = generate_salt();
 		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
-		$this->email->message('Testing the email class.');
+		$this->email->message('Testing the email class. '. base_url().$hashSurfix);
+		echo base_url().$hashSurfix;
 		
-		$this->email->send();
+		return  $this->email->send();
 	}
 }
