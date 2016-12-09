@@ -9,19 +9,6 @@
 </section>
 <div class="container">
 <div style="overflow-x:auto;">
-	<table id="cart" class="table table-hover table-condensed">
-    				<thead>
-						<tr class="hidden-xs-down">
-							<th style="width:40%">Produkt</th>
-							<th style="width:15%"></th>
-							<th style="width:15%" class="text-center"></th>
-							<th style="width:15%"></th>
-							<th style="width:15%"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td data-th="Product">
 								<div class="row">
 									<div class="col-sm-3">
 									<img src="http://placehold.it/100x100" alt="..." class="img-responsive"/>
@@ -32,7 +19,7 @@
 										Fotograf</p>
 										<h6>Einzelpreis: 1.99€</h6>
 									</div>
-									<div class="col-sm-3">
+									<div class="col-sm-2">
 									<h5>Größe</h5>
 									<p>
 									<h5>Anzahl</h5></div>
@@ -48,23 +35,19 @@
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</div>
-							<td>
+							<div class="col-sm-1">
 							<p></p>
 							Preis 1.99€
-							</td>
-						</tr>
+							</div>
+							</div>
+						<div class="row">
+							<div class="col-sm-7 col-s-12"><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Weitershoppen</a>
+							</div>
+							<div class="col-sm-2 col-s-12"><strong>Gesamtpreis 1.99€</strong>
+							</div>
+							<div class="col-sm-3 col-s-12"><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a>
+							</div>
 						</div>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Weitershoppen</a></td>
-							<td class="hidden-sm-down" colspan="2"></td>
-							<td class="text-center"><strong>Gesamtpreis 1.99€</strong></td>
-							<td><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a></td>
-						</tr>
-						
-					</tfoot>
-				</table>
 				</div>
 				
 </div>
