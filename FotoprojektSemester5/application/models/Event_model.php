@@ -13,8 +13,8 @@
       }
       
       Public function getProductsFromEvent($even_id){
-      	$this->db->join('product_variant', 'prod_id = prva_prod_id', 'INNER');
-      	$this->db->join('product_type', 'prty_id = prva_prty_id', 'INNER');
+      	$this->db->join('product_variant', 'prod_id = prva_prod_id', 'LEFT OUTER');
+      	$this->db->join('product_type', 'prty_id = prva_prty_id', 'LEFT OUTER');
       	$this->db->where('prod_even_id', $even_id);
       	$query = $this->db->get("product");
       	return $query->result();
@@ -30,7 +30,6 @@
       // insert
       function insert_event($data)
       {
-      	echo "TEST";
       	return $this->db->insert('event', $data);
       }
       
@@ -47,14 +46,12 @@
       	return $this->db->delete('event', array('even_id' => $even_id));
       }
       
+      // get MAX-ID
       function get_max_id(){
       	$maxid = 0;
       	$row = $this->db->query('SELECT MAX(even_id) AS `maxid` FROM event')->row();
-      	if ($row) {
-      		$maxid = $row->maxid;
-      	}
+      	if ($row) $maxid = $row->maxid;
       	return $maxid;
-      	
       }
       
 		
