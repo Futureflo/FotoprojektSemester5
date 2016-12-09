@@ -19,6 +19,44 @@
       	$query = $this->db->get("product");
       	return $query->result();
       }
+      
+      Public function getSingleEventById($id){
+      	$this->db->where('even_id', $id);
+      	$query = $this->db->get("event");
+      	return $query->result();
+      }
+      
+      
+      // insert
+      function insert_event($data)
+      {
+      	echo "TEST";
+      	return $this->db->insert('event', $data);
+      }
+      
+      //delete user
+      function update_event($id, $data)
+      {
+      	$this->db->where('even_id', $id);
+      	$this->db->update('event', $data);
+      }
+      
+      //delete user
+      function delete_event($even_id)
+      {
+      	return $this->db->delete('event', array('even_id' => $even_id));
+      }
+      
+      function get_max_id(){
+      	$maxid = 0;
+      	$row = $this->db->query('SELECT MAX(even_id) AS `maxid` FROM event')->row();
+      	if ($row) {
+      		$maxid = $row->maxid;
+      	}
+      	return $maxid;
+      	
+      }
+      
 		
    } 
 ?>
