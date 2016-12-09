@@ -36,5 +36,11 @@
       {
       	return $this->db->delete('user', array('user_id' => $user_id));
       }
+      //update usere status
+      function update_userStatus($user_confirmcode){
+      $this->db->set('user_status', 2, FALSE);
+      $this->db->where('user_confirm_code', $user_confirmcode);
+      $this->db->update('user');
+      }
    } 
 ?>
