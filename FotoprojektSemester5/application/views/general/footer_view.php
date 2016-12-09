@@ -2,7 +2,7 @@
 
 <footer class="footer">
 	<div class="container">
-		<p class="text-muted">Impressum BLABLA</p>
+		<p class="text-muted"><a class="" href="<?php echo base_url();?>impressum/">Impressum</a> BLABLA</p>
 	</div>
 </footer>
 
