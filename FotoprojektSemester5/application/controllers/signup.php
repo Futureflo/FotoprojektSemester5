@@ -37,13 +37,15 @@ class signup extends CI_Controller
 				'user_email' => $this->input->post('user_email'),
 				'user_password' => $hashpw,
 				'user_role_id' => 2,
+				'user_status' => 1,	
 				'user_salt' => $salt
 			);
 			
 			if ($this->user_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
-				redirect('login/');	
+				$this->sendConfirmEmail($this->input->post('user_email'));
+// 				redirect('login/');	
 			}
 			else
 			{
@@ -53,5 +55,19 @@ class signup extends CI_Controller
 
 			}
 		}
+	}
+	
+	function sendConfirmEmail($user_email){
+
+		$this->load->library('email');
+		
+		$this->email->from('noReply@FPS5.com', 'FPS5');
+		$this->email->to($user_email);
+		$hashSurfix = generate_salt();
+		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
+		$this->email->message('Testing the email class. '. base_url().$hashSurfix);
+		echo base_url().$hashSurfix;
+		
+		return  $this->email->send();
 	}
 }
