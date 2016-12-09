@@ -9,8 +9,9 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
 	public function users() {
-		$this->load->model ( 'user_model' );
-		$data ['users'] = $this->user_model->getAllUsers ();
+		//$this->load->model ( 'user_model' );
+		$data ['users'] = $this->User_model->getAllUsers ();
+		echo "bka";
 		
 		$this->load->template ( 'admin/users_view', $data );
 	}
@@ -21,13 +22,13 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/printers_view' );
 	}
 	public function deleteUser() {
-		//$user_id = $this->input->post ( "user_hidden_field" );
-		//$this->user_model->delete_user ( $user_id );
-		//redirect ( "admin/users" );
+		$user_id = $this->input->post ( "user_hidden_field" );
+		$this->User_model->delete_user ( $user_id );
+		redirect ( "admin/users" );
 	}
 	public function product_types() {
-		$this->load->model ( 'product_type_model' );
-		$data ['product_types'] = $this->product_type_model->getAllProductType ();
+		$this->load->model ( 'Product_type_model' );
+		$data ['product_types'] = $this->Product_type_model->getAllProductType ();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 }
