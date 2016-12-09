@@ -17,7 +17,7 @@
 										<h5>Bild 1</h5>
 										<p class="hidden-sm-down">Veranstaltung
 										Fotograf</p>
-										<h6>Einzelpreis: 1.99€</h6>
+										<h6>Einzelpreis: <i id="einzelpreis">1.99</i>€</h6>
 									</div>
 									<div class="col-sm-2">
 									<h5>Größe</h5>
@@ -31,13 +31,13 @@
                     <option>L</option>
                     <option>XL</option>
                 </select>
-                        <p><input type="number" class="form-control"></p>
+                        <p><input type="number" class="form-control" id="anzahl" onclick="preisaktualisieren()"></p>
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</div>
 							<div class="col-sm-1">
 							<p></p>
-							Preis 1.99€
+							<h5>Preis</h5> <i id="aktuellerpreis">1.99€</i>
 							</div>
 							</div>
 						<div class="row">
@@ -51,3 +51,14 @@
 				</div>
 				
 </div>
+
+<script>
+function preisaktualisieren()
+{
+var einzelpreis = document.getElementById("einzelpreis").innerHTML;
+var anzahl = document.getElementById("anzahl").value;
+
+document.getElementById("aktuellerpreis").innerHTML = parseFloat(einzelpreis)*parseFloat(anzahl) + "€";
+}
+
+</script>
