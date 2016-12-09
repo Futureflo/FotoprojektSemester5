@@ -12,11 +12,11 @@
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr class="hidden-xs-down">
-							<th style="width:50%">Produkt</th>
-							<th style="width:10%">Preis</th>
-							<th style="width:8%">Größe</th>
-							<th style="width:22%" class="text-center">Anzahl</th>
-							<th style="width:10%">Preis</th>
+							<th style="width:40%">Produkt</th>
+							<th style="width:15%"></th>
+							<th style="width:15%" class="text-center"></th>
+							<th style="width:15%"></th>
+							<th style="width:15%"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,44 +27,45 @@
 									<img src="http://placehold.it/100x100" alt="..." class="img-responsive"/>
 									</div>
 									<div class="col-sm-3">
-										<h4>Bild 1</h4>
-										<p class="hidden-sm-down">Veranstaltung</p>
-										<p class="hidden-sm-down">Fotograf</p>
+										<h5>Bild 1</h5>
+										<p class="hidden-sm-down">Veranstaltung
+										Fotograf</p>
+										<h6>Einzelpreis: 1.99€</h6>
 									</div>
 								</div>
+							<td>
+							<p>
+							<h5>Größe</h5>
+							</p>
+							<p>
+							<h5>Anzahl</h5>
 							</td>
-							<td class="col-sm-1" data-th="Price">1.99€</td>
-							<td data-th="Größe">
-								 <div class="dropdown row">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Größe
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                        <li><a href="#">XS</a></li>
-                        <li><a href="#">S</a></li>
-                        <li><a href="#">M</a></li>
-                        <li><a href="#">L</a></li>
-                        <li><a href="#">XL</a></li>
-                        </ul>
-                        </div>
-                        </td>
-   							<td data-th="Anzahl">
-								<input type="number" class="form-control text-center">
-							</td>
-							<td data-th="Subtotal" class="text-center">1.99€</td>
-							<td class="actions" data-th="">
+							<td>
+							 <div class="form-group">
+                <select id="Anzahl" class="form-control">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </div>
+                        <p><input type="number" class="form-control"></p>
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</td>
+							
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td class="hidden-sm-down"><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Weitershoppen</a></td>
-							<td colspan="2"></td>
+							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Weitershoppen</a></td>
+							<td class="hidden-sm-down" colspan="2"></td>
 							<td class="text-center"><strong>Gesamtpreis 1.99€</strong></td>
 							<td><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
 				</table>
 				</div>
+				
 </div>
