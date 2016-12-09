@@ -6,9 +6,9 @@
 		</p>
 		
 	</div>
-</section>
+	</section>
 <div class="container">
-<div style="overflow-x:auto;">
+
 								<div class="row">
 									<div class="col-sm-3">
 									<img src="http://placehold.it/100x100" alt="..." class="img-responsive"/>
@@ -24,7 +24,7 @@
 									<p>
 									<h5>Anzahl</h5></div>
 							 <div class="form-group col-sm-3">
-                <select id="Anzahl" class="form-control">
+                <select id="Grösse" class="form-control">
                     <option>XS</option>
                     <option>S</option>
                     <option>M</option>
@@ -48,10 +48,9 @@
 							<div class="col-sm-3 col-s-12"><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
-				</div>
+			
 				
 </div>
-
 <script>
 
 function preisaktualisieren()
