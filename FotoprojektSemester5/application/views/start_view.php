@@ -13,8 +13,8 @@
 </section>
 
 <!-- Modal -->
-<div id="loginModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div id="loginModal" class="modal-md fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -27,42 +27,46 @@
       
       <div class="modal-body">        
         
-        <div class="container">
-			<div class="row">
-				<div class="col-md-10 offset-md-1">
+       
 					<?php  $attributes = array("name" => "loginform");
 							 echo form_open("login/", $attributes);?>
 			
-					<div class="form-login">
 		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_email'); ?></span>
 		                    </br>
 		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_password'); ?></span>
 		                    </br>
+		                    <div class="container">
+					            <div class="row">
+					                <div class="col-md-6 offset-md-3">
 		                    <div class="login-btn-wrapper">
 		                    <span class="group-btn">    
-		                    	<button name="submit" type="submit" class="btn btn-primary btn-md">Login</button>
+		                    	<button name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
 		                    </span>
 		                    </div>
-		                    <div class="forgot">
-		                    	<a href="#">Passwort vergessen?</a>
 		                    </div>
-		               </div>
+					            </div>
+					       </div>
+		                    <div class="container">
+					            <div class="row">
+					                <div class="col-md-8 offset-md-2">
+					                    <a href="#">Passwort vergessen?</a>
+					                </div>
+					            </div>
+					       </div>
 				<?php  echo form_close(); ?>
 				<?php  echo $this->session->flashdata('msg'); ?>
 				
-				</div>
-			</div>
-		</div>
+				
 		</div>
 		
         
       <div class="modal-footer text-center">
        <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <button name="submit" type="submit" class="btn btn-success btn-lg btn-block">Registrieren</button>
+                <div class="col-md-8 offset-md-2">
+                    <button name="submit" type="submit" class="btn btn-success btn-md btn-block">Registrieren</button>
                 </div>
             </div>
        </div>

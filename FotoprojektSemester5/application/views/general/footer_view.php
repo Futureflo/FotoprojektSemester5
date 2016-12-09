@@ -2,7 +2,8 @@
 
 <footer class="footer">
 	<div class="container">
-		<p class="text-muted"><a class="" href="<?php echo base_url();?>impressum/">Impressum</a> BLABLA</p>
+		<p class="text-muted"><a class="" href="<?php echo base_url();?>impressum/">Impressum</a> 
+		<a class="" href="<?php echo base_url();?>contact/">Kontakt</a>BLABLA</p>
 	</div>
 </footer>
 
