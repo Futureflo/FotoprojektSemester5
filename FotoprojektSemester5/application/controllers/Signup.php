@@ -30,6 +30,9 @@ class Signup extends CI_Controller
 			$salt = generate_salt(10);
 			$algo = 'sha256';
 			$hashpw = generate_hash($salt, $this->input->post('user_password'),$algo);
+			//createConfirmCode
+			$confirmCode = generate_salt(10);
+			
 			//insert user details into db
 			$data = array(
 				'user_firstname' => $this->input->post('user_firstname'),
@@ -38,13 +41,14 @@ class Signup extends CI_Controller
 				'user_password' => $hashpw,
 				'user_role_id' => 2,
 				'user_status' => 1,	
-				'user_salt' => $salt
+				'user_salt' => $salt,
+				'user_confirmcode' => $confirmCode	
 			);
 			
 			if ($this->user_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
-				$this->sendConfirmEmail($this->input->post('user_email'));
+				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
 // 				redirect('login/');	
 			}
 			else
@@ -57,16 +61,15 @@ class Signup extends CI_Controller
 		}
 	}
 	
-	function sendConfirmEmail($user_email){
+	function sendConfirmEmail($user_email,$confirmCode){
 
 		$this->load->library('email');
 		
 		$this->email->from('noReply@FPS5.com', 'FPS5');
 		$this->email->to($user_email);
-		$hashSurfix = generate_salt();
 		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
-		$this->email->message('Testing the email class. '. base_url().$hashSurfix);
-		echo base_url().$hashSurfix;
+		$this->email->message('Testing the email class. '. base_url().$confirmCode);
+		echo base_url().$confirmCode;
 		
 		return  $this->email->send();
 	}
