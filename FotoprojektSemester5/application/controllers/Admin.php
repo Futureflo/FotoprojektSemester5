@@ -23,8 +23,8 @@ class Admin extends CI_Controller {
 	}
 	public function deleteUser() {
 		$user_id = $this->input->post ( "user_hidden_field" );
-		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->User_model->delete_user ( $user_id );
+		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function product_types() {
