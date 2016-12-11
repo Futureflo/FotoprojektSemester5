@@ -1,9 +1,14 @@
 
+<!-- Der Reiter Zahlungsmethoden muss noch hinzugefügt werden -->
 
 <footer class="footer">
 	<div class="container">
-		<p class="text-muted"><a class="" href="<?php echo base_url();?>impressum/">Impressum</a> 
-		<a class="" href="<?php echo base_url();?>contact/">Kontakt</a>BLABLA</p>
+		<div class="row offset-md-2">
+			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>impressum/">Impressum</a></p> </div>
+			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>contact/">Kontakt</a></p></div>
+			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>">AGBs</a></p></div>
+			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>">Datenschutzrichtlinien</a></p></div>
+		</div>
 	</div>
 </footer>
 
