@@ -16,7 +16,9 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function events() {
-		$this->load->template ( 'admin/events_view' );
+		$this->load->model ( 'Event_model' );
+		$data ['events'] = $this->Event_model->getAllEvents();
+		$this->load->template ( 'admin/events_view', $data);
 	}
 	public function printers() {
 		$this->load->template ( 'admin/printers_view' );
