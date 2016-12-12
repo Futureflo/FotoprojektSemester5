@@ -69,7 +69,7 @@ class Signup extends CI_Controller
 		$this->email->to($user_email);
 		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
 		$this->email->message('Testing the email class. '. base_url()."User/confirmAccount/".$confirmCode);
-		echo base_url()."AccountConfirmation/".$confirmCode;
+		echo base_url()."User/confirmAccount/".$confirmCode;
 		echo $this->email->send();		
 	}
 }
