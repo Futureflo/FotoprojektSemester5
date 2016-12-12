@@ -7,7 +7,7 @@
 		
 
 		<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle"
-			href="http://example.com" id="supportedContentDropdown"
+			href="http://example.com" id="supNportedContentDropdown"
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 				<a class="dropdown-item" href="<?php echo base_url();?>admin/">Dashboard</a>
@@ -66,7 +66,7 @@
 						class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
 
 				<li class="nav-item active "><button type="button"
-						class="nav-link btn btn-success btn-md" data-toggle="modal"
+						id="login-btn" class="nav-link btn btn-success btn-md" data-toggle="modal"
 						data-target="#loginModal">Anmelden</button></li>
 			</div>
 
@@ -93,10 +93,10 @@
 					<?php  $attributes = array("name" => "loginform");
 							 echo form_open("login/", $attributes);?>
 			
-		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
+		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_email'); ?></span>
 		                    </br>
-		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
+		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
 		                    <span class="text-danger"><?php  echo form_error('user_password'); ?></span>
 		                    </br>
 		                    <div class="container">
@@ -136,4 +136,23 @@
     </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    window.onload = function(){
+        if(document.getElementById("renew")){
+            document.getElementById("login-btn").click();
+        }
+
+    function validate(){
+        var email = document.getElementById("user_email");
+        var password = document.getElementById("user_password");
+        
+        console.log(email);
+        
+        if(email === null || password === null){
+            alert("Bitte fülle die Pflichtfelder aus!");
+        }
+    }
+}
+</script>
 

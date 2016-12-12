@@ -49,7 +49,7 @@ class Login extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
+				$this->session->set_flashdata('msg', '<div id="renew" class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
 				redirect("start/");
 			}
 		}
