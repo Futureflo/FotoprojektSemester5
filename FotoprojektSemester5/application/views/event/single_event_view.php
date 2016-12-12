@@ -15,10 +15,18 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
-			<form action="" method="post" enctype="multipart/form-data">
-			    <input type="file" name="dateiupload" class="btn">
-			    <input type="submit" name="btn[upload]" class="btn btn-success">
-			</form>
+			<?php $attributes = array("name" => "newproduct");
+				$hidden = array('even_id' => $event[0]->even_id);
+				
+				echo form_open("Product/insert", $attributes, $hidden);
+				?>
+				<div class="form-insert_product">
+					<input type="file" name="dateiupload" class="btn">
+   				 	<input type="submit" name="btn[upload]" class="btn btn-success">
+				</div>
+
+			
+			<?php echo $this->session->flashdata('msg'); ?>					
 		</div>
 	</div>
 </div>

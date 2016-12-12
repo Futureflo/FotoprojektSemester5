@@ -11,3 +11,33 @@
 		</p>
 	</div>
 </section>
+
+<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
+	<h1>Product Types</h1>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Bezeichnung</th>
+					<th>URL</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<?php
+				foreach ( $events as $event ) {
+					echo "<tr class='searchable'>";
+					echo "<td>" . $event->even_id. "</td>";
+					echo "<td>" . $event->even_name. "</td>";
+					echo "<td>" . $event->even_url . "</td>";
+					
+					echo "<tr>";
+ 				}
+				?>
+
+				
+			</tbody>
+		</table>
+	</div>
+</div>
