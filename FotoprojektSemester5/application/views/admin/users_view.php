@@ -72,9 +72,9 @@
 	 		</div>
 		  	<div class="modal-footer ">
 		        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
-		        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
-		        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
-		        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+			        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
 			</div>
 		</div>
