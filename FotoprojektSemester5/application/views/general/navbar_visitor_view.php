@@ -87,24 +87,24 @@
         </button>
       </div>
       
-      <div class="modal-body">        
+      <div class="modal-body" onmouseover="validate()">        
         
        
 					<?php  $attributes = array("name" => "loginform");
 							 echo form_open("login/", $attributes);?>
 			
-		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
-		                    <span class="text-danger"><?php  echo form_error('user_email'); ?></span>
+		                    <input onkeyup="formsSet()" type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
+		                    <span align="center" id="email_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
 		                    </br>
-		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
-		                    <span class="text-danger"><?php  echo form_error('user_password'); ?></span>
+		                    <input onkeyup="formsSet()" type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
+		                    <span align="center" id="password_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
 		                    </br>
-		                    <div class="container">
+		                    <div class="container" onmouseover="formsSet()">
 					            <div class="row">
 					                <div class="col-md-6 offset-md-3">
 		                    <div class="login-btn-wrapper">
 		                    <span class="group-btn">    
-		                    	<button name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+		                    	<button id="login" name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
 		                    </span>
 		                    </div>
 		                    </div>
@@ -142,17 +142,34 @@
         if(document.getElementById("renew")){
             document.getElementById("login-btn").click();
         }
-
-    function validate(){
-        var email = document.getElementById("user_email");
-        var password = document.getElementById("user_password");
+    }
+    
+    function formsSet(){
+        var email = document.getElementById("user_email").value;
+        var password = document.getElementById("user_password").value;
+            
+        if (email === ''){
+            document.getElementById("email_span").style.display = "block";
+        } else {
+            document.getElementById("email_span").style.display = "none";
+        }
         
-        console.log(email);
-        
-        if(email === null || password === null){
-            alert("Bitte fülle die Pflichtfelder aus!");
+        if (password === ''){
+            document.getElementById("password_span").style.display = "block";
+        } else {
+            document.getElementById("password_span").style.display = "none";
         }
     }
-}
+    
+    function validate(){
+        var email = document.getElementById("user_email").value;
+        var password = document.getElementById("user_password").value;
+        
+        if(email === '' || password === ''){
+            document.getElementById("login").disabled = true;
+        } else {
+            document.getElementById("login").disabled = false;
+        }
+    }
 </script>
 
