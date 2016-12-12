@@ -12,7 +12,7 @@
 <div class="container">
 		<div class="row">
 		<div class="col-md-9">
-		<p class="h1" id="test">Users</p>
+		<p class="h1" id="test" onclick="setPager()">Users</p>
 		</div>
 		<div class="col-md-3">
 		<input type="text" id="searchTerm" class="form-control"
@@ -34,7 +34,7 @@
 						<th>Aktion</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="table_body">
 			<?php
 			foreach ( $users as $user ) {
 				echo "<tr class='searchable'>";
@@ -54,6 +54,30 @@
 			</table>
 		</div>
 	</div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-4">
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item" id="first_page"><a class="page-link" onclick="pagination(1)">1</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+    </div>
 </div>
 
 
@@ -84,6 +108,37 @@
 </div>
 
 <script type="text/javascript">
+    
+    function setPager(){
+        var table = document.getElementById('dataTable');
+        var tr = table.getElementsByClassName('searchable');
+        var size = tr.length - 10;
+        var number = 2;
+        
+        while(size>0){
+            size -= 10;
+            createPager(number);
+            number++;
+        } 
+        
+    }
+    
+    function createPager(num){
+        var node = document.createElement("LI");
+        var a = document.createElement("A");
+        var number = document.createTextNode(num);
+        
+        a.appendChild(number);
+        node.appendChild(a);
+        
+        node.className += "page-item";
+        a.className += "page-link";
+        
+        a.onclick = function(){pagination(num);};
+        
+        document.getElementById("first_page").appendChild(node);
+    }
+    
     /**
         Alle Inhalte der Reihen einer Tabelle werden auf die Eingabe abgeglichen. Bei Nicht Übereinstimmung wird die Reihe ausgeblendet.
     */
@@ -117,5 +172,22 @@
         document.getElementById("user").innerHTML = vorname + " " + nachname;
         document.getElementById("user_hidden_field").value = id;
     }
+    
+   function pagination(page){
+        var table, tr, td, i, j;
+        table = document.getElementById('dataTable');
+        tr = table.getElementsByClassName('searchable');
+       
+       for (j=0; j < tr.length; j++){
+           tr[j].style.display = "none";
+       }
+       
+       for (i=parseFloat((page*10)-10); i < parseFloat(page*10); i++){
+           tr[i].style.display = "";
+       }
+    }
+    
+    window.addEventListener('load', setPager, false);
+    window.addEventListener('load', pagination(1), false);
 </script>
 <script src="<?php echo base_url();?>js/sorttable.js"></script>
