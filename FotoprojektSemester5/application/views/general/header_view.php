@@ -21,8 +21,9 @@
 <link rel="stylesheet" href="<?php echo base_url();?>css/fps5.css"> 
 <link rel="stylesheet" href="<?php echo base_url();?>_sonstiges/bootstrap-4.0.0-alpha.5/dist/font-awesome-4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/cookieconsent.min.css" />
+
+<script src="<?php echo base_url();?>js/cookie.js"></script>
 <script>
 window.addEventListener("load", function(){
 window.cookieconsent.initialise({
@@ -38,6 +39,7 @@ window.cookieconsent.initialise({
     "message": "Diese Webseite verwendet Cookies, um die Benutzerfreundlichkeit zu erhöhen.",
     "dismiss": "Habs verstanden",
     "link": "Weitere Informationen"
+        //"href": "http://"
   }
 })});
 </script>
