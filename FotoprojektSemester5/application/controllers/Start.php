@@ -10,7 +10,6 @@ class Start extends CI_Controller {
 
 	public function index()
 	{	
-		$this->load->library(array('form_validation'));
 		$this->load->template ( 'start_view' );
 	}
 
