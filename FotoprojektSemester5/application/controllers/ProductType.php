@@ -18,3 +18,11 @@ class ProductType extends CI_Controller {
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 }
+
+abstract class ProductStatus
+{
+	const undefined	= 0;
+	const locked	= 1;
+	const approved	= 2;
+	const deleted	= 3;
+}
