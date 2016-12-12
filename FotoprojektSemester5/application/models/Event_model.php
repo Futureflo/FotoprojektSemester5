@@ -26,7 +26,12 @@
       	return $query->result();
       }
       
-      
+      public function getAllEvents()
+      {
+      	$query = $this->db->get("event");
+      	return $query->result();
+      }
+            
       // insert
       function insert_event($data)
       {
