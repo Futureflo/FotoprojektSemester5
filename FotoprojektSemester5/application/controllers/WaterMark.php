@@ -10,11 +10,11 @@ class Watermarkdemo extends \CI_Controller
         parent::__construct();
         $this->load->library('image_lib');
     }
-    public function text($image,$font,$fsize)
+    public function text($image,$text.$font,$fsize)
     {
         $config['source_image'] = $image;
         //The image path,which you would like to watermarking
-        $config['wm_text'] = 'WASSERZEICHEN';
+        $config['wm_text'] = $text;
         $config['wm_type'] = 'text';
         $config['wm_font_path'] = './fonts/'.$font.'.ttf';
         $config['wm_font_size'] = $fsize;
