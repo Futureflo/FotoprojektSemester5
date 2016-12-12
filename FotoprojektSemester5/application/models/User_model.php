@@ -39,10 +39,10 @@
       //update usere status
       function update_userStatus($user_confirmcode){
       	
-      	return $this->db
-      	->where('user_confirmcode', 'zd87RtOMj')
-      	->update("user", array('user_status' => 2));
-      	
+      	$this->db->set('user_status', 2, FALSE);
+      	$this->db->where('user_confirmcode', $user_confirmcode);
+      	$this->db->update('user');
+		return $afftectedRows = $this->db->affected_rows();      	
       }
       
       //change Password

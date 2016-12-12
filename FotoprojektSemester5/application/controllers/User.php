@@ -18,14 +18,13 @@ class User extends CI_Controller {
 	function confirmAccount($user_confirmcode){
 		
 		$confrimcodeExists= $this->user_model->update_userStatus($user_confirmcode);
-		echo $confrimcodeExists;
-		echo $user_confirmcode;
 		if ($confrimcodeExists == 1)
 		{
-			echo "Account ist bestätigt";
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Ihre E-Mail wurde erfolgreich bestätigt</div>');				
+			redirect ('start/');		
 		}
 		else {
-			echo"Account ist nicht bestätigt";
+			redirect ('sdasd');			
 		}
 	}
 	
@@ -38,7 +37,7 @@ class User extends CI_Controller {
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();
-		redirect ( 'start' );
+		redirect ('start/');
 	}
 }
 ?>
