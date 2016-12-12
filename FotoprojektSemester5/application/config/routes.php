@@ -53,8 +53,17 @@ $route['default_controller'] = 'start';
 $route['download'] = 'downloadmanager';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['event/(:any)'] = 'event/showSingleEvent/$1';
-$route['product/(:any)'] = 'product/showSinglePicture/$1';
-$route['user/(:num)'] = 'user/showSingleUser/$1';
+
+//User
+$route['confirm/(:any)'] = 'User/confirmAccount';
+$route['user/(:num)'] = 'User/showSingleUser/$1';
+
+//ProductType
 $route['product/(:any)'] = 'ProductType/product_types';
 $route['product/(:num)'] = 'ProductType/showSingleProductType/$1';
+
+//Product
+$route['product/(:any)'] = 'Product/showSinglePicture/$1';
+
+// Event
+$route['event/(:any)'] = 'Event/showSingleEvent/$1';
