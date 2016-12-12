@@ -57,4 +57,4 @@ $route['event/(:any)'] = 'event/showSingleEvent/$1';
 $route['product/(:any)'] = 'product/showSinglePicture/$1';
 $route['user/(:num)'] = 'user/showSingleUser/$1';
 $route['product/(:any)'] = 'ProductType/product_types';
-$route['product/(:num)'] = 'ProductType/showSingleProductType/$1';
+$route['termsandconditions/(:any)'] = 'termsandconditions/$1';
