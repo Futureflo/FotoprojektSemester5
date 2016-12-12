@@ -21,7 +21,7 @@
 
 		
 
-		<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown-toggle"
+		<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle"
 			href="http://example.com" id="supportedContentDropdown"
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
@@ -166,9 +166,9 @@
         var password = document.getElementById("user_password").value;
         
         if(email === '' || password === ''){
-            document.getElementById("login").disabled = true;
+            document.getElementById("login").type = "button";
         } else {
-            document.getElementById("login").disabled = false;
+            document.getElementById("login").type = "submit";
         }
     }
 </script>
