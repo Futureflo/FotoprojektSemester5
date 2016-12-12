@@ -2,7 +2,7 @@
     border-radius: 20px;
 }
 
-.form-login {
+.form-login, .form-PasswordReset{
     background-color: #EDEDED;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -17,4 +17,3 @@
 .login-btn-wrapper {
     text-align: left;
 }
-

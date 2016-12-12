@@ -16,7 +16,9 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function events() {
-		$this->load->template ( 'admin/events_view' );
+		$this->load->model ( 'Event_model' );
+		$data ['events'] = $this->Event_model->getAllEvents();
+		$this->load->template ( 'admin/events_view', $data);
 	}
 	public function printers() {
 		$this->load->template ( 'admin/printers_view' );
@@ -24,7 +26,8 @@ class Admin extends CI_Controller {
 	public function deleteUser() {
 		$user_id = $this->input->post ( "user_hidden_field" );
 		$this->User_model->delete_user ( $user_id );
-		redirect ( "admin/users" );
+		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
+		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function product_types() {
 		$this->load->model ( 'Product_type_model' );
