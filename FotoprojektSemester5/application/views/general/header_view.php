@@ -23,8 +23,10 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/cookieconsent.min.css" />
 
+
 <script src="<?php echo base_url();?>js/cookie.js"></script>
 <script>
+// Link zur Anleitung für Cookie: https://cookieconsent.insites.com/download/#
 window.addEventListener("load", function(){
 window.cookieconsent.initialise({
   "palette": {
