@@ -31,7 +31,7 @@
 					echo "<tr class='searchable'>";
 					echo "<td>" . $pt->prty_id. "</td>";
 					echo "<td>" . $pt->prty_description. "</td>";
-					if ($pt->prty_type == ProductPrintType::Download)
+					if ($pt->prty_type == ProductPrintType::download)
 					{
 						echo "<td>" .'Download' ."</td>";
 					}
