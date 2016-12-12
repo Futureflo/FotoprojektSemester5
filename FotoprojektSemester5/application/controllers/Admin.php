@@ -11,7 +11,6 @@ class Admin extends CI_Controller {
 	public function users() {
 		//$this->load->model ( 'user_model' );
 		$data ['users'] = $this->User_model->getAllUsers ();
-		echo "bka";
 		
 		$this->load->template ( 'admin/users_view', $data );
 	}
