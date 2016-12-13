@@ -13,7 +13,7 @@
 				<h2>Impressum</h2>
 
 				<p>
-					Florian Fay<br /> <br />
+					<br /> <br />
 				</p>
 				<p>
 					Telefon:<br /> E-Mail: <br />
