@@ -45,11 +45,11 @@ class Login extends CI_Controller
 				// set session
  				$sess_data = array('login' => TRUE, 'user_name' =>  $uresult[0]->user_firstname, 'user_id' =>  $uresult[0]->user_id);			
  				$this->session->set_userdata($sess_data);				
-				redirect("profile/");
+				redirect("start/");
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
+				$this->session->set_flashdata('msg', '<div id="renew" class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
 				redirect("start/");
 			}
 		}

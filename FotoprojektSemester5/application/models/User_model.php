@@ -38,9 +38,40 @@
       }
       //update usere status
       function update_userStatus($user_confirmcode){
-      $this->db->set('user_status', 2, FALSE);
-      $this->db->where('user_confirm_code', $user_confirmcode);
-      $this->db->update('user');
+      	
+      	$this->db->set('user_status', 2, FALSE);
+      	$this->db->where('user_confirmcode', $user_confirmcode);
+      	$this->db->update('user');
+		return $afftectedRows = $this->db->affected_rows();      	
+      }
+      
+      //change Password
+      function update_userPassword($user_id, $user_password){
+      	$this->db->set('user_password', $user_password, FALSE);
+      	$this->db->set('user_salt', $user_salt, FALSE);
+      	$this->db->where('user_id', $user_id);
+      	return $this->db->update('user');
+      }
+
+      public function update_user($usrArray){
+         if(empty($usrArray) || !isset($usrArray["user_id"]))
+            return FALSE;
+         $this->db->where('user_id', $usrArray["user_id"]);
+         unset($usrArray["user_id"]);
+         return $this->db->update('user', $usrArray);
+      }
+
+      public function mail_exists($field_value){
+         $this->db->where ( 'user_email', $field_value );
+         $query = $this->db->get ( 'user' );
+         
+         if ($query->num_rows () > 0) {
+            //user exists already
+            return TRUE;
+         }
+         else{
+            return FALSE;
+         }
       }
    } 
 ?>

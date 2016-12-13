@@ -7,7 +7,7 @@
 		
 
 		<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle"
-			href="http://example.com" id="supportedContentDropdown"
+			href="http://example.com" id="supNportedContentDropdown"
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 				<a class="dropdown-item" href="<?php echo base_url();?>admin/">Dashboard</a>
@@ -21,7 +21,7 @@
 
 		
 
-		<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown-toggle"
+		<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle"
 			href="http://example.com" id="supportedContentDropdown"
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
@@ -66,11 +66,110 @@
 						class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
 
 				<li class="nav-item active "><button type="button"
-						class="nav-link btn btn-success btn-md" data-toggle="modal"
+						id="login-btn" class="nav-link btn btn-success btn-md" data-toggle="modal"
 						data-target="#loginModal">Anmelden</button></li>
 			</div>
 
 		</ul>
 	</div>
 </nav>
+
+<!-- Modal -->
+<div id="loginModal" class="modal-md fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body" onmouseover="validate()">        
+        
+       
+					<?php  $attributes = array("name" => "loginform");
+							 echo form_open("login/", $attributes);?>
+			
+		                    <input onkeyup="formsSet()" type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
+		                    <span align="center" id="email_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
+		                    </br>
+		                    <input onkeyup="formsSet()" type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
+		                    <span align="center" id="password_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
+		                    </br>
+		                    <div class="container" onmouseover="formsSet()">
+					            <div class="row">
+					                <div class="col-md-6 offset-md-3">
+		                    <div class="login-btn-wrapper">
+		                    <span class="group-btn">    
+		                    	<button id="login" name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+		                    </span>
+		                    </div>
+		                    </div>
+					            </div>
+					       </div>
+		                    <div class="container">
+					            <div class="row">
+					                <div class="col-md-8 offset-md-2">
+					                    <a href="<?php echo base_url();?>PasswordForgot/">Passwort vergessen?</a>
+					                </div>
+					            </div>
+					       </div>
+				<?php  echo form_close(); ?>
+				<?php  echo $this->session->flashdata('msg'); ?>
+				
+				
+		</div>
+		
+        
+      <div class="modal-footer text-center">
+       <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <button name="submit" type="submit" class="btn btn-success btn-md btn-block">Registrieren</button>
+                </div>
+            </div>
+       </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function(){
+        if(document.getElementById("renew")){
+            document.getElementById("login-btn").click();
+        }
+    }
+    
+    function formsSet(){
+        var email = document.getElementById("user_email").value;
+        var password = document.getElementById("user_password").value;
+            
+        if (email === ''){
+            document.getElementById("email_span").style.display = "block";
+        } else {
+            document.getElementById("email_span").style.display = "none";
+        }
+        
+        if (password === ''){
+            document.getElementById("password_span").style.display = "block";
+        } else {
+            document.getElementById("password_span").style.display = "none";
+        }
+    }
+    
+    function validate(){
+        var email = document.getElementById("user_email").value;
+        var password = document.getElementById("user_password").value;
+        
+        if(email === '' || password === ''){
+            document.getElementById("login").type = "button";
+        } else {
+            document.getElementById("login").type = "submit";
+        }
+    }
+</script>
 

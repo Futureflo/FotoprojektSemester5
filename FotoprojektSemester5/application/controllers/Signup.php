@@ -65,11 +65,11 @@ class Signup extends CI_Controller
 
 		$this->load->library('email');
 		
-		$this->email->from('noReply@FPS5.com', 'FPS5');
+		$this->email->from('noReply@snap-gallery.de', 'FPS5');
 		$this->email->to($user_email);
 		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
-		$this->email->message('Testing the email class. '. base_url()."AccountConfirmation/".$confirmCode);
-		echo base_url()."AccountConfirmation/".$confirmCode;
+		$this->email->message('Testing the email class. '. base_url()."User/confirmAccount/".$confirmCode);
+		echo base_url()."User/confirmAccount/".$confirmCode;
 		echo $this->email->send();		
 	}
 }

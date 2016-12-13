@@ -4,17 +4,17 @@
 			<div class="">
 				<h2>Kontaktformular</h2>
 				<br> 
-				Name: <br /> 
-				<input type="text" placeholder="Vor und Nachname"> 
-				<br /> <br /> 
-				E-Mail Adresse:
-				<br /> 
-				<input type="text" placeholder="E-Mail Adresse"> 
-				<br /> <br /> 
-				Nachricht: <br />
-				<textarea rows="4" cols="50"></textarea>
-				<br> <br>
-				<button type="button">Kontaktanfrage Senden</button>
+				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname eingeben" name="user_name"/>
+				<br />
+				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" name="user_email"/>
+				<br />
+				<div class="form-group">
+  <!--  <label for="comment">Nachricht:</label>  -->
+  <textarea class="form-control" rows="5" placeholder="Nachricht eingeben" id="nachricht"></textarea>
+				</div>
+				<span class="group-btn">    
+		            	<button name="submit" type="submit" class="btn btn-primary btn-md">Absenden</button>
+		        </span>
 			</div>
 		</div>
 
