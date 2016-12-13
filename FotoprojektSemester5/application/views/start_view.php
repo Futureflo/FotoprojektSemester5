@@ -1,4 +1,4 @@
-<section class="section-white" style="margin: 52px 0px 0px 0px;">
+<section class="section-white" style="margin: 3.25rem 0rem 0rem 0rem;">
 
 	<div id="carousel-example-generic" class="carousel slide float-md-left"
 		data-ride="carousel" >
@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <input type="text" id="searchTerm" class="form-control"
-			onkeyup="" placeholder="Search for event..." style="margin: 20px 10px"/>
+			onkeyup="" placeholder="Search for event..." style="margin: 1.25rem 0.625rem"/>
         </div>
     </div>
 </div>
