@@ -52,5 +52,26 @@
       	$this->db->where('user_id', $user_id);
       	return $this->db->update('user');
       }
+
+      public function update_user($usrArray){
+         if(empty($usrArray) || !isset($usrArray["user_id"]))
+            return FALSE;
+         $this->db->where('user_id', $usrArray["user_id"]);
+         unset($usrArray["user_id"]);
+         return $this->db->update('user', $usrArray);
+      }
+
+      public function mail_exists($field_value){
+         $this->db->where ( 'user_email', $field_value );
+         $query = $this->db->get ( 'user' );
+         
+         if ($query->num_rows () > 0) {
+            //user exists already
+            return TRUE;
+         }
+         else{
+            return FALSE;
+         }
+      }
    } 
 ?>
