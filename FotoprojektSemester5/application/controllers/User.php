@@ -15,16 +15,17 @@ class User extends CI_Controller {
 		);
 		$this->load->template ( 'user/single_user_view', $data );
 	}
+	// confirm E-Mail and go to start Page
 	function confirmAccount($user_confirmcode){
 		
-		$confrimcodeExists= $this->user_model->update_userStatus($user_confirmcode);
+		$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
 		if ($confrimcodeExists == 1)
 		{
 			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Ihre E-Mail wurde erfolgreich bestätigt</div>');				
 			redirect ('start/');		
 		}
 		else {
-			redirect ('sdasd');			
+			redirect ('start/');			
 		}
 	}
 	
