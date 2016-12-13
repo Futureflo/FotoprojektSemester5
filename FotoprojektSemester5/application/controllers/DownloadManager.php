@@ -64,7 +64,6 @@ class DownloadManager extends CI_Controller {
 		return $zipPath;
 	}
 	
-	
 	/**
 	 * Zips a new archive file containing files from given arary.
 	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
