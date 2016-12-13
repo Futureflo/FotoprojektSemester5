@@ -1,4 +1,4 @@
-<section class="section-white" style="padding-top: 15px;">
+<section class="section-white" style="margin: 52px 0px 0px 0px;">
 
 	<div id="carousel-example-generic" class="carousel slide float-md-left"
 		data-ride="carousel" >
