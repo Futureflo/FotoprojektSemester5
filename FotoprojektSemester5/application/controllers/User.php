@@ -21,7 +21,7 @@ class User extends CI_Controller {
 		$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
 		if ($confrimcodeExists == 1)
 		{
-			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Ihre E-Mail wurde erfolgreich bestätigt</div>');				
+			$this->session->set_flashdata('msg', '<div id="renew" class="alert alert-danger text-center">Ihre E-Mail wurde erfolgreich bestätigt</div>');				
 			redirect ('start/');		
 		}
 		else {
