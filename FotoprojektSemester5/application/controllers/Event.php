@@ -19,7 +19,7 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/single_event_view', $data );
 	}
 	
-	function new()
+	function newEvent()
 	{
 		$user_id = $this->session->userdata('user_id');
 		
@@ -35,8 +35,8 @@ class Event extends CI_Controller {
 	// 		$this->form_validation->set_rules('even_status', 'Confirm Password', 'trim|required');
 		
 	 		$even_status = $this->input->post('even_status'); 
-	 		if(isset($even_status)) $even_status = EventStatus::public;
-	 		else $even_status = EventStatus::privat;
+	 		if(isset($even_status)) $even_status = EventStatus::prv;
+	 		else $even_status = EventStatus::pbl;
 	 			
 			// submit
 			if ($this->form_validation->run() == FALSE)
@@ -77,6 +77,7 @@ class Event extends CI_Controller {
 			$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Bitte anmelden!!!</div>');
 			redirect('event/');
 		}
+		
 	}
 	
 	function generate_url(&$data)
@@ -95,8 +96,8 @@ abstract class EventStatus
 {
 	const undefined	= 0; 
 	const locked	= 1;
-	const privat	= 2;
-	const public	= 3;
+	const prv	= 2;
+	const pbl 	= 3;
 	const deleted	= 4;
 }
 ?>
