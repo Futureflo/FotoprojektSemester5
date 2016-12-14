@@ -6,7 +6,7 @@
 				<br> 
 				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname*" name="user_name"/>
 				<br />
-				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse*" name="user_email"/>
+				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="user_email"/>
 				<br />
 				<input type="text" class="form-control input-sm chat-input" placeholder="Telefonnummer" name="user_email"/>
 				<br />
