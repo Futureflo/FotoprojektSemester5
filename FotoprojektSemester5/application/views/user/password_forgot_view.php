@@ -6,7 +6,7 @@
 				
 
 
-<?php echo form_open('PasswordForgot');?>
+				<?php echo form_open('PasswordForgot');?>
 				
 					<div class="form-PasswordReset">
 						<h4>Passwort vergessen?</h4>
@@ -26,4 +26,9 @@
 							</span>
 						</div>
 					</div>
-</form>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

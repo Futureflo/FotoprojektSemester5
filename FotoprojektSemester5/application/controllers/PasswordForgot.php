@@ -23,7 +23,7 @@ class PasswordForgot extends CI_Controller {
 		}
 		else
 		{
-			$this->load->template('user/formsuccess');
+			$this->load->template('user/success_password_forgot_view');
 		}
 	}
 	
