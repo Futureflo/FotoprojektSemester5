@@ -13,22 +13,16 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active">
-				<img
-					src="<?php echo base_url();?>_sonstiges/img/bild1.jpg"
-					 class="bild">
+				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild1.jpg)"></div>
 			</div>
 			<div class="carousel-item">
-				<img
-					src="<?php echo base_url();?>_sonstiges/img/bild1.jpg"
-					alt="..."  class="bild">
+				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild1.jpg)"></div>
 				<div class="carousel-caption">
 					<h2>Heading</h2>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img
-					src="<?php echo base_url();?>_sonstiges/img/bild1.jpg"
-					alt="..."  class="bild">
+				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild1.jpg)"></div>
 				<div class="carousel-caption">
 					<h2>Heading</h2>
 				</div>
@@ -54,7 +48,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="album text-muted">
 	<div class="container">
@@ -149,7 +142,7 @@
 </div>
 
 
-<script type="text/javascript">
+<script type="text/javascript">    
 	function setPics(){
 		var w = window.innerWidth;
 		var h;

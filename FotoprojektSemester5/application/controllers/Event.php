@@ -87,7 +87,6 @@ class Event extends CI_Controller {
 		$even_id = $id;
 		$even_url = base_convert($even_id,20,36);
 		$data['even_url']  = $even_url;
-		
 		$this->event_model->update_event($id, $data);
 	}
 }
