@@ -148,7 +148,7 @@
 		var h;
 
 		if(checkMobileOrTablet()){
-			h = window.innerHeight*0.5;
+			h = (w/100)*50;
 		} else {
 			w = w*0.99;
 			h = (w/100)*30;
