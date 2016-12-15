@@ -2,10 +2,11 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Product extends CI_Controller {
 	
+	
 	public function __construct() {
-		parent::__construct ();
-		$this->load->library ( 'session' );
-		$this->load->library(array('form_validation'));
+// 		parent::__construct ();
+// // 		$this->load->library ( 'session' );
+// 		$this->load->library(array('form_validation'));
 	}
 	
 	public function index() {
@@ -14,6 +15,13 @@ class Product extends CI_Controller {
 	public function showSinglePicture($picuri) {
 		$data = array();
 		$this->load->template ( 'product/single_picture_view', $data );
+	}
+	
+	public static function buildFilePath($p)
+	{
+		$date=date_create($p->prod_date);
+		$path = Event::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
+		return $path;
 	}
 	
 	function insert()
