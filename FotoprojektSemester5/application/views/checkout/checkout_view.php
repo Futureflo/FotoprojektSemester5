@@ -53,7 +53,7 @@
 						<div class="row">
 							<div class="col-sm-9 col-s-12">
 							</div>
-							<div class="col-sm-3 col-s-12"><a href="#" class="btn btn-success btn-block">Zur Kasse<i class="fa fa-angle-right"></i></a>
+							<div class="col-sm-3 col-s-12"><a href="#" class="btn btn-success btn-block">Zur Kasse <i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 			<hr />
