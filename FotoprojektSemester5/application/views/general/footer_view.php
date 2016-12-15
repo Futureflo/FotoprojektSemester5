@@ -7,7 +7,7 @@
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>legalnotice/">Impressum</a></p> </div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>contact/">Kontakt</a></p></div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>termsandconditions/">AGBs</a></p></div>
-			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>">Datenschutzrichtlinien</a></p></div>
+			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php echo base_url();?>privacypolicy/">Datenschutzrichtlinie</a></p></div>
 		</div>
 	</div>
 </footer>

@@ -28,16 +28,17 @@ class User extends CI_Controller {
 		$data['orders'] = $orders;
 		$this->load->template ( 'user/my_order_view', $data );
 	}
+
 	function confirmAccount($user_confirmcode){
 		
-		$confrimcodeExists= $this->user_model->update_userStatus($user_confirmcode);
+		$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
 		if ($confrimcodeExists == 1)
 		{
-			$this->session->set_flashdata('msg', '<div id="renew" class="alert alert-danger text-center">Ihre E-Mail wurde erfolgreich bestätigt</div>');				
+			$this->session->set_flashdata('msg', 'Ihre E-Mail wurde erfolgreich bestätigt');				
 			redirect ('start/');		
 		}
 		else {
-			redirect ('sdasd');			
+			redirect ('start/');			
 		}
 	}
 	

@@ -23,7 +23,7 @@ class Signup extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
         {
 			// fails
-			$this->load->view('user/signup_view');
+			$this->load->template('user/signup_view');
         }
 		else
 		{
@@ -47,14 +47,14 @@ class Signup extends CI_Controller
 			
 			if ($this->user_model->insert_user($data))
 			{
-				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
+				$this->session->set_flashdata('msg','You are Successfully Registered! Please login to access your Profile!');
 				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
-// 				redirect('login/');	
+ 				redirect('login/');	
 			}
 			else
 			{
 				// error
-				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
+				$this->session->set_flashdata('msg','Oops! Error.  Please try again later!!!');
 				redirect('signup/');
 
 			}
@@ -68,8 +68,7 @@ class Signup extends CI_Controller
 		$this->email->from('noReply@snap-gallery.de', 'FPS5');
 		$this->email->to($user_email);
 		$this->email->subject('Bestätigung zu Ihrem FPS5 Account');
-		$this->email->message('Testing the email class. '. base_url()."User/confirmAccount/".$confirmCode);
-		echo base_url()."User/confirmAccount/".$confirmCode;
+		$this->email->message('Sie haben erfolgreich  '. base_url()."User/confirmAccount/".$confirmCode);
 		echo $this->email->send();		
 	}
 }
