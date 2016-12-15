@@ -29,7 +29,7 @@ class Login extends CI_Controller
 			$uresult = $this->user_model->get_user($email);
 			// ceck E-Mail-Confirmation
 			if (1 == $uresult[0]-> user_status){
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen</div>');
+				$this->session->set_flashdata('msg', 'Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen');
 				redirect("start/");
 			}
 			else{
@@ -49,7 +49,7 @@ class Login extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('msg', '<div id="renew" class="alert alert-danger text-center">Falsche E-Mail-Adresse oder Passwort</div>');
+				$this->session->set_flashdata('msg', 'Falsche E-Mail-Adresse oder Passwort');
 				redirect("start/");
 			}
 		}

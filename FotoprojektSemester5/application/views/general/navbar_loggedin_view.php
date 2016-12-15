@@ -26,8 +26,8 @@
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 				<a class="dropdown-item" href="<?php echo base_url();?>user/">Benutzereinstellungen</a>
-				<a class="dropdown-item" href="<?php echo base_url();?>user/1/">Einzelner
-					Benutzer</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>user/1/">Einzelner Benutzer</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>user/myOrders">Meine Bestellungen</a>
 			</div></li>
 
 

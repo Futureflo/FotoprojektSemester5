@@ -26,6 +26,31 @@
    			$query = $this->db->get("order");
    			return $query->result();
    		}
+   		
+   		public function getAllOrdersByUser($user_id)
+   		{
+   			$this->db->where('orde_user_id', $user_id);
+   			$query = $this->db->get("order");
+   			
+   			$orders = $query->result();
+   			foreach ($orders as $o)	{
+     			$o->order_position = $this->getAllOrderPositions($o->orde_id);
+  			}
+ 
+   			return $orders;
+   		}
+   			
+   		public function getAllOrderPositions($orde_id)
+   		{
+   			$this->db->join('product', 'orpo_prod_id = prod_id', 'LEFT OUTER');
+   			$this->db->join('event', 'even_id = prod_even_id', 'INNER');
+   			$this->db->join('product_variant', 'orpo_prod_id = prva_prod_id', 'LEFT OUTER');
+   			$this->db->join('product_type', 'prty_id = prva_prty_id', 'LEFT OUTER');
+   			$this->db->where('orpo_orde_id', $orde_id);
+   			$query = $this->db->get("order_position");
+   			
+   			return $query->result();
+   		}
    	
    		// insert
    		function insert_order($data)

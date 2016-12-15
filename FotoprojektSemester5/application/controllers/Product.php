@@ -53,7 +53,28 @@ class Product extends CI_Controller {
 				$this->load->model('product_model');
 				if ($this->product_model->insert_product($data))
 				{
-					$this->session->set_flashdata('msg','<div class="alert alert-success text-center">Product hochgeladen!</div>');
+				
+					$config['upload_path']          = 'uploads/';
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 100;
+					$config['max_width']            = 1024;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					
+					if ( ! $this->upload->do_upload('dateiupload'))
+					{
+							$this->session->set_flashdata('msg',$this->upload->display_errors());
+					}
+					else
+					{
+							$data = array('dateiupload' => $this->upload->data());
+							$this->session->set_flashdata('msg',$data);
+							//$this->session->set_flashdata('msg','<div class="alert alert-success text-center">Product hochgeladen!</div>');
+						
+					}
+
 					$this->load->model('event_model');
 					$event = $this->event_model->getSingleEventById($prod_even_id);
 					redirect('event/' . $event[0]->even_url);
@@ -70,7 +91,7 @@ class Product extends CI_Controller {
 		else
 		{
 			// error
-			$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Keine Datei ausgewählt anmelden!!!</div>');
+			$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Keine Datei ausgewählt anmelden!!!</div>'.$dateiupload[0].'');
 			redirect('event/' . $data['even_url']);
 		}
 	}
