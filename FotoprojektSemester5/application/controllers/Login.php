@@ -79,7 +79,6 @@ class Login extends CI_Controller
     function forgotPassword(){
     	$user_email = $this->input->post("email");
     	 
-    	echo $user_email;
     	$this->form_validation->set_rules('email', '"Email"', 'trim|required|valid_email|callback_user_exists');
     	$this->form_validation->set_message('user_exists','Das Passwort kann nicht zurückgesetzt werden, weil kein Benutzer mit der angegebenen E-Mail-Adresse gefunden wurde');
     
@@ -89,8 +88,9 @@ class Login extends CI_Controller
     	}
     	else
     	{
-    		$PassowrdForgotCode = generate_salt(10);
-    		$this->sendPassowrdForgotEmail($user_email,$PassowrdForgotCode);
+    		$restoreCode = generate_salt(10);
+    		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
+    		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
     		$this->load->template('user/success_password_forgot_view');
     	}
     }
@@ -102,8 +102,9 @@ class Login extends CI_Controller
     	$this->email->from('noReply@snap-gallery.de', 'FPS5');
     	$this->email->to($user_email);
     	$this->email->subject('Snap-Gallery.de Password zurücksetzen');
-    	$this->email->message('Sie können unter dem Folgenden Link ihr neues Password eingeben '. base_url()."Login/restorePassword/".$PassowrdForgotCode);
-    	echo $this->email->send();
+    	$this->email->message('Sie können unter dem Folgenden Link ihr neues Password eingeben '. base_url()."login/restorePassword/".$PassowrdForgotCode);
+    	 $this->email->send();
+    	
     }
     
     function user_exists($str)
@@ -122,7 +123,7 @@ class Login extends CI_Controller
     }
     
     function restorePassword($user_passwordrestore){
-    	
+    	echo "test";
     	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);
     	if ($uresult[0] != NULL)
     	{
@@ -134,7 +135,7 @@ class Login extends CI_Controller
     	}
     }
     
-   private function changePassword($user_id){
+  function changePassword($user_id){
   
     	$newPassword = $this->input->post("user_newPassword");
     	$newCPassword = $this->input->post("user_newCPassword");
