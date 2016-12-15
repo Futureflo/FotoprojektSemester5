@@ -44,10 +44,10 @@
 						<h5>Gesamtpreis:</h5>
 							</div>
 						<div class="col-sm-1 col-xs-2">
-						<h6>1.62€</h6>
-						<h6>0.38€</h6>
-						<h6>1.00€</h6>
-						<h5>2.99€</h5>
+						<h6><i id="nettopreis">1.62€</i></h6>
+						<h6 id="mehrwertsteuer">0.38€</h6>
+						<h6 id="versandkosten">1.00€</h6>
+						<h5 id="Gesamtpreis">2.99€</h5>
 						</div>	
 						</div>	
 						<div class="row">
@@ -66,7 +66,31 @@ function preisaktualisieren()
 var einzelpreis = document.getElementById("einzelpreis").innerHTML;
 var anzahl = document.getElementById("anzahl").value;
 
-document.getElementById("aktuellerpreis").innerHTML = parseFloat(einzelpreis)*parseFloat(anzahl) + "€";
+if (anzahl < 1) {
+    document.getElementById("anzahl").value = 1;
+} else if (isNaN(anzahl)) {
+	document.getElementById("anzahl").value = 1;
+} else {
+	document.getElementById("aktuellerpreis").innerHTML = parseFloat(einzelpreis)*parseFloat(anzahl) + "€";
+} 
 }
+
+
+function nettopreis()
+{
+var aktuellerpreis = document.getElementById("aktuellerpreis").innerHTML;
+document.getElementById("nettopreis").innerHTML = aktuellerpreis*0.81 + "€";
+}
+
+/*
+function mehrwertsteuer()
+{
+var aktuellerpreis = document.getElementById("aktuellerpreis").innerHTML;
+}
+
+function gesamtpreis()
+{
+}
+*/
 
 </script>
