@@ -1,9 +1,12 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+
 class Event extends CI_Controller {
+	const base_path = "/Images/";
+	
 	public function __construct() {
 		parent::__construct ();
-		$this->load->library ( 'session' );
+ 		$this->load->library ( 'session' );
 		$this->load->library(array('form_validation'));
 	}
 	public function index() {
@@ -14,7 +17,15 @@ class Event extends CI_Controller {
       	$this->load->model('event_model');
       	$event = $this->event_model->getSingleEventByShortcode($shortcode);
       	$data['event'] = $event;
-      	$data['products'] = $this->event_model->getProductsFromEvent($event[0]->even_id);
+      	$products = $this->event_model->getProductsFromEvent($event[0]->even_id);
+      	
+      	foreach ($products as $p)	{
+      		$date=date_create($p->prod_date);
+      		$path = Event::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
+      		$p->prod_filepath  = $path;
+      	}
+      	
+      	$data['products'] = $products;
       	
 		$this->load->template ( 'event/single_event_view', $data );
 	}
