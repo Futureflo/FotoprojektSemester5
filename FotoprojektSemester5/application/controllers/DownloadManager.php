@@ -19,22 +19,7 @@ class DownloadManager extends CI_Controller {
 	 * - Die Zip-Funktion erhält also die Info für die zu zippende Order aus dem Link.
 	 *
 	 */
-	
-	/**
-	 * Method to unpack Zip.
-	 * #Author: Severin
-	 */
-	public function unpackZip($sourcePath) {
-		echo "allright";
-	}
-	
-	public function setImageArray(){
-		$this->session->set_flashdata('arrayImages', '/*get Images and pack them into an array*/');
-	}
-	
-	////////////////////////////////////////////////////////////////////
-	// TEST SECTION //
-	////////////////////////////////////////////////////////////////////
+
 	
 	/**
 	 * Metod to convert a paid order from customers cart into a downloadlink.
@@ -114,17 +99,7 @@ class DownloadManager extends CI_Controller {
 		
 	}
 	
-	public function test(){
-		$pfade = array(
-				0 => "/2016/12/001.png",
-				1 => "/2016/12/002.jpg",
-				2 => "/2016/12/liesmich.txt",
-		);
-		$this->zipDir(77, 88, $pfade);
-		
 
-	}
-	
 	/**
 	 * Returns an Array containing all image-paths from the orderID.
 	 * @param unknown $orderID
@@ -140,18 +115,17 @@ class DownloadManager extends CI_Controller {
 		return $imagePathArray;
 	}
 	
-	/**
-	 * Helper Method to get formatted datetime.
-	 * @param unknown $ts
-	 * @return unknown
-	 */
-	function gmgetdate2($ts = null){
-		$k = array('seconds','minutes','hours','mday',
-				'wday','mon','year','yday','weekday','month',0);
-		return(array_combine($k,split(":",
-				gmdate('s:i:G:j:w:n:Y:z:l:F:U',is_null($ts)?time():$ts))));
+	public function test(){
+		$pfade = array(
+				0 => "/2016/12/001.png",
+				1 => "/2016/12/002.jpg",
+				2 => "/2016/12/liesmich.txt",
+		);
+		$this->zipDir(77, 88, $pfade);
+	
+	
 	}
-
+	
 }
 
 ?>
