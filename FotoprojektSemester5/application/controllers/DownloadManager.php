@@ -65,35 +65,50 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	/**
-	 * Zips a new archive file containing files from given arary.
+	 * Zips a new archive file containing files from given arary. Autor: Severin Klug.
 	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
 	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
-	public function zipDir(array $imagePathArray, $outZipFolder) {
+	public function zipDir($userID, $orderID, array $imagePathArray) {
 		// TODO: checken ob ziel und quellordner existieren
+		$this->load->model('order_model');
+		$this->load->helper('hash_helper');
+		
+		// Zielordner
+		$outZipFolder = "ImagesDownloadZips";
+		
 		// Instanziiert Zip Archiv
 		$zipArchive = new ZipArchive();
+		
 		// name für das Zip Archiv
-		// dateiname = datum, uhrzeit, orderID userID
-		$zipFileName = "myZip.zip";
+		// dateiname = userID, orderID, datum, uhrzeit
+		$myDate = date('omdGis');
+		$zipFileName = "Your_Zip_File_". $userID . $orderID . $myDate .".zip";
+		
 		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
-		$outZipPath = "../". $outZipFolder ."/". $zipFileName;
+		$outZipPath = $outZipFolder ."/". $zipFileName;
 		
 		// Zip Archiv in Ordnerstruktur erstellen und öffnen
 		if ($zipArchive->open($outZipPath, ZipArchive::CREATE)!==TRUE) {
 			exit("cannot open <$outZipPath>\n");
 		}
-		$readme = fopen("../Images/2016\December/liesmich.txt", "w") or die("Unable to open file!");
-		$txt = "Liesmich";
-		fwrite($readme, $txt);
-		fclose($readme);
+
 		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
-// 		for ($i = 1; $i <= count($imagePathArray); $i++) {
-// 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
-// 			// name der hinzugefügten Datei wird $i
-// 			$zipArchive->addFile('../Images'. $imagePathArray[$i], $i);
-// 		}
-		$zipArchive->addFile("../Images/liesmich.txt", "liesmich");
+		for ($i = 0; $i < count($imagePathArray); $i++) {
+			// name der hinzugefügten Datei wird ursprungs
+			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
+			$pathinfo = pathinfo($imagePathArray[$i]);
+			$fileName = $pathinfo['filename'] .".". $pathinfo['extension'];
+			$zipArchive->addFile('../Images'. $imagePathArray[$i], $fileName);
+		}
+		
+		// Zip passwortschützen
+		$mySalt = generate_salt();
+		echo $mySalt;
+		$zipArchive->setPassword($mySalt);
+// 		system('zip -P password file.zip file.txt');
+// 		$zip->Password = $mySalt;
+		
 		// Zip Archiv schließen
 		$zipArchive->close();
 		
@@ -101,11 +116,13 @@ class DownloadManager extends CI_Controller {
 	
 	public function test(){
 		$pfade = array(
-				1 => "\2016\December\001.png",
-				2 => "\2016\December\002.jpg",
-				3 => "/2016\December/liesmich.txt",
+				0 => "/2016/12/001.png",
+				1 => "/2016/12/002.jpg",
+				2 => "/2016/12/liesmich.txt",
 		);
-		$this->zipDir($pfade, "ImagesDownloadZips");
+		$this->zipDir(77, 88, $pfade);
+		
+
 	}
 	
 	/**
@@ -121,6 +138,18 @@ class DownloadManager extends CI_Controller {
 		$imagePathArray = array();
 		// return bildpfad array
 		return $imagePathArray;
+	}
+	
+	/**
+	 * Helper Method to get formatted datetime.
+	 * @param unknown $ts
+	 * @return unknown
+	 */
+	function gmgetdate2($ts = null){
+		$k = array('seconds','minutes','hours','mday',
+				'wday','mon','year','yday','weekday','month',0);
+		return(array_combine($k,split(":",
+				gmdate('s:i:G:j:w:n:Y:z:l:F:U',is_null($ts)?time():$ts))));
 	}
 
 }
