@@ -123,7 +123,6 @@ class Login extends CI_Controller
     }
     
     function restorePassword($user_passwordrestore){
-    	echo "test";
     	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);
     	if ($uresult[0] != NULL)
     	{
