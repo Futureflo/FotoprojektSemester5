@@ -43,7 +43,13 @@ class Login extends CI_Controller
 			if (strcmp($hashpw , $user_password) == 0) 
 			{
 				// set session
- 				$sess_data = array('login' => TRUE, 'user_name' =>  $uresult[0]->user_firstname, 'user_id' =>  $uresult[0]->user_id);			
+ 				$sess_data = array(	'login' => TRUE,
+ 									'user_id' =>  $uresult[0]->user_id,
+ 									'user_email' =>  $uresult[0]->user_email,
+ 									'user_name' =>  $uresult[0]->user_name,
+ 									'user_name' =>  $uresult[0]->user_firstname,
+ 									'user_status' =>  $uresult[0]->user_status,
+ 									'user_role' =>  $uresult[0]->user_role);			
  				$this->session->set_userdata($sess_data);				
 				redirect("start/");
 			}
