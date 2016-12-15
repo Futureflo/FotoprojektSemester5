@@ -4,6 +4,7 @@ class User extends CI_Controller {
 		parent::__construct ();
 		$this->load->library ( 'session' );
 		$this->load->model('user_model');
+		$this->load->model('Product_type_model');
 		
 	}
 	public function index() {
@@ -14,6 +15,18 @@ class User extends CI_Controller {
 				"userid" => $userid 
 		);
 		$this->load->template ( 'user/single_user_view', $data );
+	}
+	
+	public function myOrders() {
+		
+		$this->load->model('order_model');
+		$user_id = $this->session->userdata('user_id');
+		$orders = $this->order_model->getAllOrdersByUser($user_id);
+		
+		
+		$data['userid'] = $user_id;
+		$data['orders'] = $orders;
+		$this->load->template ( 'user/my_order_view', $data );
 	}
 	function confirmAccount($user_confirmcode){
 		
