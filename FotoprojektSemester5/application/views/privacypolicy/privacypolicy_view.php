@@ -55,7 +55,7 @@ Auch den unternehmensinternen Datenschutz nehmen wir sehr ernst. Unsere Mitarbei
 Sie erhalten jederzeit ohne Angabe von Gründen kostenfrei Auskunft über Ihre bei uns gespeicherten Daten. Sie können jederzeit Ihre bei uns erhobenen Daten sperren, berichtigen oder löschen lassen und der anonymisierten oder pseudonymisierten Datenerhebung und -speicherung zu Optimierungszwecken unserer Website widersprechen. Auch können Sie jederzeit die uns erteilte Einwilligung zur Datenerhebung und Verwendung ohne Angaben von Gründen widerrufen. Wenden Sie sich hierzu bitte an die im Impressum angegebene Kontaktadresse. Wir stehen Ihnen jederzeit gern für weitergehende Fragen zu unserem Hinweisen zum Datenschutz und zur Verarbeitung Ihrer persönlichen Daten zur Verfügung.<br /> <br />
 
 Beachten sie, dass sich Datenschutzbestimmungen und Handhabungen zum Datenschutz, z. B. bei Google, laufend ändern können. Es ist daher ratsam und erforderlich, sich über Veränderungen der gesetzlichen Bestimmungen und der Praxis von Unternehmen, z. B. Google, laufend zu informieren.
-</p>>
+</p>
 </div>
 
 
