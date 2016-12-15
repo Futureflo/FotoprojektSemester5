@@ -1,12 +1,12 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Product extends CI_Controller {
-	
+	const base_path = "/Images/";
 	
 	public function __construct() {
-// 		parent::__construct ();
-// // 		$this->load->library ( 'session' );
-// 		$this->load->library(array('form_validation'));
+		parent::__construct ();
+		$this->load->library ( 'session' );
+		$this->load->library(array('form_validation'));
 	}
 	
 	public function index() {
@@ -19,8 +19,10 @@ class Product extends CI_Controller {
 	
 	public static function buildFilePath($p)
 	{
+		//Datum-String in Datum umwandeln
 		$date=date_create($p->prod_date);
-		$path = Event::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
+		//Dateipfad erstellen. Bsp.: "/Images/2016/12/001.png"
+		$path = Product::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
 		return $path;
 	}
 	
