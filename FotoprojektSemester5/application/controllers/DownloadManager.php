@@ -74,6 +74,7 @@ class DownloadManager extends CI_Controller {
 		// Instanziiert Zip Archiv
 		$zipArchive = new ZipArchive();
 		// name für das Zip Archiv
+		// dateiname = datum, uhrzeit, orderID userID
 		$zipFileName = "myZip.zip";
 		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
 		$outZipPath = "../". $outZipFolder ."/". $zipFileName;
