@@ -29,25 +29,20 @@ class User extends CI_Controller {
 		$this->load->template ( 'user/my_order_view', $data );
 	}
 
-	function confirmAccount($user_confirmcode){
-		
-		$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
-		if ($confrimcodeExists == 1)
-		{
-			$this->session->set_flashdata('msg', 'Ihre E-Mail wurde erfolgreich bestätigt');				
-			redirect ('start/');		
-		}
-		else {
-			redirect ('start/');			
-		}
-	}
+
+	
+
 	
 	function logout() {
 		// destroy session
 		$data = array (
 				'login' => '',
-				'user_name' => '',
-				'user_id' => '' 
+				'user_id' =>  '',
+				'user_email' =>  '',
+				'user_name' =>  '',
+				'user_name' =>  '',
+				'user_status' =>  '',
+				'user_role' =>  ''
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();

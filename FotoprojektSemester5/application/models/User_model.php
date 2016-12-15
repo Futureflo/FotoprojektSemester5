@@ -45,6 +45,13 @@
 		return $afftectedRows = $this->db->affected_rows();      	
       }
       
+      //passwordRestore
+      function get_UserByRestoreCode($user_passwordrestore){	 
+      	$this->db->where('$user_passwordrestore', $$user_passwordrestore);
+      	$query = $this->db->get('user');
+      	return $query->result();
+      }
+      
       //change Password
       function update_userPassword($user_id, $user_password){
       	$this->db->set('user_password', $user_password, FALSE);
