@@ -77,9 +77,9 @@ class Login extends CI_Controller
     }
     
     function forgotPassword(){
-    	$user_email = $this->input->post("user_email");
+    	$user_email = $this->input->post("email");
     	 
-    
+    	echo $user_email;
     	$this->form_validation->set_rules('email', '"Email"', 'trim|required|valid_email|callback_user_exists');
     	$this->form_validation->set_message('user_exists','Das Passwort kann nicht zurückgesetzt werden, weil kein Benutzer mit der angegebenen E-Mail-Adresse gefunden wurde');
     
