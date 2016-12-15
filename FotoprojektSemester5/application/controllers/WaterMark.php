@@ -10,7 +10,7 @@ class Watermarkdemo extends \CI_Controller
         parent::__construct();
         $this->load->library('image_lib');
     }
-    public function text($image,$text.$font,$fsize)
+    public function text($image,$text,$font,$fsize)
     {
         $config['source_image'] = $image;
         //The image path,which you would like to watermarking

@@ -23,7 +23,7 @@ class Signup extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
         {
 			// fails
-			$this->load->view('user/signup_view');
+			$this->load->template('user/signup_view');
         }
 		else
 		{
