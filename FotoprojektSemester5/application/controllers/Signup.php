@@ -47,14 +47,14 @@ class Signup extends CI_Controller
 			
 			if ($this->user_model->insert_user($data))
 			{
-				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">You are Successfully Registered! Please login to access your Profile!</div>');
+				$this->session->set_flashdata('msg','You are Successfully Registered! Please login to access your Profile!');
 				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
 // 				redirect('login/');	
 			}
 			else
 			{
 				// error
-				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
+				$this->session->set_flashdata('msg','Oops! Error.  Please try again later!!!');
 				redirect('signup/');
 
 			}
