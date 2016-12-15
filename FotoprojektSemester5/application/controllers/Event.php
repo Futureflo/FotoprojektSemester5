@@ -1,5 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/Product.php");
 
 class Event extends CI_Controller {
 	const base_path = "/Images/";
@@ -20,8 +21,7 @@ class Event extends CI_Controller {
       	$products = $this->event_model->getProductsFromEvent($event[0]->even_id);
       	
       	foreach ($products as $p)	{
-      		$date=date_create($p->prod_date);
-      		$path = Event::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
+      		$path = Product::buildFilePath($p);
       		$p->prod_filepath  = $path;
       	}
       	

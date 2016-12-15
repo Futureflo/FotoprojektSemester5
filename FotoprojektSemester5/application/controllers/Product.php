@@ -16,12 +16,13 @@ class Product extends CI_Controller {
 		$data = array();
 		$this->load->template ( 'product/single_picture_view', $data );
 	}
-// 	public function buildFilePath($p)
-// 	{
-		
-// 		echo $path;
-// 		return $path;
-// 	}
+	
+	public static function buildFilePath($p)
+	{
+		$date=date_create($p->prod_date);
+		$path = Event::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
+		return $path;
+	}
 	
 	function insert()
 	{
