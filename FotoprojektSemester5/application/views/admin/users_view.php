@@ -2,7 +2,7 @@
 <section style="padding-top: 70px">
 <div class="container">
 		<?php if (isset($user_id)){
-			echo "<div class='alert alert-danger'><span class='glyphicon glyphicon-warning-sign'></span>";
+			echo "<div class='alert alert-danger'>";
 		    echo "Der Benutzer mit der ID: " . $user_id . " wurde gelöscht</div>";
 		}  ?>
 </div>

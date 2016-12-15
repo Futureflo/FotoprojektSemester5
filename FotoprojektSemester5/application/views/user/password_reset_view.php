@@ -2,7 +2,7 @@
 	<div class="signup-center">
 	<div class="container">
 	<div class="row">
-		<div class="col-md-4 offset-md-4">
+		<div class="col-md-6 offset-md-3">
 			<div class="form-PasswordReset">
                     <h4>Passwort zurücksetzen</h4>
 						<p>Sie haben Ihr Passwort zurücksetzen lassen. Bitte geben Sie Ihr neues Passwort ein.</p>                   		<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort" name="user_password"/>

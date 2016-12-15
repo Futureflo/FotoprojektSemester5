@@ -19,27 +19,6 @@ class DownloadManager extends CI_Controller {
 	 * - Die Zip-Funktion erhält also die Info für die zu zippende Order aus dem Link.
 	 *
 	 */
-	/**
-	 * Zip a folder (include itself).
-	 * Usage:
-	 *   HZip::zipDir('/path/to/sourceDir', '/path/to/out.zip');
-	 *   Source: http://php.net/manual/de/class.ziparchive.php
-	 *
-	 * @param string $sourcePath Path of directory to be zip.
-	 * @param string $outZipPath Path of output zip file.
-	 */
-	// 	public static function zipDir($sourcePath, $outZipPath) {
-	// 		$pathInfo = pathInfo($sourcePath);
-	// 		echo $pathInfo;
-	// 		$parentPath = $pathInfo['dirname'];
-	// 		$dirName = $pathInfo['basename'];
-	
-	// 		$z = new ZipArchive();
-	// 		$z->open($outZipPath, ZIPARCHIVE::CREATE);
-	// 		$z->addEmptyDir($dirName);
-	// 		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
-	// 		$z->close();
-	// 	}
 	
 	/**
 	 * Method to unpack Zip.
@@ -85,30 +64,48 @@ class DownloadManager extends CI_Controller {
 		return $zipPath;
 	}
 	
-	
 	/**
 	 * Zips a new archive file containing files from given arary.
-	 * Returns zip-archive-path.
+	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
+	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
-	public static function zipDir(array $imagePath) {
-		$images = $this->session->flashdata('arrayImages');
-		echo "sourcePath: ". $sourcePath;
-		echo "</br>";
-		echo "outZipPath: ". $outZipPath;
-		// 		$pathInfo = pathInfo($sourcePath);
-		// 		echo "pathInfo: ". $pathInfo;
-		// 		$parentPath = $pathInfo['dirname'];
-		// 		$dirName = $pathInfo['basename'];
-	
-		// 		$z = new ZipArchive();
-		// 		$z->open($outZipPath, ZIPARCHIVE::CREATE);
-		// 		$z->addEmptyDir($dirName);
-		// 		self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
-		// 		$z->close();
-		return $zipPath;
+	public function zipDir(array $imagePathArray, $outZipFolder) {
+		// TODO: checken ob ziel und quellordner existieren
+		// Instanziiert Zip Archiv
+		$zipArchive = new ZipArchive();
+		// name für das Zip Archiv
+		$zipFileName = "myZip.zip";
+		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
+		$outZipPath = "../". $outZipFolder ."/". $zipFileName;
+		
+		// Zip Archiv in Ordnerstruktur erstellen und öffnen
+		if ($zipArchive->open($outZipPath, ZipArchive::CREATE)!==TRUE) {
+			exit("cannot open <$outZipPath>\n");
+		}
+		$readme = fopen("../Images/2016\December/liesmich.txt", "w") or die("Unable to open file!");
+		$txt = "Liesmich";
+		fwrite($readme, $txt);
+		fclose($readme);
+		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
+// 		for ($i = 1; $i <= count($imagePathArray); $i++) {
+// 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
+// 			// name der hinzugefügten Datei wird $i
+// 			$zipArchive->addFile('../Images'. $imagePathArray[$i], $i);
+// 		}
+		$zipArchive->addFile("../Images/liesmich.txt", "liesmich");
+		// Zip Archiv schließen
+		$zipArchive->close();
+		
 	}
 	
-
+	public function test(){
+		$pfade = array(
+				1 => "\2016\December\001.png",
+				2 => "\2016\December\002.jpg",
+				3 => "/2016\December/liesmich.txt",
+		);
+		$this->zipDir($pfade, "ImagesDownloadZips");
+	}
 	
 	/**
 	 * Returns an Array containing all image-paths from the orderID.
