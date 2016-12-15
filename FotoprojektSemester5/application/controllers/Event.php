@@ -3,8 +3,6 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname(__FILE__) . "/Product.php");
 
 class Event extends CI_Controller {
-	const base_path = "/Images/";
-	
 	public function __construct() {
 		parent::__construct ();
  		$this->load->library ( 'session' );
