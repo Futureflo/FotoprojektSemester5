@@ -16,10 +16,10 @@
 function load(img)
 {
   img.fadeOut(0, function() {
-    img.fadeIn(1500);
+    img.fadeIn(1000);
   });
 }
-$('.lazyload').lazyload({load: load});
+$('.lazyload').lazyload({threshold: 225,load: load});
 </script>
 
 <!-- TEMP -->
