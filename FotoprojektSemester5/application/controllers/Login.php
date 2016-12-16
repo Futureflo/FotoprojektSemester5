@@ -125,8 +125,6 @@ class Login extends CI_Controller
     function restorePassword($user_passwordrestore){
     	
     	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);    	
-    	print_r($uresult);
-    	echo $uresult[0]->user_email;
     	if ($uresult[0].count == 1)
     	{
     		$this->load->template ( 'user/password_reset_view' );
