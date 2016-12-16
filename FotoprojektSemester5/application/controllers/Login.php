@@ -123,14 +123,17 @@ class Login extends CI_Controller
     }
     
     function restorePassword($user_passwordrestore){
-    	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);
-    	if ($uresult[0] != NULL)
+    	
+    	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);    	
+    	print_r($uresult);
+    	echo $uresult[0]->user_email;
+    	if ($uresult[0].count == 1)
     	{
     		$this->load->template ( 'user/password_reset_view' );
     		$this->changePassword($user_id);
     	}
     	else {
-    		redirect ('start/');
+//     		redirect ('start/');
     	}
     }
     
@@ -152,7 +155,7 @@ class Login extends CI_Controller
 			$algo = 'sha256';
     		$newSalt = generate_salt(10);
     		$newHashpw = generate_hash($newSalt,$newPassword, $algo);
-    		$this->user_model->update_userPassword($user_id, $newHashpw);
+    		$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt);
     		redirect('Login/');
     	}
     }
