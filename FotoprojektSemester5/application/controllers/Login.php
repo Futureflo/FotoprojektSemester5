@@ -89,7 +89,7 @@ class Login extends CI_Controller
     	else
     	{
     		$restoreCode = generate_salt(10);
-    		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
+    		echo $this->user_model->update_userRestoreCode($user_email,$restoreCode);
     		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
     		$this->load->template('user/success_password_forgot_view');
     	}
