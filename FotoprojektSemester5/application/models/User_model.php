@@ -45,9 +45,9 @@
       }
       
       //set restorecode
-      function update_userRestoreCode($user_id,$user_passwordrestore){      	 
+      function update_userRestoreCode($user_email,$user_passwordrestore){      	 
       	$this->db->set('user_passwordrestore', $user_passwordrestore, FALSE);
-      	$this->db->where('user_id', $user_id);
+      	$this->db->where('user_email', $user_email);
       	$this->db->update('user');
       }
       
