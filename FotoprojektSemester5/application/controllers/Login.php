@@ -61,6 +61,7 @@ class Login extends CI_Controller
 		}
 		}
     }
+<<<<<<< HEAD
     
     
     function confirmAccount($user_confirmcode){
@@ -164,4 +165,6 @@ class Login extends CI_Controller
     	redirect('Login/');
     }
     
+=======
+>>>>>>> branch 'master' of https://github.com/Futureflo/FotoprojektSemester5.git
 }

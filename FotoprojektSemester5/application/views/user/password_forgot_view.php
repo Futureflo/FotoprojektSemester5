@@ -6,7 +6,7 @@
 				
 
 
-				<?php echo form_open('Login/forgotPassword');?>
+				<?php echo form_open('PasswordForgot');?>
 				
 					<div class="form-PasswordReset">
 						<h4>Passwort vergessen?</h4>

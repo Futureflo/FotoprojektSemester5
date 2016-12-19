@@ -12,15 +12,6 @@
       	return $query->result();
       }
       
-      Public function getProductFilepath($prod_id){
-      	$this->db->join('product_variant', 'prod_id = prva_prod_id', 'LEFT OUTER');
-      	$this->db->join('product_type', 'prty_id = prva_prty_id', 'LEFT OUTER');
-      	$this->db->join('product_variant', 'prod_id = prva_prod_id', 'INNER JOIN');
-      	$this->db->where('prod_id', $prod_id);
-      	$query = $this->db->get("product");
-      	return $query->result();
-      }
-      
       // insert
       function insert_product($data)
       {

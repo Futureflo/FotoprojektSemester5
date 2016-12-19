@@ -1,7 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Product extends CI_Controller {
-	const base_path = "/Images/";
 	
 	public function __construct() {
 		parent::__construct ();
@@ -15,15 +14,6 @@ class Product extends CI_Controller {
 	public function showSinglePicture($picuri) {
 		$data = array();
 		$this->load->template ( 'product/single_picture_view', $data );
-	}
-	
-	public static function buildFilePath($p)
-	{
-		//Datum-String in Datum umwandeln
-		$date=date_create($p->prod_date);
-		//Dateipfad erstellen. Bsp.: "/Images/2016/12/001.png"
-		$path = Product::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
-		return $path;
 	}
 	
 	function insert()

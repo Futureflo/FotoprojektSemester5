@@ -37,31 +37,16 @@
       	return $this->db->delete('user', array('user_id' => $user_id));
       }
       //update usere status
-      function update_userStatus($user_confirmcode){      	
+      function update_userStatus($user_confirmcode){
+      	
       	$this->db->set('user_status', 2, FALSE);
       	$this->db->where('user_confirmcode', $user_confirmcode);
       	$this->db->update('user');
 		return $afftectedRows = $this->db->affected_rows();      	
       }
       
-      //set restorecode
-      function update_userRestoreCode($user_email,$user_passwordrestore){      	 
-      	$this->db->set('user_passwordrestore', $user_passwordrestore);
-      	$this->db->where('user_email', $user_email);
-      	$this->db->update('user');
-      	return $afftectedRows = $this->db->affected_rows();
-      	 
-      }
-      
-      //passwordRestore     			
-      function get_UserByRestoreCode($user_passwordrestore){	 
-      	$this->db->where('user_passwordrestore', $user_passwordrestore);
-      	$query = $this->db->get('user');
-      	return $query->result();
-      }
-      
       //change Password
-      function update_userPassword($user_id, $user_password,$user_salt){
+      function update_userPassword($user_id, $user_password){
       	$this->db->set('user_password', $user_password, FALSE);
       	$this->db->set('user_salt', $user_salt, FALSE);
       	$this->db->where('user_id', $user_id);

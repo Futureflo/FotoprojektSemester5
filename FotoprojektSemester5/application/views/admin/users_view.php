@@ -12,19 +12,26 @@
 
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-9">
-			<p class="h1" id="test" onclick="setPager()">Users</p>
+		<div class="row">
+		<div class="col-md-3">
+		<p class="h1" id="test" onclick="setPager()">Users</p>
 		</div>
+		
+		<div class="col-md-6">
+			<a class="btn btn-success" href="#">
+  			<i class="fa fa-user-plus fa-lg"></i> Benutzer anlegen</a>
+		</div>
+		
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Search for user..." />
 		</div>
-	</div>
-	<div class="col-sm-12 col-md-12">
+		</div>
+		<div class="row">
+		<div class="col-sm-12 col-md-12">
 		<div class="table-responsive">
 			<table id="dataTable"
-				class="table table-striped table-bordered sortable">
+				class="table  table-bordered sortable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -33,12 +40,31 @@
 						<th>e-Mail</th>
 						<!-- <th>Passwort</th> -->
 						<th>Rolle</th>
+						<th>Status</th>
 						<th>Aktion</th>
 					</tr>
 				</thead>
 				<tbody id="table_body">
 			<?php
 			foreach ( $users as $user ) {
+				switch ($user->user_status) {
+					default :
+					case 0 : // undefiniert
+						$statusText = "undefiniert";
+						break;
+					case 1 : // Admin
+						$statusText = "registriert";
+						break;
+					case 2 : // Besteller
+						$statusText = "aktiv";
+						break;
+					case 3 : // Fotograf
+						$statusText = "gesperrt";
+						break;
+					case 4 : // Veranstalter
+						$statusText = "gelöscht";
+						break;
+				}			
 				echo "<tr class='searchable'>";
 				echo "<td>" . $user->user_id . "</td>";
 				echo "<td>" . $user->user_name . "</td>";
@@ -46,16 +72,52 @@
 				echo "<td>" . $user->user_email . "</td>";
 				// echo "<td>" . $user->user_password . "</td>";
 				echo "<td>" . $user->usro_name . "</td>";
+				echo "<td>" . $statusText . "</td>";
 				echo "<td>";
-				echo "<center><a class='btn btn-danger btn-xs' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='Delete' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';>";
-				echo "<i class='fa fa-trash-o' aria-hidden='True' style='color:white;'></i></a></center></td>";
-				echo "<tr>";
+
+				echo "<center>";
+					if ($user->user_status == 1 || $user->user_status == 3){
+						echo btnEdit($user);
+						echo btnUnlockUser($user);
+						echo btnDelete($user);
+					}elseif ($user->user_status == 2){
+						echo btnEdit($user);
+						echo btnLockUser($user);
+						echo btnDelete($user);
+					}elseif ($user->user_status == 4){
+						echo btnRecycle($user);
+					};
+				echo "</center>";
+				echo "</td>";
+				echo "</tr>";
+			}
+			
+			function btnDelete($user){
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='delete' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			
+			function btnEdit($user){
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#editUser' title='Benutzer \"" . $user->user_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			
+			function btnLockUser($user){
+				return "<a class='btn btn-warning' data-toggle='modal' data-target='#lockUser' title='Benutzer \"" . $user->user_name . "\" sperren' aria-label='lock' style='margin-right:1rem' onclick='whichUserLock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-ban fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			
+			function btnUnlockUser($user){
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			
+			function btnRecycle($user){
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycle' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
 			</tbody>
 			</table>
+			
 		</div>
 	</div>
+</div>
 </div>
 
 <div class="container">
@@ -82,32 +144,50 @@
 <div class="modal fade" id="delete" tabindex="-1" role="dialog"
 	aria-labelledby="edit" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				</button>
-				<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        	<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+	 		</div>
+	   		<div class="modal-body">   
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
+		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiederruflich löschen?
+		       	</div>
+	 		</div>
+		  	<div class="modal-footer ">
+		        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+			        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+		        </form>
 			</div>
-			<div class="modal-body">
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
-					den Benutzer "<span id="user"></span>" unwiederruflich löschen?
-				</div>
-			</div>
-			<div class="modal-footer ">
-				<form action="<?php echo base_url();?>admin/deleteUser/"
-					method="post">
-					<input id="user_hidden_field" type="hidden"
-						name="user_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
-						<span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen
-					</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">
-						<span class="glyphicon glyphicon-remove"></span>Abbrechen
-					</button>
-				</form>
+		</div>
+    	<!-- /.modal-content --> 
+	</div>
+      <!-- /.modal-dialog --> 
+</div>
+
+<div class="modal fade" id="lockUser" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        	<h4 class="modal-title custom_align" id="Heading">Benutzer sperren?</h4>
+	 		</div>
+	   		<div class="modal-body">   
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
+		       		</span>Möchten Sie den Benutzer "<span id="userLock"></span>" sperren?
+		       	</div>
+	 		</div>
+		  	<div class="modal-footer ">
+		        <form action="<?php echo base_url();?>admin/lockUser/" method="post">
+			        <input id="user_hidden_field" type="hidden" name="userLock_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer sperren</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+		        </form>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -192,6 +272,11 @@
     function whichUser(vorname, nachname, id){
         document.getElementById("user").innerHTML = vorname + " " + nachname;
         document.getElementById("user_hidden_field").value = id;
+    }
+
+    function whichUserLock(vorname, nachname, id){
+        document.getElementById("userLock").innerHTML = vorname + " " + nachname;
+        document.getElementById("userLock_hidden_field").value = id;
     }
     
     /**

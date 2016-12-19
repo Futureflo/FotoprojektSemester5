@@ -12,16 +12,6 @@
 	</div>
 </footer>
 
-<script>
-function load(img)
-{
-  img.fadeOut(0, function() {
-    img.fadeIn(1500);
-  });
-}
-$('.lazyload').lazyload({load: load});
-</script>
-
 <!-- TEMP -->
 <script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
 <script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
