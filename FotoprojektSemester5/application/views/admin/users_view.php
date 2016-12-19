@@ -89,10 +89,7 @@
 					};
 				echo "</center>";
 				echo "</td>";
-				echo "<center><a class='btn btn-danger btn-xs' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='Delete' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';>";
-				echo "<i class='fa fa-trash-o' aria-hidden='True' style='color:white;'></i></a></center></td>";
-
-				echo "<tr>";
+				echo "</tr>";
 			}
 			
 			function btnDelete($user){
@@ -188,37 +185,9 @@
 		  	<div class="modal-footer ">
 		        <form action="<?php echo base_url();?>admin/lockUser/" method="post">
 			        <input id="user_hidden_field" type="hidden" name="userLock_hidden_field" value="">
-			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer sperren</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
-
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				</button>
-				<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
-			</div>
-			<div class="modal-body">
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
-					den Benutzer "<span id="user"></span>" unwiederruflich löschen?
-				</div>
-			</div>
-			<div class="modal-footer ">
-				<form action="<?php echo base_url();?>admin/deleteUser/"
-					method="post">
-					<input id="user_hidden_field" type="hidden"
-						name="user_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
-						<span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen
-					</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">
-						<span class="glyphicon glyphicon-remove"></span>Abbrechen
-					</button>
-				</form>
-
 			</div>
 		</div>
 		<!-- /.modal-content -->
