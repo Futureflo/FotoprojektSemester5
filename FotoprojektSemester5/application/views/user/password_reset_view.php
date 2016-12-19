@@ -7,6 +7,7 @@
                     <h4>Passwort zurücksetzen</h4>
 						<p>Sie haben Ihr Passwort zurücksetzen lassen. Bitte geben Sie Ihr neues Passwort ein.</p>                   		<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort" name="user_password"/>
                     	<span class="text-danger"></span>
+                    	<input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
                     <br>
                     	<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort bestätigen" name="user_cpassword"/>
                     	<span class="text-danger"></span>
