@@ -128,16 +128,18 @@ class Login extends CI_Controller
     	
     	if ($uresult[0] != Null)
     	{
-    		$this->load->template ( 'user/password_reset_view' );
-    		$this->changePassword($uresult[0]->user_id);
+    		$data['user_id'] = $uresult->user_id;
+    		$this->load->template('user/password_reset_view',$data);
+    		
     	}
     	else {
 //     		redirect ('start/');
     	}
     }
     
-  function changePassword($user_id){
-  
+  function changePassword(){
+  	
+  		$this->load->template('user/password_reset_view');
     	$newPassword = $this->input->post("user_newPassword");
     	$newCPassword = $this->input->post("user_newCPassword");
     	
@@ -146,17 +148,20 @@ class Login extends CI_Controller
     	
     	if ($this->form_validation->run() == FALSE)
     	{
-    		// validation fail
-    		
+    		// validation fail    		
     		 }
     	else
-    	{
-			$algo = 'sha256';
-    		$newSalt = generate_salt(10);
-    		$newHashpw = generate_hash($newSalt,$newPassword, $algo);
-    		$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt);
-    		redirect('Login/');
+    	{   		
+    		cahngePassword($user_id);
     	}
+    }
+    
+    private function changePassword($user_id){
+    	$algo = 'sha256';
+    	$newSalt = generate_salt(10);
+    	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
+    	$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt);
+    	redirect('Login/');
     }
     
 }
