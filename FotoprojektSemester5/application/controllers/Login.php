@@ -124,11 +124,12 @@ class Login extends CI_Controller
     
     function restorePassword($user_passwordrestore){
     	
-    	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);    	
-    	if ($uresult[0].count == 1)
+    	$uresult = $this->user_model->get_UserByRestoreCode($user_passwordrestore);   
+    	
+    	if ($uresult[0] != Null)
     	{
     		$this->load->template ( 'user/password_reset_view' );
-    		$this->changePassword($user_id);
+    		$this->changePassword($uresult[0]->user_id);
     	}
     	else {
 //     		redirect ('start/');
@@ -140,13 +141,13 @@ class Login extends CI_Controller
     	$newPassword = $this->input->post("user_newPassword");
     	$newCPassword = $this->input->post("user_newCPassword");
     	
-    	$this->form_validation->set_rules('user_newpassword', 'New Password', 'trim|required|matches[user_newcpassword]');
-    	$this->form_validation->set_rules('user_newcpassword', 'Confirm New Password', 'trim|required');
+    	$this->form_validation->set_rules('user_newPassword', 'New Password', 'trim|required|matches[user_newcpassword]');
+    	$this->form_validation->set_rules('user_newCPassword', 'Confirm New Password', 'trim|required');
     	
     	if ($this->form_validation->run() == FALSE)
     	{
     		// validation fail
-    		$this->load->template ( 'user/password_reset_view' );
+    		
     		 }
     	else
     	{
