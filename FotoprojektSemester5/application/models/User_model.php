@@ -61,10 +61,19 @@
 		return $afftectedRows = $this->db->affected_rows();      	
       }
       
+      //update usere status by id
+      function update_userStatusByID($user_id,$user_status){
+      	 
+      	$this->db->set('user_status', $user_status);
+      	$this->db->where('user_id', $user_id);
+      	$this->db->update('user');
+      	return $afftectedRows = $this->db->affected_rows();
+      }
+      
       //change Password
-      function update_userPassword($user_id, $user_password){
-      	$this->db->set('user_password', $user_password, FALSE);
-      	$this->db->set('user_salt', $user_salt, FALSE);
+      function update_userPassword($user_id, $user_password,$user_salt){
+      	$this->db->set('user_password', $user_password);
+      	$this->db->set('user_salt', $user_salt);
       	$this->db->where('user_id', $user_id);
       	return $this->db->update('user');
       }
