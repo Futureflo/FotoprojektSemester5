@@ -70,6 +70,7 @@
 					echo "<div class=\"card-block\">";
 					echo "<h4 class=\"card-title\"><a href=\"" . base_url() . "event/" . $event->even_url . "/\">" . $event->even_name . "</a></h4>";
 					echo "</div>";
+					echo "<a href=\"" . base_url() . "event/" . $event->even_url . "/\">";
 
 					// 1. Bild des Events anzeigen ansonsten Platzhalter
 					if(isset($products[0])) {
@@ -84,7 +85,7 @@
 						data-holder-rendered=\"true\"> ";
 					}
 
-					
+					echo "</a>";
 					echo "-->";
 					echo "</div>";
 					echo "</div>";
