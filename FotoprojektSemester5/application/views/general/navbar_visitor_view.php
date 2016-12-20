@@ -87,24 +87,24 @@
         </button>
       </div>
       
-      <div class="modal-body" onmouseover="validate()">        
+      <div class="modal-body">        
         
        
 					<?php  $attributes = array("name" => "loginform");
 							 echo form_open("login/", $attributes);?>
 			
-		                    <input onkeyup="formsSet()" type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
+		                    <input type="text" class="form-control input-sm chat-input" placeholder="E-Mail-Adresse eingeben" id="user_email" name="user_email" value="<?php  echo set_value('user_email'); ?>"/>
 		                    <span align="center" id="email_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
 		                    </br>
-		                    <input onkeyup="formsSet()" type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
+		                    <input type="password" class="form-control input-sm chat-input" placeholder="Passwort eingeben" id="user_password" name="user_password" value="<?php  echo set_value('user_password'); ?>"/>
 		                    <span align="center" id="password_span" class="text-danger" style="display:none">Das Feld darf nicht leer sein!</span>
 		                    </br>
-		                    <div class="container" onmouseover="formsSet()">
+		                    <div class="container">
 					            <div class="row">
 					                <div class="col-md-6 offset-md-3">
 		                    <div class="login-btn-wrapper">
 		                    <span class="group-btn">    
-		                    	<button id="login" name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+		                    	<button onclick="validate()" id="login" name="submit" type="submit" class="btn btn-primary btn-md btn-block">Login</button>
 		                    </span>
 		                    </div>
 		                    </div>
@@ -139,10 +139,18 @@
 
 <script type="text/javascript">
     window.onload = function(){
-        if(document.getElementById("renew")){
+        if(document.getElementById("fehler_span").innerHTML.length > 0){
             document.getElementById("login-btn").click();
         }
     }
+    
+    document.getElementById("user_password")
+    	.addEventListener("keyup", function(event) {
+    	event.preventDefault();
+		    if (event.keyCode == 13) {
+		        document.getElementById("login").click();
+		    }
+	});
     
     function formsSet(){
         var email = document.getElementById("user_email").value;
@@ -167,9 +175,9 @@
         
         if(email === '' || password === ''){
             document.getElementById("login").type = "button";
+            formsSet();
         } else {
             document.getElementById("login").type = "submit";
         }
     }
 </script>
-

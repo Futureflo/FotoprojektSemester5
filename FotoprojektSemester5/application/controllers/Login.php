@@ -85,14 +85,15 @@ class Login extends CI_Controller
     
     	if ($this->form_validation->run() == FALSE)
     	{
-    		$this->load->template('user/password_forgot_view');
+     		$this->load->template('user/password_forgot_view');
     	}
     	else
     	{
     		$restoreCode = generate_salt(10);
+    		
     		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
     		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
-    		$this->load->template('user/success_password_forgot_view');
+//     		$this->load->template('user/success_password_forgot_view');
     	}
     }
     
@@ -129,7 +130,8 @@ class Login extends CI_Controller
     	
     	if ($uresult[0] != Null)
     	{
-    		$data['user_id'] = $uresult->user_id;
+    		$data['user_id'] = $uresult[0]->user_id;
+    		
     		$this->load->template('user/password_reset_view',$data);
     		
     	}
@@ -138,12 +140,11 @@ class Login extends CI_Controller
     	}
     }
     
-  function changePassword(){
+  function getNewPassword(){
   	
-  		$this->load->template('user/password_reset_view');
     	$newPassword = $this->input->post("user_newPassword");
     	$newCPassword = $this->input->post("user_newCPassword");
-    	
+    	$user_id = $this->input->post('user_id');
     	$this->form_validation->set_rules('user_newPassword', 'New Password', 'trim|required|matches[user_newcpassword]');
     	$this->form_validation->set_rules('user_newCPassword', 'Confirm New Password', 'trim|required');
     	
