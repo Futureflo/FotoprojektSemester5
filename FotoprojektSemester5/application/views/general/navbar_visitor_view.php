@@ -118,7 +118,7 @@
 					            </div>
 					       </div>
 				<?php  echo form_close(); ?>
-				<?php  echo $this->session->flashdata('msg'); ?>
+				<div id="fehler_span" class="text-danger"><?php  echo $this->session->flashdata('msg'); ?></div>
 				
 				
 		</div>
