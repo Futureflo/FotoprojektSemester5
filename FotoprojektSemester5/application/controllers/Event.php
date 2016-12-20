@@ -28,6 +28,17 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/single_event_view', $data );
 	}
 	
+	public function getAllPublicEvents() {
+		$this->load->model('event_model');
+		$events = $this->event_model->getAllPublicEvents();
+		
+		foreach ($events as $e)	{
+			$e->products  = $this->event_model->getProductsFromEvent($e->even_id);;
+		}
+		
+		return $events;
+	}
+	
 	function newEvent()
 	{
 		$user_id = $this->session->userdata('user_id');
