@@ -17,12 +17,21 @@ class ProductType extends CI_Controller {
 		$data['product_types'] = $this->product_type_model->getAllProductType();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
+	
+	public static function getAllProductType()
+	{
+		$CI =& get_instance();
+		$CI->load->model('Product_type_model');
+		$product_types = $CI->Product_type_model->getAllProductType();
+		
+		return $product_types;
+	}
 }
 
-abstract class ProductStatus
+abstract class ProductPrintType
 {
-	const undefined	= 0;
-	const locked	= 1;
-	const approved	= 2;
-	const deleted	= 3;
+	const undefined = 0;
+	const print = 1;
+	const download = 2;
+	const mixed = 3;
 }

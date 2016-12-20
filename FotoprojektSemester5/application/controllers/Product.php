@@ -36,7 +36,7 @@ class Product extends CI_Controller {
 		{
 			// set form validation rules
 			$prod_name =  get_name($dateiupload);
-			$prod_status = ProuctStatus::locked;
+			$prod_status = ProductStatus::locked;
 			$prod_date = date("Y-m-d");
 			$prod_filepath = '';
 			$prod_even_id = $this->input->post('even_id');
@@ -122,7 +122,7 @@ function upload()
 	
 }
 
-abstract class ProuctStatus
+abstract class ProductStatus
 {
 	const undefined	= 0;
 	const locked	= 1;

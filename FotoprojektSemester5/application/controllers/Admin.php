@@ -1,5 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/ProductType.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -24,8 +25,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function product_types() {
-		$this->load->model ( 'Product_type_model' );
-		$data ['product_types'] = $this->Product_type_model->getAllProductType ();
+		$data ['product_types'] = ProductType::getAllProductType();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 	
