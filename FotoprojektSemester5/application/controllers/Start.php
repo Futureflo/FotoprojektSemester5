@@ -11,8 +11,7 @@ class Start extends CI_Controller {
 
 	public function index()
 	{	
-		$this->load->model ( 'Event_model' );
-		$data ['events'] = $this->Event_model->getAllPublicEvents();
+		$data ['events'] = Event::getAllPublicEvents();
 		$this->load->template ( 'start_view', $data);
 	}
 
