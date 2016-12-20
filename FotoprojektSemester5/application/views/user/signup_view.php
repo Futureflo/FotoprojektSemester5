@@ -3,10 +3,10 @@
 <div class="row">
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link active" href="#">Kunde</a>
+    <a class="nav-link active" id="kunde" onclick="einblendenfotograf()">Kunde</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Fotograf</a>
+    <a class="nav-link" id="fotograf" onclick="einblendenfotograf()">Fotograf</a>
   </li>
 </ul>
 </div>
@@ -104,6 +104,23 @@
     <input class="form-control" type="password" id="pwwdh" placeholder="Passwort wiederholen">
     </div>
     </div> 
+<div id="signupfotograf" style="display:none">
+   <div class="row">
+    <div class="col-sm-11">
+    <input type="text" class="form-control" id="kontoinhaber" placeholder="Kontoinhaber">
+    </div>
+    </div>
+     <div class="row">
+    <div class="col-sm-11">
+    <input type="text" class="form-control" id="iban" placeholder="IBAN">
+    </div>
+    </div>
+     <div class="row">
+    <div class="col-sm-11">
+    <input type="text" class="form-control" id="bic" placeholder="BIC">
+    </div>
+    </div>
+</div>        
 <br>
 <div class="row">
 <div class="col-sm-11">
@@ -146,4 +163,15 @@
 </div>
 </section>
 
+<script type="text/javascript">
 
+function fotografeinblenden()
+{
+	if (email === ''){
+        document.getElementById("signupfotograf").style.display = "block";
+    } else {
+        document.getElementById("signupfotograf").style.display = "none";
+    }
+}
+
+</script>
