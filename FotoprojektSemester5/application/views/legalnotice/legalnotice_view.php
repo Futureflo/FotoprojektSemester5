@@ -18,7 +18,7 @@
 					
 					
 					<h2>Disclaimer – rechtliche Hinweise</h2>
-					§ 1 Haftungsbeschränkung<br /> Die Inhalte dieser Website werden mit
+					<strong>§ 1 Haftungsbeschränkung</strong><br /> <br /> Die Inhalte dieser Website werden mit
 					größtmöglicher Sorgfalt erstellt. Der Anbieter übernimmt jedoch
 					keine Gewähr für die Richtigkeit, Vollständigkeit und Aktualität der
 					bereitgestellten Inhalte. Die Nutzung der Inhalte der Website
@@ -26,8 +26,8 @@
 					Beiträge geben die Meinung des jeweiligen Autors und nicht immer die
 					Meinung des Anbieters wieder. Mit der reinen Nutzung der Website des
 					Anbieters kommt keinerlei Vertragsverhältnis zwischen dem Nutzer und
-					dem Anbieter zustande. <br />
-					<br /> § 2 Externe Links<br /> Diese Website enthält Verknüpfungen
+					dem Anbieter zustande. <br /><br />
+					<br /> <strong>§ 2 Externe Links</strong><br /> <br /> Diese Website enthält Verknüpfungen
 					zu Websites Dritter ("externe Links"). Diese Websites unterliegen
 					der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der
 					erstmaligen Verknüpfung der externen Links die fremden Inhalte
@@ -39,8 +39,8 @@
 					oder Link liegenden Inhalte zu Eigen macht. Eine ständige Kontrolle
 					der externen Links ist für den Anbieter ohne konkrete Hinweise auf
 					Rechtsverstöße nicht zumutbar. Bei Kenntnis von Rechtsverstößen
-					werden jedoch derartige externe Links unverzüglich gelöscht. <br />
-					<br /> § 3 Urheber- und Leistungsschutzrechte<br /> Die auf dieser
+					werden jedoch derartige externe Links unverzüglich gelöscht. <br /><br />
+					<br /> <strong>§ 3 Urheber- und Leistungsschutzrechte</strong><br /> <br />Die auf dieser
 					Website veröffentlichten Inhalte unterliegen dem deutschen Urheber-
 					und Leistungsschutzrecht. Jede vom deutschen Urheber- und
 					Leistungsschutzrecht nicht zugelassene Verwertung bedarf der
@@ -55,8 +55,8 @@
 					Downloads für den persönlichen, privaten und nicht kommerziellen
 					Gebrauch ist erlaubt. <br />
 					<br /> Die Darstellung dieser Website in fremden Frames ist nur mit
-					schriftlicher Erlaubnis zulässig. <br />
-					<br /> § 4 Besondere Nutzungsbedingungen<br /> Soweit besondere
+					schriftlicher Erlaubnis zulässig. <br /><br />
+					<br /> <strong>§ 4 Besondere Nutzungsbedingungen</strong><br /> <br />Soweit besondere
 					Bedingungen für einzelne Nutzungen dieser Website von den
 					vorgenannten Paragraphen abweichen, wird an entsprechender Stelle
 					ausdrücklich darauf hingewiesen. In diesem Falle gelten im
@@ -65,6 +65,7 @@
 						Quelle: <a href="http://www.juraforum.de/">Juraforum.de</a> –
 						Impressum Generator
 					</p>
+					<br />
 					<br />
 					<br />
 					<h2>Datenschutzerklärung:</h2>
