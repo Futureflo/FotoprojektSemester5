@@ -30,19 +30,19 @@ class Admin extends CI_Controller {
 	}
 	
 	public function deleteUser(){
-		$user_id = $this->input->post ( "user_hidden_field" );
+		$user_id = $this->input->post ( "userDelete_hidden_field" );
 		$this->User_model->update_userStatusByID($user_id,4);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function lockUser(){
-		$user_id = $this->input->post ( "user_hidden_field" );
+		$user_id = $this->input->post ( "userLock_hidden_field" );
 		$this->User_model->update_userStatusByID($user_id,3);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function unlockUser(){
-		$user_id = $this->input->post ( "user_hidden_field" );
+		$user_id = $this->input->post ( "userUnlock_hidden_field" );
 		$this->User_model->update_userStatusByID($user_id,2);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
