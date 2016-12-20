@@ -31,6 +31,19 @@
       	$query = $this->db->get("event");
       	return $query->result();
       }
+      public function getAllPublicEvents()
+      {
+      	$this->db->where('even_status', EventStatus::pbl);
+      	$query = $this->db->get("event");
+      	return $query->result();
+      }
+      
+      public function search($even_name)
+      {
+      	$this->db->like('even_name', '%' . $even_name . '%');
+      	$query = $this->db->get("event");
+      	return $query->result();
+      }
             
       // insert
       function insert_event($data)

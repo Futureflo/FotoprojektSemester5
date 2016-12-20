@@ -105,7 +105,7 @@
 			}
 			
 			function btnUnlockUser($user){
-				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUserUnlock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			
 			function btnRecycle($user){
@@ -184,7 +184,7 @@
 	 		</div>
 		  	<div class="modal-footer ">
 		        <form action="<?php echo base_url();?>admin/lockUser/" method="post">
-			        <input id="user_hidden_field" type="hidden" name="userLock_hidden_field" value="">
+			        <input id="userLock_hidden_field" type="hidden" name="userLock_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer sperren</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
@@ -193,6 +193,34 @@
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="unlockUser" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        	<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+	 		</div>
+	   		<div class="modal-body">   
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
+		       		</span>Möchten Sie den Benutzer "<span id="userUnlock"></span>" wieder entsperren?
+		       	</div>
+	 		</div>
+		  	<div class="modal-footer ">
+		        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+			        <input id="userUnlock_hidden_field" type="hidden" name="userUnlock_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer entsperren</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+		        </form>
+			</div>
+		</div>
+    	<!-- /.modal-content --> 
+	</div>
+      <!-- /.modal-dialog --> 
 </div>
 
 <script type="text/javascript">
@@ -277,6 +305,11 @@
     function whichUserLock(vorname, nachname, id){
         document.getElementById("userLock").innerHTML = vorname + " " + nachname;
         document.getElementById("userLock_hidden_field").value = id;
+    }
+
+    function whichUserUnlock(vorname, nachname, id){
+        document.getElementById("userUnlock").innerHTML = vorname + " " + nachname;
+        document.getElementById("userUnlock_hidden_field").value = id;
     }
     
     /**
