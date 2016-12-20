@@ -118,7 +118,7 @@
 					            </div>
 					       </div>
 				<?php  echo form_close(); ?>
-				<?php  echo $this->session->flashdata('msg'); ?>
+				<div id="fehler_span" class="text-danger"><?php  echo $this->session->flashdata('msg'); ?></div>
 				
 				
 		</div>
@@ -128,7 +128,7 @@
        <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <button name="submit" type="submit" class="btn btn-success btn-md btn-block">Registrieren</button>
+                    <a href="<?php echo base_url();?>signup/" class="btn btn-success btn-md btn-block" role="button" >Registrieren</a>
                 </div>
             </div>
        </div>

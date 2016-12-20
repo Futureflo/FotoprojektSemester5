@@ -10,7 +10,7 @@
    			$this->db->join('product_type', 'prty_id = prva_prty_id', 'LEFT OUTER');
    			
    			$this->db->where('orde_id', $orde_id);
-   			$query = $this->db->get("product");
+   			$query = $this->db->get("order");
    			return $query->result();
    		}
    	
@@ -21,12 +21,14 @@
    			return $query->result();
    		}
    	
+   		// return all orders
    		public function getAllOrders()
    		{
    			$query = $this->db->get("order");
    			return $query->result();
    		}
    		
+   		// return all orderPositions from a specific user
    		public function getAllOrdersByUser($user_id)
    		{
    			$this->db->where('orde_user_id', $user_id);
@@ -40,6 +42,7 @@
    			return $orders;
    		}
    			
+   		// return all orderPositions
    		public function getAllOrderPositions($orde_id)
    		{
    			$this->db->join('product', 'orpo_prod_id = prod_id', 'LEFT OUTER');
@@ -52,23 +55,23 @@
    			return $query->result();
    		}
    	
-   		// insert
+   		// insert order
    		function insert_order($data)
    		{
    			return $this->db->insert('order', $data);
    		}
    	
-   		//delete user
+   		// update order
    		function update_order($id, $data)
    		{
    			$this->db->where('orde_id', $id);
    			$this->db->update('order', $data);
    		}
    	
-   		//delete user
+   		// delete order
    		function delete_order($orde_id)
    		{
-   			return $this->db->delete('order', array('orde_id' => orde_id));
+   			return $this->db->delete('order', array('orde_id' => $orde_id));
    		}
    	
    		// get MAX-ID
