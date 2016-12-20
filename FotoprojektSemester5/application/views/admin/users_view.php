@@ -203,7 +203,7 @@
 	    	<div class="modal-header">
 	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-	        	<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+	        	<h4 class="modal-title custom_align" id="Heading">User entsperren?</h4>
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
@@ -211,7 +211,7 @@
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
-		        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+		        <form action="<?php echo base_url();?>admin/unlockUser/" method="post">
 			        <input id="userUnlock_hidden_field" type="hidden" name="userUnlock_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer entsperren</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>

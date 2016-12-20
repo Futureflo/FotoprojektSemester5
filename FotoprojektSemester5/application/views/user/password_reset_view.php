@@ -3,7 +3,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
-						<?php echo form_open('Login/getNewPassword', array('user_id' => $user_id[0]));?>
+						<?php echo form_open('Login/getNewPassword', '', array('user_id' => $user_id));?>
 					
 			<div class="form-PasswordReset">
                     <h4>Passwort zurücksetzen</h4>
