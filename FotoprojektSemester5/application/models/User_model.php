@@ -10,7 +10,7 @@
       	$query = $this->db->get("user");
       	return $query->result();
       }
-		
+	// get user by email
       function get_user($email)
       {
        	$this->db->where('user_email', $email);
@@ -18,15 +18,31 @@
       	return $query->result();
       }
       
-      // get user
+      // get user by id
       function get_user_by_id($id)
       {
       	$this->db->where('user_id', $id);
       	$query = $this->db->get('user');
       	return $query->result();
       }
+      // get user by passwordRestoreCode
+      function get_UserByRestoreCode($user_passwordrestore)
+      {
+      	$this->db->where('user_passwordrestore', $user_passwordrestore);
+      	$query = $this->db->get('user');
+      	return $query->result();
+      }
      
-      // insert
+      //set restorecode
+      function update_userRestoreCode($user_email,$user_passwordrestore){
+       	$this->db->set('user_passwordrestore', $user_passwordrestore);
+      	$this->db->where('user_email', $user_email);
+      	$this->db->update('user');
+       	return $afftectedRows = $this->db->affected_rows();
+      	
+      }
+      
+      // insert new User
       function insert_user($data)
       {
       	return $this->db->insert('user', $data);

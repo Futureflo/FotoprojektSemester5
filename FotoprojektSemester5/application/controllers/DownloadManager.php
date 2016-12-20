@@ -4,6 +4,10 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class DownloadManager extends CI_Controller {
 
 
+	public function __construct() {
+		parent::__construct ();
+	}
+	
 	public function index() {
 		echo "indexseite des DownloadManager";
 	}
@@ -19,33 +23,39 @@ class DownloadManager extends CI_Controller {
 	 * - Die Zip-Funktion erhält also die Info für die zu zippende Order aus dem Link.
 	 *
 	 */
-	
-	/**
-	 * Method to unpack Zip.
-	 * #Author: Severin
-	 */
-	public function unpackZip($sourcePath) {
-		echo "allright";
-	}
-	
-	public function setImageArray(){
-		$this->session->set_flashdata('arrayImages', '/*get Images and pack them into an array*/');
-	}
-	
-	////////////////////////////////////////////////////////////////////
-	// TEST SECTION //
-	////////////////////////////////////////////////////////////////////
+
 	
 	/**
 	 * Metod to convert a paid order from customers cart into a downloadlink.
 	 * @param unknown $orderID
 	 * @return downloadLink
 	 */
-	public static function manageDownload($orderID) {
-		$pathArray = orderIDtoImagePathArray($orderID);
-		$zipPath =  zipDir($pathArray);
-		$downloadLink = createDownloadLink($orderID, $userID);
-		return $downloadLink;
+	public function manageDownload($userID, $orderID) {
+// 		$pathArray = orderIDtoImagePathArray($orderID);
+// 		$zipPath =  zipDir($pathArray);
+// 		$downloadLink = createDownloadLink($orderID, $userID);
+// 		return $downloadLink;
+		$this->load->model('order_model');
+		
+		$userID = $this->session->userdata('user_id');
+		$products = $this->order_model->getProductsFromOrder($orderID); 
+		
+		foreach ($products as $p)    {
+			$path = Product::buildFilePath($p);
+			$p->prod_filepath = $path;
+		}
+		
+		$pfade = array(
+				"path" => " "
+		);
+		
+		foreach ($products as $p)    {
+			$path = Product::buildFilePath($p);
+			$p->prod_filepath = $path;
+			array_push($pfade, $p->prod_filepath);
+		}
+		
+		zipDir($userID, $orderID, $products);
 	}
 	
 	
@@ -65,48 +75,56 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	/**
-	 * Zips a new archive file containing files from given arary.
+	 * Zips a new archive file containing files from given arary. Autor: Severin Klug.
 	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
 	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
-	public function zipDir(array $imagePathArray, $outZipFolder) {
+	public function zipDir($userID, $orderID, array $imagePathArray) {
 		// TODO: checken ob ziel und quellordner existieren
+		$this->load->model('order_model');
+		$this->load->helper('hash_helper');
+		
+		// Zielordner
+		$outZipFolder = "ImagesDownloadZips";
+		
 		// Instanziiert Zip Archiv
 		$zipArchive = new ZipArchive();
+		
 		// name für das Zip Archiv
-		$zipFileName = "myZip.zip";
+		// dateiname = userID, orderID, datum, uhrzeit
+		$myDate = date('omdGis');
+		$zipFileName = "Your_Zip_File_". $userID . $orderID . $myDate .".zip";
+		
 		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
-		$outZipPath = "../". $outZipFolder ."/". $zipFileName;
+		$outZipPath = $outZipFolder ."/". $zipFileName;
 		
 		// Zip Archiv in Ordnerstruktur erstellen und öffnen
 		if ($zipArchive->open($outZipPath, ZipArchive::CREATE)!==TRUE) {
 			exit("cannot open <$outZipPath>\n");
 		}
-		$readme = fopen("../Images/2016\December/liesmich.txt", "w") or die("Unable to open file!");
-		$txt = "Liesmich";
-		fwrite($readme, $txt);
-		fclose($readme);
+
 		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
-// 		for ($i = 1; $i <= count($imagePathArray); $i++) {
-// 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
-// 			// name der hinzugefügten Datei wird $i
-// 			$zipArchive->addFile('../Images'. $imagePathArray[$i], $i);
-// 		}
-		$zipArchive->addFile("../Images/liesmich.txt", "liesmich");
+		for ($i = 0; $i < count($imagePathArray); $i++) {
+			// name der hinzugefügten Datei wird ursprungs
+			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
+			$pathinfo = pathinfo($imagePathArray[$i]->path);
+			$fileName = $pathinfo['filename'] .".". $pathinfo['extension'];
+			$zipArchive->addFile('../Images'. $imagePathArray[$i], $fileName);
+		}
+		
+		// Zip passwortschützen
+		$mySalt = generate_salt();
+		echo $mySalt;
+		$zipArchive->setPassword($mySalt);
+// 		system('zip -P password file.zip file.txt');
+// 		$zip->Password = $mySalt;
+		
 		// Zip Archiv schließen
 		$zipArchive->close();
 		
 	}
 	
-	public function test(){
-		$pfade = array(
-				1 => "\2016\December\001.png",
-				2 => "\2016\December\002.jpg",
-				3 => "/2016\December/liesmich.txt",
-		);
-		$this->zipDir($pfade, "ImagesDownloadZips");
-	}
-	
+
 	/**
 	 * Returns an Array containing all image-paths from the orderID.
 	 * @param unknown $orderID
@@ -121,7 +139,17 @@ class DownloadManager extends CI_Controller {
 		// return bildpfad array
 		return $imagePathArray;
 	}
-
+	
+	public function test(){
+		$pfade = array(
+				0 => "/2016/12/001.png",
+				1 => "/2016/12/002.jpg",
+				2 => "/2016/12/liesmich.txt",
+		);
+		$this->zipDir(77, 88, $pfade);
+	}
+	
 }
 
 ?>
+
