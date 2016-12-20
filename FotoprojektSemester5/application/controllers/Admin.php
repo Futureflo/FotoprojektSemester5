@@ -1,6 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname(__FILE__) . "/ProductType.php");
+include_once (dirname(__FILE__) . "/PriceProfile.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -27,6 +28,11 @@ class Admin extends CI_Controller {
 	public function product_types() {
 		$data ['product_types'] = ProductType::getAllProductType();
 		$this->load->template ( 'admin/product_type_view', $data );
+	}
+	
+	public function price_profiles() {
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles();
+		$this->load->template ( 'admin/price_profile_view', $data );
 	}
 	
 	public function deleteUser(){
