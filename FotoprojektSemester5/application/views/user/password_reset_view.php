@@ -3,21 +3,23 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
+						<?php echo form_open('Login/getNewPassword', array('user_id' => $user_id[0]));?>
+					
 			<div class="form-PasswordReset">
                     <h4>Passwort zurücksetzen</h4>
-						<p>Sie haben Ihr Passwort zurücksetzen lassen. Bitte geben Sie Ihr neues Passwort ein.</p>                   		<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort" name="user_password"/>
+						<p>Sie haben Ihr Passwort zurücksetzen lassen. Bitte geben Sie Ihr neues Passwort ein.</p>                   		<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort" name="user_newPassword"/>
                     	<span class="text-danger"></span>
-                    	<input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
                     <br>
-                    	<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort bestätigen" name="user_cpassword"/>
+                    	<input type="password" class="form-control input-sm chat-input" placeholder="Neues Passwort bestätigen" name="user_newCPassword"/>
                     	<span class="text-danger"></span>
                     <br>
                     <div align="right">
                     <span class="group-btn">    
                     	<button name="submit" type="submit" class="btn btn-primary btn-md">Passwort speichern</button>
                     </span>
-                    </div>
+                    </div>                    
                </div>
+               </form>
 			
 		<!-- <legend>Signup</legend>
 			
