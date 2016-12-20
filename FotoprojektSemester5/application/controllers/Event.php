@@ -1,5 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/Product.php");
+
 class Event extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -14,7 +16,14 @@ class Event extends CI_Controller {
       	$this->load->model('event_model');
       	$event = $this->event_model->getSingleEventByShortcode($shortcode);
       	$data['event'] = $event;
-      	$data['products'] = $this->event_model->getProductsFromEvent($event[0]->even_id);
+      	$products = $this->event_model->getProductsFromEvent($event[0]->even_id);
+      	
+      	foreach ($products as $p)	{
+      		$path = Product::buildFilePath($p);
+      		$p->prod_filepath  = $path;
+      	}
+      	
+      	$data['products'] = $products;
       	
 		$this->load->template ( 'event/single_event_view', $data );
 	}
