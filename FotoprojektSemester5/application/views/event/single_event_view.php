@@ -50,12 +50,16 @@
 		<div class="row">
 		<?php
 			foreach($products as $product){
-			echo "<div class=\"card\">"; 
-			echo " <img data-src=../../../". $product->prod_filepath . "\" alt=". $product->prod_name . "\"
+				echo "<div class=\"card\">";
+				echo "<div class=\"lazyload\">";
+				echo "<!--";
+				echo " <img data-src=../../../" . $product->prod_filepath . "\" alt=" . $product->prod_name . "\"
 					style=\"width:304px;height:228px; display: block;\"
-					src=../../../". $product->prod_filepath . ">";
-			echo "<p class=\"card-text\">" . $product->prod_name . " | " . $product->prty_description . "</p>";
-			echo "</div>";
+					src=../../../" . $product->prod_filepath . ">";
+				echo "<p class=\"card-text\">" . $product->prod_name . " | " . $product->prty_description . "</p>";
+				echo "-->";
+				echo "</div>";
+				echo "</div>";
 			}
 			
 			?>
