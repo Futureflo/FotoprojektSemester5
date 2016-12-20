@@ -16,28 +16,36 @@ class Event extends CI_Controller {
       	$this->load->model('event_model');
       	$event = $this->event_model->getSingleEventByShortcode($shortcode);
       	$data['event'] = $event;
-      	$products = $this->event_model->getProductsFromEvent($event[0]->even_id);
-      	
-      	foreach ($products as $p)	{
-      		$path = Product::buildFilePath($p);
-      		$p->prod_filepath  = $path;
-      	}
-      	
-      	$data['products'] = $products;
+      	$data['products'] = Event::getProductsFromEvent($event[0]);
       	
 		$this->load->template ( 'event/single_event_view', $data );
 	}
 	
-	public function getAllPublicEvents() {
-		$this->load->model('event_model');
-		$events = $this->event_model->getAllPublicEvents();
+	public static function getAllPublicEvents() {
+		$CI =& get_instance();
+		$CI->load->model('event_model');
 		
-		foreach ($events as $e)	{
-			$e->products  = $this->event_model->getProductsFromEvent($e->even_id);;
+		$events = $CI->event_model->getAllPublicEvents();
+		
+		foreach ($events as $event)	{
+			$event->products  = Event::getProductsFromEvent($event);
 		}
 		
 		return $events;
 	}
+	
+	public static function getProductsFromEvent($event)
+	{
+		$CI =& get_instance();
+		$CI->load->model('event_model');
+		$products = $CI->event_model->getProductsFromEvent($event->even_id);
+		foreach ($products as $p)	{
+			$path = Product::buildFilePath($p);
+			$p->prod_filepath  = $path;
+		}
+		return $products;
+	}
+	
 	
 	function newEvent()
 	{
