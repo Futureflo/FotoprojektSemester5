@@ -10,7 +10,7 @@
    			$this->db->join('product_type', 'prty_id = prva_prty_id', 'LEFT OUTER');
    			
    			$this->db->where('orde_id', $orde_id);
-   			$query = $this->db->get("product");
+   			$query = $this->db->get("order");
    			return $query->result();
    		}
    	

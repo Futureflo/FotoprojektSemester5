@@ -93,7 +93,7 @@ class Login extends CI_Controller
     		
     		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
     		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
-//     		$this->load->template('user/success_password_forgot_view');
+     		$this->load->template('user/success_password_forgot_view');
     	}
     }
     
@@ -145,25 +145,28 @@ class Login extends CI_Controller
     	$newPassword = $this->input->post("user_newPassword");
     	$newCPassword = $this->input->post("user_newCPassword");
     	$user_id = $this->input->post('user_id');
-    	$this->form_validation->set_rules('user_newPassword', 'New Password', 'trim|required|matches[user_newcpassword]');
+    	$this->form_validation->set_rules('user_newPassword', 'New Password', 'trim|required|matches[user_newCPassword]');
     	$this->form_validation->set_rules('user_newCPassword', 'Confirm New Password', 'trim|required');
-    	
+    	echo $newPassword."    ".$newCPassword."  ".$user_id ;
     	if ($this->form_validation->run() == FALSE)
     	{
+    		//$this->load->view('user/password_reset_view');
     		// validation fail    		
     		 }
     	else
     	{   		
-    		cahngePassword($user_id);
+    		
+    		$this->changePassword($user_id,$newPassword);
     	}
     }
     
-    private function changePassword($user_id){
+     function changePassword($user_id,$newPassword){
     	$algo = 'sha256';
     	$newSalt = generate_salt(10);
     	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
+    	echo "salt:".$newSalt."   hesh:".$newHashpw;
     	$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt);
-    	redirect('Login/');
+    	
     }
     
 }
