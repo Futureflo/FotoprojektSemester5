@@ -68,10 +68,43 @@
 </div>
 
 
-<svg xmlns="http://www.w3.org/2000/svg" width="356" height="280"
-	viewBox="0 0 356 280" preserveAspectRatio="none"
-	style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">
-	<defs>
-	<style type="text/css"></style></defs>
-	<text x="0" y="18"
-		style="font-weight:bold;font-size:18pt;font-family:Arial, Helvetica, Open Sans, sans-serif">356x280</text></svg>
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bilder kaufen</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-sm-12">
+      		
+      		</div>
+      		<div class="row">
+      			<div class="col-sm-6"></div>
+      		<div class="row">
+      			<div class="col-sm-6"></div>
+      		<button type="button" class="btn btn-primary">Digital</button>
+      			<div class="col-sm-6"></div>
+      		<button type="button" class="btn btn-primary">Digital</button>
+      			</div>
+       		
+      	</div>
+      
+              <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-default">In den Warenkorb</button>
+      </div>
+    </div>
+
+  </div>
+</div>

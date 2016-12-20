@@ -77,7 +77,7 @@ class Login extends CI_Controller
     	}
     }
     
-    function forgotPassword(){
+ public  function forgotPassword(){
     	$user_email = $this->input->post("email");
     	 
     	$this->form_validation->set_rules('email', '"Email"', 'trim|required|valid_email|callback_user_exists');
@@ -160,7 +160,7 @@ class Login extends CI_Controller
     	}
     }
     
-     function changePassword($user_id,$newPassword){
+private     function changePassword($user_id,$newPassword){
     	$algo = 'sha256';
     	$newSalt = generate_salt(10);
     	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
