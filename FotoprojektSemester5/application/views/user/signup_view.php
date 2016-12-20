@@ -65,7 +65,7 @@
  </div>
  <br>
    <div class="row">
-    <div class="col-sm-10 col-xs-9">
+    <div class="col-sm-9 col-xs-9">
     <input type="text" class="form-control" id="str" placeholder="Straße">
     </div>
     <div class="col-sm-2 col-xs-2">
@@ -74,9 +74,11 @@
  </div>
  <br>
     <div class="row">
+    <div class="col-sm-11">
     	<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php echo set_value('even_date'); ?>"/>  -->
 		<input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="2016-12-08"/>
 	    <span class="text-danger"><?php echo form_error('even_date'); ?></span>
+ </div>
  </div> 
  <br>
   <div class="row">
