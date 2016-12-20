@@ -113,7 +113,7 @@
 		                    <div class="container">
 					            <div class="row">
 					                <div class="col-md-8 offset-md-2">
-					                    <a href="<?php echo base_url();?>PasswordForgot/">Passwort vergessen?</a>
+					                    <a href="<?php echo base_url();?>login/forgotPassword/">Passwort vergessen?</a>
 					                </div>
 					            </div>
 					       </div>
