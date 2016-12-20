@@ -9,14 +9,6 @@
 			<div class="row">
 				<div class="col-md-12">
 					<p>
-					
-					
-					<h2>Impressum</h2>
-	
-					<p>
-						<br /> <br />
-					</p>
-					<p>
 						Telefon:<br /> E-Mail: <br />
 					</p>
 					<p>
