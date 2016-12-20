@@ -76,7 +76,7 @@
     <div class="row">
     <div class="col-sm-11">
     	<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php echo set_value('even_date'); ?>"/>  -->
-		<input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="2016-12-08"/>
+		<input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date"/>
 	    <span class="text-danger"><?php echo form_error('even_date'); ?></span>
  </div>
  </div> 

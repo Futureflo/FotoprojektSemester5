@@ -68,13 +68,13 @@
 					echo "<div class=\"lazyload\">";
 					echo "<!--";
 					echo "<div class=\"card-block\">";
-					echo "<h4 class=\"card-title\">" . $event->even_name . "</h4>";
+					echo "<h4 class=\"card-title\"><a href=\"" . base_url() . "event/" . $event->even_url . "/\">" . $event->even_name . "</a></h4>";
 					echo "</div>";
 
 					// 1. Bild des Events anzeigen ansonsten Platzhalter
 					if(isset($products[0])) {
-						echo " <img data-src=./" . $products[0]->prod_filepath . "\" alt=" . $products[0]->prod_name . "\"
-						style=\"width:304px;height:228px; display: block;\"
+						echo " <img onmouseout=\"notShow(this)\" onmouseover=\"show(this)\" data-src=./" . $products[0]->prod_filepath . "\" alt=" . $products[0]->prod_name . "\"
+						style=\"width:100%;height:280px; display: block; filter: blur(5px);\"
 						src=./" . $products[0]->prod_filepath . ">";
 					}
 					else {
@@ -96,7 +96,15 @@
 </div>
 
 
-<script type="text/javascript">    
+<script type="text/javascript">  
+function show(img){
+	img.style.filter = "none";
+}
+
+function notShow(img){
+	img.style.filter = "blur(5px)";
+}
+
 	function setPics(){
 		var w = window.innerWidth;
 		var h;
