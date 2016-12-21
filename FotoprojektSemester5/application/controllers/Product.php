@@ -1,5 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/PriceProfile.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
 	
@@ -12,8 +13,8 @@ class Product extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'errors/404' );
 	}
-	public function showSinglePicture($picuri) {
-		$data = array();
+	public function showSinglePicture($prod_id) {
+		$data['product']  = Product::getProduct($prod_id);
 		$this->load->template ( 'product/single_picture_view', $data );
 	}
 	
@@ -24,6 +25,31 @@ class Product extends CI_Controller {
 		//Dateipfad erstellen. Bsp.: "/Images/2016/12/001.png"
 		$path = Product::base_path . date_format($date,"o/m") . "/" . $p->prod_filepath;
 		return $path;
+	}
+	
+	public static function getProduct($prod_id)
+	{
+		$CI =& get_instance();
+		$CI->load->model('product_model');
+		$product = $CI->product_model->getSingleProduct($prod_id);
+ 		$product[0]->product_variants = Product::getProductVariants($prod_id);
+ 		$product[0]->prod_filepath = Product::buildFilePath($product[0]);
+		return $product[0];
+	}
+	
+	
+	public static function getProductVariants($prod_id)
+	{
+		$CI =& get_instance();
+		$CI->load->model('product_model');
+		$product_variants = $CI->product_model->getProductVariants($prod_id);
+		
+		//Preis aus Preisprofil besorgen
+		foreach ($product_variants as $product_variant) {
+			$product_variant->price = PriceProfile::getPriceByProductType($product_variant->prod_even_id, $product_variant->prva_prty_id);
+		}
+
+		return $product_variants;
 	}
 	
 	function insert()
