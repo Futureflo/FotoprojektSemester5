@@ -41,6 +41,12 @@ class Login extends CI_Controller
 					redirect ( "start/" );
 						
 					break;
+				case UserStatus::lockedByAdmin :
+							
+					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt. Kontaktieren Sie bitte den Admin' );
+					redirect ( "start/" );
+					
+					break;
 				case UserStatus::activated :
 					
 					// check for user credentials
@@ -90,9 +96,8 @@ class Login extends CI_Controller
 		}
 	}
 
-    
-    
-    function confirmAccount($user_confirmcode){
+
+public    function confirmAccount($user_confirmcode){
     
     	$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
     	if ($confrimcodeExists == 1)
@@ -117,11 +122,17 @@ class Login extends CI_Controller
     	}
     	else
     	{
-    		$restoreCode = generate_salt(10);
-    		
-    		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
-    		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
-     		$this->load->template('user/success_password_forgot_view');
+    		$uresult = $this->user_model->get_user ( $user_email );
+    		if ($uresult[0]->user_status == UserStatus::lockedByAdmin) {
+    			$this->session->set_flashdata('msg', 'Solange ihr Account gesperrt ist können Sie ihr Passwort nicht zurück setzen. Kontaktieren Sie bitte den Admin für weitere Informationen');    			 
+    			redirect ( "login/forgotPassword" );
+    		}
+    		else{
+    			$restoreCode = generate_salt(10);    			
+    			$this->user_model->update_userRestoreCode($user_email,$restoreCode);
+    			$this->sendPassowrdForgotEmail($user_email,$restoreCode);
+    			$this->load->template('user/success_password_forgot_view');
+    		}    		
     	}
     }
     
