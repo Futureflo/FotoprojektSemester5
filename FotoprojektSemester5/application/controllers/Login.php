@@ -41,6 +41,12 @@ class Login extends CI_Controller
 					redirect ( "start/" );
 						
 					break;
+				case UserStatus::lockedByAdmin :
+							
+					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt. Kontaktieren Sie bitte den Admin' );
+					redirect ( "start/" );
+					
+					break;
 				case UserStatus::activated :
 					
 					// check for user credentials
@@ -116,6 +122,10 @@ public    function confirmAccount($user_confirmcode){
     	}
     	else
     	{
+    		$uresult = $this->user_model->get_user ( $email );
+    		if ($uresult[0]->user_status == UserStatus::lockedByAdmin) {
+    			$this->session->set_flashdata('msg', 'Solange ihr Account gesperrt ist können Sie ihr Passwort nicht zurück setzen. Kontaktieren Sie bitte den Admin für weitere Informationen');    			 
+    		} 
     		$restoreCode = generate_salt(10);
     		
     		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
