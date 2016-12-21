@@ -70,6 +70,14 @@
       	return $afftectedRows = $this->db->affected_rows();
       }
       
+      function update_userPasswordAttempt($user_email,$user_passwordattempt){
+      
+      	$this->db->set('user_passwordattempt', $user_passwordattempt);
+      	$this->db->where('user_email', $user_email);
+      	$this->db->update('user');
+      	return $afftectedRows = $this->db->affected_rows();
+      }
+      
       //change Password
       function update_userPassword($user_id, $user_password,$user_salt){
       	$this->db->set('user_password', $user_password);
