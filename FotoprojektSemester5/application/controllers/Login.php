@@ -1,4 +1,6 @@
 <?php
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/User.php");
 class Login extends CI_Controller
 {
 	public function __construct()
@@ -29,17 +31,17 @@ class Login extends CI_Controller
 			$status = $uresult [0]->user_status;
 			switch ($status) {
 				
-				case 1 :
+				case  UserStatus::unconfirmed:
 					$this->session->set_flashdata ( 'msg', 'Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen' );
 					redirect ( "start/" );
 					break;
-				case 3 :
+				case UserStatus::locked :
 					
 					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Password über "Password vergessen" zurück' );						
 					redirect ( "start/" );
 						
 					break;
-				case 2 :
+				case UserStatus::activated :
 					
 					// check for user credentials
 					$user_salt = $uresult [0]->user_salt;
@@ -74,7 +76,7 @@ class Login extends CI_Controller
 							
 						$this->user_model->update_userPasswordAttempt ( $email, $passwordAttempt );
 						if ($passwordAttempt > 5) {
-							$this->user_model->update_userStatusByID ( $uresult [0]->user_id, 3 );
+							$this->user_model->update_userStatusByID ( $uresult [0]->user_id, UserStatus::locked );
 						}
 						else {
 							$this->session->set_flashdata ( 'msg', 'Falsche E-Mail-Adresse oder Passwort' );
@@ -185,7 +187,7 @@ class Login extends CI_Controller
     	}
     }
     
-private     function changePassword($user_id,$newPassword){
+private function changePassword($user_id,$newPassword){
     	$algo = 'sha256';
     	$newSalt = generate_salt(10);
     	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
