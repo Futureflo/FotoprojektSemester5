@@ -109,7 +109,7 @@ class DownloadManager extends CI_Controller {
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
 			$pathinfo = pathinfo($imagePathArray[$i]->path);
 			$fileName = $pathinfo['filename'] .".". $pathinfo['extension'];
-			$zipArchive->addFile('../Images'. $imagePathArray[$i], $fileName);
+			$zipArchive->addFile('../'. $imagePathArray[$i]->path, $fileName);
 		}
 		
 		// Zip passwortschützen
@@ -141,12 +141,10 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	public function test(){
-		$pfade = array(
-				0 => "/2016/12/001.png",
-				1 => "/2016/12/002.jpg",
-				2 => "/2016/12/liesmich.txt",
-		);
-		$this->zipDir(77, 88, $pfade);
+		$this->load->model('order_model');
+		$this->load->helper('hash_helper');
+		$pfade = $this->order_model->getProductsFromOrder(1);
+		$this->zipDir(1, 1, $pfade);
 	}
 	
 }
