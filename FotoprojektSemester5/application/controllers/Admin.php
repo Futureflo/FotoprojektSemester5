@@ -11,12 +11,18 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
+	
 	public function users() {
-		//$this->load->model ( 'user_model' );
-		$data ['users'] = $this->User_model->getAllUsers ();
-		
+		print_r($this->User_model->get_AllArchivedUsers());
+		$data ['users'] = $this->User_model->getAllUsers();		
 		$this->load->template ( 'admin/users_view', $data );
 	}
+	public function archivedUsers() {
+		print_r($this->User_model->get_AllArchivedUsers());
+		$data ['users'] = $this->User_model->getAllUsers();
+		$this->load->template ( 'admin/users_view', $data );
+	}
+	
 	public function events() {
 		$this->load->model ( 'Event_model' );
 		$data ['events'] = $this->Event_model->getAllEvents();

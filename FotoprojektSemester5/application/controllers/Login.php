@@ -90,9 +90,8 @@ class Login extends CI_Controller
 		}
 	}
 
-    
-    
-    function confirmAccount($user_confirmcode){
+
+public    function confirmAccount($user_confirmcode){
     
     	$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
     	if ($confrimcodeExists == 1)
