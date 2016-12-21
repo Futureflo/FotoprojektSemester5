@@ -37,7 +37,8 @@
       // insert
       function insert_product($data)
       {
-      	return $this->db->insert('product', $data);
+      	$this->db->insert('product', $data);
+      	return $this->db->insert_id();
       }
       
       //delete product
