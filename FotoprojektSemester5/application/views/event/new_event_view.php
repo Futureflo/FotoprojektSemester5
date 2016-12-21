@@ -41,7 +41,15 @@
 							<br>
 		                    	<input type="checkbox" class="form-control input-sm chat-input" placeholder="Öffentliches Event" name="even_status" value="<?php echo set_value('even_status'); ?>"/> Öffentliches event
 		                    	<span class="text-danger"><?php echo form_error('even_status'); ?></span>
-				
+		                    <br>
+		                    <?php 
+		                    echo 'Preisprofil: <select name="even_prpr_id">';
+		                    foreach ($price_profiles as $price_profile){
+                    			echo '<option value=' . $price_profile->prpr_id . '>' .$price_profile->prpr_description .'</option>';
+		                    }
+		                    echo '</select>';
+		                    ?>
+
 		                    <div class="event-btn-wrapper">
 		                    <span class="group-btn">    
 		                    	<button name="submit" type="submit" class="btn btn-success btn-md">Anlegen</button>

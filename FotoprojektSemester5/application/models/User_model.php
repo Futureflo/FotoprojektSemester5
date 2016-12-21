@@ -80,7 +80,8 @@
       }
       
       //change Password
-      function update_userPassword($user_id, $user_password,$user_salt){
+      function update_userPassword($user_id, $user_password,$user_salt,$user_status){
+      	$this->db->set('user_status', $user_status);
       	$this->db->set('user_password', $user_password);
       	$this->db->set('user_salt', $user_salt);
       	$this->db->where('user_id', $user_id);
