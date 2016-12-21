@@ -83,28 +83,85 @@
         <h4 class="modal-title">Bilder kaufen</h4>
       </div>
       <div class="modal-body">
-      	<div class="row">
-      		<div class="col-sm-12">
+    	<div class="container">
+      		<div class="row">
+      			<div class="col-md-6">
       		
-      		</div>
-      		<div class="row">
-      			<div class="col-sm-6"></div>
-      		<div class="row">
-      			<div class="col-sm-6"></div>
-      		<button type="button" class="btn btn-primary">Digital</button>
-      			<div class="col-sm-6"></div>
-      		<button type="button" class="btn btn-primary">Digital</button>
-      			</div>
+				<img src="http://www.basteldichblue.com/Public/BMDE/12/Viereckiges%20Scoubidou%20x4/4726_200x200.jpg" class="img-responsive" alt="Cinque Terre">
        		
-      	</div>
-      
+      			</div>
+      			
+      			<div class="col-md-6">
+      			<button class="btn" data-toggle="collapse" data-target="#digital">Digital</button>
+				
+				<div id="digital" class="collapse">
+				<br />
+				<div class="form-group">
+			    <select class="form-control" id="größeSelect">
+			      <option style="color: grey">Größe wählen*</option>
+			      <option>Small</option>
+			      <option>Medium</option>
+			      <option>Large</option>
+			      <option>ExtraLarge</option>
+			    </select>
+			    </div> 
+				<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/>
+				<textarea class="form-control" rows="1" cols="10" placeholder="Preis" readonly="readonly"></textarea>
+      			
+      			</div>
+      			
+      			<button class="btn" data-toggle="collapse" data-target="#analog">Analog</button>
+      			
+      			
+      			<div id="analog" class="collapse">
+      			<br />
+      			<div class="form-group">
+			    <select class="form-control" id="formatSelect">
+			      <option style="color: grey">Format wählen*</option>
+			      <option>Bild</option>
+			      <option>Tasse</option>
+			      <option>Format</option>
+			      <option>Penistattoo</option>
+			    </select>
+			    </div>
+			    <div class="form-group">
+			     <select class="form-control" id="größeSelect">
+			      <option style="color: grey">Größe wählen*</option>
+			      <option>Small</option>
+			      <option>Medium</option>
+			      <option>Large</option>
+			      <option>ExtraLarge</option>
+			    </select>
+			    </div> 
+			    <div class="form-group">
+			        <select class="form-control" id="rahmenSelect">
+			      <option style="color: grey">Bilderrahmen wählen*</option>
+			      <option>Mit Bilderrahmen</option>
+			      <option>Ohne Bilderrahmen</option>
+			    </select>
+			    </div> 
+			    <div class="form-group">
+			        <select class="form-control" id="materialSelect">
+			      <option style="color: grey">Material wählen*</option>
+			      <option>Matt</option>
+			      <option>Glänzend</option>
+			      <option>Hochwertig</option>
+			      <option>Billig scheiß</option>
+			    </select>
+			    </div> 
+			    <textarea class="form-control" rows="1" cols="10" placeholder="Preis" readonly="readonly"></textarea>
+			    
+      			</div> 
+      			 
+      			</div>
+     	 	</div>
               <p>Some text in the modal.</p>
-      </div>
+     	</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
         <button type="button" class="btn btn-default">In den Warenkorb</button>
       </div>
     </div>
-
+	</div>
   </div>
 </div>
