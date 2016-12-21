@@ -39,11 +39,22 @@ class Event extends CI_Controller {
 		$CI =& get_instance();
 		$CI->load->model('event_model');
 		$products = $CI->event_model->getProductsFromEvent($event->even_id);
-		foreach ($products as $p)	{
-			$path = Product::buildFilePath($p);
-			$p->prod_filepath  = $path;
+		foreach ($products as $product => $p){
+			$products[$product] = Product::getProduct($p->prod_id);
 		}
 		return $products;
+	}
+	
+	public static function searchEvents($search) {
+		$CI =& get_instance();
+		$CI->load->model('event_model');
+	
+		$events = $CI->event_model->search($search);
+		foreach ($events as $event)	{
+			$event->products  = Event::getProductsFromEvent($event);
+		}
+	
+		return $events;
 	}
 	
 	

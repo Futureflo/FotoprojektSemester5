@@ -14,5 +14,11 @@ class Start extends CI_Controller {
 		$data ['events'] = Event::getAllPublicEvents();
 		$this->load->template ( 'start_view', $data);
 	}
+	
+	public function search(){
+		$search = $this->uri->segment(3);
+		$data ['events'] = Event::searchEvents($search);
+		echo json_encode ($data) ;
+	}
 
 }

@@ -1,4 +1,5 @@
 <?php 
+
    Class User_model extends CI_Model {
 	
       Public function __construct() { 
@@ -55,7 +56,7 @@
       //update usere status
       function update_userStatus($user_confirmcode){
       	
-      	$this->db->set('user_status', 2, FALSE);
+      	$this->db->set('user_status',2, FALSE);
       	$this->db->where('user_confirmcode', $user_confirmcode);
       	$this->db->update('user');
 		return $afftectedRows = $this->db->affected_rows();      	
@@ -66,6 +67,14 @@
       	 
       	$this->db->set('user_status', $user_status);
       	$this->db->where('user_id', $user_id);
+      	$this->db->update('user');
+      	return $afftectedRows = $this->db->affected_rows();
+      }
+      
+      function update_userPasswordAttempt($user_email,$user_passwordattempt){
+      
+      	$this->db->set('user_passwordattempt', $user_passwordattempt);
+      	$this->db->where('user_email', $user_email);
       	$this->db->update('user');
       	return $afftectedRows = $this->db->affected_rows();
       }

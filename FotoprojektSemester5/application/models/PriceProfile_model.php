@@ -23,6 +23,14 @@
       	$query = $this->db->get("price_product_type");
       	return $query->result();
       }
+      
+      Public function getPriceByProductType($prpr_id, $prty_id){
+      	$this->db->where('prpt_prpr_id', $prpr_id);
+      	$this->db->where('prpt_prty_id', $prty_id);
+      	$query = $this->db->get("price_product_type");
+      	return $query->result();
+      }
+      
 
       // insert price_profile
       function insert_price_profile($data)
