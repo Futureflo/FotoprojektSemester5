@@ -125,12 +125,13 @@ public    function confirmAccount($user_confirmcode){
     		$uresult = $this->user_model->get_user ( $email );
     		if ($uresult[0]->user_status == UserStatus::lockedByAdmin) {
     			$this->session->set_flashdata('msg', 'Solange ihr Account gesperrt ist können Sie ihr Passwort nicht zurück setzen. Kontaktieren Sie bitte den Admin für weitere Informationen');    			 
-    		} 
-    		$restoreCode = generate_salt(10);
-    		
-    		$this->user_model->update_userRestoreCode($user_email,$restoreCode);
-    		$this->sendPassowrdForgotEmail($user_email,$restoreCode);
-     		$this->load->template('user/success_password_forgot_view');
+    		}
+    		else{
+    			$restoreCode = generate_salt(10);    			
+    			$this->user_model->update_userRestoreCode($user_email,$restoreCode);
+    			$this->sendPassowrdForgotEmail($user_email,$restoreCode);
+    			$this->load->template('user/success_password_forgot_view');
+    		}    		
     	}
     }
     

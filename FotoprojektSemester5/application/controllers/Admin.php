@@ -50,7 +50,7 @@ class Admin extends CI_Controller {
 	}
 	public function lockUser(){
 		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,UserStatus::locked);
+		$this->User_model->update_userStatusByID($user_id,UserStatus::lockedByAdmin);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
