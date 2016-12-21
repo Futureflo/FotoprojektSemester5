@@ -192,7 +192,7 @@ private function changePassword($user_id,$newPassword){
     	$newSalt = generate_salt(10);
     	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
     	echo "salt:".$newSalt."   hesh:".$newHashpw;
-    	$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt);
+    	$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt,UserStatus::activated);
     	
     }
     

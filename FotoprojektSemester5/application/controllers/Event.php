@@ -10,7 +10,8 @@ class Event extends CI_Controller {
 	}
 	public function index() {
 		$this->load->model('event_model');
-		$this->load->template ( 'event/new_event_view' );
+		$data['price_profiles'] = PriceProfile::getAllPriceProfiles();
+		$this->load->template ( 'event/new_event_view', $data);
 	}
 	public function showSingleEvent($shortcode) {
       	$this->load->model('event_model');
@@ -72,6 +73,8 @@ class Event extends CI_Controller {
 	// 		$this->form_validation->set_rules('even_url', 'Password', 'trim|required|matches[user_cpassword]');
 	// 		$this->form_validation->set_rules('even_user_id', 'Confirm Password', 'trim|required');
 	// 		$this->form_validation->set_rules('even_status', 'Confirm Password', 'trim|required');
+	
+	 		$even_prpr_id = $this->input->post('even_prpr_id');
 		
 	 		$even_status = $this->input->post('even_status'); 
 	 		if(isset($even_status)) $even_status = EventStatus::prv;
@@ -91,7 +94,8 @@ class Event extends CI_Controller {
 						'even_date' => $this->input->post('even_date'),
 						'even_status' => $even_status,
 	 					'even_url' => '',
-						'even_user_id' => $user_id
+						'even_user_id' => $user_id,
+						'even_prpr_id' => $even_prpr_id
 				);
 	
 				$this->load->model('event_model');
