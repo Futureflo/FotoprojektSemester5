@@ -1,16 +1,29 @@
 <?php 
-
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__DIR__).  "/controllers/User.php");
    Class User_model extends CI_Model {
 	
       Public function __construct() { 
          parent::__construct(); 
       } 
-            
+       // get all aktiv Users     
       Public function getAllUsers(){
       	$this->db->join('user_role', 'usro_id = user_role_id', 'LEFT OUTER');
+      	$this->db->where('user_status !=', UserStatus::deleted);
       	$query = $this->db->get("user");
       	return $query->result();
       }
+      
+      // get deleted user
+      Public function get_AllArchivedUsers()
+      {
+      	$this->db->join('user_role', 'usro_id = user_role_id', 'LEFT OUTER');
+      	$this->db->where('user_status', UserStatus::deleted);
+      	$query = $this->db->get("user");
+      	return $query->result();
+      }
+      
+      
 	// get user by email
       function get_user($email)
       {
@@ -56,7 +69,7 @@
       //update usere status
       function update_userStatus($user_confirmcode){
       	
-      	$this->db->set('user_status',2, FALSE);
+      	$this->db->set('user_status',UserStatus::activated, FALSE);
       	$this->db->where('user_confirmcode', $user_confirmcode);
       	$this->db->update('user');
 		return $afftectedRows = $this->db->affected_rows();      	
