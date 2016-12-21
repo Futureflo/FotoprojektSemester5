@@ -45,9 +45,6 @@ class PriceProfile extends CI_Controller {
 	public static function getPriceProfile($prpr_id)
 	{
 		$CI =& get_instance();
-		$CI->load->model('priceprofile_model');
-		$price_profile = $CI->priceprofile_model->getPriceProfileById($prpr_id);
-		$prices = $CI->priceprofile_model->getPricesById($prpr_id);
 		$price_profile[0]->prices = $prices;
 		return $price_profile[0];
 	}
@@ -56,8 +53,6 @@ class PriceProfile extends CI_Controller {
 	public static function getPriceByProductType($prpr_id, $prty_id)
 	{
 		$CI =& get_instance();
-		$CI->load->model('priceprofile_model');
-		$price = $CI->priceprofile_model->getPriceByProductType($prpr_id, $prty_id);
 		return $price[0];
 	}
 	
