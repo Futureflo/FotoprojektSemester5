@@ -16,7 +16,7 @@ class Event extends CI_Controller {
 	public function showSingleEvent($shortcode) {
       	$this->load->model('event_model');
       	$event = $this->event_model->getSingleEventByShortcode($shortcode);
-      	$data['event'] = $event;
+      	$data['event'] = $event[0];
       	$data['products'] = Event::getProductsFromEvent($event[0]);
       	
 		$this->load->template ( 'event/single_event_view', $data );
