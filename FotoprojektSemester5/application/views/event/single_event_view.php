@@ -155,8 +155,7 @@
       			 
       			</div>
      	 	</div>
-              <p>Some text in the modal.</p>
-     	</div>
+       	</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
         <button type="button" class="btn btn-default">In den Warenkorb</button>
