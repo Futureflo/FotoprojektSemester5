@@ -40,7 +40,7 @@
       
       public function search($even_name)
       {
-      	$this->db->like('even_name', '%' . $even_name . '%');
+      	$this->db->like('even_name',   $even_name );
       	$query = $this->db->get("event");
       	return $query->result();
       }
