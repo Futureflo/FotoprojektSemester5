@@ -49,7 +49,7 @@ class PriceProfile extends CI_Controller {
 		$price_profile = $CI->priceprofile_model->getPriceProfileById($prpr_id);
 		$prices = $CI->priceprofile_model->getPricesById($prpr_id);
 		$price_profile[0]->prices = $prices;
-		return $price_profile;
+		return $price_profile[0];
 	}
 	
 	//Liefert Preisen aus Format und Preisprofil
@@ -58,7 +58,7 @@ class PriceProfile extends CI_Controller {
 		$CI =& get_instance();
 		$CI->load->model('priceprofile_model');
 		$price = $CI->priceprofile_model->getPriceByProductType($prpr_id, $prty_id);
-		return $price;
+		return $price[0];
 	}
 	
 }

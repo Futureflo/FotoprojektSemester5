@@ -1,7 +1,7 @@
 
 <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading"> <?php echo'Preisprofil: ' . $price_profile[0]->prpr_description ?></h1>
+		<h1 class="jumbotron-heading"> <?php echo'Preisprofil: ' . $price_profile->prpr_description ?></h1>
 	</div>
 </section>
 
@@ -18,7 +18,7 @@
 			<tbody>
 
 				<?php
-				foreach ($price_profile[0]->prices as $price){
+				foreach ($price_profile->prices as $price){
 					echo "<tr class='searchable'>";
 					echo "<td>" . $price->prty_description. "</td>";
 					echo "<td>" . $price->prpt_price. '€' ."</td>";
