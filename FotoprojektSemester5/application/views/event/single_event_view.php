@@ -19,8 +19,8 @@
 				echo form_open_multipart("Product/insert", array("name" => "newproduct"), array('even_id' => $event->even_id));
 				?>
 				<div class="form-insert_product">
-					<input type="file" name="dateiupload" class="btn">
-   				 	<input type="submit" name="btn[upload]" class="btn btn-success">
+					<input type="file" multiple name="dateiupload[]" />
+   				 	<input type="submit" name="btn[upload]" class="btn btn-success" />
 				</div>
  </form>
 			
