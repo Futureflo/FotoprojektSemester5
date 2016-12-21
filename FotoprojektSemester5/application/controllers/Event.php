@@ -46,6 +46,18 @@ class Event extends CI_Controller {
 		return $products;
 	}
 	
+	public static function searchEvents($search) {
+		$CI =& get_instance();
+		$CI->load->model('event_model');
+	
+		$events = $CI->event_model->search($search);
+		foreach ($events as $event)	{
+			$event->products  = Event::getProductsFromEvent($event);
+		}
+	
+		return $events;
+	}
+	
 	
 	function newEvent()
 	{

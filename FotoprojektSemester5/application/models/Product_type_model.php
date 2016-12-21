@@ -25,11 +25,4 @@ Class Product_type_model extends CI_Model {
 	}
 	 
 }
-abstract class ProductPrintType
-{
-	const undefined = 0;
-	const print = 1;
-	const download = 2;
-	const mixed = 3;
-}
 ?>

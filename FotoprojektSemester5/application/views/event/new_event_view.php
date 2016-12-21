@@ -25,7 +25,7 @@
 				<div class="col-md-10 offset-md-1">
 		
 					<?php $attributes = array("name" => "newevent");
-					echo form_open("Event/new", $attributes);?>
+					echo form_open("Event/newEvent", $attributes);?>
 					
 					<div class="form-new_event">
 							<br>

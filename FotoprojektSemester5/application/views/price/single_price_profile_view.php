@@ -1,7 +1,7 @@
 
 <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">Alle Formate</h1>
+		<h1 class="jumbotron-heading"> <?php echo'Preisprofil: ' . $price_profile[0]->prpr_description ?></h1>
 	</div>
 </section>
 
@@ -10,29 +10,27 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Bezeichnung</th>
+					<th>Preis</th>
 					<th>Typ</th>
-					<th>Fotograf</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				<?php
-				foreach ( $product_types as $pt ) {
+				foreach ($price_profile[0]->prices as $price){
 					echo "<tr class='searchable'>";
-					echo "<td>" . $pt->prty_id. "</td>";
-					echo "<td>" . $pt->prty_description. "</td>";
-					if ($pt->prty_type == ProductPrintType::download)
+					echo "<td>" . $price->prty_description. "</td>";
+					echo "<td>" . $price->prpt_price. '€' ."</td>";
+					if ($price->prty_type == ProductPrintType::download)
 					{
 						echo "<td>" .'Download' ."</td>";
 					}
 					else echo "<td>" .'Druck' ."</td>";
-					
-					echo "<td>" .$pt->prty_user_id."</td>";
+				
 					
 					echo "<tr>";
- 				}
+				}
 				?>
 
 				

@@ -11,12 +11,12 @@
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 			<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 				<a class="dropdown-item" href="<?php echo base_url();?>admin/">Dashboard</a>
-				<a class="dropdown-item" href="<?php echo base_url();?>admin/users/">Alle
-					Benutzer</a> <a class="dropdown-item"
-					href="<?php echo base_url();?>admin/events/">Alle Events</a> <a
-					class="dropdown-item"
-					href="<?php echo base_url();?>admin/printers/">Alle Druckereien
-					(System)</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>admin/users/">Alle Benutzer</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>admin/events/">Alle Events</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>admin/printers/">Alle Druckereien (System)</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>admin/product_types/">Alle Formate</a>
+				<a class="dropdown-item" href="<?php echo base_url();?>admin/price_profiles/">Alle Preisprofile</a>
+				
 			</div></li>
 
 		
