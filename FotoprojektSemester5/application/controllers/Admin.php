@@ -13,13 +13,11 @@ class Admin extends CI_Controller {
 	}
 	
 	public function users() {
-		print_r($this->User_model->get_AllArchivedUsers());
 		$data ['users'] = $this->User_model->getAllUsers();		
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function archivedUsers() {
-		print_r($this->User_model->get_AllArchivedUsers());
-		$data ['users'] = $this->User_model->getAllUsers();
+	public function archivedUsers() {						
+		$data ['users'] = $this->User_model->get_AllArchivedUsers();
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	
