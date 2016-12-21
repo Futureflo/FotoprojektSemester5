@@ -54,4 +54,11 @@ class User extends CI_Controller {
 		redirect ('start/');
 	}
 }
+abstract class UserStatus
+{
+	const unconfirmed = 1;
+	const activated = 2;
+	const locked = 3;
+	const deleted = 4;
+}
 ?>

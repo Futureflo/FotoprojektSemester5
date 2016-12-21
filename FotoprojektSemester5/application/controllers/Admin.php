@@ -2,6 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname(__FILE__) . "/ProductType.php");
 include_once (dirname(__FILE__) . "/PriceProfile.php");
+include_once (dirname(__FILE__) . "/User.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -37,19 +38,19 @@ class Admin extends CI_Controller {
 	
 	public function deleteUser(){
 		$user_id = $this->input->post ( "userDelete_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,4);
+		$this->User_model->update_userStatusByID($user_id,UserStatus::deleted);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function lockUser(){
 		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,3);
+		$this->User_model->update_userStatusByID($user_id,UserStatus::locked);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function unlockUser(){
 		$user_id = $this->input->post ( "userUnlock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,2);
+		$this->User_model->update_userStatusByID($user_id,UserStatus::activated);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}
