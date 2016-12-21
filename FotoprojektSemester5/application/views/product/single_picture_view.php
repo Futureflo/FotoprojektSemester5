@@ -1,13 +1,36 @@
-
-<section class="jumbotron text-xs-center">
+ <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">Single Picture View</h1>
-		<p class="lead text-muted">Something short and leading about the
-			collection below—its contents, the creator, etc. Make it short and
-			sweet, but not too short so folks don't simply skip over it entirely.</p>
-		<p>
-			<a href="#" class="btn btn-primary">Main call to action</a> <a
-				href="#" class="btn btn-secondary">Secondary action</a>
-		</p>
+		<h1 class="jumbotron-heading"> <?php  echo 'Produkt: ' . $product[0]->prod_name ?></h1>	
 	</div>
 </section>
+
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Bezeichnung</th>
+				<th>Preis aus Preisprofi</th>
+				<th>Preis spez.</th>
+			</tr>
+		</thead>
+		<tbody>
+
+
+			<?php  
+			foreach ($product[0]->product_variants  as $product_variant) {
+				echo "<tr class='searchable'>";
+					echo "<td>" . $product_variant->prty_description. "</td>";
+					echo "<td>" . $product_variant->price[0]->prpt_price. "</td>";
+					echo "<td>" . $product_variant->prva_price_specific. "</td>";
+				echo "<tr>";
+			}
+			 ?>
+ 
+
+				
+		</tbody>
+	</table>
+</div>
+	
+	
