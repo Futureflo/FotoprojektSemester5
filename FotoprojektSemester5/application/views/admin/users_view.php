@@ -49,20 +49,23 @@
 			foreach ( $users as $user ) {
 				switch ($user->user_status) {
 					default :
-					case 0 : // undefiniert
+					case 0 : 
 						$statusText = "undefiniert";
 						break;
-					case 1 : // Admin
+					case 1 : 
 						$statusText = "registriert";
 						break;
-					case 2 : // Besteller
+					case 2 : 
 						$statusText = "aktiv";
 						break;
-					case 3 : // Fotograf
+					case 3 : 
 						$statusText = "gesperrt";
 						break;
-					case 4 : // Veranstalter
+					case 4 : 
 						$statusText = "gelöscht";
+						break;
+					case 5 : 
+						$statusText = "gesperrt durch admin";
 						break;
 				}			
 				echo "<tr class='searchable'>";
