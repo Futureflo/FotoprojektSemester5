@@ -54,98 +54,139 @@ class Product extends CI_Controller {
 	
 	function insert()
 	{
-		$this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
+// 		$this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
 		
-		$dateiupload = $this->input->post('dateiupload');
-			
-		if($dateiupload)
+		//Konstanten setzten
+		$prod_status = ProductStatus::locked;
+		$prod_date = date("Y-m-d H:i:s");
+	
+		//Event laden
+		$prod_even_id = $this->input->post('even_id');
+		$this->load->model('event_model');
+		$event = $this->event_model->getSingleEventById($prod_even_id);
+		
+
+		$files = $_FILES;
+		$cpt = count($_FILES['dateiupload']['name']);
+		for($i=0; $i<$cpt; $i++)
 		{
-			// set form validation rules
-			$prod_name =  get_name($dateiupload);
-			$prod_status = ProductStatus::locked;
-			$prod_date = date("Y-m-d");
-			$prod_filepath = '';
-			$prod_even_id = $this->input->post('even_id');
-			
-			upload();
-					 	
-			// submit
-			if ($this->form_validation->run() == FALSE)
+			//Dateidaten können geändert werden
+			$filename = $files['dateiupload']['name'][$i];
+			$_FILES['dateiupload']['name'] = $filename;
+			$_FILES['dateiupload']['type']= $files['dateiupload']['type'][$i];
+			$_FILES['dateiupload']['tmp_name']= $files['dateiupload']['tmp_name'][$i];
+			$_FILES['dateiupload']['error']= $files['dateiupload']['error'][$i];
+			$_FILES['dateiupload']['size']= $files['dateiupload']['size'][$i];
+		
+			if($filename)
 			{
-				// fails
-				$this->load->view( 'event/single_event_view');
-			}
-			else
-			{
-				//insert event details into db
+				$prod_name =  $this->get_name($filename);
+				$prod_filepath = $filename;
+				
 				$data = array(
 						'prod_date' => $prod_date,
 						'prod_even_id' => $prod_even_id,
 						'prod_name' => $prod_name,
-						'prod_status' => $prod_status
-// 						'prod_filepath' => $user_id
+						'prod_status' => $prod_status,
+						'prod_filepath' => $prod_filepath
 				);
-	
-				$this->load->model('product_model');
-				if ($this->product_model->insert_product($data))
-				{
 				
-					$config['upload_path']          = 'uploads/';
-					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 100;
-					$config['max_width']            = 1024;
-					$config['max_height']           = 768;
-	
-					$this->load->library('upload', $config);
-					$this->upload->initialize($config);
-					
-					if ( ! $this->upload->do_upload('dateiupload'))
-					{
-							$this->session->set_flashdata('msg',$this->upload->display_errors());
-					}
-					else
-					{
-							$data = array('dateiupload' => $this->upload->data());
-							$this->session->set_flashdata('msg',$data);
-							//$this->session->set_flashdata('msg','<div class="alert alert-success text-center">Product hochgeladen!</div>');
-						
-					}
-
-					$this->load->model('event_model');
-					$event = $this->event_model->getSingleEventById($prod_even_id);
-					redirect('event/' . $event[0]->even_url);
+				$this->load->model('product_model');
+				
+				//Produkt einfügen
+				$new_prod_id = $this->product_model->insert_product($data);
+				if ($new_prod_id)
+				{
+					// Varianten mit Preisprofil aus Event anlegen
+					$this->insert_product_variant($new_prod_id, $event[0]);
 				}
 				else
 				{
 					// error
 					$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>');
-					redirect('event/');
-	
 				}
 			}
+			else
+			{
+				// error
+				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>'.$dateiupload.'');
+			}
+		}
+		
+		
+		//Wasserzeichen hochladen
+		/*
+		 * HIer muss noch etwas passieren
+		 */
+		$this->upload('./Images/');
+		
+		//Orginal-Dateien uploaden
+		$this->upload('../Images/');
+		
+		//Eventseite neu laden
+		redirect('event/' . $event[0]->even_url);
+		
+	}
+	
+	function get_name($filename)
+	{
+		$name = "";
+		$pos = strpos($filename, "\\");
+		$pos2 = strrpos($filename, ".");
+	
+	 	$name = substr($filename, $pos, $pos2); 
+		return $name;
+	}
+	
+	function get_fileext($filename)
+	{
+		$pos2 = strrpos($filename, ".");
+	
+		$ext = substr($filename, $pos2, strlen($filename)-$pos2);
+		return $ext;
+	}
+	
+	function upload($path)
+	{
+		// Monat und Jahr für Uploadordner festlegen
+		$month = date('m');
+		$year = date('Y');
+				
+		$config['upload_path']          = $path . $year .'/'. $month;
+		$config['allowed_types']        = 'gif|jpg|png';
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		
+		
+			
+		if ( ! $this->upload->do_upload())
+		{
+			$this->session->set_flashdata('msg',$this->upload->display_errors());
 		}
 		else
 		{
-			// error
-			$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Keine Datei ausgewählt anmelden!!!</div>'.$dateiupload[0].'');
-			redirect('event/' . $data['even_url']);
+			$finfo=$this->upload->data();
+			$this->session->set_flashdata('msg','<div class="alert alert-success text-center"> '.$finfo['file_name'].' hochgeladen!</div>');
+		
 		}
 	}
-}
-
-function get_name($filename)
-{
-	$name = "";
-	$pos = strpos($filename, "\\");
-	$pos2 = strrpos($filename, ".");
-
- 	$name = substr($filename, $pos, $pos2); 
-	return $name;
-}
-
-function upload()
-{
 	
+	function insert_product_variant($prod_id, $event)
+	{
+		$prpr_id= $event->even_prpr_id;
+		$this->load->model('product_model');
+		$price_profile = PriceProfile::getPriceProfile($prpr_id);
+		//Zu allen Formaten im Preisprofil wird eine Variante angelegt
+		foreach ($price_profile->prices as $price)
+		{
+			$data = array(
+					'prva_prod_id' => $prod_id,
+					'prva_prty_id' => $price->prpt_prty_id
+			);
+			$this->product_model->insert_product_variant($data);
+		}
+	}
 }
 
 abstract class ProductStatus
