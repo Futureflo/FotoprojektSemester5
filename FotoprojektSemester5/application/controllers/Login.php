@@ -125,7 +125,7 @@ public    function confirmAccount($user_confirmcode){
     		//ceck first if user wasn't lockedByAdmin 
     		$uresult = $this->user_model->get_user ( $user_email );
     		if ($uresult[0]->user_status == UserStatus::lockedByAdmin) {
-    			$this->session->set_flashdata('msg', 'Solange ihr Account gesperrt ist können Sie ihr Passwort nicht zurück setzen. Kontaktieren Sie bitte den Admin für weitere Informationen');    			 
+    			$this->session->set_flashdata('pwlocked', 'Solange ihr Account gesperrt ist können Sie ihr Passwort nicht zurück setzen. Kontaktieren Sie bitte den Admin für weitere Informationen');    			 
     			redirect ( "login/forgotPassword" );
     		}
     		else{
