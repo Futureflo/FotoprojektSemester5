@@ -57,6 +57,7 @@
 				echo "<div class=\"card\">";
 				echo "<div class=\"lazyload\">";
 				echo "<!--";
+				echo "<a href=\"" . base_url() . "Product/showSinglePicture/" . $product->prod_id. "/\">";
 				echo " <img data-src='../../" . $product->prod_filepath ."'". " alt=" . $product->prod_name .
 					" style=\"width:304px;height:228px; display: block;\"
 					src=../../" . $product->prod_filepath . ">";

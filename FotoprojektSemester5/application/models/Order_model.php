@@ -13,6 +13,15 @@
    			$query = $this->db->get("order");
    			return $query->result();
    		}
+   		
+   		Public function getProductInformationByOrderId($orde_id){
+   			$this->db->join('order_position', 'orde_id = orpo_orde_id', 'LEFT OUTER');
+   			$this->db->join('product', 'orpo_prod_id = prod_id', 'LEFT OUTER');
+   		
+   			$this->db->where('orde_id', $orde_id);
+   			$query = $this->db->get("order");
+   			return $query->result();
+   		}
    	
    		Public function getSingleOrderById($id){
    			$this->db->join('user', 'user_id = orde_user_id', 'INNER');

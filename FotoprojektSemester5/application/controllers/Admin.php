@@ -11,12 +11,16 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
+	
 	public function users() {
-		//$this->load->model ( 'user_model' );
-		$data ['users'] = $this->User_model->getAllUsers ();
-		
+		$data ['users'] = $this->User_model->getAllUsers();		
 		$this->load->template ( 'admin/users_view', $data );
 	}
+	public function archivedUsers() {						
+		$data ['users'] = $this->User_model->get_AllArchivedUsers();
+		$this->load->template ( 'admin/users_view', $data );
+	}
+	
 	public function events() {
 		$this->load->model ( 'Event_model' );
 		$data ['events'] = $this->Event_model->getAllEvents();
@@ -44,7 +48,7 @@ class Admin extends CI_Controller {
 	}
 	public function lockUser(){
 		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,UserStatus::locked);
+		$this->User_model->update_userStatusByID($user_id,UserStatus::lockedByAdmin);
 		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
 		$this->load->template ( 'admin/users_view', $data );
 	}

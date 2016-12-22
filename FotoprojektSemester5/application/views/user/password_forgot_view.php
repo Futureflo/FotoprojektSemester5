@@ -7,6 +7,7 @@
 
 
 				<?php echo form_open('login/forgotPassword');?>
+								<div id="fehler_span" class="text-danger"><?php  echo $this->session->flashdata('pwlocked'); ?></div>
 				
 					<div class="form-PasswordReset">
 						<h4>Passwort vergessen?</h4>

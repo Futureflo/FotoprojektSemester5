@@ -29,18 +29,7 @@ class User extends CI_Controller {
 		$this->load->template ( 'user/my_order_view', $data );
 	}
 
-	function confirmAccount($user_confirmcode){
-		
-		$confrimcodeExists = $this->user_model->update_userStatus($user_confirmcode);
-		if ($confrimcodeExists == 1)
-		{
-			$this->session->set_flashdata('msg', 'Ihre E-Mail wurde erfolgreich bestätigt');				
-			redirect ('start/');		
-		}
-		else {
-			redirect ('start/');			
-		}
-	}
+
 	
 	function logout() {
 		// destroy session
@@ -56,9 +45,11 @@ class User extends CI_Controller {
 }
 abstract class UserStatus
 {
+	const undefined = 0;
 	const unconfirmed = 1;
 	const activated = 2;
 	const locked = 3;
 	const deleted = 4;
+	const lockedByAdmin = 5;
 }
 ?>
