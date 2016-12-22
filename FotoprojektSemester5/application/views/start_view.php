@@ -13,16 +13,24 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active">
-				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild2.jpg)"></div>
+				<div class="bild" style="background-image: url(<?php
+				echo base_url ();
+				?>_sonstiges/img/bild2.jpg)"></div>
 			</div>
 			<div class="carousel-item">
-				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild3.jpg)"></div>
+				<div class="bild" style="background-image: url(<?php
+				
+				echo base_url ();
+				?>_sonstiges/img/bild3.jpg)"></div>
 				<div class="carousel-caption">
 					<h2>Heading</h2>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<div class="bild" style="background-image: url(<?php echo base_url();?>_sonstiges/img/bild1.jpg)"></div>
+				<div class="bild" style="background-image: url(<?php
+				
+				echo base_url ();
+				?>_sonstiges/img/bild1.jpg)"></div>
 				<div class="carousel-caption">
 					<h2>Heading</h2>
 				</div>
@@ -58,13 +66,13 @@
 	<h1 class="text-xs-center">Events</h1>
 	<div class="container">
 		<div class="row">
-			<div id="public">
+			<div id="result">
 			<?php
 			foreach ( $events as $event ) {
 				// Produkte aus Event in $products zwischenspeichern
 				$products = $event->products;
 				
-				echo "<div class=\"card\">";
+				echo "<div class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard\">";
 				echo "<div class=\"lazyload\">";
 				echo "<!--";
 				echo "<div class=\"card-block\">";
@@ -74,7 +82,7 @@
 				
 				// 1. Bild des Events anzeigen ansonsten Platzhalter
 				if (isset ( $products [0] )) {
-					echo " <img onmouseout=\"notShow(this)\" onmouseover=\"show(this)\" data-src=./" . $products [0]->prod_filepath . "\" alt=" . $products [0]->prod_name . "\"
+					echo " <img class=\"img-responsive\" onmouseout=\"notShow(this)\" onmouseover=\"show(this)\" data-src=./" . $products [0]->prod_filepath . "\" alt=" . $products [0]->prod_name . "\"
 						style=\"width:100%;height:280px; display: block; filter: blur(5px);\"
 						src=./" . $products [0]->prod_filepath . ">";
 				} else {
@@ -91,7 +99,6 @@
 			}
 			?>
 			</div>
-			<div id="result"></div>
 			<img id="phimg" data-src="holder.js/100px280/thumb" alt="100%x280"
 						style="height: 280px; width: 100%; display: none;"
 						src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22356%22%20height%3D%22280%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20356%20280%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158b0639c79%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A18pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158b0639c79%22%3E%3Crect%20width%3D%22356%22%20height%3D%22280%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22131.2890625%22%20y%3D%22148.1%22%3E356x280%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
@@ -122,7 +129,10 @@ var old = '';
 function searchEvent(ev){
     $.ajax({
     		  type: "POST",
-    		  url: "<?php echo site_url();?>/Start/search/"+ev,
+    		  url: "<?php
+								
+								echo site_url ();
+								?>/Start/search/"+ev,
     		  dataType: 'html',
     		  success:function(data){
     			  try{  
@@ -155,6 +165,7 @@ function createPic(prodfile, prodname){
     var img = document.createElement("IMG");
     
     // Attribute dem bild geben
+    img.classList.add("img-responsive");
     img.setAttribute("data-src", "./"+prodfile);
     img.setAttribute("src", "./"+prodfile);
     img.setAttribute("alt", prodname);
@@ -172,7 +183,7 @@ function ceateEvent(eventname, eventurl, img){
 	var div = document.getElementById('result');
     
     // benötigte Elemente
-    var card = document.createElement("DIV");
+    var col = document.createElement("DIV");
     var lazy = document.createElement("DIV");
     var script = document.createElement("SCRIPT");
     var cardblock = document.createElement("DIV");
@@ -183,7 +194,7 @@ function ceateEvent(eventname, eventurl, img){
     //var kom = document.createTextNode("-->");
     
     // Elementen Klassen zuweisen
-    card.classList.add("card");
+    col.className +="col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard";
     lazy.classList.add("lazyload");
     cardblock.classList.add("card-block");
     h.classList.add("card-title");
@@ -208,9 +219,9 @@ function ceateEvent(eventname, eventurl, img){
     //lazy.appendChild(kom);
     
     //lazy.appendChild(script);
-    card.appendChild(lazy);
+    col.appendChild(lazy);
     
-    div.appendChild(card);
+    div.appendChild(col);
 }
     
 function phimg(){
@@ -223,11 +234,6 @@ function resetEvents(){
     var result = document.getElementById("result");
     while (result.firstChild) {
         result.removeChild(result.firstChild);
-    }
-    
-    var public = document.getElementById("public");
-    while (public.firstChild){
-        public.removeChild(public.firstChild);
     }
 }
 
