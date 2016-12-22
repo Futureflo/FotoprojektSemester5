@@ -38,7 +38,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->model('order_model');
 		
 		$userID = $this->session->userdata('user_id');
-		$products = $this->order_model->getProductsFromOrder($orderID); 
+		$products = $this->order_model->getProductsFromOrder($orderID);
 		
 		foreach ($products as $p)    {
 			$path = Product::buildFilePath($p);
