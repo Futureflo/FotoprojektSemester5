@@ -1,6 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname(__FILE__) . "/PriceProfile.php");
+include_once (dirname ( __FILE__ ) . "/Event.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
 	
@@ -46,7 +47,9 @@ class Product extends CI_Controller {
 		
 		//Preis aus Preisprofil besorgen
 		foreach ($product_variants as $product_variant) {
-			$product_variant->price = PriceProfile::getPriceByProductType($product_variant->prod_even_id, $product_variant->prva_prty_id);
+			$event = Event::getSingleEventById ( $product_variant->prod_even_id );
+			$price = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prva_prty_id );
+			$product_variant->price = $price;
 		}
 
 		return $product_variants;

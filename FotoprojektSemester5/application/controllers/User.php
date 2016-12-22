@@ -1,4 +1,5 @@
 <?php
+include_once (dirname(__FILE__) . "/ProductType.php");
 class User extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
