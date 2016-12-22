@@ -38,7 +38,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->model('order_model');
 		
 		$userID = $this->session->userdata('user_id');
-		$products = $this->order_model->getProductsFromOrder($orderID); 
+		$products = $this->order_model->getProductsFromOrder($orderID);
 		
 		foreach ($products as $p)    {
 			$path = Product::buildFilePath($p);
@@ -107,9 +107,9 @@ class DownloadManager extends CI_Controller {
 		for ($i = 0; $i < count($imagePathArray); $i++) {
 			// name der hinzugefügten Datei wird ursprungs
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
-			$pathinfo = pathinfo($imagePathArray[$i]->path);
+			$pathinfo = pathinfo($imagePathArray[$i]->prod_filepath);
 			$fileName = $pathinfo['filename'] .".". $pathinfo['extension'];
-			$zipArchive->addFile('../'. $imagePathArray[$i]->path, $fileName);
+			$zipArchive->addFile('../'. $imagePathArray[$i]->prod_filepath, $fileName);
 		}
 		
 		// Zip passwortschützen
@@ -143,8 +143,9 @@ class DownloadManager extends CI_Controller {
 	public function test(){
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
-		$pfade = $this->order_model->getProductsFromOrder(1);
+		$pfade = $this->order_model->getProductInformationByOrderId(1);
 		$this->zipDir(1, 1, $pfade);
+// 		echo $pfade[0]->prod_filepath;
 	}
 	
 }
