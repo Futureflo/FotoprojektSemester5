@@ -33,7 +33,6 @@ class Contact extends CI_Controller
     		$telNum = $this->input->post('telNum');
     		$subject = $this->input->post('subject');
     		$message = $this->input->post('message');
-    		echo $name.$email.$telNum.$subject.$message;
     		$this->email->from($email, $name);
     		$this->email->to($email);
     		$this->email->subject($subject);
