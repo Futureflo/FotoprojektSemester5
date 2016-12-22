@@ -35,6 +35,14 @@ class Event extends CI_Controller {
 		return $events;
 	}
 	
+	public static function getSingleEventById($even_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'event_model' );
+		
+		$event = $CI->event_model->getSingleEventById ( $even_id );
+		return $event [0];
+	}
+	
 	public static function getProductsFromEvent($event)
 	{
 		$CI =& get_instance();
