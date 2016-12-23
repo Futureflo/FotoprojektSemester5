@@ -1,5 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname(__FILE__) . "/Product.php");
 
 class DownloadManager extends CI_Controller {
 
@@ -36,6 +37,11 @@ class DownloadManager extends CI_Controller {
 // 		$downloadLink = createDownloadLink($orderID, $userID);
 // 		return $downloadLink;
 		$this->load->model('order_model');
+		
+
+		// Zip passwortschützen
+		$mySalt = generate_salt();
+		echo $mySalt;
 		
 		$userID = $this->session->userdata('user_id');
 		$products = $this->order_model->getProductsFromOrder($orderID);
@@ -79,7 +85,7 @@ class DownloadManager extends CI_Controller {
 	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
 	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
-	public function zipDir($userID, $orderID, array $imagePathArray) {
+	public function zipDir($userID, $orderID, array $productsArray) {
 		// TODO: checken ob ziel und quellordner existieren
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
@@ -93,7 +99,7 @@ class DownloadManager extends CI_Controller {
 		// name für das Zip Archiv
 		// dateiname = userID, orderID, datum, uhrzeit
 		$myDate = date('omdGis');
-		$zipFileName = "Your_Zip_File_". $userID . $orderID . $myDate .".zip";
+		$zipFileName = "Download_Zip_Archive_". $userID ."_". $orderID  ."_". $myDate .".zip";
 		
 		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
 		$outZipPath = $outZipFolder ."/". $zipFileName;
@@ -104,21 +110,15 @@ class DownloadManager extends CI_Controller {
 		}
 
 		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
-		for ($i = 0; $i < count($imagePathArray); $i++) {
+		for ($i = 0; $i < count($productsArray); $i++) {
 			// name der hinzugefügten Datei wird ursprungs
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
-			$pathinfo = pathinfo($imagePathArray[$i]->prod_filepath);
-			$fileName = $pathinfo['filename'] .".". $pathinfo['extension'];
-			$zipArchive->addFile('../'. $imagePathArray[$i]->prod_filepath, $fileName);
+			$pathComplete = Product::buildFilePath($products[$i]);
+			echo $pathComplete ."; ";
+			$fileName = $pathComplete['filename'] .".". $pathComplete['extension'];
+			$zipArchive->addFile($pathComplete, $fileName);
+			
 		}
-		
-		// Zip passwortschützen
-		$mySalt = generate_salt();
-		echo $mySalt;
-		$zipArchive->setPassword($mySalt);
-// 		system('zip -P password file.zip file.txt');
-// 		$zip->Password = $mySalt;
-		
 		// Zip Archiv schließen
 		$zipArchive->close();
 		
@@ -143,8 +143,8 @@ class DownloadManager extends CI_Controller {
 	public function test(){
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
-		$pfade = $this->order_model->getProductInformationByOrderId(1);
-		$this->zipDir(1, 1, $pfade);
+		$products = $this->order_model->getProductInformationByOrderId(1);
+		$this->zipDir(1, 1, $products);
 // 		echo $pfade[0]->prod_filepath;
 	}
 	
