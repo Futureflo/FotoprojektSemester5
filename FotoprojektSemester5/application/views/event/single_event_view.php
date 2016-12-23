@@ -90,225 +90,102 @@
       <div class="modal-body">
     	<div class="container">
       		<div class="row">
-      			<div class="col-md-4">
+      			<div class="col-md-6">
       		
 					<img src="http://www.basteldichblue.com/Public/BMDE/12/Viereckiges%20Scoubidou%20x4/4726_200x200.jpg" class="img-responsive" alt="Cinque Terre">
        		
       			</div>
-      			
-      			<div class="col-md-8">
-      				<div class="panel-group" id="accordion">
-	      				<div class="col-md-6">
-	      				
-			      			<button class="btn"  data-toggle="collapse" data-target="#digital" data-parent="#accordion">Digital</button>
-							
-							<div id="digital" class="collapse" style="display:block">
-								<br />
-								<div class="form-group">
-								    <select class="form-control" id="größeSelect">
-								      <option style="color: grey">Größe wählen*</option>
-								      <option>Small</option>
-								      <option>Medium</option>
-								      <option>Large</option>
-								      <option>ExtraLarge</option>
-								    </select>
-							    </div> 
-								<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/>
-								<br />
-								
-								<div class="col-md-4">
-									<p>Preis:<p/> 
-								</div>
-								<div class="col-md-6">
-									<textarea class="form-control" rows="1" cols="5" readonly="readonly"></textarea>
+      			<div class="col-md-6">
+				   <ul class="nav nav-tabs" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Digital</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">Analog</a>
+				  </li>
+					</ul>
+				
+				<!-- Tab panes -->
+					<div class="tab-content">
+					  <div role="tabpanel" class="tab-pane fade in active" id="digital">
+					  
+					  	
+								<div id="digital" class="collapse">
+									<br />
+	<!-- 								<div class="form-group"> -->
+	<!-- 								    <select class="form-control" id="größeSelect"> -->
+	<!-- 								      <option style="color: grey">Größe wählen*</option> -->
+	<!-- 								      <option>Small</option> -->
+	<!-- 								      <option>Medium</option> -->
+	<!-- 								      <option>Large</option> -->
+	<!-- 								      <option>ExtraLarge</option> -->
+	<!-- 								    </select> -->
+	<!-- 							    </div>  -->
+	<!-- 								<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/> -->
+	<!-- 								<br /> -->
+									
+									<div class="col-md-3">
+										<p>Preis:<p/> 
+									</div>
+									<div class="col-md-9">
+										<textarea class="form-control" rows="1" cols="3" style="overflow:auto;resize:none" readonly="readonly"></textarea>
+					      			</div>
 				      			</div>
-			      			</div>
-			      			
-		      			</div>
-		      			
-		      			
-		      			<div class="col-md-6">
-			      			
-			      			<button class="btn" data-toggle="collapse" data-target="#analog" data-parent="#accordion">Analog</button>
-			      			
-			      			
-			      			<div id="analog" class="collapse" style="display:none">
-				      			<br />
-				      			<div class="form-group">
-								    <select class="form-control" id="formatSelect">
-								      <option style="color: grey">Format wählen*</option>
-								      <option>Bild</option>
-								      <option>Tasse</option>
-								      <option>Format</option>
-								      <option>Penistattoo</option>
-								    </select>
-							    </div>
-							    <div class="form-group">
-								     <select class="form-control" id="größeSelect">
-								      <option style="color: grey">Größe wählen*</option>
-								      <option>Small</option>
-								      <option>Medium</option>
-								      <option>Large</option>
-								      <option>ExtraLarge</option>
-								    </select>
-							    </div> 
-							    <div class="form-group">
-								        <select class="form-control" id="rahmenSelect">
-								      <option style="color: grey">Bilderrahmen wählen*</option>
-								      <option>Mit Bilderrahmen</option>
-								      <option>Ohne Bilderrahmen</option>
-								    </select>
-							    </div> 
-							    <div class="form-group">
-								        <select class="form-control" id="materialSelect">
-								      <option style="color: grey">Material wählen*</option>
-								      <option>Matt</option>
-								      <option>Glänzend</option>
-								      <option>Hochwertig</option>
-								      <option>Billig scheiß</option>
-								    </select>
-							    </div> 
-							    <textarea class="form-control" rows="1" cols="10" placeholder="Preis" readonly="readonly"></textarea>
+					  
+					  </div>
+					  <div role="tabpanel" class="tab-pane fade" id="analog">
+					  
+					    			<div id="analog" class="collapse" >
+					      			<br />
+					      			<div class="form-group">
+									    <select class="form-control" id="formatSelect">
+									      <option style="color: grey">Format wählen*</option>
+									      <option>Bild</option>
+									      <option>Tasse</option>
+									      <option>Format</option>
+									    </select>
+								    </div>
+								    <div class="form-group">
+									     <select class="form-control" id="größeSelect">
+									      <option style="color: grey">Größe wählen*</option>
+									      <option>Small</option>
+									      <option>Medium</option>
+									      <option>Large</option>
+									      <option>ExtraLarge</option>
+									    </select>
+								    </div> 
+								    <div class="form-group">
+									        <select class="form-control" id="rahmenSelect">
+									      <option style="color: grey">Bilderrahmen wählen*</option>
+									      <option>Mit Bilderrahmen</option>
+									      <option>Ohne Bilderrahmen</option>
+									    </select>
+								    </div> 
+								    <div class="form-group">
+									        <select class="form-control" id="materialSelect">
+									      <option style="color: grey">Material wählen*</option>
+									      <option>Matt</option>
+									      <option>Glänzend</option>
+									      <option>Hochwertig</option>
+									     
+									    </select>
+								    </div> 
+								    <textarea class="form-control" rows="1" cols="10" placeholder="Preis" readonly="readonly"></textarea>
+				 	 	</div>
+				  </div>
+				  
+				</div> <!--  col-md-6 -->
+	      	</div> <!--  row -->      		
+			   		
+		</div> <!--  container -->
+	</div>	  <!--  modal body -->   
+ 
 						    
-			      				</div> 
-		      				</div> 
-		      			</div>
-	      			</div>
-     	 	</div>
-       	</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-        <button type="button" class="btn btn-default">In den Warenkorb</button>
-      </div>
-    </div>
-	</div>
-  </div>
-</div>
-
-
-
-
-<div id="myModal2" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Bilder kaufen</h4>
-      </div>
-      <div class="modal-body">
-    	<div class="container">
-      		<div class="row">
-      			<div class="col-md-4">
-      		
-					<img src="http://www.basteldichblue.com/Public/BMDE/12/Viereckiges%20Scoubidou%20x4/4726_200x200.jpg" class="img-responsive" alt="Cinque Terre">
-       		
-      			</div>
-      			
-      			<div class="col-md-8">
-	      			<div class="col-md-6">
-	      			
-	      			<div class="panel-group" id="accordion">
-						  <div class="panel panel-default">
-						    <div class="panel-heading">
-						      <h4 class="panel-title">
-						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-						        Digital</a>
-						      </h4>
-						    </div>
-						    <div id="collapse1" class="panel-collapse collapse in">
-						      <div class="panel-body">
-						   
-								<div class="form-group">
-								    <select class="form-control" id="größeSelect">
-								      <option style="color: grey">Größe wählen*</option>
-								      <option>Small</option>
-								      <option>Medium</option>
-								      <option>Large</option>
-								      <option>ExtraLarge</option>
-								    </select>
-							    </div> 
-								<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/>
-								<br />
-								
-								<div class="col-md-4">
-									<p>Preis:<p/> 
-								</div>
-								<div class="col-md-6">
-									<textarea class="form-control" rows="1" cols="5" readonly="readonly"></textarea>
-				      			</div>
-	
-							      </div>
-							    </div>
-							  </div>
-							  <div class="panel panel-default">
-							    <div class="panel-heading">
-							      <h4 class="panel-title">
-							        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-							        Analog</a>
-							      </h4>
-							    </div>
-							    <div id="collapse2" class="panel-collapse collapse">
-							      <div class="panel-body">
-							
-								<div class="form-group">
-								    <select class="form-control" id="formatSelect">
-								      <option style="color: grey">Format wählen*</option>
-								      <option>Bild</option>
-								      <option>Tasse</option>
-								      <option>Format</option>
-								      <option>Penistattoo</option>
-								    </select>
-							    </div>
-							    <div class="form-group">
-								     <select class="form-control" id="größeSelect">
-								      <option style="color: grey">Größe wählen*</option>
-								      <option>Small</option>
-								      <option>Medium</option>
-								      <option>Large</option>
-								      <option>ExtraLarge</option>
-								    </select>
-							    </div> 
-							    <div class="form-group">
-								        <select class="form-control" id="rahmenSelect">
-								      <option style="color: grey">Bilderrahmen wählen*</option>
-								      <option>Mit Bilderrahmen</option>
-								      <option>Ohne Bilderrahmen</option>
-								    </select>
-							    </div> 
-							    <div class="form-group">
-								        <select class="form-control" id="materialSelect">
-								      <option style="color: grey">Material wählen*</option>
-								      <option>Matt</option>
-								      <option>Glänzend</option>
-								      <option>Hochwertig</option>
-								      <option>Billig scheiß</option>
-								    </select>
-							    </div> 
-							    <textarea class="form-control" rows="1" cols="10" placeholder="Preis" readonly="readonly"></textarea>
-					    
-
-
-						      </div>
-						    </div>
-						  </div>
-						</div>
-	      			
-	      			</div>
-	      			
-	      			
-	      			<div class="col-md-6">
-	      			
-	      			</div> 
-	      			</div>
-     	 	</div>
-       	</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-        <button type="button" class="btn btn-default">In den Warenkorb</button>
-      </div>
-    </div>
-	</div>
-  </div>
-</div>
+			      			  
+     	<div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+	        <button type="button" class="btn btn-default">In den Warenkorb</button>
+	    </div>
+    </div> <!--  modal content -->    
+  </div> <!--  modal dialog-->   
+</div> <!--  modal -->   
