@@ -64,7 +64,10 @@
 					case 4 : // Veranstalter
 						$statusText = "gelöscht";
 						break;
-				}			
+					case 5 : // Veranstalter
+						$statusText = "gesperrt durch admin";
+						break;
+				}
 				echo "<tr class='searchable'>";
 				echo "<td>" . $user->user_id . "</td>";
 				echo "<td>" . $user->user_name . "</td>";
@@ -74,41 +77,37 @@
 				echo "<td>" . $user->usro_name . "</td>";
 				echo "<td>" . $statusText . "</td>";
 				echo "<td>";
-
+				
 				echo "<center>";
-					if ($user->user_status == 1 || $user->user_status == 3){
-						echo btnEdit($user);
-						echo btnUnlockUser($user);
-						echo btnDelete($user);
-					}elseif ($user->user_status == 2){
-						echo btnEdit($user);
-						echo btnLockUser($user);
-						echo btnDelete($user);
-					}elseif ($user->user_status == 4){
-						echo btnRecycle($user);
-					};
+				if ($user->user_status == 1 || $user->user_status == 3 || $user->user_status == 5) {
+					echo btnEdit ( $user );
+					echo btnUnlockUser ( $user );
+					echo btnDelete ( $user );
+				} elseif ($user->user_status == 2) {
+					echo btnEdit ( $user );
+					echo btnLockUser ( $user );
+					echo btnDelete ( $user );
+				} elseif ($user->user_status == 4) {
+					echo btnRecycle ( $user );
+				}
+				;
 				echo "</center>";
 				echo "</td>";
 				echo "</tr>";
 			}
-			
-			function btnDelete($user){
+			function btnDelete($user) {
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='delete' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			
-			function btnEdit($user){
+			function btnEdit($user) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#editUser' title='Benutzer \"" . $user->user_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			
-			function btnLockUser($user){
+			function btnLockUser($user) {
 				return "<a class='btn btn-warning' data-toggle='modal' data-target='#lockUser' title='Benutzer \"" . $user->user_name . "\" sperren' aria-label='lock' style='margin-right:1rem' onclick='whichUserLock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-ban fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			
-			function btnUnlockUser($user){
+			function btnUnlockUser($user) {
 				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUserUnlock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			
-			function btnRecycle($user){
+			function btnRecycle($user) {
 				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycle' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
@@ -157,7 +156,10 @@
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
-		        <form action="<?php echo base_url();?>admin/deleteUser/" method="post">
+		        <form action="<?php
+										
+										echo base_url ();
+										?>admin/deleteUser/" method="post">
 			        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
@@ -183,7 +185,10 @@
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
-		        <form action="<?php echo base_url();?>admin/lockUser/" method="post">
+		        <form action="<?php
+										
+										echo base_url ();
+										?>admin/lockUser/" method="post">
 			        <input id="userLock_hidden_field" type="hidden" name="userLock_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer sperren</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
@@ -211,7 +216,10 @@
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
-		        <form action="<?php echo base_url();?>admin/unlockUser/" method="post">
+		        <form action="<?php
+										
+										echo base_url ();
+										?>admin/unlockUser/" method="post">
 			        <input id="userUnlock_hidden_field" type="hidden" name="userUnlock_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer entsperren</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
@@ -387,4 +395,7 @@
     window.addEventListener('load', setPager, false);
     window.addEventListener('load', pagination(1), false);
 </script>
-<script src="<?php echo base_url();?>js/sorttable.js"></script>
+<script src="<?php
+
+echo base_url ();
+?>js/sorttable.js"></script>
