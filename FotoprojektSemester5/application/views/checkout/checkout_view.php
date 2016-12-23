@@ -12,6 +12,11 @@
 			<img src="http://placehold.it/100x100" alt="..."
 				class="img-responsive" />
 		</div>
+		
+		<?php
+		// foreach ( $shoppingcartpositions as $position ) {
+		// }
+		?>
 		<div class="col-sm-5 col-xs-6">
 			<ul style="list-style-type: none">
 				<li><h6>Bild 1</h6></li>
