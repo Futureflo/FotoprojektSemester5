@@ -1,6 +1,7 @@
  <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading"> <?php  echo 'Produkt: ' . $product->prod_name ?></h1>	
+		<h1 class="jumbotron-heading"> <?php
+		echo 'Produkt: ' . $product->prod_name?></h1>	
 	</div>
 </section>
 
@@ -17,15 +18,16 @@
 		<tbody>
 
 
-			<?php  
-			foreach ($product->product_variants  as $product_variant) {
+			<?php
+			
+			foreach ( $product->product_variants as $product_variant ) {
 				echo "<tr class='searchable'>";
-					echo "<td>" . $product_variant->prty_description. "</td>";
-					echo "<td>" . $product_variant->price->prpt_price. "</td>";
-					echo "<td>" . $product_variant->prva_price_specific. "</td>";
+				echo "<td>" . $product_variant->prty_description . "</td>";
+				echo "<td>" . $product_variant->price->prpt_price . "</td>";
+				echo "<td>" . $product_variant->prva_price_specific . "</td>";
 				echo "<tr>";
 			}
-			 ?>
+			?>
  
 
 				
