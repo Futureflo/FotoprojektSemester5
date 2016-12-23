@@ -22,11 +22,11 @@
     <div class="row">
     <div class="col-sm-3">
       <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        <input type="radio" class="form-check-input" name="optionsRadios" name="optionsRadios1" value="option1" checked>
         Frau
       </label>
     <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+        <input type="radio" class="form-check-input" name="optionsRadios" name="optionsRadios2" value="option2">
         Herr
       </label>
       </div>
@@ -35,95 +35,100 @@
     </fieldset>
  </div>
  <div class="row">
-    <div class="col-sm-11">
-    <input type="text" class="form-control" id="vorname" placeholder="Vorname">
+    <div class="col-sm-12">
+    <input type="text" class="form-control" name="vorname" placeholder="Vorname">
     </div>
  </div>
  <br>
   <div class="row">
-    <div class="col-sm-11">
-    <input type="text" class="form-control" id="nachname" placeholder="Nachname">
+    <div class="col-sm-12">
+    <input type="text" class="form-control" name="nachname" placeholder="Nachname">
     </div>
  </div>
  <br>
   <div class="row">
-    <div class="col-sm-11">
+    <div class="col-sm-12">
     <div class="form-group">
-    <select class="form-control" id="land">
+    <select class="form-control" name="land">
       <option>Deutschland</option>
     </select>
   </div>
     </div>
  </div>
   <div class="row">
-    <div class="col-sm-2">
-    <input type="text" class="form-control" id="plz" placeholder="PLZ">
+    <div class="col-sm-3">
+    <input type="text" class="form-control" name="plz" placeholder="PLZ">
     </div>
     <div class="col-sm-9">
-    <input type="text" class="form-control" id="ort" placeholder="Ort">
+    <input type="text" class="form-control" name="ort" placeholder="Ort">
     </div>
  </div>
  <br>
    <div class="row">
     <div class="col-sm-9 col-xs-9">
-    <input type="text" class="form-control" id="str" placeholder="Straße">
+    <input type="text" class="form-control" name="str" placeholder="Straße">
     </div>
-    <div class="col-sm-2 col-xs-2">
-    <input type="text" class="form-control" id="hausnr" placeholder="Hausnr">
+    <div class="col-sm-3 col-xs-3">
+    <input type="text" class="form-control" name="hausnr" placeholder="Hausnr">
     </div>
  </div>
  <br>
     <div class="row">
-    <div class="col-sm-11">
-    	<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php echo set_value('even_date'); ?>"/>  -->
-		<input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date"/>
-	    <span class="text-danger"><?php echo form_error('even_date'); ?></span>
+    <div class="col-sm-12">
+    	<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php
+					echo set_value ( 'even_date' );
+					?>"/>  -->
+		<input type="date" class="form-control input-sm chat-input" placeholder="Geburtstag" name="even_date"/>
+	    <span class="text-danger"><?php
+					
+					echo form_error ( 'even_date' );
+					?></span>
  </div>
  </div> 
  <br>
   <div class="row">
-    <div class="col-sm-11">
-    <input type="email" class="form-control" id="email" placeholder="E-Mail">
+    <div class="col-sm-12">
+    <input type="email" class="form-control" name="email" placeholder="E-Mail">
     </div>
  </div>
  <br>
    <div class="row">
-    <div class="col-sm-11">
-    <input type="email" class="form-control" id="emailwdh" placeholder="E-Mail wiederholen">
+    <div class="col-sm-12">
+    <input type="email" class="form-control" name="emailwdh" placeholder="E-Mail wiederholen">
     </div>
     </div>
 <br>
   <div class="row">
-    <div class="col-sm-11">
-    <input class="form-control" type="password" id="pw" placeholder="Passwort">
+    <div class="col-sm-12">
+    <input class="form-control" type="password" name="pw" placeholder="Passwort">
     </div>
  </div>
  <br>
    <div class="row">
-    <div class="col-sm-11">
-    <input class="form-control" type="password" id="pwwdh" placeholder="Passwort wiederholen">
+    <div class="col-sm-12">
+    <input class="form-control" type="password" name="pwwdh" placeholder="Passwort wiederholen">
     </div>
     </div> 
 <div id="signupfotograf" style="display:none">
    <div class="row">
-    <div class="col-sm-11">
-    <input type="text" class="form-control" id="kontoinhaber" placeholder="Kontoinhaber">
+    <div class="col-sm-12">
+    <input type="text" class="form-control" name="kontoinhaber" placeholder="Kontoinhaber">
     </div>
     </div>
      <div class="row">
-    <div class="col-sm-11">
-    <input type="text" class="form-control" id="iban" placeholder="IBAN">
+    <div class="col-sm-12">
+    <input type="text" class="form-control" name="iban" placeholder="IBAN">
     </div>
     </div>
      <div class="row">
-    <div class="col-sm-11">
-    <input type="text" class="form-control" id="bic" placeholder="BIC">
+    <div class="col-sm-12">
+    <input type="text" class="form-control" name="bic" placeholder="BIC">
     </div>
     </div>
 </div>        
 <br>
 <div class="row">
-<div class="col-sm-11">
+<div class="col-sm-12">
 <div class="form-check">
     <label class="form-check-label">
       <input type="checkbox" class="form-check-input">
@@ -133,7 +138,7 @@
 </div>
 </div>
 <div class="row">
-<div class="col-sm-11">
+<div class="col-sm-12">
 <div class="form-check">
     <label class="form-check-label">
       <input type="checkbox" class="form-check-input">
@@ -143,7 +148,7 @@
 </div>
 </div> 
 <div class="row">
-<div class="col-sm-11">
+<div class="col-sm-12">
 <div class="form-check">
     <label class="form-check-label">
       <input type="checkbox" class="form-check-input">
@@ -153,7 +158,7 @@
 </div>
 </div>
 <div class="row">
-<div class="col-sm-5">
+<div class="col-sm-4">
 </div>
 <div class="col-sm-6">
 <button name="submit" type="submit" class="btn btn-primary btn-md">Registrieren</button>
@@ -168,9 +173,9 @@
 function fotografeinblenden()
 {
 	if (email === ''){
-        document.getElementById("signupfotograf").style.display = "block";
+        document.getElementByname("signupfotograf").style.display = "block";
     } else {
-        document.getElementById("signupfotograf").style.display = "none";
+        document.getElementByname("signupfotograf").style.display = "none";
     }
 }
 
