@@ -1,64 +1,78 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
-include_once (dirname(__FILE__) . "/ProductType.php");
-include_once (dirname(__FILE__) . "/PriceProfile.php");
-include_once (dirname(__FILE__) . "/User.php");
+include_once (dirname ( __FILE__ ) . "/ProductType.php");
+include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
+include_once (dirname ( __FILE__ ) . "/User.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model('User_model');
+		$this->load->model ( 'User_model' );
+		$data ['UsersViewHeader'] = "Alle Benutzer";
 	}
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
-	
 	public function users() {
-		$data ['users'] = $this->User_model->getAllUsers();		
+		$data ['users'] = $this->User_model->getAllUsers ();
+		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function archivedUsers() {						
-		$data ['users'] = $this->User_model->get_AllArchivedUsers();
+	public function archivedUsers() {
+		$data ['users'] = $this->User_model->get_AllArchivedUsers ();
+		$data ['UsersViewHeader'] = "Archivierte Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	
 	public function events() {
 		$this->load->model ( 'Event_model' );
-		$data ['events'] = $this->Event_model->getAllEvents();
-		$this->load->template ( 'admin/events_view', $data);
+		$data ['events'] = $this->Event_model->getAllEvents ();
+		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
 		$this->load->template ( 'admin/printers_view' );
 	}
-
 	public function product_types() {
-		$data ['product_types'] = ProductType::getAllProductType();
+		$data ['product_types'] = ProductType::getAllProductType ();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
-	
 	public function price_profiles() {
-		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles();
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/price_profile_view', $data );
 	}
-	
-	public function deleteUser(){
+	public function deleteUser() {
 		$user_id = $this->input->post ( "userDelete_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,UserStatus::deleted);
-		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
+		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$data ['UsersViewHeader'] = "Alle Benutzer";
+		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gelöscht";
+		$this->User_model->update_userStatusByID ( $user_id, UserStatus::deleted );
+		$data ['users'] = $this->User_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function lockUser(){
+	public function lockUser() {
 		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,UserStatus::lockedByAdmin);
-		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
+		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$data ['UsersViewHeader'] = "Alle Benutzer";
+		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gesperrt";
+		$this->User_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
+		$data ['users'] = $this->User_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function unlockUser(){
+	public function unlockUser() {
 		$user_id = $this->input->post ( "userUnlock_hidden_field" );
-		$this->User_model->update_userStatusByID($user_id,UserStatus::activated);
-		$data = array('user_id'=> $user_id, 'users'=> $this->User_model->getAllUsers());
+		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$data ['UsersViewHeader'] = "Alle Benutzer";
+		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde wieder entsperrt";
+		$this->User_model->update_userStatusByID ( $user_id, UserStatus::activated );
+		$data ['users'] = $this->User_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
-
-	
+	public function recycleUser() {
+		$user_id = $this->input->post ( "userRecycle_hidden_field" );
+		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$data ['UsersViewHeader'] = "Archivierte Benutzer";
+		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde wieder hergestellt";
+		$this->User_model->update_userStatusByID ( $user_id, UserStatus::activated );
+		$data ['users'] = $this->User_model->get_AllArchivedUsers ();
+		$this->load->template ( 'admin/users_view', $data );
+	}
 }
 ?>
