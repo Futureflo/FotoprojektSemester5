@@ -100,9 +100,9 @@
       				<div class="panel-group" id="accordion">
 	      				<div class="col-md-6">
 	      				
-			      			<button class="btn" data-toggle="collapse" data-target="#digital" data-parent="#accordion">Digital</button>
+			      			<button class="btn"  data-toggle="collapse" data-target="#digital" data-parent="#accordion">Digital</button>
 							
-							<div id="digital" class="collapse">
+							<div id="digital" class="collapse" style="display:block">
 								<br />
 								<div class="form-group">
 								    <select class="form-control" id="größeSelect">
@@ -132,7 +132,7 @@
 			      			<button class="btn" data-toggle="collapse" data-target="#analog" data-parent="#accordion">Analog</button>
 			      			
 			      			
-			      			<div id="analog" class="collapse">
+			      			<div id="analog" class="collapse" style="display:none">
 				      			<br />
 				      			<div class="form-group">
 								    <select class="form-control" id="formatSelect">
