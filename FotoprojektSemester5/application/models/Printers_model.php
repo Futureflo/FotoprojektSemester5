@@ -36,7 +36,7 @@ class Printers_model extends CI_Model {
 		foreach ( $GLOBALS ["allPrinters"] as $Printer ) {
 			$printerPrices = array ();
 			foreach ( $GLOBALS ["allPrinterPrices"] as $PrinterPrice ) {
-				if ($Printer->prsu_id == $PrinterPrice->prsp_prty_id) {
+				if ($Printer->prsu_id == $PrinterPrice->prsp_prsu_id) {
 					array_push ( $printerPrices, $PrinterPrice );
 				}
 			}
@@ -49,6 +49,29 @@ class Printers_model extends CI_Model {
 		return $this->getPrintersForUser ( 0 );
 	}
 	Public function getPrintersForUser($userid, $withSystemPrinter = FALSE) {
+		$Printers = array ();
+		
+		if (! isset ( $GLOBALS ["allPrinters"] ))
+			$GLOBALS ["allPrinters"] = $this->getAllPrinters ();
+		
+		foreach ( $GLOBALS ["allPrinters"] as $Printer ) {
+			if ($Printer->prsu_user_id == $userid || $Printer->prsu_user_id == 0) {
+				array_push ( $Printers, $Printer );
+			}
+		}
+		return $Printers;
+	}
+	public function getPrinterPriceByProducttype($prsu_id, $prty_id) {
+		$Price = array ();
+		
+		if (! isset ( $GLOBALS ["allPrinterPrices"] )) {
+			if (! isset ( $GLOBALS ["allPrinters"] ))
+				$GLOBALS ["allPrinters"] = $this->getAllPrinters ();
+		}
+		foreach ( $GLOBALS ["allPrinterPrices"] as $PrinterPrice ) {
+			if ($PrinterPrice->prsp_prsu_id == $prsu_id && $PrinterPrice->prsp_prty_id == $prty_id)
+				return $PrinterPrice;
+		}
 	}
 }
 ?>
