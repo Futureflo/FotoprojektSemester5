@@ -37,7 +37,12 @@ class User extends CI_Controller {
 		$data = array (
 				'login' => '',
 				'user_name' => '',
-				'user_id' => '' 
+				'user_id' => '',
+				'user_email' => '',
+				'user_firstname' => '',
+				'user_status' => '',
+				'user_role' => ''
+				
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();
