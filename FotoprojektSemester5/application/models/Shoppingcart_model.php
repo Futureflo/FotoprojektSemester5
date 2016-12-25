@@ -11,7 +11,7 @@ class Shoppingcart_model extends CI_Model {
 		$this->db->where ( 'shca_user_id', $user_id );
 		$query = $this->db->get ( 'shopping_cart' );
 		$return = $query->result ();
-		return $return;
+		return $return [0];
 	}
 	public function getShoppingCartPositions($shca_id) {
 		// initialize return variable
