@@ -82,8 +82,15 @@
 		</div>
 	</div>
 	<div class="row">
-		<a href="#" class="btn btn-success btn-block">Zur Kasse <i
-			class="fa fa-angle-right"></i></a>
+		
+		<?php
+		echo form_open ( "Checkout/overview", '' );
+		?>
+<button name="submit" type="submit"
+			class="btn btn-success btn-block btn-md">Zur Kasse</button>
+			<?php
+			echo form_close ();
+			?>
 	</div>
 
 
