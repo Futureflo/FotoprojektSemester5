@@ -9,7 +9,8 @@
 <body>
 	<section class="jumbotron text-xs-center">
 		<div class="container">
-			<h1 class="jumbotron-heading"><?php echo 'Meine Bestellungen'?> </h1>
+			<h1 class="jumbotron-heading"><?php
+			echo 'Meine Bestellungen'?> </h1>
 		</div>
 	</section>
 	
@@ -20,46 +21,56 @@ https://jsfiddle.net/KyleMit/DSGxz/
 <div class="panel-group" id="accordion">
   
   <?php
-			foreach($orders as $order)
-			{
-				echo "<div class=\"panel panel-default\" id=\panel". $order->orde_id .  ">"; 
-					echo "<div class=\"panel-heading\">";
-						echo "<h4 class= \"panel-title\">";
-								echo "<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" . $order->orde_id . "\">";
-								echo "Bestellnummer: " . $order->orde_no . " | Datum: " .  $order->orde_date .  " | Summe: " . $order->orde_sum . "€";
-								echo "</a>";
-						echo "</h4>";			
-					echo "</div>";
-					echo "<div id=\"collapse" . $order->orde_id . "\" class=\"panel-collapse collapse\">";
-						echo "<div class=\"panel-body\">";
-											
-						foreach($order->order_position as $op)
-						{
-							echo "<table class=\"table table-striped\">";
-							echo "<tr>". "<th>Event:</th>". "<th>" . $op->even_name . "</th></tr>";
-							echo "<tr>". "<th>Name:</th>". "<th>" . $op->prod_name . "</th></tr>";
-							echo "<tr>". "<th>Menge:</th>". "<th>" . $op->orpo_amount . "</th></tr>";
-							echo "<tr>". "<th>Preis:</th>". "<th>" . $op->orpo_price . "€</th></tr>";
-							echo "<tr>". "<th>Format:</th>". "<th>" . $op->prty_description . "</th></tr>";
-							
-							if ($op->prty_type == ProductPrintType::download)
-							{
-								echo "<tr>". "<th>Bestelltyp:</th>". "<th>" . 'Download' . "</th></tr>";
-							}
-							else echo "<tr>". "<th>Bestelltyp:</th>". "<th>" . 'Druck' . "</th></tr>";
-							
-							echo "</tr>";
-							echo "</table>";
-							echo "<p>";
-							
-							echo "_______________________________________________________________________________________________________<br>";
-	
-						}
-							
-						echo "</div>";
-					echo "</div>";
-    			echo "</div>";
-  			
+		foreach ( $orders as $order ) {
+			echo "<div class=\"panel panel-default\" id=\panel" . $order->orde_id . ">";
+			echo "<div class=\"panel-heading\">";
+			echo "<h4 class= \"panel-title\">";
+			echo "<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" . $order->orde_id . "\">";
+			echo "Bestellnummer: " . $order->orde_no . " | Datum: " . $order->orde_date . " | Summe: " . $order->orde_sum . "€";
+			echo "</a>";
+			echo "</h4>";
+			echo "</div>";
+			echo "<div id=\"collapse" . $order->orde_id . "\" class=\"panel-collapse collapse\">";
+			echo "<div class=\"panel-body\">";
+			?>
+						<table class="table table-striped">
+						<thead>
+						<tr>
+						<th>Event</th>
+						<th>Name</th>
+						<th>Menge</th>
+						<th>Preis</th>
+						<th>Format</th>
+						<th>Bestelltyp</th>
+						
+						
+						</tr>
+						</thead>
+						<tbody>
+						
+						
+								<?php
+			foreach ( $order->order_position as $op ) {
+				echo "<tr>";
+				echo "<td>" . $op->even_name . "</td>";
+				echo "<td>" . $op->prod_name . "</td>";
+				echo "<td>" . $op->orpo_amount . "</td>";
+				echo "<td>" . $op->orpo_price . "€</td>";
+				echo "<td>" . $op->prty_description . "</td>";
+				
+				if ($op->prty_type == ProductPrintType::download) {
+					echo "<td>" . 'Download' . "</td>";
+				} else
+					echo "<td>" . 'Druck' . "</td>";
+				echo "</tr>";
 			}
-?>
+			?>
+			</tbody>
+			</table>
+			<?php
+			// echo "</div>";
+			echo "</div>";
+			echo "</div>";
+		}
+		?>
 </div>
