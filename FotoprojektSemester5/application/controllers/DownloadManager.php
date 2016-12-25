@@ -91,7 +91,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->helper('hash_helper');
 		
 		// Zielordner
-		$outZipFolder = "ImagesDownloadZips";
+		$outZipFolder = "ImagesDownloadZips"; // TODO: erstellen, wenn nicht existiert
 		
 		// Instanziiert Zip Archiv
 		$zipArchive = new ZipArchive();
@@ -113,10 +113,9 @@ class DownloadManager extends CI_Controller {
 		for ($i = 0; $i < count($productsArray); $i++) {
 			// name der hinzugefügten Datei wird ursprungs
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
-			$pathComplete = Product::buildFilePath($products[$i]);
-			echo $pathComplete ."; ";
-			$fileName = $pathComplete['filename'] .".". $pathComplete['extension'];
-			$zipArchive->addFile($pathComplete, $fileName);
+			$pathComplete = Product::buildFilePath($productsArray[$i]);
+			$path_parts = pathinfo($pathComplete);
+			$zipArchive->addFile("../". $pathComplete, $path_parts['basename']);
 			
 		}
 		// Zip Archiv schließen
@@ -145,7 +144,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->helper('hash_helper');
 		$products = $this->order_model->getProductInformationByOrderId(1);
 		$this->zipDir(1, 1, $products);
-// 		echo $pfade[0]->prod_filepath;
+	
 	}
 	
 }

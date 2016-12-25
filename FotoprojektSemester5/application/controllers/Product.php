@@ -4,6 +4,7 @@ include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
 include_once (dirname ( __FILE__ ) . "/Event.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
+	private static $event;
 	public function __construct() {
 		parent::__construct ();
 		$this->load->library ( 'session' );
@@ -49,15 +50,52 @@ class Product extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'product_model' );
 		$pv = $CI->product_model->getProductVariant ( $prod_id, $prty_id );
-		
-		// Preis aus Preisprofil besorgen
-		$event = Event::getSingleEventById ( $pv->prod_even_id );
-		$price = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $pv->prva_prty_id );
-		$pv->price = $price;
+		$pv->price = Product::getPrice ( $pv );
 		
 		return $pv;
 	}
-	function insert() {
+	public static function getPrintersProductPrice($prsu_id, $prty_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'printers_model' );
+		$PrinterPrice = $CI->printers_model->getPrinterPriceByProducttype ( $prsu_id, $prty_id );
+		return $PrinterPrice->prsp_price;
+	}
+	public static function getPrice($product_variant) {
+		// Basispreis aus Preisprofil
+		// event-Cache
+		if (isset ( $GLOBALS ["event"] ) == false) {
+			$event = Event::getSingleEventById ( $product_variant->prod_even_id );
+			$GLOBALS ["event"] = $event;
+		} else {
+			$event = $GLOBALS ["event"];
+		}
+		
+		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prva_prty_id );
+		$price_basic = $profile->prpt_price;
+		
+		// Preisaufschlag Fotograf
+		$prva_price_specific = $product_variant->prva_price_specific;
+		
+		// Preisaufschlag von Druckerei
+		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prva_prty_id );
+		
+		// Provision
+		$price_provision = 0;
+		
+		// Preis zusammensetzen
+		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier ) + floatval ( $price_provision );
+		
+		$price = array (
+				'price_basic' => $price_basic,
+				'price_specific' => $prva_price_specific,
+				'price_supplier' => $price_supplier,
+				'price_provision' => $price_provision,
+				'price_sum' => $price_sum 
+		);
+		
+		return $price;
+	}
+	public function insert() {
 		// $this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
 		
 		// Konstanten setzten

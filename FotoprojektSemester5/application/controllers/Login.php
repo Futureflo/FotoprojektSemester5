@@ -17,17 +17,18 @@ class Login extends CI_Controller
 		$password = $this->input->post ( "user_password" );
 		
 		// form validation
-		$this->form_validation->set_rules ( "user_email", "Email-ID", "trim|required" );
+		$this->form_validation->set_rules ( "user_email", "Email-ID", "trim|required|valid_email|callback_user_exists" );
 		$this->form_validation->set_rules ( "user_password", "Password", "trim|required" );
 		
-		$uresult = $this->user_model->get_user ( $email );
 		
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
-			
+			$this->session->set_flashdata ( 'msg', 'Falsche E-Mail-Adresse oder Passwort' );
 			redirect ( "start/" );
+			
 		} 
 		else {
+			$uresult = $this->user_model->get_user ( $email );
 			$status = $uresult [0]->user_status;
 			switch ($status) {
 				
@@ -66,7 +67,7 @@ class Login extends CI_Controller
 								'user_id' => $uresult [0]->user_id,
 								'user_email' => $uresult [0]->user_email,
 								'user_name' => $uresult [0]->user_name,
-								'user_name' => $uresult [0]->user_firstname,
+								'user_firstname' => $uresult [0]->user_firstname,
 								'user_status' => $uresult [0]->user_status,
 								'user_role' => $uresult [0]->user_role 
 						);

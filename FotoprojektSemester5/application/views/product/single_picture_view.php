@@ -12,7 +12,9 @@
 			<tr>
 				<th>Bezeichnung</th>
 				<th>Preis aus Preisprofil</th>
-				<th>Preis spez.</th>
+				<th>Preis spez (Aufschlag)</th>
+				<th>Preis Druckerei</th>
+				<th>Summe</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,8 +25,11 @@
 			foreach ( $product->product_variants as $product_variant ) {
 				echo "<tr class='searchable'>";
 				echo "<td>" . $product_variant->prty_description . "</td>";
-				echo "<td>" . $product_variant->price->prpt_price . "</td>";
-				echo "<td>" . $product_variant->prva_price_specific . "</td>";
+				echo "<td>" . $product_variant->price ['price_basic'];
+				echo "<td>" . $product_variant->price ['price_specific'] . "</td>";
+				echo "<td>" . $product_variant->price ['price_supplier'] . "</td>";
+				echo "<td>" . $product_variant->price ['price_sum'] . "</td>";
+				
 				echo "<tr>";
 			}
 			?>
