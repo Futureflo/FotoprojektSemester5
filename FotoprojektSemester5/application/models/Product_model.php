@@ -26,6 +26,7 @@ class Product_model extends CI_Model {
 		$this->db->join ( 'product', 'prod_id = prva_prod_id', 'INNER JOIN' );
 		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
 		$this->db->join ( 'print_supplier_price', 'prsp_prsu_id = even_prsu_id AND prsp_prty_id = prva_prty_id', 'INNER JOIN' );
+		$this->db->join ( 'price_product_type', 'prpt_prpr_id = even_prpr_id AND prpt_prty_id = prva_prty_id', 'INNER JOIN' );
 		$this->db->where ( 'prva_prod_id', $prod_id );
 		$query = $this->db->get ( "product_variant" );
 		return $query->result ();

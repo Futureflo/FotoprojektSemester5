@@ -1,7 +1,8 @@
- <section class="jumbotron text-xs-center">
+
+<section class="jumbotron text-xs-center">
 	<div class="container">
 		<h1 class="jumbotron-heading"> <?php
-		echo 'Produkt: ' . $product->prod_name?></h1>	
+		echo 'Produkt: ' . $product->prod_name?></h1>
 	</div>
 </section>
 
@@ -15,6 +16,7 @@
 				<th>Preis spez (Aufschlag)</th>
 				<th>Preis Druckerei</th>
 				<th>Summe</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,15 +31,23 @@
 				echo "<td>" . $product_variant->price ['price_specific'] . "</td>";
 				echo "<td>" . $product_variant->price ['price_supplier'] . "</td>";
 				echo "<td>" . $product_variant->price ['price_sum'] . "</td>";
+				echo "<td>";
+				btnorder ( $product_variant );
+				echo "</td>";
 				
 				echo "<tr>";
 			}
-			?>
- 
-
-				
+			function btnorder($product_variant) {
+				echo form_open ( "ShoppingCart/insert", '', array (
+						'scpo_prod_id' => $product_variant->prva_prod_id,
+						'scpo_prty_id' => $product_variant->prva_prty_id,
+						'scpo_amount' => 1 
+				) );
+				echo " <input type=\"submit\" name=\"Bestellen\" value=\"Bestellen\" class=\"btn btn-success\" />";
+				echo form_close ();
+			}
+			?>	
 		</tbody>
 	</table>
 </div>
-	
-	
+

@@ -13,7 +13,7 @@
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
 			
-			$price = $shoppingcart_position->product_variant->price->prpt_price;
+			$price = $shoppingcart_position->product_variant->price ['price_sum'];
 			$amount = $shoppingcart_position->scpo_amount;
 			$prodname = $shoppingcart_position->product_variant->prod_name;
 			$size = $shoppingcart_position->product_variant->prty_description;
@@ -32,7 +32,7 @@
 			echo '<li>Digital/Analog</li>';
 			echo '<li><h6>';
 			
-			echo '<div class="col-sm-1"><h5>' . $price . '<i id="aktuellerpreis">1.99</i>€</h5></div>';
+			echo '<div class="col-sm-1"><h5><i id="aktuellerpreis">' . $price . '</i>€</h5></div>';
 		}
 		?>
 		</div>
