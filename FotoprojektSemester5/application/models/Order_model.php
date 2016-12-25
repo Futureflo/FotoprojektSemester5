@@ -58,7 +58,8 @@ class Order_model extends CI_Model {
 	
 	// insert order
 	function insert_order($data) {
-		return $this->db->insert ( 'order', $data );
+		$this->db->insert ( 'order', $data );
+		return $this->db->insert_id ();
 	}
 	
 	// update order
@@ -74,13 +75,26 @@ class Order_model extends CI_Model {
 		) );
 	}
 	
-	// get MAX-ID
-	function get_max_id() {
-		$maxid = 0;
-		$row = $this->db->query ( 'SELECT MAX(orde_id) AS `maxid` FROM order' )->row ();
-		if ($row)
-			$maxid = $row->maxid;
-		return $maxid;
+	// insert order_position
+	function insert_order_position($order_position) {
+		return $this->db->insert ( 'order_position', $order_position );
+	}
+	
+	// update order_positon
+	function update_order_position($order_position) {
+		$this->db->where ( 'orpo_orde_id', $order_position->orpo_orde_id );
+		$this->db->where ( 'orpo_prod_id', $order_position->orpo_prod_id );
+		$this->db->where ( 'orpo_prty_id', $order_position->orpo_prty_id );
+		$this->db->update ( 'order_position', $order_position );
+	}
+	
+	// delete order_positon
+	function delete_order_position($order_position) {
+		return $this->db->delete ( 'order_position', array (
+				'orpo_orde_id' => $order_position->orpo_orde_id,
+				'orpo_prod_id' => $order_position->orpo_prod_id,
+				'orpo_prty_id' => $order_position->orpo_prty_id 
+		) );
 	}
 }
 ?>
