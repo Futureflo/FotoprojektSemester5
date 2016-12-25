@@ -1,5 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname ( __FILE__ ) . "/Product.php");
 class ShoppingCart extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -57,5 +58,24 @@ class ShoppingCart extends CI_Controller {
 		
 		// Testseite wieder aufrufen
 		redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
+	}
+	public static function getSingleShoppingCartById($shca_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'shoppingcart_model' );
+		
+		$user_id = $CI->session->userdata ( 'user_id' );
+		$cart = $CI->shoppingcart_model->getShoppingCartById ( $shca_id );
+		
+		$shca_id = $cart->shca_id;
+		$shoppingcart_positions = $CI->shoppingcart_model->getShoppingCartPositions ( $shca_id );
+		
+		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
+			$prod_id = $shoppingcart_position->scpo_prod_id;
+			$prty_id = $shoppingcart_position->scpo_prty_id;
+			
+			$shoppingcart_position->product_variant = Product::getProductVariant ( $prod_id, $prty_id );
+		}
+		$cart->shoppingcart_positions = $shoppingcart_positions;
+		return $cart;
 	}
 }
