@@ -113,7 +113,7 @@ include_once (dirname(__DIR__).  "/controllers/User.php");
       	$this->db->where ( $key, $value );
       	$query = $this->db->get ( 'user' );
       	 
-      	if ($query->num_rows () > 0) {
+      	if ($query->num_rows () != 0) {
       		//value exists already
       		return TRUE;
       	}

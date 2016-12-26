@@ -134,7 +134,7 @@ public    function confirmAccount($user_confirmcode){
     			do {
     				$restoreCode = generate_salt(10);
     				$CodeExists = $this->user_model->exists('user_passwordrestore', $restoreCode);
-    			} while ($CodeExists == false);
+    			} while ($CodeExists == true);
     			  			
     			$this->user_model->update_userRestoreCode($user_email,$restoreCode);
     			$this->sendPassowrdForgotEmail($user_email,$restoreCode);
