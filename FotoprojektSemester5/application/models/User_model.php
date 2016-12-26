@@ -108,6 +108,19 @@ include_once (dirname(__DIR__).  "/controllers/User.php");
          unset($usrArray["user_id"]);
          return $this->db->update('user', $usrArray);
       }
+      
+      public function exists($key, $value){
+      	$this->db->where ( $key, $value );
+      	$query = $this->db->get ( 'user' );
+      	 
+      	if ($query->num_rows () > 0) {
+      		//value exists already
+      		return TRUE;
+      	}
+      	else{
+      		return FALSE;
+      	}
+      }
 
       public function mail_exists($field_value){
          $this->db->where ( 'user_email', $field_value );

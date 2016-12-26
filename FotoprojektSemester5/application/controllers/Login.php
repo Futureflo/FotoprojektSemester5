@@ -130,7 +130,12 @@ public    function confirmAccount($user_confirmcode){
     			redirect ( "login/forgotPassword" );
     		}
     		else{
-    			$restoreCode = generate_salt(10);    			
+    			//check if restoreCode allready exists
+    			do {
+    				$restoreCode = generate_salt(10);
+    				$CodeExists = $this->user_model->exists('user_passwordrestore', $restoreCode);
+    			} while ($CodeExists == false);
+    			  			
     			$this->user_model->update_userRestoreCode($user_email,$restoreCode);
     			$this->sendPassowrdForgotEmail($user_email,$restoreCode);
     			$this->load->template('user/success_password_forgot_view');
@@ -204,9 +209,8 @@ private function changePassword($user_id,$newPassword){
     	$algo = 'sha256';
     	$newSalt = generate_salt(10);
     	$newHashpw = generate_hash($newSalt,$newPassword, $algo);
-    	echo "salt:".$newSalt."   hesh:".$newHashpw;
     	$this->user_model->update_userPassword($user_id, $newHashpw,$newSalt,UserStatus::activated);
-    	
+    	$this->load->view('user/success_password_forgot_view');
     }
     
 }
