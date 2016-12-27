@@ -3,7 +3,12 @@
 	<div class="container">
 		<h1 class="jumbotron-heading"> <?php
 		echo 'Produkt: ' . $product->prod_name?></h1>
+		
 	</div>
+	<?php
+	echo " <img data-src='../../.." . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style= display: block;\"
+					src=../../.." . $product->prod_filepath . ">";
+	?>;
 </section>
 
 

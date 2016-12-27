@@ -51,7 +51,7 @@ class Event extends CI_Controller {
 		$CI->load->model ( 'event_model' );
 		$products = $CI->event_model->getProductsFromEvent ( $event->even_id );
 		foreach ( $products as $product => $p ) {
-			$products [$product] = Product::getProduct ( $p->prod_id );
+			$products [$product] = Product::getProduct ( $p->prod_id, true );
 		}
 		return $products;
 	}

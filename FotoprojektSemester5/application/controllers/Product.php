@@ -17,7 +17,7 @@ class Product extends CI_Controller {
 		$this->load->template ( 'errors/404' );
 	}
 	public function showSinglePicture($prod_id) {
-		$data ['product'] = Product::getProduct ( $prod_id, true );
+		$data ['product'] = Product::getProduct ( $prod_id );
 		$this->load->template ( 'product/single_picture_view', $data );
 	}
 	public static function buildFilePath($p, $thumb = false) {
@@ -40,7 +40,7 @@ class Product extends CI_Controller {
 		$CI->load->model ( 'product_model' );
 		$product = $CI->product_model->getSingleProduct ( $prod_id );
 		$product [0]->product_variants = Product::getProductVariants ( $prod_id );
-		$product [0]->prod_filepath = Product::buildFilePath ( $product [0], true );
+		$product [0]->prod_filepath = Product::buildFilePath ( $product [0], $thumb );
 		return $product [0];
 	}
 	public static function getProductVariants($prod_id) {
@@ -166,16 +166,11 @@ class Product extends CI_Controller {
 				// Originalbild hochladen
 				$this->upload ( '..' . Product::base_path, $file );
 				
-				print_r ( $file );
-				echo "<br>";
-				
 				$newPath = $this->upload ( '.' . Product::base_path, $file );
+				// // Wasserzeichen hochladen erzeugen
 				Watermarkdemo::watermark ( $newPath );
 				Watermarkdemo::thumb ( $newPath );
-				// // Wasserzeichen hochladen erzeugen
-				// $newPath = $this->upload ( '.' . Product::base_path, $file );
-				echo "<br>";
-				echo $newPath;
+				
 				//
 			} else {
 				// error
@@ -184,8 +179,7 @@ class Product extends CI_Controller {
 		}
 		
 		// Eventseite neu laden
-		
-		// redirect ( 'event/' . $event [0]->even_url );
+		redirect ( 'event/' . $event [0]->even_url );
 	}
 	static function get_name($filename) {
 		$name = "";
@@ -218,8 +212,6 @@ class Product extends CI_Controller {
 		$config ['allowed_types'] = 'gif|jpg|png';
 		$this->load->library ( 'upload', $config );
 		$this->upload->initialize ( $config );
-		echo "<br>";
-		print_r ( $_FILES );
 		// Den Kontainer für den Upload füllen
 		$_FILES ['dateiupload'] ['name'] = $file ['name'];
 		$_FILES ['dateiupload'] ['type'] = $file ['type'];
@@ -230,12 +222,9 @@ class Product extends CI_Controller {
 		// Jetzt der Upload einer einzelner Datei
 		if (! $this->upload->do_upload ( 'dateiupload' )) {
 			$this->session->set_flashdata ( 'msg', $this->upload->display_errors () );
-			echo $this->upload->display_errors ();
 		} else {
 			$finfo = $this->upload->data ();
 			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
-			echo "<br>";
-			echo $finfo ['file_name'] . ' hochgeladen!';
 		}
 		
 		return $upload_path . $file ['name'];
