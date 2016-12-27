@@ -96,7 +96,7 @@ class Signup extends CI_Controller
 		}
 	}
 	
-	function uploadTradeLicence()
+	function uploadTradeLicense()
 	{
 		// set path to store uploaded files
 		$config['upload_path'] = './uploads/';

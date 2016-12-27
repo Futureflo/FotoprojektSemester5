@@ -1,5 +1,8 @@
 <section class="jumbotron text-xs-left">
 	<div class="container">
+					<?php echo form_open_multipart('signup/');?>
+								<div id="fehler_span" class="text-danger"><?php  echo $this->session->flashdata('msgReg'); ?></div>
+	
 		<div class="row">
 			<ul class="nav nav-pills" role="tablist">
 				<li class="nav-item"><a class="nav-link active" href="#kunde"
@@ -132,7 +135,8 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-insert_product">
-										<input type="file" multiple name="dateiupload[]" /> <input
+									<?php echo form_open_multipart('signup/uploadTradeLicense');?>
+										<input type="file" name="dateiupload" /> <input
 											type="submit" name="btn[upload]" class="btn btn-success"
 											value="Gewerbeschein absenden" />
 									</div>
