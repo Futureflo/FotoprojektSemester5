@@ -147,7 +147,7 @@ public    function confirmAccount($user_confirmcode){
     
     	$this->load->library('email');
     
-    	$this->email->from('noReply@snap-gallery.de', 'FPS5');
+    	$this->email->from('noReply@snap-gallery.de', 'Snap Gallery');
     	$this->email->to($user_email);
     	$this->email->subject('Snap-Gallery.de Password zurücksetzen');
     	$this->email->message('Sie können unter dem Folgenden Link ihr neues Password eingeben '. base_url()."login/restorePassword/".$PassowrdForgotCode);
