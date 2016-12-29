@@ -31,12 +31,10 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/printers_view' );
 	}
 	public function product_types() {
-		$data ['product_types'] = ProductType::getAllProductType ();
-		$this->load->template ( 'admin/product_type_view', $data );
+		redirect ( 'ProductType/product_types' );
 	}
 	public function price_profiles() {
-		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
-		$this->load->template ( 'admin/price_profile_view', $data );
+		redirect ( 'PriceProfile/price_profiles' );
 	}
 	public function deleteUser() {
 		$user_id = $this->input->post ( "userDelete_hidden_field" );
