@@ -80,7 +80,6 @@
 					Wir behalten uns das Eigentum an der Ware bis zur vollständigen Bezahlung des Kaufpreises vor.<br /><br /> 
 					</p>
 					<p>
-					****************************************************************************************************<br />
 					<strong>§6 Widerrufsrecht des Kunden als Verbraucher<br />Widerrufsrecht für Verbraucher</strong><br /><br />
 					Verbrauchern steht ein Widerrufsrecht nachfolgender Maßgabe zu, wobei Verbraucher jede natürliche Person ist, die ein 
 					Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen 
@@ -113,8 +112,7 @@
 					Betrag zu zahlen, der dem Anteil der bis zu dem Zeitpunkt, zu dem Sie uns von der Ausübung des Widerrufsrechts hinsichtlich 
 					dieses Vertrags unterrichten, bereits erbrachten Dienstleistungen im Vergleich zum Gesamtumfang der im Vertrag vorgesehenen 
 					Dienstleistungen entspricht.<br /><br /> 
-					<strong>Ende der Widerrufsbelehrung</strong><br />  
-					****************************************************************************************************
+					<strong>Ende der Widerrufsbelehrung</strong>
 					<br /><br />
 					</p>
 					<p>
@@ -152,7 +150,6 @@
 					Als Vertragssprache steht ausschließlich Deutsch zur Verfügung.<br /><br />					
 					</p>
 					<p>
-					****************************************************************************************************<br />
 					<strong>§10 Kundendienst</strong><br /><br />					
 					<strong>Unser Kundendienst für Fragen, Reklamationen und Beanstandungen steht Ihnen werktags von 9:00 
 					Uhr bis 17:30 Uhr unter<br /><br />
@@ -160,8 +157,7 @@
 					Telefon: 05123 45678911<br />
 					Telefax: 05123 45678912<br />
 					E-Mail: service@fps5.com<br />
-					zur Verfügung.</strong><br />
-					****************************************************************************************************
+					zur Verfügung.</strong>
 					</p>
 				</div>
 			</div>
