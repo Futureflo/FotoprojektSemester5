@@ -54,9 +54,6 @@ class Watermarkdemo extends \CI_Controller {
 		$config ['wm_font_color'] = '#FF0000';
 		$config ['wm_vrt_alignment'] = 'middle';
 		$config ['wm_hor_alignment'] = 'left';
-		$config ['wm_padding'] = '100';
-		$config ['wm_opacity'] = 20;
-		$config ['quality'] = '1';
 		
 		$CI->image_lib->initialize ( $config );
 		$CI->image_lib->watermark ();

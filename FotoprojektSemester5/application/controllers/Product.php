@@ -167,9 +167,10 @@ class Product extends CI_Controller {
 				$this->upload ( '..' . Product::base_path, $file );
 				
 				$newPath = $this->upload ( '.' . Product::base_path, $file );
+				
 				// // Wasserzeichen hochladen erzeugen
 				Watermarkdemo::watermark ( $newPath );
-				Watermarkdemo::thumb ( $newPath );
+				Watermarkdemo::thumb ($newPath);
 				
 				//
 			} else {
