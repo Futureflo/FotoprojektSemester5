@@ -102,6 +102,41 @@
 	</div>
 </div>
 
+<button type="button" id="proof-btn" class="btn btn-success btn-md" data-toggle="modal" data-target="#proofModal" style="display: none"></button>
+
+<!-- Modal -->
+<div id="proofModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+
+				<input type="text" class="form-control input-sm chat-input" placeholder="Bestätigungscode" id="event_code" name="event_code" />
+
+			</div>
+
+
+			<div class="modal-footer text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<a class="btn btn-success btn-md btn-block" role="button">Absenden</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script type="text/javascript">  
 var old = '';
@@ -126,7 +161,7 @@ function searchEvent(ev){
     		  type: "POST",
     		  url: "<?php
 								
-echo site_url ();
+								echo site_url ();
 								?>/Start/search/"+ev,
     		  dataType: 'html',
     		  success:function(data){
@@ -163,8 +198,21 @@ echo site_url ();
 function noresults(searchtext){
     document.getElementById('noresults').innerHTML = "Es konnten keine Events mit dem Namen " + searchtext +" gefunden werden!";
 }    
+   
+function proofEvent(i){
+    var ai = i.parentNode.parentNode;
+    
+    ai.setAttribute("href", "#"+i.getAttribute("id"));
+    
+    var a = ai.parentNode.firstChild.firstChild.firstChild;
+    
+    a.setAttribute("href", "#"+i.getAttribute("id"));
+    
+    document.getElementById('proof-btn').click();
+}    
     
 function createPic(prodfile, prodname, status){
+    var count = 0;
     
     if(status == 2){
     	var i = document.createElement("I");
@@ -172,11 +220,14 @@ function createPic(prodfile, prodname, status){
 		i.classList.add("fa");
         i.classList.add("fa-lock");
         //i.classList.add("fa-10x");
-        i.style.fontSize = "17rem";
+        i.style.fontSize = "17.5rem";
         i.style.display = "inline-block";
         i.style.width = "100%";
         i.style.textAlign = "center";
         i.setAttribute("aria-hidden","true");
+        i.setAttribute("id", "place"+count);
+        i.onclick = function(){proofEvent(this);};
+        count++;
         
         div.appendChild(i);
         
