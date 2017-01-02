@@ -47,13 +47,17 @@ class Watermarkdemo extends \CI_Controller {
 		$CI->load->library ( 'image_lib' );
 		
 		$config ['source_image'] = $filepath;
-		$config ['wm_text'] = 'Copyright 2016 - FPS5';
-		$config ['wm_type'] = 'text';
-		$config ['wm_font_path'] = './system/fonts/texb.ttf';
-		$config ['wm_font_size'] = '50';
-		$config ['wm_font_color'] = '#FF0000';
-		$config ['wm_vrt_alignment'] = 'middle';
-		$config ['wm_hor_alignment'] = 'left';
+                $config['wm_overlay_path'] = './Images/logo.png';
+                $config['wm_type'] = 'overlay';
+                $config['width'] = '50';
+                $config['height'] = '50';
+                $config['padding'] = '50';
+                $config['wm_opacity'] = '100';
+                $config['wm_vrt_alignment'] = 'bottom';
+                $config['wm_hor_alignment'] = 'right';
+                $config['wm_vrt_offset'] = '100';
+		//$config ['wm_text'] = 'Copyright 2016 - FPS5';
+		//$config ['wm_type'] = 'text';
 		
 		$CI->image_lib->initialize ( $config );
 		$CI->image_lib->watermark ();

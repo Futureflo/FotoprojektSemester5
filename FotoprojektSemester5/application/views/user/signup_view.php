@@ -1,23 +1,25 @@
 <section class="jumbotron text-xs-left">
 	<div class="container">
 					<?php
-					
-echo form_open_multipart ( 'signup/' );
+					echo form_open_multipart ( 'signup/' );
 					?>
 								<div id="fehler_span" class="text-danger"><?php
 								
-echo $this->session->flashdata ( 'msgReg' );
+								echo $this->session->flashdata ( 'msgReg' );
 								?></div>
 	
 		<div class="row">
 			<ul class="nav nav-pills" role="tablist">
 				<li class="nav-item"><a class="nav-link active" href="#customer"
-					data-toggle="tab">Kunde</a></li>
+					data-toggle="tab" onmouseout="checkType()">Kunde</a></li>
 				<li class="nav-item"><a class="nav-link" href="#photographer"
-					data-toggle="tab">Fotograf</a></li>
+					data-toggle="tab" onmouseout="checkType()">Fotograf</a></li>
 			</ul>
 
-			<form>
+			<form action="<?php
+			
+echo base_url ();
+			?>user/" method="post">
 				<div class="form-group">
 					<fieldset class="form-group">
 						<div class="row">
@@ -128,7 +130,7 @@ echo $this->session->flashdata ( 'msgReg' );
 							placeholder="Passwort wiederholen">
 					</div>
 				</div>
-			</form>
+			
 
 			<!-- Tab panes -->
 			<div class="tab-content">
@@ -136,7 +138,7 @@ echo $this->session->flashdata ( 'msgReg' );
 					<!-- Der Inhalt ist leer, da die Kunden Felder immer angezeigt werden -->
 				</div>
 				<div role="tabpanel" class="tab-pane" id="photographer">
-					<form>
+					
 						<br>
 						<div id="signupphotographer">
 							<div class="row">
@@ -144,7 +146,7 @@ echo $this->session->flashdata ( 'msgReg' );
 									<div class="form-insert_product">
 									<?php
 									
-echo form_open_multipart ( 'signup/uploadTradeLicense' );
+									echo form_open_multipart ( 'signup/uploadTradeLicense' );
 									?>
 										<input type="file" name="dateiupload" /> <input
 											type="submit" name="btn[upload]" class="btn btn-success"
@@ -174,10 +176,10 @@ echo form_open_multipart ( 'signup/uploadTradeLicense' );
 								</div>
 							</div>
 						</div>
-					</form>
+					
 				</div>
 				<br>
-				<form>
+				
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-check">
@@ -212,9 +214,32 @@ echo form_open_multipart ( 'signup/uploadTradeLicense' );
 								class="btn btn-primary btn-md">Registrieren</button>
 						</div>
 					</div>
-				</form>
+				
 
 			</div>
+			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value="">
+			</form>
 		</div>
 	</div>
 </section>
+
+
+
+
+<script type="text/javascript">
+    
+
+	function checkType(){
+        var customer = document.getElementById('customer');
+        var photograph = document.getElementById('photographer');
+        var field = document.getElementById('type_hidden_field');
+        
+        if(customer.classList.contains('active')){
+            field.value = "customer";
+        } else if(photograph.classList.contains('active')){
+            field.value = "photographer";
+        }
+	}
+    
+    window.addEventListener('load', checkType, false);
+</script>
