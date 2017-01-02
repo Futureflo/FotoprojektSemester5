@@ -68,6 +68,12 @@ class User_model extends CI_Model {
 	function insert_user($data) {
 		return $this->db->insert ( 'user', $data );
 	}
+	
+	// insert new User
+	function insert_address($data) {
+		return $this->db->insert ( 'adress', $data );
+	}
+	
 	// delete user
 	function delete_user($user_id) {
 		return $this->db->delete ( 'user', array (
