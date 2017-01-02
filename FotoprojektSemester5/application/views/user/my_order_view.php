@@ -12,12 +12,7 @@
 			<h1 class="jumbotron-heading"><?php
 			echo 'Meine Bestellungen'?> </h1>
 		</div>
-	</section>
-	
-<!-- Beispiel aus
-https://jsfiddle.net/KyleMit/DSGxz/ 
--->
-
+		<br>
 <div class="panel-group" id="accordion">
   
   <?php
@@ -33,40 +28,32 @@ https://jsfiddle.net/KyleMit/DSGxz/
 			echo "<div id=\"collapse" . $order->orde_id . "\" class=\"panel-collapse collapse\">";
 			echo "<div class=\"panel-body\">";
 			?>
-						<table class="table table-striped">
-						<thead>
-						<tr>
-						<th>Event</th>
-						<th>Name</th>
-						<th>Menge</th>
-						<th>Preis</th>
-						<th>Format</th>
-						<th>Bestelltyp</th>
-						
-						
-						</tr>
-						</thead>
-						<tbody>
+						<div class="row">
+						<div class="col-sm-2 hidden-xs-down"><h5>Event</h5></div>
+						<div class="col-sm-2 hidden-xs-down"><h5>Name</h5></div>
+						<div class="col-sm-2 hidden-xs-down"><h5>Menge</h5></div>
+						<div class="col-sm-2 hidden-xs-down"><h5>Preis</h5></div>
+						<div class="col-sm-2 hidden-xs-down"><h5>Format</h5></div>
+						<div class="col-sm-2 hidden-xs-down"><h5>Bestelltyp</h5></div>
+						</div>
 						
 						
 								<?php
 			foreach ( $order->order_position as $op ) {
-				echo "<tr>";
-				echo "<td>" . $op->even_name . "</td>";
-				echo "<td>" . $op->prod_name . "</td>";
-				echo "<td>" . $op->orpo_amount . "</td>";
-				echo "<td>" . $op->orpo_price . "€</td>";
-				echo "<td>" . $op->prty_description . "</td>";
+				echo "<div class=\"row\">";
+				echo "<div class=\"col-sm-2 col-xs-6\">" . $op->even_name . "</div>";
+				echo "<div class=\"col-sm-2 col-xs-6\">" . $op->prod_name . "</div>";
+				echo "<div class=\"col-sm-2 col-xs-6\">" . $op->orpo_amount . "</div>";
+				echo "<div class=\"col-sm-2 col-xs-6\">" . $op->orpo_price . "€</div>";
+				echo "<div class=\"col-sm-2 col-xs-6\">" . $op->prty_description . "</div>";
 				
 				if ($op->prty_type == ProductPrintType::download) {
-					echo "<td>" . 'Download' . "</td>";
+					echo "<div class=\"col-sm-2 col-xs-6\">" . 'Download' . "</div>";
 				} else
-					echo "<td>" . 'Druck' . "</td>";
-				echo "</tr>";
+					echo "<div class=\"col-sm-2 col-xs-6\">" . 'Druck' . "</div>";
+				echo "</div>";
 			}
 			?>
-			</tbody>
-			</table>
 			<?php
 			// echo "</div>";
 			echo "</div>";
@@ -74,3 +61,4 @@ https://jsfiddle.net/KyleMit/DSGxz/
 		}
 		?>
 </div>
+	</section>

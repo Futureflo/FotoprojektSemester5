@@ -1,8 +1,6 @@
 <section class="jumbotron text-xs-left">
 	<div class="container">
-					<?php
-					echo form_open_multipart ( 'signup/' );
-					?>
+
 								<div id="fehler_span" class="text-danger"><?php
 								
 								echo $this->session->flashdata ( 'msgReg' );
@@ -16,10 +14,10 @@
 					data-toggle="tab" onmouseout="checkType()">Fotograf</a></li>
 			</ul>
 
-			<form action="<?php
-			
-echo base_url ();
-			?>user/" method="post">
+					<?php
+ 					echo form_open ( 'signup/' );
+					?>
+
 				<div class="form-group">
 					<fieldset class="form-group">
 						<div class="row">
@@ -32,11 +30,12 @@ echo base_url ();
 							<div class="row">
 								<div class="col-sm-3">
 									<label class="form-check-label"> <input type="radio"
-										class="form-check-input" id="sex"
-										name="female" value="option1" checked> Frau
-									</label> <label class="form-check-label"> <input type="radio"
-										class="form-check-input" id="sex"
-										name="male" value="option2"> Herr
+										class="form-check-input" 
+										name="gender" value="Frau" checked> Frau
+									</label> 
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input"
+										name="gender" value="Herr"> Herr
 									</label>
 								</div>
 							</div>
@@ -112,7 +111,7 @@ echo base_url ();
 				<br>
 				<div class="row">
 					<div class="col-sm-12">
-						<input type="email" class="form-control" name="emailrepeat"
+						<input type="email" class="form-control" name="cemail"
 							placeholder="E-Mail wiederholen">
 					</div>
 				</div>
@@ -126,7 +125,7 @@ echo base_url ();
 				<br>
 				<div class="row">
 					<div class="col-sm-12">
-						<input class="form-control" type="password" name="passwordrepeat"
+						<input class="form-control" type="password" name="cpassword"
 							placeholder="Passwort wiederholen">
 					</div>
 				</div>
@@ -218,7 +217,7 @@ echo base_url ();
 
 			</div>
 			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value="">
-			</form>
+			<?php echo form_close();?>
 		</div>
 	</div>
 </section>
@@ -235,9 +234,9 @@ echo base_url ();
         var field = document.getElementById('type_hidden_field');
         
         if(customer.classList.contains('active')){
-            field.value = "customer";
+            field.value = "2";
         } else if(photograph.classList.contains('active')){
-            field.value = "photographer";
+            field.value = "3";
         }
 	}
     

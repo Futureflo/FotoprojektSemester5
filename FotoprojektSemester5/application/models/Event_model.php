@@ -61,7 +61,8 @@
       //delete user
       function delete_event($even_id)
       {
-      	return $this->db->delete('event', array('even_id' => $even_id));
+	  
+      	return $this->db->update('event', array('even_status' => 4), "even_id = ".$even_id."");
       }
       
       // get MAX-ID
