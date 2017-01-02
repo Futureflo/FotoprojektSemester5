@@ -129,7 +129,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 offset-md-2">
-							<a class="btn btn-success btn-md btn-block" role="button">Absenden</a>
+							<a class="btn btn-success btn-md btn-block" role="button" id="send_code">Absenden</a>
 						</div>
 					</div>
 				</div>
@@ -202,6 +202,7 @@ function noresults(searchtext){
    
 function proofEvent(i){
     var ai = i.parentNode.parentNode;
+    var url = ai.getAttribute("href");
     
     ai.setAttribute("href", "#"+i.getAttribute("id"));
     
@@ -209,8 +210,13 @@ function proofEvent(i){
     
     a.setAttribute("href", "#"+i.getAttribute("id"));
     
-    document.getElementById('proof-btn').click();
-}    
+    clickProofModal(url);
+} 
+
+function clickProofModal(url){
+	document.getElementById('proof-btn').click();
+	document.getElementById('send_code').setAttribute("href", url);
+}
     
 function createPic(prodfile, prodname, status){
     var count = 0;
