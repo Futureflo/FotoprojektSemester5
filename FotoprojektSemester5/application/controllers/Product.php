@@ -80,9 +80,12 @@ class Product extends CI_Controller {
 		}
 		
 		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prva_prty_id );
-		$price_basic = $profile->prpt_price;
-		
-		// Preisaufschlag Fotograf
+		if (isset ( $profile ))
+			$price_basic = $profile->prpt_price;
+		else
+			$price_basic = 0;
+			
+			// Preisaufschlag Fotograf
 		$prva_price_specific = $product_variant->prva_price_specific;
 		
 		// Preisaufschlag von Druckerei
