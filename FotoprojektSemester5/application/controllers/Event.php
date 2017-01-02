@@ -28,13 +28,14 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/single_event_view', $data );
 	}
 	public function lockEventById($even_id) {
+		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
 		
 		$event = $CI->event_model->getSingleEventById ( $even_id );
 		
 		if (isset ( $event [0] )) {
 			$event [0]->even_status = EventStatus::locked;
-			$CI->event_model->update ( $even_id, $event );
+			$CI->event_model->update_event ( $even_id, $event [0] );
 		}
 	}
 	public static function getAllPublicEvents() {
