@@ -137,10 +137,9 @@ class Signup extends CI_Controller
 			if ($addressIsSet && $UserIsSet)
 			{
 				
-				$this->session->set_flashdata('msgReg','You are Successfully Registered! Please login to access your Profile!');				
 				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
- 				redirect('start/');	
-			}
+ 				$this->load->template ( 'user/success_signup_view' );
+					}
 			else
 			{
 				// error
