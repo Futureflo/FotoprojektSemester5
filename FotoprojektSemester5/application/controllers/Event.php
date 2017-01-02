@@ -28,33 +28,35 @@ class Event extends CI_Controller {
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
-
-	
 	public function deleteEvent() {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
-		if (isset($_POST['chk_group'])) {
-		$optionArray = $_POST['chk_group'];
-		$oki = 0;
-			for ($i=0; $i<count($optionArray); $i++) {
-				$ok = $CI->event_model->delete_event($optionArray[$i]);
-				if($ok) { $oki = $oki+1; }
-				else
-				{ $oki=$oki-1; }
+		if (isset ( $_POST ['chk_group'] )) {
+			$optionArray = $_POST ['chk_group'];
+			$oki = 0;
+			for($i = 0; $i < count ( $optionArray ); $i ++) {
+				$ok = $CI->event_model->delete_event ( $optionArray [$i] );
+				if ($ok) {
+					$oki = $oki + 1;
+				} else {
+					$oki = $oki - 1;
+				}
 			}
 			
-			if($oki >= 1) {  $this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Die Aktion wurde erfolgreich ausgeführt! </div>' ); } 
-			else { $this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Leider hat das nicht geklappt!</div>' ); }
+			if ($oki >= 1) {
+				$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Die Aktion wurde erfolgreich ausgeführt! </div>' );
+			} else {
+				$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Leider hat das nicht geklappt!</div>' );
+			}
 		}
 		
-		$this->showEvents();
+		$this->showEvents ();
 	}
-	
 	public function showEvents() {
 		$this->load->model ( 'event_model' );
 		$data ['events'] = $this->event_model->getAllEvents ();
 		$this->load->template ( 'event/all_event_view', $data );
-}
+	}
 	public function lockEventById($even_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
@@ -65,7 +67,31 @@ class Event extends CI_Controller {
 			$event [0]->even_status = EventStatus::locked;
 			$CI->event_model->update_event ( $even_id, $event [0] );
 		}
-
+	}
+	public function unlockEventById($even_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'event_model' );
+		
+		$event = $CI->event_model->getSingleEventById ( $even_id );
+		
+		if (isset ( $event [0] )) {
+			// Nur ein gesperrtes Event kann entsperrt werden
+			if ($event [0]->even_status == EventStatus::locked) {
+				$event [0]->even_status = EventStatus::prv;
+				$CI->event_model->update_event ( $even_id, $event [0] );
+			}
+		}
+	}
+	public function changeStateToPublicById($even_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'event_model' );
+		
+		$event = $CI->event_model->getSingleEventById ( $even_id );
+		
+		if (isset ( $event [0] )) {
+			$event [0]->even_status = EventStatus::public;
+			$CI->event_model->update_event ( $even_id, $event [0] );
+		}
 	}
 	public static function getAllPublicEvents() {
 		$CI = & get_instance ();
