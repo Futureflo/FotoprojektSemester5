@@ -14,7 +14,7 @@ class Signup extends CI_Controller
 	
 	function index()
 	{
-		$this->load->template('user/signup_view');
+ 		$this->load->template('user/signup_view');
 		
 		$title = $this->input->post('user_title');
 		$name = $this->input->post('lastname');
@@ -40,6 +40,17 @@ class Signup extends CI_Controller
 		$agb = $this->input->post('checktermsandconditions');
 		$privacyPolicy = $this->input->post('checklegalnotice');
 		$newsletter = $this->input->post('checknewsletter');
+		if($agb != true && $privacyPolicy != true){
+		
+			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
+				 
+		}
+		if($newsletter == true){
+		
+			$this->Newsletter->assignUser($userid);
+				
+		}
+		
 		
 		$role = $this->input->post('type_hidden_field');
 		
@@ -51,6 +62,16 @@ class Signup extends CI_Controller
  		$this->form_validation->set_rules('cemail', 'Confirm Email', 'trim|required|matches[email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+		
+		
 		
 		
 		// submit
@@ -99,16 +120,21 @@ class Signup extends CI_Controller
 				'adre_coun_id' => '80'
 			);
 			$addressIsSet = $this->user_model->insert_address($address);
+			echo redirect($title);
 				
 			if (UserRole::Photograph) {
 				$bankAccount = array(
 						'user_id' => $user_id,
-						'pain_accountholder' => $accountholder,
-						'adre_iban' => $iban,
-						'adre_bic' => $bic
+						'pain_account_holder' => $accountholder,
+						'pain_account_iban' => $iban,
+						'pain_account_bic' => $bic
 				);
 			}
+			if($newsletter == true){
 			
+				$this->Newsletter->assignUser($user_id);
+			
+			}
 			if ($addressIsSet && $UserIsSet)
 			{
 				
