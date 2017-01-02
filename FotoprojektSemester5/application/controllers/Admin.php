@@ -28,7 +28,10 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
-		$this->load->template ( 'admin/printers_view' );
+		$this->load->model ( 'Printers_model' );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {
 		redirect ( 'ProductType/product_types' );
