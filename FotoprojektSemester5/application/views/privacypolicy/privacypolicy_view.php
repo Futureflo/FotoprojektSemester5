@@ -14,7 +14,7 @@
 					ausdrücklich mit der Erhebung, der Verarbeitung und der Nutzung
 					Ihrer personenbezogenen Daten durch die Webseite einverstanden.
 					Sollten Sie Fragen in Bezug auf diese Richtlinie haben, wenden Sie 
-					sich bitte an unseren Ansprechpartnern klausmustermann@fps5.de.</p>
+					sich bitte an unseren Ansprechpartner klausmustermann@fps5.de.</p>
 				<p>
 					<strong>1. Nutzer</strong><br /> <br /> Die Nutzung dieser
 					Webseite setzt die Volljährigkeit des Nutzers voraus. Minderjährige
