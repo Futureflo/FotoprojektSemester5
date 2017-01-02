@@ -78,10 +78,12 @@
 				echo base_url ();
 				?>">Home <span class="sr-only"></span></a></li>
 
-				<li class="nav-item "><a class="nav-link" href="<?php
-				
-				echo base_url ();
-				?>">Fotograf</a></li>
+				<li class="nav-item dropdown ">
+				<a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fotograf</a>
+					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+						<a class="dropdown-item" href="<?php echo base_url (); ?>event/uebersicht/">&Uuml;bersicht</a> 
+						<a class="dropdown-item" href="<?php echo base_url (); ?>event/">Neues Event</a> 
+					</div></li>
 
 				<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">Event</a>
