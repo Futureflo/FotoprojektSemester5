@@ -17,6 +17,7 @@
 					<?php
  					echo form_open ( 'signup/' );
 					?>
+
 				<div class="form-group">
 					<fieldset class="form-group">
 						<div class="row">
@@ -29,11 +30,12 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label class="form-check-label"> <input type="radio"
-										class="form-check-input" id="sex"
-										name="female" value="option1" checked> Frau
-									</label> <label class="form-check-label"> <input type="radio"
-										class="form-check-input" id="sex"
-										name="male" value="option2"> Herr
+										class="form-check-input" 
+										name="gender" value="female" checked> Frau
+									</label> 
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input"
+										name="gender" value="male"> Herr
 									</label>
 								</div>
 							</div>

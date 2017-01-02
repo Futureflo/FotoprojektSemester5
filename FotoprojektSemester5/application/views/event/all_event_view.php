@@ -1,35 +1,36 @@
-<section style="padding-top: 70px"></section>
+<section style="padding-top: 100px"></section>
 
 
 <div class="contrainer">
 	<div class="row">
 	
-		<h1 class="offset-md-1 col-md-2" >Events</h1>
+		<h1 class="offset-md-2 col-md-2" >&Uuml;bersicht</h1>
 		
 		
 		<button onclick="validate()" id="new" name="submit" type="button" 
 		 class="btn btn-danger fa fa-trash-o col-md-1" data-toggle='modal' data-target='#delete'></button>
 		 
-		<button onclick="validate()" id="erase" name="submit" type="button" 
-		 class="btn btn-primary fa fa-plus-square offset-md-1 col-md-1"></button>
+		<a href="<?php echo base_url(); ?>/event/"><button id="erase" name="submit" type="button" 
+		 class="btn btn-primary fa fa-plus-square offset-md-1 col-md-1"></button></a>
 
-		<div class="offset-md-3 col-md-2">
+		<div class="offset-md-1 col-md-2">
 			<input type="text" id="searchTerm" class="form-control"
 			 onkeyup="search()" placeholder="Search for user..."/>
 		</div>
 
 
 	</div>
+	<section style="padding-top: 50px"></section>
 	
-	
+	<form action="<?php echo base_url (); ?>Event/deleteEvent/" method="post">
 	<div class="row">
-		<div class="offset-md-1 col-md-10">
+		<div class="offset-md-2 col-md-8"><?php echo $this->session->flashdata ( 'msgReg' ); ?>
 			<div class="table-responsive">
 					<table id="dataTable"
-						class="table table-striped table-bordered sortable">
+						class="table table-striped table-bordered sortable table-hover">
 						<thead>
 							<tr>
-								<th><input type="checkbox" name="eventsRemove" value="all"></th>
+								<th></th>
 								<th>ID</th>
 								<th>Bezeichnung</th>
 								<th>Status</th>
@@ -39,8 +40,8 @@
 						<tbody>
 							<?php
 								foreach ( $events as $event ) {
-									echo "<tr class='searchable'>";
-									echo "<td><input type='checkbox' name='eventsRemove' value='" . $event->even_id."'></td>";
+									echo "<tr>";
+									echo "<td><input type='checkbox' name='chk_group[]' value='" . $event->even_id."'></td>";
 									echo "<td>" . $event->even_id. "</td>";
 									echo "<td>" . $event->even_name. "</td>";
 									//echo "<td>" . $event->even_status . "</td>";
@@ -87,11 +88,8 @@
 			 		</div>
 				  	
 				  	<div class="modal-footer ">
-				        <form action="<?php
-												
-												echo base_url ();
-												?>admin/deleteUser/" method="post">
-					        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Events löschen</button>
+				   
+					        <input type="submit" class="btn btn-danger" value="Events löschen"><span class="glyphicon glyphicon-ok-sign"></span>
 					        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 				        </form>
 					</div>
@@ -106,5 +104,10 @@
 	</div>
 </div>
 
-
+<script language="javascript">
+function check(element)
+ {
+   element.checked = !element.checked;
+ }
+</script>
 

@@ -28,3 +28,14 @@
 	background-color: white;
 	padding-bottom: 1.25rem;
 }
+
+.zeile
+{
+background-color: #000000;
+}
+
+.zeile:hover
+{
+background-color: #CCCCCC;
+}
+
