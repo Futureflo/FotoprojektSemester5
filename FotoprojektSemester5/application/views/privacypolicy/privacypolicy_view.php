@@ -13,20 +13,10 @@
 					durch die Webseite. Mit der Nutzung der Webseite erklären Sie sich
 					ausdrücklich mit der Erhebung, der Verarbeitung und der Nutzung
 					Ihrer personenbezogenen Daten durch die Webseite einverstanden.
-					Diese Richtlinie unterliegt den Gesetzen des Staates Kalifornien,
-					USA, ungeachtet eventueller Konflikte in Bezug auf rechtliche
-					Grundsätze Ihres Standortes. Durch die fortgesetzte Nutzung der
-					Webseite erklären Sie sich damit einverstanden, an die
-					englischsprachige Version des Vertrages gebunden zu sein, abrufbar
-					unter http://, und Sie erkennen an, dass im Falle eines Konflikts
-					zwischen der englischen Version und dieser Übersetzung die
-					englische Version vorrangige Geltung besitzt. Sollten Sie Fragen in
-					Bezug auf diese Richtlinie haben, wenden Sie sich bitte an den
-					zuständigen Zonen-Manager, wie unten aufgeführt. Die Zuständigkeit
-					des Ansprechpartners richtet sich nach der Zone bzw. Region, in der
-					Sie sich registriert haben.</p>
+					Sollten Sie Fragen in Bezug auf diese Richtlinie haben, wenden Sie 
+					sich bitte an unseren Ansprechpartner klausmustermann@fps5.de.</p>
 				<p>
-					<strong>1. Nutzer</strong><br /> <br /> Die Nutzung der Diese
+					<strong>1. Nutzer</strong><br /> <br /> Die Nutzung dieser
 					Webseite setzt die Volljährigkeit des Nutzers voraus. Minderjährige
 					im Alter zwischen 13 und 18 Jahren dürfen die Diese Webseite nur
 					mit dem ausdrücklichen Einverständnis ihrer gesetzlichen Vertreter
@@ -51,7 +41,7 @@
 					Anschrift/Firmierung, E-Mail-Adresse, Staatszugehörigkeit. Von
 					hochladenden Mitgliedern kann bei der Registrierung auf dieser
 					Webseite zusätzlich zum Zweck der Identifikation ein
-					Identifikationspapier (Personaldokument, Führerschein) erforderlich
+					Identifikationspapier (Gewerbeschein bei Fotografen) erforderlich
 					werden.<br /> <br /> Ggf. sammelt Diese Webseite auch solche
 					Informationen, wie z. B. Up- und Downloads auf der Webseite,
 					Profildaten-Änderungen, Änderungen von hochgeladenen Inhalten und
@@ -98,7 +88,7 @@
 				</p>
 				<p>
 					<strong>4. Dritte Parteien</strong><br /> <br /> Diese Webseite
-					nutzt den Service von Drittfirmen, wie Paypal für Zahlungen auf der
+					nutzt den Service von Drittfirmen, wie Paypal für Zahlungen auf der FPS5
 					Webseite. Zudem kann unsere Seite gelegentlich Links zu anderen
 					Seiten enthalten. Durch das Anklicken dieser Links verlassen Sie
 					die Webseite. Diese Webseite übernimmt keinerlei Haftung für den
@@ -118,7 +108,7 @@
 					<strong>5. Verwendung personenbezogener Daten</strong><br /> <br />
 					Diese Webseite darf Ihre personenbezogenen Daten nutzen, um:<br />
 					<br /> • Ihre Identität aus Sicherheitsgründen zu prüfen,<br /> <br />
-					• Ihnen einen Mitgliedskonto zur Verfügung zu stellen,<br /> <br />
+					• Ihnen ein Mitgliedskonto zur Verfügung zu stellen,<br /> <br />
 					• Ihre Transaktionen durchzuführen,<br /> <br /> • Ihnen
 					Kundenservice zu bieten,<br /> <br /> • Ihnen Servicematerial und
 					Angebote zukommen zu lassen,<br /> <br /> • Ihre Up- und Downloads,
@@ -145,7 +135,7 @@
 					verschiedene Arten abzusichern. Unsere Server dürfen nur von
 					ausgesuchtem Fachpersonal gewartet und bedient werden. Ihre
 					personenbezogenen Daten sind durch einen persönlichen,
-					einzigartigen Mitgliedsnamen und einem persönliches,
+					einzigartigen Mitgliedsnamen und ein persönliches,
 					verschlüsseltes Passwort geschützt. Bitte bewahren diese
 					Zugangsdaten sicher und vor Missbrauch geschützt auf, teilen diese
 					niemanden mit und loggen sich bei Verlassen unserer Seite jedes Mal
@@ -175,19 +165,7 @@
 					Einschränkung solche Daten und Informationen, welche an Dritte
 					übermittelt werden, auch in dem Falle der Nichteinhaltung der
 					Webseite Datenschutzrichtlinien Dritter und eventuelle Schäden, die
-					daraus resultieren.<br /> <br /> Als registriertes Mitglied der
-					Webseite steht es Ihnen frei, sich am Blog oder Forum von dieser
-					Webseite zu beteiligen. Informationen, die im FPS5 Forum eingegeben
-					werden, sind nur von registrierten Mitgliedern aus derselben
-					Landeszone einsehbar. Blog-Einträge können von jedem Besucher der
-					FPS5 Webseite gelesen werden. Wir raten eindringlich davon ab,
-					Informationen durch Einträge im Forum oder Blog zu hinterlassen,
-					die Sie nicht preisgeben wollen. Bei Einträgen im Blog oder Forum
-					wird Ihr "Alias-Name" als Absender beim veröffentlichen Ihres
-					Eintrages verwendet. Nachrichten oder Einträge im Blog oder Forum
-					können nach eigenem Ermessen von FPS5 gelöscht oder gesperrt werden
-					und dürfen auch über beendete Mitgliedschaften hinaus gespeichert
-					bleiben. <br /> <br />
+					daraus resultieren.<br /> <br />
 				</p>
 				<p>
 					<strong>7. Optionen</strong><br /> <br /> Sie können die von Ihnen
@@ -202,7 +180,7 @@
 					uneingeschränkt Nachrichten zu veränderten Dienstleistungsbereichen
 					oder insbesondere Nachrichten zu Änderungen von FPS5 Richtlinien
 					("Erforderliche Hinweise"), Nachrichten bei technischen Störungen
-					oder Nichterreichbarkeit der FPS5 Webseite. Um auch den Empfang der
+					oder Nichterreichbarkeit der Webseite. Um auch den Empfang der
 					Erforderlichen Hinweise zu unterbinden, ist die Schließung des
 					entsprechenden Mitgliedskontos notwendig. <br /> <br />
 				</p>
@@ -228,7 +206,7 @@
 					Profil einschränken, FPS5 diese Einstellung nicht ohne Ihre
 					Zustimmung ändern wird. Sollten überwiegende Anteile von FPS5
 					verkauft werden oder in den Besitz einer anderen Firma übergehen,
-					werden Sie von FPS5 darüber informiert. FPS5 hat das Recht, dem
+					werden Sie darüber informiert. FPS5 hat das Recht, dem
 					Neueigentümer dann Zugang auf personenbezogene Daten zu gewähren.
 					Bei Verkäufen von Teilbereichen von FPS5 hat FPS5 das Recht, dem
 					Käufer personenbezogene Daten zur Verfügung zu stellen ohne dafür
