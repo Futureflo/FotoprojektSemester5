@@ -40,17 +40,14 @@ class Signup extends CI_Controller
 		$agb = $this->input->post('checktermsandconditions');
 		$privacyPolicy = $this->input->post('checklegalnotice');
 		$newsletter = $this->input->post('checknewsletter');
+		
 		if($agb != true && $privacyPolicy != true){
 		
 			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
 				 
 		}
-	
-		
-		
 		$role = $this->input->post('type_hidden_field');
-		
-		
+			
 		// set form validation rules
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
@@ -58,16 +55,18 @@ class Signup extends CI_Controller
  		$this->form_validation->set_rules('cemail', 'Confirm Email', 'trim|required|matches[email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
- 		$this->form_validation->set_rules('zip', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-		
-		
+ 		$this->form_validation->set_rules('zip', 'ZIP', 'trim|required');
+ 		$this->form_validation->set_rules('city', 'City', 'trim|required');
+ 		$this->form_validation->set_rules('street', 'Street', 'trim|required');
+ 		$this->form_validation->set_rules('housenumber', 'Housenumber', 'trim|required');
+ 		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+
+		if ($role == UserRole::Photograph){
+			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
+			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
+			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
+// 			$this->form_validation->set_rules ( 'traderlicense', 'Traderlicense', 'required' );			
+		}
 		
 		
 		// submit
