@@ -31,11 +31,11 @@
 								<div class="col-sm-3">
 									<label class="form-check-label"> <input type="radio"
 										class="form-check-input" 
-										name="gender" value="female" checked> Frau
+										name="gender" value="Frau" checked> Frau
 									</label> 
 									<label class="form-check-label"> <input type="radio"
 										class="form-check-input"
-										name="gender" value="male"> Herr
+										name="gender" value="Herr"> Herr
 									</label>
 								</div>
 							</div>

@@ -16,7 +16,7 @@ class Signup extends CI_Controller
 	{
  		$this->load->template('user/signup_view');
 		
-		$title = $this->input->post('user_title');
+		$title = $this->input->post('gender');
 		$name = $this->input->post('lastname');
 		$firstname = $this->input->post('firstname');
 		$fullname = $firstname." ".$name;
@@ -45,11 +45,7 @@ class Signup extends CI_Controller
 			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
 				 
 		}
-		if($newsletter == true){
-		
-			$this->Newsletter->assignUser($userid);
-				
-		}
+	
 		
 		
 		$role = $this->input->post('type_hidden_field');
@@ -62,7 +58,7 @@ class Signup extends CI_Controller
  		$this->form_validation->set_rules('cemail', 'Confirm Email', 'trim|required|matches[email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
-// 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+ 		$this->form_validation->set_rules('zip', 'Confirm Password', 'trim|required');
 // 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
 // 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
 // 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
@@ -120,21 +116,25 @@ class Signup extends CI_Controller
 				'adre_coun_id' => '80'
 			);
 			$addressIsSet = $this->user_model->insert_address($address);
-			echo redirect($title);
 				
 			if (UserRole::Photograph) {
-				$bankAccount = array(
+				$bankaccountData = array(
 						'user_id' => $user_id,
 						'pain_account_holder' => $accountholder,
 						'pain_account_iban' => $iban,
-						'pain_account_bic' => $bic
+						'pain_account_bic' => $bic,
+						'paty_id' => 2
 				);
+				$this->user_model->insert_bankaccount($bankaccountData);
 			}
 			if($newsletter == true){
-			
-				$this->Newsletter->assignUser($user_id);
-			
+				$newsletterData = array(
+						'nele_user_id' => $user_id,
+						'nele_email' => $email
+				);
+				$this->user_model->insert_UserToNewsletter($newsletterData);
 			}
+			
 			if ($addressIsSet && $UserIsSet)
 			{
 				
