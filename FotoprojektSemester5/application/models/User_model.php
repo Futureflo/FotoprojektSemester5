@@ -41,6 +41,14 @@ class User_model extends CI_Model {
 		$query = $this->db->get ( 'user' );
 		return $query->result ();
 	}
+
+	// get useraddress by id
+	function get_address_by_id($id) {
+		$this->db->where ( 'adre_user_id', $id );
+		$query = $this->db->get ( 'adress' );
+		return $query->result();
+	}
+	
 	// get user by passwordRestoreCode
 	function get_UserByRestoreCode($user_passwordrestore) {
 		$this->db->where ( 'user_passwordrestore', $user_passwordrestore );
@@ -66,7 +74,7 @@ class User_model extends CI_Model {
 				'user_id' => $user_id 
 		) );
 	}
-	// update usere status
+	// update user status
 	function update_userStatus($user_confirmcode) {
 		$this->db->set ( 'user_status', UserStatus::activated, FALSE );
 		$this->db->where ( 'user_confirmcode', $user_confirmcode );
@@ -74,7 +82,7 @@ class User_model extends CI_Model {
 		return $afftectedRows = $this->db->affected_rows ();
 	}
 	
-	// update usere status by id
+	// update user status by id
 	function update_userStatusByID($user_id, $user_status) {
 		$this->db->set ( 'user_status', $user_status );
 		$this->db->where ( 'user_id', $user_id );
@@ -84,6 +92,14 @@ class User_model extends CI_Model {
 	function update_userPasswordAttempt($user_email, $user_passwordattempt) {
 		$this->db->set ( 'user_passwordattempt', $user_passwordattempt );
 		$this->db->where ( 'user_email', $user_email );
+		$this->db->update ( 'user' );
+		return $afftectedRows = $this->db->affected_rows ();
+	}
+	
+	// update user email by id
+	function update_userEmailByID($user_id, $user_email) {
+		$this->db->set ( 'user_email', $user_email);
+		$this->db->where ( 'user_id', $user_id );
 		$this->db->update ( 'user' );
 		return $afftectedRows = $this->db->affected_rows ();
 	}
