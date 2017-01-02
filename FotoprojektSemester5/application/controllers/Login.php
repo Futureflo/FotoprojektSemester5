@@ -181,6 +181,7 @@ class Login extends CI_Controller {
 		$newSalt = generate_salt ( 10 );
 		$newHashpw = generate_hash ( $newSalt, $newPassword, $algo );
 		$this->user_model->update_userPassword ( $user_id, $newHashpw, $newSalt, UserStatus::activated );
-		$this->load->template ( 'user/success_password_forgot_view' );
+		$this->session->set_flashdata ( 'msg', 'Ihr Passwort wurde erfolgreich geändert' );
+		redirect ( "start/" );
 	}
 }
