@@ -28,7 +28,7 @@ class Event extends CI_Controller {
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
-<<<<<<< HEAD
+
 	
 	public function deleteEvent() {
 		$CI = & get_instance ();
@@ -54,7 +54,7 @@ class Event extends CI_Controller {
 		$this->load->model ( 'event_model' );
 		$data ['events'] = $this->event_model->getAllEvents ();
 		$this->load->template ( 'event/all_event_view', $data );
-=======
+
 	public function lockEventById($even_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
