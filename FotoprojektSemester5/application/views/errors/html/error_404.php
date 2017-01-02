@@ -1,10 +1,5 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>404 Page Not Found</title>
+
+
 <style type="text/css">
 
 ::selection { background-color: #E13300; color: white; }
@@ -33,6 +28,15 @@ h1 {
 	padding: 14px 15px 10px 15px;
 }
 
+#text {
+	color: #444;
+	background-color: transparent;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 0 0 14px 0;
+	padding: 14px 15px 10px 15px;
+}
+
 code {
 	font-family: Consolas, Monaco, Courier New, Courier, monospace;
 	font-size: 12px;
@@ -54,11 +58,7 @@ p {
 	margin: 12px 15px 12px 15px;
 }
 </style>
-</head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+	<div id="container" style="margin: 4rem 0rem 0rem 0rem;">
+		<h1>404 Page Not Found</h1>
+		<i id="text">The page you requested was not found.</i>
 	</div>
-</body>
-</html>
