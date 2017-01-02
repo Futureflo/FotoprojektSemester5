@@ -13,19 +13,15 @@
 
 <div class="container">
 		<div class="row">
-		<div class="col-md-9">
+		<div class="col-md-6">
 		<p class="h1" id="test" onclick="setPager()">
 		<?php
 		
 		echo $PrintersViewHeader?>
 		</p>
 		</div>
-		<!--  
-			<div class="col-md-6">
-				<a class="btn btn-success" href="#">
-	  			<i class="fa fa-user-plus fa-lg"></i> Benutzer anlegen</a>
-			</div>
-		-->
+		<button onclick="validate()" id="create" name="submit" type="button"
+  			class="btn btn-primary fa fa-plus-square offset-md-1 col-md-2">  Druckerei anlegen</button>
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Search for print shops..." />
@@ -42,6 +38,7 @@
 						<th>Druckereiname</th>
 						<th>Erstellungsdatum</th>
 						<th>Erstellt von</th>
+						<th>Status</th>
 						<th>Aktion</th>
 					</tr>
 				</thead>
@@ -54,14 +51,25 @@
 				echo "<td>" . $printer->adre_name . "</td>";
 				echo "<td>" . $printer->prsu_createdon . "</td>";
 				echo "<td>" . $printer->prsu_createdby . "</td>";
+				switch ($printer->prsu_status) {
+					case 1 :
+						echo "<td> Aktiv </td>";
+						// echo "<td>" . btnEventUnlock($event);
+						// echo btnEventDelete($event) . "</td>";
+						break;
+					case 2 :
+						echo "<td> Gesperrt </td>";
+						// echo "<td>" . btnEventLock($event);
+						// echo btnPublic($event);
+						// echo btnEventDelete($event) . "</td>";
+						break;
+				}
 				echo "<td>";
 				
-				// if ($user->user_status == 1 || $user->user_status == 3 || $user->user_status == 5) {
-				echo btnEdit ( $printer );
-				echo btnDelete ( $printer );
-				// echo btnRecycle ( $user );
-				// }
-				// ;
+				if ($printer->prsu_status == 1) {
+					echo btnEdit ( $printer );
+					echo btnDelete ( $printer );
+				}
 				echo "</td>";
 				echo "</tr>";
 			}
@@ -71,9 +79,6 @@
 			function btnEdit($printer) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			// function btnRecycle($user) {
-			// return "<a class='btn btn-success' data-toggle='modal' data-target='#recycleUser' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUserRecycle(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-			// }
 			?>
 			</tbody>
 			</table>
@@ -115,20 +120,20 @@
 	    	<div class="modal-header">
 	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-	        	<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+	        	<h4 class="modal-title custom_align" id="Heading">Druckerei löschen?</h4>
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiederruflich löschen?
+		       		</span>Möchten Sie die Druckerei "<span id="printer"></span>" unwiderruflich löschen?
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
 		        <form action="<?php
 										
 										echo base_url ();
-										?>admin/deleteUser/" method="post">
-			        <input id="user_hidden_field" type="hidden" name="userDelete_hidden_field" value="">
-			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
+										?>admin/deletePrinter/" method="post">
+			        <input id="printer_hidden_field" type="hidden" name="printerDelete_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Druckerei löschen</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
 			</div>
