@@ -23,9 +23,36 @@ class Event extends CI_Controller {
 		$this->load->model ( 'event_model' );
 		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
 		$data ['event'] = $event [0];
+		
 		$data ['products'] = Event::getProductsFromEvent ( $event [0] );
 		
 		$this->load->template ( 'event/single_event_view', $data );
+	}
+	
+	public function deleteEvent() {
+		$CI = & get_instance ();
+		$CI->load->model ( 'event_model' );
+		if (isset($_POST['chk_group'])) {
+		$optionArray = $_POST['chk_group'];
+		$oki = 0;
+			for ($i=0; $i<count($optionArray); $i++) {
+				$ok = $CI->event_model->delete_event($optionArray[$i]);
+				if($ok) { $oki = $oki+1; }
+				else
+				{ $oki=$oki-1; }
+			}
+			
+			if($oki >= 1) {  $this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Die Aktion wurde erfolgreich ausgeführt! </div>' ); } 
+			else { $this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Leider hat das nicht geklappt!</div>' ); }
+		}
+		
+		$this->showEvents();
+	}
+	
+	public function showEvents() {
+		$this->load->model ( 'event_model' );
+		$data ['events'] = $this->event_model->getAllEvents ();
+		$this->load->template ( 'event/all_event_view', $data );
 	}
 	public static function getAllPublicEvents() {
 		$CI = & get_instance ();
