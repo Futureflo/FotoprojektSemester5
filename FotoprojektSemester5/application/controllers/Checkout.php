@@ -18,6 +18,7 @@ class Checkout extends CI_Controller {
 			
 			$shoppingcart_position->product_variant = Product::getProductVariant ( $prod_id, $prty_id );
 		}
+		// Müsste hier nicht jede Shoppingcart_position noch den $shoppingcart_positions zugeördnet werden?
 		$cart->shoppingcart_positions = $shoppingcart_positions;
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;

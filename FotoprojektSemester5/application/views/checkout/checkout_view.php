@@ -13,6 +13,7 @@
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
 			
+			// Warum kann ich hier auf Preis zugreifen?
 			$price = $shoppingcart_position->product_variant->price->prpt_price;
 			$amount = $shoppingcart_position->scpo_amount;
 			$prodname = $shoppingcart_position->product_variant->prod_name;
