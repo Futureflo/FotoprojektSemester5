@@ -37,7 +37,7 @@ class StaticPages extends CI_Controller {
 	}
 
 
-	public function termsandcondition()
+	public function termsandconditions()
 	{
 			$this->load->template ( 'termsandconditions/termsandconditions_view' );
 	}

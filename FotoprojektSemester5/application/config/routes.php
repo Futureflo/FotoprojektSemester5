@@ -73,4 +73,4 @@ $route ['event/delete/(:any)'] = 'Event/deleteEvent/$1';
 // Static Pages
 $route ['legalnotice'] = 'staticpages/legalnotice';
 $route ['privacypolicy'] = 'staticpages/privacypolicy';
-$route ['termsandcondition'] = 'staticpages/termsandcondition';
+$route ['termsandconditions'] = 'staticpages/termsandconditions';
