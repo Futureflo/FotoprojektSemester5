@@ -27,7 +27,7 @@
 		</div>
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
-				onkeyup="search()" placeholder="Suche Druckerei..." />
+				onkeyup="search()" placeholder="Suche Druckerei.." />
 		</div>
 	</div>
 	<div class="row">
