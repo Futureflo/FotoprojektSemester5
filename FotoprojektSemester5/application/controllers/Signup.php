@@ -14,9 +14,9 @@ class Signup extends CI_Controller
 	
 	function index()
 	{
-		$this->load->template('user/signup_view');
+ 		$this->load->template('user/signup_view');
 		
-		$title = $this->input->post('user_title');
+		$title = $this->input->post('gender');
 		$name = $this->input->post('lastname');
 		$firstname = $this->input->post('firstname');
 		$fullname = $firstname." ".$name;
@@ -41,9 +41,13 @@ class Signup extends CI_Controller
 		$privacyPolicy = $this->input->post('checklegalnotice');
 		$newsletter = $this->input->post('checknewsletter');
 		
+		if($agb != true && $privacyPolicy != true){
+		
+			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
+				 
+		}
 		$role = $this->input->post('type_hidden_field');
-		
-		
+			
 		// set form validation rules
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
@@ -51,6 +55,18 @@ class Signup extends CI_Controller
  		$this->form_validation->set_rules('cemail', 'Confirm Email', 'trim|required|matches[email]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
 		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
+ 		$this->form_validation->set_rules('zip', 'ZIP', 'trim|required');
+ 		$this->form_validation->set_rules('city', 'City', 'trim|required');
+ 		$this->form_validation->set_rules('street', 'Street', 'trim|required');
+ 		$this->form_validation->set_rules('housenumber', 'Housenumber', 'trim|required');
+ 		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+
+		if ($role == UserRole::Photograph){
+			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
+			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
+			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
+// 			$this->form_validation->set_rules ( 'traderlicense', 'Traderlicense', 'required' );			
+		}
 		
 		
 		// submit
@@ -101,21 +117,29 @@ class Signup extends CI_Controller
 			$addressIsSet = $this->user_model->insert_address($address);
 				
 			if (UserRole::Photograph) {
-				$bankAccount = array(
+				$bankaccountData = array(
 						'user_id' => $user_id,
-						'pain_accountholder' => $accountholder,
-						'adre_iban' => $iban,
-						'adre_bic' => $bic
+						'pain_account_holder' => $accountholder,
+						'pain_account_iban' => $iban,
+						'pain_account_bic' => $bic,
+						'paty_id' => 2
 				);
+				$this->user_model->insert_bankaccount($bankaccountData);
+			}
+			if($newsletter == true){
+				$newsletterData = array(
+						'nele_user_id' => $user_id,
+						'nele_email' => $email
+				);
+				$this->user_model->insert_UserToNewsletter($newsletterData);
 			}
 			
 			if ($addressIsSet && $UserIsSet)
 			{
 				
-				$this->session->set_flashdata('msgReg','You are Successfully Registered! Please login to access your Profile!');				
 				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
- 				redirect('start/');	
-			}
+ 				$this->load->template ( 'user/success_signup_view' );
+					}
 			else
 			{
 				// error

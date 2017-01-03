@@ -77,23 +77,23 @@ class Printers_model extends CI_Model {
 	
 	// get deleted printer
 	Public function get_AllArchivedPrinters() {
-		// $this->db->join ( 'user_role', 'usro_id = user_role_id', 'LEFT OUTER' );
-		$this->db->where ( 'user_status', UserStatus::deleted );
-		$query = $this->db->get ( "user" );
+		$this->db->where ( 'prsu', PrinterStatus::deleted );
+		$query = $this->db->get ( "print_supplier" );
 		return $query->result ();
 	}
 	
 	// get printer by email
 	function get_printer($email) {
 		$this->db->where ( 'prsu_email', $email );
-		$query = $this->db->get ( 'print_suppliers' );
+		$query = $this->db->get ( 'print_supplier' );
 		return $query->result ();
 	}
 	
 	// get printer by id
 	function get_printer_by_id($id) {
+		$this->db->join ( 'adress', 'prsu_adre_id = adre_id', 'INNER JOIN' );
 		$this->db->where ( 'prsu_id', $id );
-		$query = $this->db->get ( 'print_suppliers' );
+		$query = $this->db->get ( 'print_supplier' );
 		return $query->result ();
 	}
 	
@@ -116,27 +116,12 @@ class Printers_model extends CI_Model {
 		) );
 	}
 	
-	// update user status by id
-	function update_userStatusByID($user_id, $user_status) {
-		$this->db->set ( 'user_status', $user_status );
-		$this->db->where ( 'user_id', $user_id );
-		$this->db->update ( 'user' );
+	// update printer status by id
+	function update_printerStatusByID($prsu_id, $prsu_status) {
+		$this->db->set ( 'prsu_status', $prsu_status );
+		$this->db->where ( 'prsu_id', $prsu_id );
+		$this->db->update ( 'print_supplier' );
 		return $affectedRows = $this->db->affected_rows ();
-	}
-	
-	// update user email by id
-	function update_userEmailByID($user_id, $user_email) {
-		$this->db->set ( 'user_email', $user_email );
-		$this->db->where ( 'user_id', $user_id );
-		$this->db->update ( 'user' );
-		return $affectedRows = $this->db->affected_rows ();
-	}
-	public function update_user($usrArray) {
-		if (empty ( $usrArray ) || ! isset ( $usrArray ["user_id"] ))
-			return FALSE;
-		$this->db->where ( 'user_id', $usrArray ["user_id"] );
-		unset ( $usrArray ["user_id"] );
-		return $this->db->update ( 'user', $usrArray );
 	}
 }
 ?>

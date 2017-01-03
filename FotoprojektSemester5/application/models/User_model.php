@@ -69,9 +69,14 @@ class User_model extends CI_Model {
 		return $this->db->insert ( 'user', $data );
 	}
 	
-	// insert new User
+	// insert new Useraddress
 	function insert_address($data) {
 		return $this->db->insert ( 'adress', $data );
+	}
+	
+	// insert new Bankaccount
+	function insert_bankaccount($data) {
+		return $this->db->insert ( 'payment_information', $data );
 	}
 	
 	// delete user
@@ -147,5 +152,10 @@ class User_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	// add User to Newsletter
+	function insert_UserToNewsletter($data) {
+		return $this->db->insert ( 'newsletter', $data );
+	}
+	
 }
 ?>
