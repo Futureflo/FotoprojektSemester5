@@ -10,35 +10,75 @@ echo form_open ( "Order/newOrder", '', array (
 		'shca_id' => $cart->shca_id 
 ) );
 ?>
-<div class="panel-group" id="accordion">
 
-	<!-- Postionen -->
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-					Positonen</a>
-			</h4>
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+			<div class="form-group col-xs-12">
+				<label class="h5" for="delivery">Lieferadresse</label>
+			    <?php
+							echo "<select class=\"form-control\" name=\"orde_de_adre_id\" id=\"delivery\">";
+							foreach ( $adresses as $adress ) {
+								echo '<option value=' . $adress->adre_id . '>';
+								
+								echo '<b>' . $adress->adre_name . ' </b>';
+								echo $adress->adre_street . ', ' . $adress->adre_city . ', ' . $adress->adre_zip . ' ' . $adress->country->coun_nicename;
+								
+								echo "</option>";
+							}
+							echo "</select>";
+							?>
+			  </div>
+			<div class="form-group col-xs-12">
+				<label class="h5" for="payadress">Rechnungsadresse</label>
+			  	<?php
+						echo "<select name=\"orde_in_adre_id\" class=\"form-control\" id=\"payadress\">";
+						foreach ( $adresses as $adress ) {
+							echo '<option value=' . $adress->adre_id . '>';
+							
+							echo '<b>' . $adress->adre_name . ' </b>';
+							echo $adress->adre_street . ', ' . $adress->adre_city . ', ' . $adress->adre_zip . ' ' . $adress->country->coun_nicename;
+							
+							echo "</option>";
+						}
+						echo "</select>";
+						?>
+			  </div>
+			<div class="form-group col-xs-12">
+				<label class="h5" for="payment">Zahlungsmethode</label>
+			  <?php
+					echo "<select name=\"orde_pain_id\" class=\"form-control\" id=\"payment\">";
+					echo "<option> PayPal </option>";
+					echo "</select>";
+					?>
+			  </div>
 		</div>
+	</div>
+	<hr>
+	<br>
+	<div class="row">
+		<div class="col-xs-12">
 
-		<div id="collapse1" class="panel-collapse collapse">
-			<div class="panel-body">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Bild</th>
-							<th>Veranstaltung</th>
-							<th>Größe</th>
-							<th>Digital/Analog</th>
-							<th>Preis</th>
-							<th>Menge</th>
-							<th><h5>
-									<b>Summe</b>
-								</h5></th>
-						</tr>
-					</thead>
-					<tbody>
+			<!-- Postionen -->
+			<h5>Übersicht</h5>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Bild</th>
+						<th>Veranstaltung</th>
+						<th>Größe</th>
+						<th>Digital/Analog</th>
+						<th>Preis</th>
+						<th>Menge</th>
+						<th><h5>
+								<b>Summe</b>
+							</h5></th>
+					</tr>
+				</thead>
+				<tbody>
 		<?php
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
@@ -89,54 +129,20 @@ echo form_open ( "Order/newOrder", '', array (
 		}
 		?>
 					</tbody>
-				</table>
-			</div>
+			</table>
 		</div>
+
 	</div>
+</div>
 
-	<!-- Lieferadresse -->
-	<h4>Lieferadresse</h4>
-					     <?php
-										echo "<select name=\"orde_de_adre_id\">";
-										foreach ( $adresses as $adress ) {
-											echo '<option value=' . $adress->adre_id . '>';
-											
-											echo '<b>' . $adress->adre_name . ' </b>';
-											echo $adress->adre_street . ', ' . $adress->adre_city . ', ' . $adress->adre_zip . ' ' . $adress->country->coun_nicename;
-											
-											echo "</option>";
-										}
-										echo "</select>";
-										?>
-<!-- Rechnungsadresse -->
-	<h4>Rechnungsadresse</h4>
-					     <?php
-										echo "<select name=\"orde_in_adre_id\">";
-										foreach ( $adresses as $adress ) {
-											echo '<option value=' . $adress->adre_id . '>';
-											
-											echo '<b>' . $adress->adre_name . ' </b>';
-											echo $adress->adre_street . ', ' . $adress->adre_city . ', ' . $adress->adre_zip . ' ' . $adress->country->coun_nicename;
-											
-											echo "</option>";
-										}
-										echo "</select>";
-										?>
-										</div>
 
-<!-- Payment -->
-												<h4>Payment</h4>
-					     <?php
-										echo "<select name=\"orde_pain_id\">";
-										echo "<option> PayPal </option>";
-										echo "</select>";
-										?>
-
-<div>
+<div class="container">
 	<hr>
 	<div class="row">
-		<button name="submit" type="submit"
-			class="btn btn-success btn-block btn-md">zahlungspflichtig bestellen</button>
+		<div class="col-md-4 offset-md-4">
+			<button name="submit" type="submit"
+				class="btn btn-success btn-block btn-md">zahlungspflichtig bestellen</button>
+		</div>
 	</div>
 
 
