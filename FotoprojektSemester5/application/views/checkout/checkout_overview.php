@@ -2,7 +2,8 @@
 
 <section class="jumbotron text-xs-center" style="padding-bottom: 1rem">
 	<div class="container">
-		<h1 class="jumbotron-heading">Ihe Bestellung</h1>
+		<h1 class="jumbotron-heading">Ihre Bestellung</h1>
+		<p class="lead text-muted">Bestätigen</p>
 	</div>
 </section>
 <?php

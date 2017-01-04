@@ -84,7 +84,7 @@
 	<div class="row">
 		
 		<?php
-		echo form_open ( "Checkout/overview", '' );
+		echo form_open ( "Checkout/checkLogin", '' );
 		?>
 <button name="submit" type="submit"
 			class="btn btn-success btn-block btn-md">Zur Kasse</button>

@@ -14,9 +14,9 @@ class Checkout extends CI_Controller {
 			
 			$shopping_cart = array (
 					'shca_id' => 0,
-					'shca_commission' => 0,
-					'shca_sum' => 0,
-					'shca_delivery_charge' => 0,
+					// 'shca_commission' => 0,
+					// 'shca_sum' => 0,
+					// 'shca_delivery_charge' => 0,
 					'shca_user_id' => $user_id 
 			);
 			$shca_id = $this->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
@@ -61,6 +61,19 @@ class Checkout extends CI_Controller {
 		$data ['cart'] = $cart;
 		$data ['adresses'] = $this->adress_model->getAdressesForUser ( $user_id );
 		$this->load->template ( 'checkout/checkout_overview', $data );
+	}
+	public function checkLogin() {
+		if ($this->session->userdata ( 'login' )) {
+			$this->overview ();
+		} else {
+			$this->load->template ( 'checkout/checkout_login.php' );
+		}
+	}
+	public function guest() {
+		$this->load->template ( 'checkout/checkout_guest.php' );
+	}
+	public function payment() {
+		$this->load->template ( 'checkout/checkout_payment.php' );
 	}
 }
 ?>
