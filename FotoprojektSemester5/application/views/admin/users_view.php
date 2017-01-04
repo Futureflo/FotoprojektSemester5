@@ -154,7 +154,7 @@
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiederruflich löschen?
+		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiderruflich löschen?
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
@@ -263,6 +263,22 @@
 	</div>
       <!-- /.modal-dialog --> 
 </div>
+
+<script type="text/javascript">
+$('.signinform').submit(function() { 
+   $(this).ajaxSubmit({ 
+       type : "POST",
+       //set the data type
+       dataType:'json',
+       url: 'index.php/user/signin', // target element(s) to be updated with server response 
+       cache : false,
+       //check this in Firefox browser
+       success : function(response){ console.log(response); alert(response)},
+       error: onFailRegistered
+   });        
+   return false; 
+}); 
+</script>
 
 <script type="text/javascript">
     
