@@ -62,18 +62,30 @@ class Checkout extends CI_Controller {
 		$data ['adresses'] = $this->adress_model->getAdressesForUser ( $user_id );
 		$this->load->template ( 'checkout/checkout_overview', $data );
 	}
-	public function checkLogin() {
-		if ($this->session->userdata ( 'login' )) {
-			$this->overview ();
-		} else {
-			$this->load->template ( 'checkout/checkout_login.php' );
-		}
-	}
 	public function guest() {
 		$this->load->template ( 'checkout/checkout_guest.php' );
 	}
 	public function payment() {
 		$this->load->template ( 'checkout/checkout_payment.php' );
+	}
+	public function customer() {
+		$this->load->model ( 'user_model' );
+		
+		$user_id = $this->session->userdata ( 'user_id' );
+		
+		$user = $this->user_model->get_user_by_id ( $user_id );
+		$address = $this->user_model->get_address_by_id ( $user_id );
+		
+		$data ['user_title'] = $user [0]->user_title;
+		$data ['user_name'] = $user [0]->user_name;
+		$data ['user_firstname'] = $user [0]->user_firstname;
+		
+		$data ['adre_name'] = $address [0]->adre_name;
+		$data ['adre_street'] = $address [0]->adre_street;
+		$data ['adre_zip'] = $address [0]->adre_zip;
+		$data ['adre_city'] = $address [0]->adre_city;
+		
+		$this->load->template ( 'checkout/checkout_customer.php', $data );
 	}
 }
 ?>
