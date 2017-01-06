@@ -112,8 +112,12 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-
-			<div class="modal-body">        
+			
+			<div class="modal-body">       
+				<div id="fehler_span" class="text-danger"><?php
+				
+				echo $this->session->flashdata ( 'msg' );
+				?></div> 
         
        
 					<?php
@@ -159,10 +163,7 @@
 				
 				echo form_close ();
 				?>
-				<div id="fehler_span" class="text-danger"><?php
 				
-				echo $this->session->flashdata ( 'msg' );
-				?></div>
 
 
 			</div>
@@ -187,7 +188,14 @@
 <script type="text/javascript">
     window.onload = function(){
         if(document.getElementById("fehler_span").innerHTML.length > 0){
+            var text = document.getElementById("fehler_span").innerHTML;
             document.getElementById("login-btn").click();
+            if(text.includes("erfolgreich")) {
+                 document.getElementById("fehler_span").className="alert alert-success";
+            }
+            else {
+            document.getElementById("fehler_span").className="alert alert-danger";
+            }
         }
     }
     
@@ -217,11 +225,14 @@
     }
     
     function validate(){
+    	
         var email = document.getElementById("user_email").value;
         var password = document.getElementById("user_password").value;
         
         if(email === '' || password === ''){
             document.getElementById("login").type = "button";
+            document.getElementById("fehler_span").className="text-danger";
+       	 	document.getElementById("fehler_span").innerHTML = "";
             formsSet();
         } else {
             document.getElementById("login").type = "submit";

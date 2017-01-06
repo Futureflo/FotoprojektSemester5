@@ -3,6 +3,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/ProductType.php");
 include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
 include_once (dirname ( __FILE__ ) . "/User.php");
+include_once (dirname ( __FILE__ ) . "/Printers.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -30,6 +31,16 @@ class Admin extends CI_Controller {
 	public function printers() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function deletePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
 		$data ['printers'] = $this->Printers_model->getAllPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}

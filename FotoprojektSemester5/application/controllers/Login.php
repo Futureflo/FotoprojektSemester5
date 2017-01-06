@@ -159,7 +159,7 @@ class Login extends CI_Controller {
 			
 			$this->load->template ( 'user/password_reset_view', $data );
 		} else {
-			 redirect ('start/');
+			redirect ( 'start/' );
 		}
 	}
 	function getNewPassword() {
@@ -170,11 +170,11 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required' );
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
-			$this->session->set_flashdata ( 'msg', 'Das Passwort mit dem wiederholten Passwort übereinstimmen' );
-							
+			// $this->session->set_flashdata ( 'msg', 'Das Passwort mit dem wiederholten Passwort übereinstimmen' );
 		} else {
 			
 			$this->changePassword ( $user_id, $newPassword );
+			// Warum hier redirect und nicht Aufruf von template() ?!
 			redirect ( "start/" );
 		}
 	}
@@ -183,6 +183,6 @@ class Login extends CI_Controller {
 		$newSalt = generate_salt ( 10 );
 		$newHashpw = generate_hash ( $newSalt, $newPassword, $algo );
 		$this->user_model->update_userPassword ( $user_id, $newHashpw, $newSalt, UserStatus::activated );
-		$this->session->set_flashdata ( 'msg', 'Ihr Passwort wurde erfolgreich geändert' );	
+		$this->session->set_flashdata ( 'msg', 'Ihr Passwort wurde erfolgreich geändert' );
 	}
 }
