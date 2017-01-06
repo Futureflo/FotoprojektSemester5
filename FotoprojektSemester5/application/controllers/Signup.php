@@ -14,8 +14,7 @@ class Signup extends CI_Controller
 	
 	function index()
 	{
- 		$this->load->template('user/signup_view');
-		
+
 		$title = $this->input->post('gender');
 		$name = $this->input->post('lastname');
 		$firstname = $this->input->post('firstname');
@@ -41,11 +40,11 @@ class Signup extends CI_Controller
 		$privacyPolicy = $this->input->post('checklegalnotice');
 		$newsletter = $this->input->post('checknewsletter');
 		
-		if($agb != true && $privacyPolicy != true){
+// 		if($agb != true && $privacyPolicy != true){
 		
-			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
+// 			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
 				 
-		}
+// 		}
 		$role = $this->input->post('type_hidden_field');
 			
 		// set form validation rules
@@ -68,12 +67,17 @@ class Signup extends CI_Controller
 // 			$this->form_validation->set_rules ( 'traderlicense', 'Traderlicense', 'required' );			
 		}
 		
+		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
+		$this->form_validation->set_rules('checklegalnotice', 'Privacy Policy', 'required');
+		
+		
 		
 		// submit
 		if ($this->form_validation->run() == FALSE)
         {
 			// fails
-        	$this->session->set_flashdata('msgReg','Füllen Sie bitte alle Pflichtfelder aus!');
+        	$this->load->template('user/signup_view');       	     
+//         	$this->session->set_flashdata('msgReg','Füllen Sie bitte alle Pflichtfelder aus!');
 
         }
 		else
