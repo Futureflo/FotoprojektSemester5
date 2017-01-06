@@ -13,9 +13,8 @@
 				<li class="nav-item"><a class="nav-link" href="#photographer"
 					data-toggle="tab" onmouseout="checkType()">Fotograf</a></li>
 			</ul>
-
 					<?php
- 					echo form_open ( 'signup/' );
+ 					echo form_open ('signup/');
 					?>
 
 				<div class="form-group">
@@ -46,6 +45,9 @@
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="firstname"
 							placeholder="Vorname">
+							<span class="text-danger">
+							<?php echo form_error ( 'firstname' );?>
+							</span>
 					</div>
 				</div>
 				<br>
@@ -53,6 +55,9 @@
 					<div class="col-sm-12">
 						<input type="text" class="form-control" name="lastname"
 							placeholder="Nachname">
+							<span class="text-danger">
+							<?php echo form_error ( 'lastname' );?>
+							</span>							
 					</div>
 				</div>
 				<br>
@@ -62,6 +67,9 @@
 							<select class="form-control" name="country">
 								<option>Deutschland</option>
 							</select>
+									<span class="text-danger">
+							<?php echo form_error ( 'country' );?>
+							</span>	
 						</div>
 					</div>
 				</div>
@@ -69,10 +77,16 @@
 					<div class="col-sm-3 col-xs-3">
 						<input type="text" class="form-control" name="zip"
 							placeholder="PLZ">
+							<span class="text-danger">
+							<?php echo form_error ( 'zip' );?>
+							</span>							
 					</div>
 					<div class="col-sm-9 col-xs-9">
 						<input type="text" class="form-control" name="city"
 							placeholder="Ort">
+							<span class="text-danger">
+							<?php echo form_error ( 'city' );?>
+							</span>							
 					</div>
 				</div>
 				<br>
@@ -80,10 +94,16 @@
 					<div class="col-sm-9 col-xs-9">
 						<input type="text" class="form-control" name="street"
 							placeholder="Straße">
+							<span class="text-danger">
+							<?php echo form_error ( 'street' );?>
+							</span>
 					</div>
 					<div class="col-sm-3 col-xs-3">
 						<input type="text" class="form-control" name="housenumber"
 							placeholder="Hausnr">
+							<span class="text-danger">
+							<?php echo form_error ( 'housenumber' );?>
+							</span>
 					</div>
 				</div>
 				<br>
@@ -94,11 +114,10 @@
 						echo set_value ( 'birthday' );
 						?>"/>  -->
 						<input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" 
-							placeholder="Geburtstag" name="birthday" /> <span
-							class="text-danger"><?php
-							
-							echo form_error ( 'birthday' );
-							?></span>
+							placeholder="Geburtstag" name="birthday" />
+							 <span class="text-danger">
+							<?php echo form_error ( 'birthday' );?>
+							</span>
 					</div>
 				</div>
 				<br>
@@ -106,6 +125,9 @@
 					<div class="col-sm-12">
 						<input type="email" class="form-control" name="email"
 							placeholder="E-Mail">
+							<span class="text-danger">
+							<?php echo form_error ( 'email' );?>
+							</span>							
 					</div>
 				</div>
 				<br>
@@ -113,6 +135,9 @@
 					<div class="col-sm-12">
 						<input type="email" class="form-control" name="cemail"
 							placeholder="E-Mail wiederholen">
+							<span class="text-danger">
+							<?php echo form_error ( 'cemail' );?>
+							</span>
 					</div>
 				</div>
 				<br>
@@ -120,6 +145,9 @@
 					<div class="col-sm-12">
 						<input class="form-control" type="password" name="password"
 							placeholder="Passwort">
+							<span class="text-danger">
+							<?php echo form_error ( 'password' );?>
+							</span>
 					</div>
 				</div>
 				<br>
@@ -127,6 +155,9 @@
 					<div class="col-sm-12">
 						<input class="form-control" type="password" name="cpassword"
 							placeholder="Passwort wiederholen">
+							<span class="text-danger">
+							<?php echo form_error ( 'cpassword' );?>
+							</span>
 					</div>
 				</div>
 			
@@ -150,6 +181,9 @@
 										<input type="file" name="dateiupload" /> <input
 											type="submit" name="btn[upload]" class="btn btn-success"
 											value="Gewerbeschein absenden" />
+							<span class="text-danger">
+							<?php echo form_error ( 'dateiupload' );?>
+							</span>
 									</div>
 								</div>
 							</div>
@@ -158,6 +192,9 @@
 								<div class="col-sm-12">
 									<input type="text" class="form-control" name="accountholder"
 										placeholder="Kontoinhaber">
+							<span class="text-danger">
+							<?php echo form_error ( 'accountholder' );?>
+							</span>
 								</div>
 							</div>
 							<br>
@@ -165,6 +202,9 @@
 								<div class="col-sm-12">
 									<input type="text" class="form-control" name="iban"
 										placeholder="IBAN">
+							<span class="text-danger">
+							<?php echo form_error ( 'iban' );?>
+							</span>										
 								</div>
 							</div>
 							<br>
@@ -172,6 +212,9 @@
 								<div class="col-sm-12">
 									<input type="text" class="form-control" name="bic"
 										placeholder="BIC">
+							<span class="text-danger">
+							<?php echo form_error ( 'bic' );?>
+							</span>
 								</div>
 							</div>
 						</div>
@@ -185,6 +228,9 @@
 								<label class="form-check-label"> <input type="checkbox"
 									class="form-check-input" name="checktermsandconditions"> AGB zustimmen
 								</label>
+							<span class="text-danger">
+							<?php echo form_error ( 'checktermsandconditions' );?>
+							</span>
 							</div>
 						</div>
 					</div>
@@ -194,6 +240,9 @@
 								<label class="form-check-label"> <input type="checkbox"
 									class="form-check-input" name="checklegalnotice"> Datenschutzrichtlinien akzeptieren
 								</label>
+							<span class="text-danger">
+							<?php echo form_error ( 'checklegalnotice' );?>
+							</span>
 							</div>
 						</div>
 					</div>
@@ -203,6 +252,9 @@
 								<label class="form-check-label"> <input type="checkbox"
 									class="form-check-input" name="checknewsletter"> Newsletter abonnieren
 								</label>
+							<span class="text-danger">
+							<?php echo form_error ( 'checknewsletter' );?>
+							</span>
 							</div>
 						</div>
 					</div>
