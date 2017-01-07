@@ -40,11 +40,6 @@ class Signup extends CI_Controller
 		$privacyPolicy = $this->input->post('checklegalnotice');
 		$newsletter = $this->input->post('checknewsletter');
 		
-// 		if($agb != true && $privacyPolicy != true){
-		
-// 			$this->session->set_flashdata('msgReg','Bitte stimmen Sie den AGB zu und akzeptieren Sie die Datenschutzrichtlinien');
-				 
-// 		}
 		$role = $this->input->post('type_hidden_field');
 			
 		// set form validation rules
@@ -64,7 +59,7 @@ class Signup extends CI_Controller
 			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
-// 			$this->form_validation->set_rules ( 'traderlicense', 'Traderlicense', 'required' );			
+  			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
 		}
 		
 		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
@@ -110,6 +105,8 @@ class Signup extends CI_Controller
 			$result = $this->user_model->get_user($email);
 			$user_id = $result[0]->user_id;
 			//insert address
+			
+			
 			$address = array(
 				'adre_user_id' => $user_id,
 				'adre_zip' => $zip,
@@ -121,6 +118,7 @@ class Signup extends CI_Controller
 			$addressIsSet = $this->user_model->insert_address($address);
 				
 			if (UserRole::Photograph) {
+				
 				$bankaccountData = array(
 						'user_id' => $user_id,
 						'pain_account_holder' => $accountholder,
@@ -129,6 +127,9 @@ class Signup extends CI_Controller
 						'paty_id' => 2
 				);
 				$this->user_model->insert_bankaccount($bankaccountData);
+				
+				// upload traderlicense
+				$this->uploadTradeLicense($user_id);
 			}
 			if($newsletter == true){
 				$newsletterData = array(
@@ -155,27 +156,37 @@ class Signup extends CI_Controller
 		}
 	}
 	
-	function uploadTradeLicense()
+	function uploadTradeLicense($user_id)
 	{
 		// set path to store uploaded files
-		$config['upload_path'] = './Tradelicinse/';
+		$basefolder = './Tradelicinse/';
+		$config['upload_path'] = $basefolder;
 		// set allowed file types
 		$config['allowed_types'] = 'pdf';
 		// set upload limit, set 0 for no limit
 		$config['max_size']    = 0;
-	
+		// get filename and add userid
+		$file_name = $_FILES['tradelicense']['name'];
+		$newfile_name = $user_id."_".$file_name;
+		$config['file_name'] = $newfile_name;
+
 		// load upload library with custom config settings
 		$this->load->library('upload', $config);
-	
+		$this->upload->initialize ( $config );
+		
 		// if upload failed , display errors
-		if (!$this->upload->do_upload())
+		if (!$this->upload->do_upload('tradelicense'))
 		{
-			$this->session->set_flashdata('upload','Upload des Gerwerbeschein ist fehlgeschlagen. Bitte versuchen Sie es erneut!');
+			$upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+			$user_tradelicenseurl= $basefolder.$newfile_name;
+			$this->user_model->update_userTradelicenseByID($user_id);
+			$this->session->set_flashdata('msgReg','Upload des Gerwerbeschein ist fehlgeschlagen. Bitte versuchen Sie es erneut!');
+
 				
 		}
 		else
 		{
-			$this->session->set_flashdata('upload','Gewerbeschein wurde erfolgreich hochgeladen');
+			$this->session->set_flashdata('msgReg','Gewerbeschein wurde erfolgreich hochgeladen');
 				
 			//print_r($this->upload->data());
 			// print uploaded file data

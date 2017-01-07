@@ -92,7 +92,13 @@ class User_model extends CI_Model {
 		$this->db->update ( 'user' );
 		return $afftectedRows = $this->db->affected_rows ();
 	}
-	
+	// update user tradelicense
+	function update_userTradelicenseByID($user_id, $user_tradelicenseurl) {
+		$this->db->set ( 'user_tradelicenseurl', $user_tradelicenseurl );
+		$this->db->where ( 'user_id', $user_id );
+		$this->db->update ( 'user' );
+		return $afftectedRows = $this->db->affected_rows ();
+	}
 	// update user status by id
 	function update_userStatusByID($user_id, $user_status) {
 		$this->db->set ( 'user_status', $user_status );
