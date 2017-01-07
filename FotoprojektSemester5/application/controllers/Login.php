@@ -73,7 +73,7 @@ class Login extends CI_Controller {
 								'user_role' => $uresult [0]->user_role 
 						);
 						$this->session->set_userdata ( $sess_data );
-						redirect ( "start/" );
+						redirect ( $_SERVER['HTTP_REFERER'] );
 					} else {
 						
 						$passwordAttempt = $uresult [0]->user_passwordattempt;
