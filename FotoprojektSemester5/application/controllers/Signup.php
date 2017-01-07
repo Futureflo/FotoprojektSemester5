@@ -148,9 +148,7 @@ class Signup extends CI_Controller
 			else
 			{
 				// error
-				$this->session->set_flashdata('msg','Oops! Error.  Please try again later!!!');
-// 				redirect('signup/');
-				
+				$this->session->set_flashdata('msgReg','Es ist ein technischer Fehler aufgetreten. Bitte Versuchen Sie es später noch einmal.');
 
 			}
 		}
@@ -177,19 +175,15 @@ class Signup extends CI_Controller
 		// if upload failed , display errors
 		if (!$this->upload->do_upload('tradelicense'))
 		{
-			$upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
-			$user_tradelicenseurl= $basefolder.$newfile_name;
-			$this->user_model->update_userTradelicenseByID($user_id);
 			$this->session->set_flashdata('msgReg','Upload des Gerwerbeschein ist fehlgeschlagen. Bitte versuchen Sie es erneut!');
-
-				
 		}
 		else
 		{
+			//safe url in DB
+			$user_tradelicenseurl= $basefolder.$newfile_name;
+			$this->user_model->update_userTradelicenseByID($user_id);
 			$this->session->set_flashdata('msgReg','Gewerbeschein wurde erfolgreich hochgeladen');
-				
-			//print_r($this->upload->data());
-			// print uploaded file data
+
 		}
 	}
 	
