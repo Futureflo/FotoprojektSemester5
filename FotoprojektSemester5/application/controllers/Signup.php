@@ -10,6 +10,7 @@ class Signup extends CI_Controller
 		$this->load->library(array('form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
+		$this->load->model ( 'adress_model' );
 	}
 	
 	function index()
@@ -125,10 +126,11 @@ class Signup extends CI_Controller
 				'adre_city' => $city,
 				'adre_street' => $streetAndNr,
 				'adre_name' => $fullname,
-				'adre_coun_id' => '80'
+					'adre_coun_id' => '80',
+					'adre_status' => 1 
 			);
-			$addressIsSet = $this->user_model->insert_address($address);
-				
+			$addressIsSet = $this->adress_model->addAdressObj ( $address );
+			
 			if (UserRole::Photograph) {
 				
 				$bankaccountData = array(

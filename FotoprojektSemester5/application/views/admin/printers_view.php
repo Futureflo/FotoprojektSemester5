@@ -66,6 +66,7 @@
 				if ($printer->prsu_status == 1) {
 					echo btnEdit ( $printer );
 					echo btnDelete ( $printer );
+					echo btneditprinter ( $printer );
 				}
 				echo "</td>";
 				echo "</tr>";
@@ -75,6 +76,13 @@
 			}
 			function btnEdit($printer) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			function btneditprinter($printer) {
+				echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
+				echo "<button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\" bearbeiten' aria-label='delete' >
+							<i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
+							</button>";
+				echo form_close ();
 			}
 			?>
 			</tbody>

@@ -6,6 +6,7 @@
 			?>
 			<div class="">
 				<h2>Newsletterabmeldung:</h2>
+				<br>
 				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email"/>
 				<br />
 				<div class="form-group">
