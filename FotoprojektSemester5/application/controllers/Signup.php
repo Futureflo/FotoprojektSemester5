@@ -59,7 +59,12 @@ class Signup extends CI_Controller
 			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
-  			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
+			
+			if (empty($_FILES['tradelicense']['name']))
+			{
+				$this->form_validation->set_rules('tradelicense', 'Traderlicense', 'required');
+			}
+//    			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
 		}
 		
 		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
@@ -181,7 +186,7 @@ class Signup extends CI_Controller
 		{
 			//safe url in DB
 			$user_tradelicenseurl= $basefolder.$newfile_name;
-			$this->user_model->update_userTradelicenseByID($user_id);
+			$this->user_model->update_userTradelicenseByID($user_id,$user_tradelicenseurl);
 			$this->session->set_flashdata('msgReg','Gewerbeschein wurde erfolgreich hochgeladen');
 
 		}
