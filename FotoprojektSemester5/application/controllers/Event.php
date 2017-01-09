@@ -93,6 +93,17 @@ class Event extends CI_Controller {
 			$CI->event_model->update_event ( $even_id, $event [0] );
 		}
 	}
+	public function changeStateToPrivateById($even_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'event_model' );
+	
+		$event = $CI->event_model->getSingleEventById ( $even_id );
+	
+		if (isset ( $event [0] )) {
+			$event [0]->even_status = EventStatus::prv;
+			$CI->event_model->update_event ( $even_id, $event [0] );
+		}
+	}
 	public static function getAllPublicEvents() {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
