@@ -97,6 +97,43 @@
 			<img id="phimg" data-src="holder.js/100px280/thumb" alt="100%x280" style="height: 280px; width: 100%; display: none;"
 				src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22356%22%20height%3D%22280%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20356%20280%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158b0639c79%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A18pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158b0639c79%22%3E%3Crect%20width%3D%22356%22%20height%3D%22280%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22131.2890625%22%20y%3D%22148.1%22%3E356x280%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
 				data-holder-rendered="true">
+				<br>
+			<h4 id="noresults" style="text-align: center"></h4>
+		</div>
+	</div>
+</div>
+
+<button type="button" id="proof-btn" class="btn btn-success btn-md" data-toggle="modal" data-target="#proofModal" style="display: none"></button>
+
+<!-- Modal -->
+<div id="proofModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+
+				<input type="text" class="form-control input-sm chat-input" placeholder="Bestätigungscode" id="event_code" name="event_code" />
+
+			</div>
+
+
+			<div class="modal-footer text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<a class="btn btn-success btn-md btn-block" role="button" id="send_code">Absenden</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -134,15 +171,19 @@ function searchEvent(ev){
     				   var response = jQuery.parseJSON(data);
 
     				   var events = response.events;
+        
+                        if(events.length <= 0){
+                            noresults(ev);
+                        } else {
 
-    				   for (var i in events){
-                           if(events[i].products.length > 0){
-                                ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[0].even_status));
-                            } else {
-                                ceateEvent(events[i].even_name, events[i].even_url)
+                           for (var i in events){
+                               if(events[i].products.length > 0){
+                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[0].even_status));
+                                } else {
+                                    ceateEvent(events[i].even_name, events[i].even_url)
+                                }
                             }
-    			        }
-    				     
+                    	}
     				   
     				  }catch(e) {  
     				   alert('Exception while request..' + e);
@@ -155,7 +196,30 @@ function searchEvent(ev){
     		});
     }
     
+function noresults(searchtext){
+    document.getElementById('noresults').innerHTML = "Es konnten keine Events mit dem Namen \"" + searchtext +"\" gefunden werden!";
+}    
+   
+function proofEvent(i){
+    var ai = i.parentNode.parentNode;
+    var url = ai.getAttribute("href");
+    
+    ai.setAttribute("href", "#"+i.getAttribute("id"));
+    
+    var a = ai.parentNode.firstChild.firstChild.firstChild;
+    
+    a.setAttribute("href", "#"+i.getAttribute("id"));
+    
+    clickProofModal(url);
+} 
+
+function clickProofModal(url){
+	document.getElementById('proof-btn').click();
+	document.getElementById('send_code').setAttribute("href", url);
+}
+    
 function createPic(prodfile, prodname, status){
+    var count = 0;
     
     if(status == 2){
     	var i = document.createElement("I");
@@ -163,11 +227,14 @@ function createPic(prodfile, prodname, status){
 		i.classList.add("fa");
         i.classList.add("fa-lock");
         //i.classList.add("fa-10x");
-        i.style.fontSize = "17rem";
+        i.style.fontSize = "17.5rem";
         i.style.display = "inline-block";
         i.style.width = "100%";
         i.style.textAlign = "center";
         i.setAttribute("aria-hidden","true");
+        i.setAttribute("id", "place"+count);
+        i.onclick = function(){proofEvent(this);};
+        count++;
         
         div.appendChild(i);
         
@@ -246,6 +313,7 @@ function resetEvents(){
     while (result.firstChild) {
         result.removeChild(result.firstChild);
     }
+    document.getElementById('noresults').innerHTML = "";
 }
 
 function show(img){

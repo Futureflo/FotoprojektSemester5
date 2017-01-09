@@ -2,9 +2,9 @@
 <section style="padding-top: 70px">
 	<div class="container">
 		<?php
-		if (isset ( $user_id )) {
+		if (isset ( $message )) {
 			echo "<div class='alert alert-danger'>";
-			echo "Der Benutzer mit der ID: " . $user_id . " wurde gelöscht</div>";
+			echo $message . "</div>";
 		}
 		?>
 </div>
@@ -13,15 +13,19 @@
 
 <div class="container">
 		<div class="row">
-		<div class="col-md-3">
-		<p class="h1" id="test" onclick="setPager()">Users</p>
-		</div>
+		<div class="col-md-9">
+		<p class="h1" id="test" onclick="setPager()">
+		<?php
 		
-		<div class="col-md-6">
-			<a class="btn btn-success" href="#">
-  			<i class="fa fa-user-plus fa-lg"></i> Benutzer anlegen</a>
+		echo $UsersViewHeader?>
+		</p>
 		</div>
-		
+		<!--  
+			<div class="col-md-6">
+				<a class="btn btn-success" href="#">
+	  			<i class="fa fa-user-plus fa-lg"></i> Benutzer anlegen</a>
+			</div>
+		-->
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Search for user..." />
@@ -78,20 +82,18 @@
 				echo "<td>" . $statusText . "</td>";
 				echo "<td>";
 				
-				echo "<center>";
 				if ($user->user_status == 1 || $user->user_status == 3 || $user->user_status == 5) {
-					echo btnEdit ( $user );
+					// echo btnEdit ( $user );
 					echo btnUnlockUser ( $user );
 					echo btnDelete ( $user );
 				} elseif ($user->user_status == 2) {
-					echo btnEdit ( $user );
+					// echo btnEdit ( $user );
 					echo btnLockUser ( $user );
 					echo btnDelete ( $user );
 				} elseif ($user->user_status == 4) {
 					echo btnRecycle ( $user );
 				}
 				;
-				echo "</center>";
 				echo "</td>";
 				echo "</tr>";
 			}
@@ -108,7 +110,7 @@
 				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUserUnlock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnRecycle($user) {
-				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycle' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycleUser' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUserRecycle(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
 			</tbody>
@@ -152,7 +154,7 @@
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiederruflich löschen?
+		       		</span>Möchten Sie den Benutzer "<span id="user"></span>" unwiderruflich löschen?
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
@@ -160,7 +162,7 @@
 										
 										echo base_url ();
 										?>admin/deleteUser/" method="post">
-			        <input id="user_hidden_field" type="hidden" name="user_hidden_field" value="">
+			        <input id="user_hidden_field" type="hidden" name="userDelete_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
@@ -230,6 +232,53 @@
 	</div>
       <!-- /.modal-dialog --> 
 </div>
+
+<div class="modal fade" id="recycleUser" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        	<h4 class="modal-title custom_align" id="Heading">User wiederherstellen?</h4>
+	 		</div>
+	   		<div class="modal-body">   
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
+		       		</span>Möchten Sie den Benutzer "<span id="userRecycle"></span>" wiederherstellen?
+		       	</div>
+	 		</div>
+		  	<div class="modal-footer ">
+		        <form action="<?php
+										
+										echo base_url ();
+										?>admin/recycleUser/" method="post">
+			        <input id="userRecycle_hidden_field" type="hidden" name="userRecycle_hidden_field" value="">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer wiederherstellen</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+		        </form>
+			</div>
+		</div>
+    	<!-- /.modal-content --> 
+	</div>
+      <!-- /.modal-dialog --> 
+</div>
+
+<script type="text/javascript">
+$('.signinform').submit(function() { 
+   $(this).ajaxSubmit({ 
+       type : "POST",
+       //set the data type
+       dataType:'json',
+       url: 'index.php/user/signin', // target element(s) to be updated with server response 
+       cache : false,
+       //check this in Firefox browser
+       success : function(response){ console.log(response); alert(response)},
+       error: onFailRegistered
+   });        
+   return false; 
+}); 
+</script>
 
 <script type="text/javascript">
     
@@ -313,6 +362,11 @@
     function whichUserLock(vorname, nachname, id){
         document.getElementById("userLock").innerHTML = vorname + " " + nachname;
         document.getElementById("userLock_hidden_field").value = id;
+    }
+
+    function whichUserRecycle(vorname, nachname, id){
+        document.getElementById("userRecycle").innerHTML = vorname + " " + nachname;
+        document.getElementById("userRecycle_hidden_field").value = id;
     }
 
     function whichUserUnlock(vorname, nachname, id){

@@ -4,220 +4,223 @@
 	</div>
 </section>
 
-	<section class="text-justify">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<p>
-					<strong>§ 1 Geltungsbereich</strong><br /> <br /> 1. Diese
-					Verkaufsbedingungen gelten ausschließlich gegenüber Unternehmern,
-					juristischen Personen des öffentlichen Rechts oder
-					öffentlich-rechtlichen Sondervermögen im Sinne von § 310 Absatz 1
-					BGB. Entgegenstehende oder von unseren Verkaufsbedingungen
-					abweichende Bedingungen des Bestellers erkennen wir nur an, wenn wir
-					ausdrücklich schriftlich der Geltung zustimmen. <br /> <br /> 2.
-					Diese Verkaufsbedingungen gelten auch für alle zukünftigen Geschäfte
-					mit dem Besteller, soweit es sich um Rechtsgeschäfte verwandter Art
-					handelt (vorsorglich sollten die Verkaufsbedingungen in jedem Fall
-					der Auftragsbestätigung beigefügt werden). <br /> <br /> 
-					</p>
-					<p>
-					<strong>§ 2 Angebot und Vertragsabschluss</strong><br /> <br /> Sofern eine
-					Bestellung als Angebot gemäß § 145 BGB anzusehen ist, können wir
-					diese innerhalb von zwei Wochen annehmen. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 3 Überlassene Unterlagen</strong><br /> <br /> An allen in
-					Zusammenhang mit der Auftragserteilung dem Besteller überlassenen
-					Unterlagen, wie z. B. Kalkulationen, Zeichnungen etc., behalten wir
-					uns Eigentums- und Urheberrechte vor. Diese Unterlagen dürfen
-					Dritten nicht zugänglich gemacht werden, es sei denn, wir erteilen
-					dazu dem Besteller unsere ausdrückliche schriftliche Zustimmung.
-					Soweit wir das Angebot des Bestellers nicht innerhalb der Frist von
-					§ 2 annehmen, sind diese Unterlagen uns unverzüglich zurückzusenden.
-					<br /> <br />
-					</p>
-					<p>
-					<strong>§ 4 Preise und Zahlung</strong><br /> <br />
-					1. Sofern nichts Gegenteiliges schriftlich vereinbart wird, gelten
-					unsere Preise ab Werk ausschließlich Verpackung und zuzüglich
-					Mehrwertsteuer in jeweils gültiger Höhe. Kosten der Verpackung
-					werden gesondert in Rechnung gestellt. <br /> <br /> 2. Die Zahlung
-					des Kaufpreises hat ausschließlich auf das umseitig genannte Konto
-					zu erfolgen. Der Abzug von Skonto ist nur bei schriftlicher
-					besonderer Vereinbarung zulässig. <br /> <br /> *) Bitte beachten
-					Sie den Benutzerhinweis auf der Vorseite und die Anmerkungen im
-					Anhang 1! <br /> <br /> 3. Sofern nichts anderes vereinbart wird,
-					ist der Kaufpreis innerhalb von 10 Tagen nach Lieferung zu zahlen
-					(Alternativen: „ ... ist der Kaufpreis innerhalb von 21 Tagen nach
-					Rechnungsstellung zahlbar“ oder „ ... ist der Kaufpreis bis zum -
-					konkretes Datum - zahlbar“). Verzugszinsen werden in Höhe von 8 %
-					über dem jeweiligen Basiszinssatz p.a. (siehe Anlage 1) berechnet.
-					Die Geltendmachung eines höheren Verzugsschadens bleibt vorbehalten.
-					<br /> <br /> 4. Sofern keine Festpreisabrede getroffen wurde,
-					bleiben angemessene Preisänderungen wegen veränderter Lohn-,
-					Material- und Vertriebskosten für Lieferungen, die 3 Monate oder
-					später nach Vertragsabschluss erfolgen, vorbehalten. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 5 Zurückbehaltungsrechte</strong><br /> <br /> Zur
-					Ausübung eines Zurückbehaltungsrechts ist der Besteller nur insoweit
-					befugt, als sein Gegenanspruch auf dem gleichen Vertragsverhältnis
-					beruht. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 6 Lieferzeit</strong><br /> <br />
-					1. Der Beginn der von uns angegebenen Lieferzeit setzt die
-					rechtzeitige und ordnungsgemäße Erfüllung der Verpflichtungen des
-					Bestellers voraus. Die Einrede des nicht erfüllten Vertrages bleibt
-					vorbehalten. <br /> <br /> 2. Kommt der Besteller in Annahmeverzug
-					oder verletzt er schuldhaft sonstige Mitwirkungspflichten, so sind
-					wir berechtigt, den uns insoweit entstehenden Schaden,
-					einschließlich etwaiger Mehraufwendungen ersetzt zu verlangen.
-					Weitergehende Ansprüche bleiben vorbehalten. Sofern vorstehende
-					Voraussetzungen vorliegen, geht die Gefahr eines zufälligen
-					Untergangs oder einer zufälligen Verschlechterung der Kaufsache in
-					dem Zeitpunkt auf den Besteller über, in dem dieser in Annahme- oder
-					Schuldnerverzug geraten ist. <br /> <br /> 3. Wir haften im Fall des
-					von uns nicht vorsätzlich oder grob fahrlässig herbeigeführten
-					Lieferverzugs für jede vollendete Woche Verzug im Rahmen einer
-					pauschalierten Verzugsentschädigung in Höhe von 3 % des
-					Lieferwertes, maximal jedoch nicht mehr als 15 % des Lieferwertes. <br />
-					<br /> 4. Weitere gesetzliche Ansprüche und Rechte des Bestellers
-					wegen eines Lieferverzuges bleiben unberührt. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 7 Gefahrübergang bei Versendung</strong><br /> <br /> Wird die Ware
-					auf Wunsch des Bestellers an diesen versandt, so geht mit der
-					Absendung an den Besteller, spätestens mit Verlassen des
-					Werks/Lagers die Gefahr des zufälligen Untergangs oder der
-					zufälligen Verschlechterung der Ware auf den Besteller über. Dies
-					gilt unabhängig davon, ob die Versendung der Ware vom Erfüllungsort
-					erfolgt oder wer die Frachtkosten trägt. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 8 Eigentumsvorbehalt</strong><br /> <br /> 1. Wir behalten uns das
-					Eigentum an der gelieferten Sache bis zur vollständigen Zahlung
-					sämtlicher Forderungen aus dem Liefervertrag vor. Dies gilt auch für
-					alle zukünftigen Lieferungen, auch wenn wir uns nicht stets
-					ausdrücklich hierauf berufen. Wir sind berechtigt, die Kaufsache
-					zurückzunehmen, wenn der Besteller sich vertragswidrig verhält. <br />
-					<br /> 2. Der Besteller ist verpflichtet, solange das Eigentum noch
-					nicht auf ihn übergegangen ist, die Kaufsache pfleglich zu
-					behandeln. Insbesondere ist er verpflichtet, diese auf eigene Kosten
-					gegen Diebstahl-, Feuer- und Wasserschäden ausreichend zum Neuwert
-					zu versichern (Hinweis: nur zulässig bei Verkauf hochwertiger
-					Güter). Müssen Wartungs- und Inspektionsarbeiten durchgeführt
-					werden, hat der Besteller diese auf eigene Kosten rechtzeitig
-					auszuführen. Solange das Eigentum noch nicht übergegangen ist, hat
-					uns der Besteller unverzüglich schriftlich zu benachrichtigen, wenn
-					der gelieferte Gegenstand gepfändet oder sonstigen Eingriffen
-					Dritter ausgesetzt ist. Soweit der Dritte nicht in der Lage ist, uns
-					die gerichtlichen und außergerichtlichen Kosten einer Klage gemäß §
-					771 ZPO zu erstatten, haftet der Besteller für den uns entstandenen
-					Ausfall. <br /> <br /> 3. Der Besteller ist zur Weiterveräußerung
-					der Vorbehaltsware im normalen Geschäftsverkehr berechtigt. Die
-					Forderungen gegenüber dem Abnehmer aus der Weiterveräußerung der
-					Vorbehaltsware tritt der Besteller schon jetzt an uns in Höhe des
-					mit uns vereinbarten Faktura-Endbetrages (einschließlich
-					Mehrwertsteuer) ab. Diese Abtretung gilt unabhängig davon, ob die
-					Kaufsache ohne oder nach Verarbeitung weiterverkauft worden ist. Der
-					Besteller bleibt zur Einziehung der Forderung auch nach der
-					Abtretung ermächtigt. Unsere Befugnis, die Forderung selbst
-					einzuziehen, bleibt davon unberührt. Wir werden jedoch die Forderung
-					nicht einziehen, solange der Besteller seinen
-					Zahlungsverpflichtungen aus den vereinnahmten Erlösen nachkommt,
-					nicht in Zahlungsverzug ist und insbesondere kein Antrag auf
-					Eröffnung eines Insolvenzverfahrens gestellt ist oder
-					Zahlungseinstellung vorliegt.<br /> <br />
-					4. Die Be- und Verarbeitung oder Umbildung der Kaufsache durch den
-					Besteller erfolgt stets Namens und im Auftrag für uns. In diesem
-					Fall setzt sich das Anwartschaftsrecht des Bestellers an der
-					Kaufsache an der umgebildeten Sache fort. Sofern die Kaufsache mit
-					anderen, uns nicht gehörenden Gegenständen verarbeitet wird,
-					erwerben wir das Miteigentum an der neuen Sache im Verhältnis des
-					objektiven Wertes unserer Kaufsache zu den anderen bearbeiteten
-					Gegenständen zur Zeit der Verarbeitung. Dasselbe gilt für den Fall
-					der Vermischung. Sofern die Vermischung in der Weise erfolgt, dass
-					die Sache des Bestellers als Hauptsache anzusehen ist, gilt als
-					vereinbart, dass der Besteller uns anteilmäßig Miteigentum überträgt
-					und das so entstandene Alleineigentum oder Miteigentum für uns
-					verwahrt. Zur Sicherung unserer Forderungen gegen den Besteller
-					tritt der Besteller auch solche Forderungen an uns ab, die ihm durch
-					die Verbindung der Vorbehaltsware mit einem Grundstück gegen einen
-					Dritten erwachsen; wir nehmen diese Abtretung schon jetzt an. <br />
-					<br /> 5. Wir verpflichten uns, die uns zustehenden Sicherheiten auf
-					Verlangen des Bestellers freizugeben, soweit ihr Wert die zu
-					sichernden Forderungen um mehr als 20 % übersteigt. <br /> <br />
-					</p>
-					<p>
-					<strong>§ 9 Gewährleistung und Mängelrüge sowie
-						Rückgriff/Herstellerregress</strong><br /> <br /> 1.
-					Gewährleistungsrechte des Bestellers setzen voraus, dass dieser
-					seinen nach § 377 HGB geschuldeten Untersuchungs- und
-					Rügeobliegenheiten ordnungsgemäß nachgekommen ist. <br /> <br /> 2.
-					Mängelansprüche verjähren in 12 Monaten nach erfolgter Ablieferung
-					der von uns gelieferten Ware bei unserem Besteller. Für
-					Schadensersatzansprüche bei Vorsatz und grober Fahrlässigkeit sowie
-					bei Verletzung von Leben, Körper und Gesundheit, die auf einer
-					vorsätzlichen oder fahrlässigen Pflichtverletzung des Verwenders
-					beruhen, gilt die gesetzliche Verjährungsfrist. (Hinweis: bei dem
-					Verkauf gebrauchter Güter kann die Gewährleistungsfrist mit Ausnahme
-					der im Satz 2 genannten Schadensersatzansprüche ganz ausgeschlossen
-					werden). Soweit das Gesetz gemäß § 438 Abs. 1 Nr. 2 BGB (Bauwerke
-					und Sachen für Bauwerke), § 479 Absatz 1 BGB (Rückgriffsanspruch)
-					und § 634a Absatz 1 BGB (Baumängel) längere Fristen zwingend
-					vorschreibt, gelten diese Fristen Vor etwaiger Rücksendung der Ware
-					ist unsere Zustimmung einzuholen. <br /> <br /> 3. Sollte trotz
-					aller aufgewendeter Sorgfalt die gelieferte Ware einen Mangel
-					aufweisen, der bereits zum Zeitpunkt des Gefahrübergangs vorlag, so
-					werden wir die Ware, vorbehaltlich fristgerechter Mängelrüge nach
-					unserer Wahl nachbessern oder Ersatzware liefern. Es ist uns stets
-					Gelegenheit zur Nacherfüllung innerhalb angemessener Frist zu geben.
-					Rückgriffsansprüche bleiben von vorstehender Regelung ohne
-					Einschränkung unberührt. <br /> <br /> 4. Schlägt die Nacherfüllung
-					fehl, kann der Besteller – unbeschadet etwaiger
-					Schadensersatzansprüche – vom Vertrag zurücktreten oder die
-					Vergütung mindern. <br /> <br /> 5. Mängelansprüche bestehen nicht
-					bei nur unerheblicher Abweichung von der vereinbarten
-					Beschaffenheit, bei nur unerheblicher Beeinträchtigung der
-					Brauchbarkeit, bei natürlicher Abnutzung oder Verschleiß wie bei
-					Schäden, die nach dem Gefahrübergang infolge fehlerhafter oder
-					nachlässiger Behandlung, übermäßiger Beanspruchung, ungeeigneter
-					Betriebsmittel, mangelhafter Bauarbeiten, ungeeigneten Baugrundes
-					oder aufgrund besonderer äußerer Einflüsse entstehen, die nach dem
-					Vertrag nicht vorausgesetzt sind. Werden vom Besteller oder Dritten
-					unsachgemäß Instandsetzungsarbeiten oder Änderungen vorgenommen, so
-					bestehen für diese und die daraus entstehenden Folgen ebenfalls
-					keine Mängelansprüche. <br /> <br /> 6. Ansprüche des Bestellers
-					wegen der zum Zweck der Nacherfüllung erforderlichen Aufwendungen,
-					insbesondere Transport-, Wege-, Arbeits- und Materialkosten, sind
-					ausgeschlossen, soweit die Aufwendungen sich erhöhen, weil die von
-					uns gelieferte Ware nachträglich an einen anderen Ort als die
-					Niederlassung des Bestellers verbracht worden ist, es sei denn, die
-					Verbringung entspricht ihrem bestimmungsgemäßen Gebrauch. <br /> <br />
-					7. Rückgriffsansprüche des Bestellers gegen uns bestehen nur
-					insoweit, als der Besteller mit seinem Abnehmer keine über die
-					gesetzlich zwingenden Mängelansprüche hinausgehenden Vereinbarungen
-					getroffen hat. Für den Umfang des Rückgriffsanspruches des
-					Bestellers gegen den Lieferer gilt ferner Absatz 6 entsprechend. <br />
-					<br />
-					</p>
-					<p>
-					<strong>§ 10 Sonstiges</strong><br /> <br /> 1. Dieser
-					Vertrag und die gesamten Rechtsbeziehungen der Parteien unterliegen
-					dem Recht der Bundesrepublik Deutschland unter Ausschluss des
-					UN-Kaufrechts (CISG). <br /> <br /> 2. Erfüllungsort und
-					ausschließlicher Gerichtsstand und für alle Streitigkeiten aus
-					diesem Vertrag ist unser Geschäftssitz, sofern sich aus der
-					Auftragsbestätigung nichts anderes ergibt (Hinweis: Die Verwendung
-					der Klausel ist unzulässig, wenn mindestens eine der Parteien ein
-					nicht im Handelsregister eingetragenes Unternehmen ist) <br /> <br />
-					3. Alle Vereinbarungen, die zwischen den Parteien zwecks Ausführung
-					dieses Vertrages getroffen werden, sind in diesem Vertrag
-					schriftlich niedergelegt.
-					</p>
-				</div>
+<section class="text-justify">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<p>Diese Datenschutzrichtlinie in seiner jeweils aktualisierten Form
+					regelt die Erhebung und Verwendung von personenbezogenen Daten
+					durch die Webseite. Mit der Nutzung der Webseite erklären Sie sich
+					ausdrücklich mit der Erhebung, der Verarbeitung und der Nutzung
+					Ihrer personenbezogenen Daten durch die Webseite einverstanden.
+					Sollten Sie Fragen in Bezug auf diese Richtlinie haben, wenden Sie 
+					sich bitte an unseren Ansprechpartner klausmustermann@fps5.de.</p>
+				<p>
+					<strong>1. Nutzer</strong><br /> <br /> Die Nutzung dieser
+					Webseite setzt die Volljährigkeit des Nutzers voraus. Minderjährige
+					im Alter zwischen 13 und 18 Jahren dürfen die Diese Webseite nur
+					mit dem ausdrücklichen Einverständnis ihrer gesetzlichen Vertreter
+					nutzen.<br /> <br /> ANMERKUNG FÜR MINDERJÄHRIGE IM ALTER UNTER 13
+					JAHREN UND DEREN ELTERN ODER GESETZLICHE VERTRETER:<br /> <br />
+					DIESE WEBSEITE ERHEBT NICHT WISSENTLICH PERSONENBEZOGENE DATEN VON
+					KINDERN UNTER 13 JAHREN. WENN DU DAS 13. LEBENSJAHR NOCH NICHT
+					VOLLENDET HAST, DARFST DU DIESE WEBSEITE NICHT NUTZEN. BITTE SENDE
+					DIESE WEBSEITE KEINE PERSÖNLICHEN INFORMATIONEN, EINSCHLIESSLICH
+					DEINER E-MAIL-ADRESSE, DEINEM NAMEN UND/ODER ANDERE
+					KONTAKTINFORMATION. EINE KONTAKTAUFNAHME DARF NUR DURCH DEINE
+					ELTERN ODER GESETZLICHEN VERTRETER GESCHEHEN.<br /> <br />
+				</p>
+				<p>
+					<strong>2. Erhebung personenbezogener Daten</strong><br /> <br />
+					Wenn Sie die Webseite besuchen, kann es sein, dass die Webseite
+					nicht personenbezogene Daten, wie z. B. Ihr Internet Protokoll
+					(IP), den Browser-Typen sowie die Art des Systems sammelt. Diese
+					Informationen dienen nicht dazu, Sie als Person zu identifizieren.
+					Wenn Sie sich auf der Diese Webseite Mitglied registrieren, werden
+					zusätzlich personenbezogene Daten abgefragt, wie z. B. Name,
+					Anschrift/Firmierung, E-Mail-Adresse, Staatszugehörigkeit. Von
+					hochladenden Mitgliedern kann bei der Registrierung auf dieser
+					Webseite zusätzlich zum Zweck der Identifikation ein
+					Identifikationspapier (Gewerbeschein bei Fotografen) erforderlich
+					werden.<br /> <br /> Ggf. sammelt Diese Webseite auch solche
+					Informationen, wie z. B. Up- und Downloads auf der Webseite,
+					Profildaten-Änderungen, Änderungen von hochgeladenen Inhalten und
+					Forumsaktivitäten. Diese Webseite hat den Zahlungsverkehr an
+					Drittfirmen ausgegliedert, die sich auf sichere Zahlungen im
+					Internet spezialisiert haben, um auf der Webseite Käufe und/oder
+					Vergütungen für Verkäufe zu generieren, wodurch wiederum eine
+					Sammlung von personenbezogenen Daten (z. B. Kreditkartennummer)
+					durch diese Drittfirmen erfolgen kann. Diese Webseite behält sich
+					das Recht vor, die durch Mitgliedschaft bei dieser Webseite
+					erhobenen Daten zur Aufklärung und Verfolgung von
+					Urheberrechtsverletzungen oder jedweder Betrugsversuche
+					auszuwerten. Informationen zu Urheberrechtsverletzungen und
+					Betrugsversuchen werden ggf. suf der Webseite gespeichert und
+					archiviert. <br /> <br />
+				</p>
+				<p>
+					<strong>3. Cookies</strong><br /> <br /> Wenn Sie unsere Webseite
+					besuchen, können Sie verschiedene Informationen suchen und
+					aufrufen, ohne Ihre Identität offenzulegen. Wir verwenden ggf.
+					Cookies, um die Session eines Nutzers effektiver zu gestalten und
+					registrierten Mitglieder die Möglichkeit der „Remember Me“-
+					Funktion zu bieten. Cookies können unabhängig davon genutzt werden,
+					ob Sie bei uns registriert sind oder nicht. Cookies sind kleine,
+					einmalige Textdateien, die von einem Webserver auf Ihre Festplatte
+					übertragen werden und anschließend auf Ihren Computer gespeichert
+					werden. Die Art der Information, die ein Cookie erhebt, beinhaltet
+					das Datum und die Zeit Ihres Besuches, den Browser-Verlauf, Ihre
+					Einstellungen sowie Ihren Benutzernamen.<br /> <br /> Unter
+					Umständen kann es sein, dass dritte Dienstleistungs-Provider
+					Cookies auf unserer Webseite nutzen. Wir können Cookies, die von
+					dritten Dienstleistungs-Providern genutzt werden, nicht
+					kontrollieren oder hierauf zugreifen. Diese Richtlinie regelt nur
+					die Cookies, die von dieser Webseite genutzt werden, nicht jene,
+					die von Dritten genutzt werden.<br /> <br /> Sie haben die
+					Möglichkeit die Verwendung von Cookies auf Ihrem Computer zu
+					erlauben oder zu verbieten. Normalerweise können Sie Ihren Browser
+					entsprechend einstellen, jedoch kann es vorkommen, dass bei nicht
+					erlaubter Verwendung von Cookies gewisse Funktionen der Webseite
+					nur begrenzt zur Verfügung stehen, wie Mitgliederbereiche,
+					Zahlungsmethoden oder andere interaktive Features. Die
+					grundlegenden Funktionen der Webseite sollten auch bei nicht
+					erlaubter Verwendung von Cookies erfahrbar sein. <br /> <br />
+				</p>
+				<p>
+					<strong>4. Dritte Parteien</strong><br /> <br /> Diese Webseite
+					nutzt den Service von Drittfirmen, wie Paypal für Zahlungen auf der FPS5
+					Webseite. Zudem kann unsere Seite gelegentlich Links zu anderen
+					Seiten enthalten. Durch das Anklicken dieser Links verlassen Sie
+					die Webseite. Diese Webseite übernimmt keinerlei Haftung für den
+					Inhalt der verlinkten Seiten und die Sicherheit bezüglich Ihrer
+					personenbezogenen Daten durch das Nutzen der verlinkten Seiten.
+					Andere Seiten können abweichende und eigene Bestimmungen im Umgang
+					mit und der Erhebung von personenbezogenen Daten haben. Sie können
+					nach Angaben wie Name, Anschrift, E-Mail-Adresse, IP-Adresse,
+					Browsereigenschaften und Kreditkartennummer gefragt werden. Die
+					Datenschutzrichtlinien von dieser Webseite regeln weder die
+					Erhebung, die Weitergabe oder den Umgang personenbezogener Daten
+					durch Dritte. Wir raten daher an, sich auf den verlinkten Seiten
+					Dritter, über die Praxis zur Handhabung von personenbezogenen Daten
+					und Cookies zu informieren. <br /> <br />
+				</p>
+				<p>
+					<strong>5. Verwendung personenbezogener Daten</strong><br /> <br />
+					Diese Webseite darf Ihre personenbezogenen Daten nutzen, um:<br />
+					<br /> • Ihre Identität aus Sicherheitsgründen zu prüfen,<br /> <br />
+					• Ihnen ein Mitgliedskonto zur Verfügung zu stellen,<br /> <br />
+					• Ihre Transaktionen durchzuführen,<br /> <br /> • Ihnen
+					Kundenservice zu bieten,<br /> <br /> • Ihnen Servicematerial und
+					Angebote zukommen zu lassen,<br /> <br /> • Ihre Up- und Downloads,
+					Änderungen im Profil und Forumsaktivität auszuwerten,<br /> <br />
+					• Im Falle, dass Sie Anbieter auf dieser Webseite sind, Sie zu
+					vergüten und Ihre Steuerformulare vorzubereiten,<br /> <br /> •
+					Ihnen Auskunft über getätigte Transaktionen, neue Produkte und
+					Dienste zu geben,<br /> <br /> • Ihnen interaktive Features, wie
+					Blog oder Forum bereitzustellen.<br /> <br /> Diese Webseite darf
+					unter der Bewahrung Ihrer Anonymität Ihre Daten verwenden, um
+					statistische Werte zum Verkehr auf Webseite zu ermitteln. Ebenso
+					ist es dieser Webseite gestattet, Ihre Daten zu verwenden, um Ihnen
+					bei eventuellen Schwierigkeiten oder technischen Unklarheiten im
+					Umgang mit der Webseite zu assistieren. Diese Webseite darf Ihre
+					personenbezogenen und demografischen Daten an dritte
+					Dienstleistungs-Provider weitergeben. <br /> <br />
+				</p>
+				<p>
+					<strong>6. Schutz Ihrer personenbezogenen Daten</strong><br /> <br />
+					Diese Webseite hält sich natürlich an die gesetzlichen und unserer
+					Meinung nach auch moralischen Bestimmungen zum Schutz Ihrer
+					persönlichen Daten. Aus diesem Grunde hat sich diese Webseite
+					verpflichtet, Ihre personenbezogenen Daten auch entsprechend auf
+					verschiedene Arten abzusichern. Unsere Server dürfen nur von
+					ausgesuchtem Fachpersonal gewartet und bedient werden. Ihre
+					personenbezogenen Daten sind durch einen persönlichen,
+					einzigartigen Mitgliedsnamen und ein persönliches,
+					verschlüsseltes Passwort geschützt. Bitte bewahren diese
+					Zugangsdaten sicher und vor Missbrauch geschützt auf, teilen diese
+					niemanden mit und loggen sich bei Verlassen unserer Seite jedes Mal
+					aus. Zusätzlich nutzen wir die Secure Socket Layer Technologie
+					(SSL) für sensible Daten (z. B. Login, Zahlungsinformationen etc.).
+					Wir bieten bei der Anmeldung auf der Webseite die Möglichkeit sich
+					einen "Alias-Namen" zuzulegen; Ihr Benutzername bleibt so für
+					andere nicht sichtbar. Diese Webseite behält sich das Recht vor,
+					personenbezogene Daten auch über eine beendete Mitgliedschaft
+					hinaus auszuwerten, wenn es für die Ausübung und/oder
+					Aufrechterhaltung unserer Dienstleistungen erforderlich ist.<br />
+					<br /> Die Erhebung und Auswertung personenbezogener Daten ist
+					nicht standortbezogen oder an Länder gebunden. Sie erkennen an und
+					akzeptieren, dass die bei der Mitgliedschaft auf der Webseite von
+					Ihnen gemachten und bei der Verwendung der Webseite angegebenen
+					personenbezogenen Daten auch außerhalb Ihres Standortes oder
+					Heimatlandes ausgewertet werden dürfen und stimmen einem Transfer
+					solcher Daten zu.<br /> <br /> Wir bieten einen sehr hohen Standard
+					an Sicherheitstechnologie, um Ihre Daten zu schützen. Eine
+					hundertprozentige und absolute Sicherheit kann und wird jedoch
+					nicht gewährt werden. Diese Webseite garantiert lediglich die
+					maximale Ausschöpfung der uns zur Verfügung stehenden Mittel,
+					Techniken und Möglichkeiten, um personenbezogene Daten zu schützen.
+					Daher übernimmt die Webseite keinerlei Haftung in Bezug auf
+					Diebstahl, Verlust, Veränderung oder missbräuchliche Verwendung
+					personenbezogener oder sonstiger Daten, inklusive und ohne
+					Einschränkung solche Daten und Informationen, welche an Dritte
+					übermittelt werden, auch in dem Falle der Nichteinhaltung der
+					Webseite Datenschutzrichtlinien Dritter und eventuelle Schäden, die
+					daraus resultieren.<br /> <br />
+				</p>
+				<p>
+					<strong>7. Optionen</strong><br /> <br /> Sie können die von Ihnen
+					bei der Registrierung auf der FPS5 Webseite gemachten Angaben
+					jederzeit im Mitgliedsbereich unter "Profil" einsehen und
+					korrigieren. Sie können im Profil auch einstellen, ob Sie unseren
+					Newsletter oder andere Service-Informationen erhalten möchten oder
+					nicht. Wenn Sie diese Funktion abstellen, erhalten Sie weder
+					Newsletter, Spezialangebote noch Promotion-Informationen zugesandt.
+					FPS5 hat jedoch das Recht, Ihnen weiterhin Nachrichten zu senden,
+					um Sie über wichtige Änderungen zu informieren, inklusive und
+					uneingeschränkt Nachrichten zu veränderten Dienstleistungsbereichen
+					oder insbesondere Nachrichten zu Änderungen von FPS5 Richtlinien
+					("Erforderliche Hinweise"), Nachrichten bei technischen Störungen
+					oder Nichterreichbarkeit der Webseite. Um auch den Empfang der
+					Erforderlichen Hinweise zu unterbinden, ist die Schließung des
+					entsprechenden Mitgliedskontos notwendig. <br /> <br />
+				</p>
+				<p>
+					<strong>8. Offenlegungspflichten</strong><br /> <br /> Auf
+					Verlangen von befugten Behörden oder resultierend aus gesetzlichen
+					Vorschriften ist FPS5 verpflichtet, personenbezogene Daten
+					offenzulegen. Ist dieses der Fall, behält sich FPS5 das Recht vor,
+					angefragte Daten gemäß den gesetzlichen Vorschriften zur Verfügung
+					zu stellen, einschließlich und ohne jede Einschränkung durch
+					Gerichtsbeschluss, Haftbefehl, Strafandrohung erwirkte oder für
+					prozessdienliche Auskünfte und ermittlungstechnische Dienste
+					wichtige Daten. <br /> <br />
+				</p>
+				<p>
+					<strong>9. Bekanntmachung von Änderungen</strong><br /> <br /> FPS5
+					behält sich das Recht vor, diese Richtlinien nach eigenem Ermessen
+					zu ändern. Bitte nehmen Sie das „Datum der letzten Aktualisierung“
+					zur Kenntnis, wie am Anfang dieses Dokuments ausgewiesen. Mit
+					dieser Information ist es Ihnen möglich herauszufinden, ob diese
+					Bestimmungen kürzlich geändert wurden.<br /> <br /> Bitte beachten
+					Sie, dass, wenn Sie die Einstellungen Ihres Mitgliedskontos im
+					Profil einschränken, FPS5 diese Einstellung nicht ohne Ihre
+					Zustimmung ändern wird. Sollten überwiegende Anteile von FPS5
+					verkauft werden oder in den Besitz einer anderen Firma übergehen,
+					werden Sie darüber informiert. FPS5 hat das Recht, dem
+					Neueigentümer dann Zugang auf personenbezogene Daten zu gewähren.
+					Bei Verkäufen von Teilbereichen von FPS5 hat FPS5 das Recht, dem
+					Käufer personenbezogene Daten zur Verfügung zu stellen ohne dafür
+					Ihre Zustimmung einzuholen, eine entsprechende Benachrichtigung
+					wird dann an die Mitglieder gesandt. <br /> <br />
+				</p>
+				<p>
+					<strong>10. Im Streitfall</strong><br /> <br /> Alle Streitigkeiten
+					bezüglich Ihres Datenschutzes sind Gegenstand dieser
+					Datenschutzerklärung und FPS5s Nutzungsbedingungen, einschließlich
+					aber nicht beschränkt auf jede Bestimmung bezüglich Schadensersatz,
+					Haftungsbegrenzung und Rechtswahl.
+				</p>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>

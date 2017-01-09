@@ -2,8 +2,10 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
 include_once (dirname ( __FILE__ ) . "/Event.php");
+include_once (dirname ( __FILE__ ) . "/WaterMark.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
+	private static $event;
 	public function __construct() {
 		parent::__construct ();
 		$this->load->library ( 'session' );
@@ -18,19 +20,27 @@ class Product extends CI_Controller {
 		$data ['product'] = Product::getProduct ( $prod_id );
 		$this->load->template ( 'product/single_picture_view', $data );
 	}
-	public static function buildFilePath($p) {
+	public static function buildFilePath($p, $thumb = false) {
 		// Datum-String in Datum umwandeln
 		$date = date_create ( $p->prod_date );
+		
+		if ($thumb == true) {
+			
+			$filename = Product::get_name ( $p->prod_filepath ) . '_thumb' . Product::get_fileext ( $p->prod_filepath );
+		} else {
+			$filename = $p->prod_filepath;
+		}
+		
 		// Dateipfad erstellen. Bsp.: "/Images/2016/12/001.png"
-		$path = Product::base_path . date_format ( $date, "o/m" ) . "/" . $p->prod_filepath;
+		$path = Product::base_path . date_format ( $date, "o/m" ) . "/" . $filename;
 		return $path;
 	}
-	public static function getProduct($prod_id) {
+	public static function getProduct($prod_id, $thumb = false) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'product_model' );
 		$product = $CI->product_model->getSingleProduct ( $prod_id );
 		$product [0]->product_variants = Product::getProductVariants ( $prod_id );
-		$product [0]->prod_filepath = Product::buildFilePath ( $product [0] );
+		$product [0]->prod_filepath = Product::buildFilePath ( $product [0], $thumb );
 		return $product [0];
 	}
 	public static function getProductVariants($prod_id) {
@@ -49,15 +59,55 @@ class Product extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'product_model' );
 		$pv = $CI->product_model->getProductVariant ( $prod_id, $prty_id );
-		
-		// Preis aus Preisprofil besorgen
-		$event = Event::getSingleEventById ( $pv->prod_even_id );
-		$price = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $pv->prva_prty_id );
-		$pv->price = $price;
+		$pv->price = Product::getPrice ( $pv );
 		
 		return $pv;
 	}
-	function insert() {
+	public static function getPrintersProductPrice($prsu_id, $prty_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'printers_model' );
+		$PrinterPrice = $CI->printers_model->getPrinterPriceByProducttype ( $prsu_id, $prty_id );
+		return $PrinterPrice->prsp_price;
+	}
+	public static function getPrice($product_variant) {
+		// Basispreis aus Preisprofil
+		// event-Cache
+		if (isset ( $GLOBALS ["event"] ) == false) {
+			$event = Event::getSingleEventById ( $product_variant->prod_even_id );
+			$GLOBALS ["event"] = $event;
+		} else {
+			$event = $GLOBALS ["event"];
+		}
+		
+		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prva_prty_id );
+		if (isset ( $profile ))
+			$price_basic = $profile->prpt_price;
+		else
+			$price_basic = 0;
+			
+			// Preisaufschlag Fotograf
+		$prva_price_specific = $product_variant->prva_price_specific;
+		
+		// Preisaufschlag von Druckerei
+		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prva_prty_id );
+		
+		// Provision
+		$price_provision = 0;
+		
+		// Preis zusammensetzen
+		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier ) + floatval ( $price_provision );
+		
+		$price = array (
+				'price_basic' => $price_basic,
+				'price_specific' => $prva_price_specific,
+				'price_supplier' => $price_supplier,
+				'price_provision' => $price_provision,
+				'price_sum' => $price_sum 
+		);
+		
+		return $price;
+	}
+	public function insert() {
 		// $this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
 		
 		// Konstanten setzten
@@ -74,14 +124,9 @@ class Product extends CI_Controller {
 		for($i = 0; $i < $cpt; $i ++) {
 			// Dateidaten können geändert werden
 			$filename = $files ['dateiupload'] ['name'] [$i];
-			$_FILES ['dateiupload'] ['name'] = $filename;
-			$_FILES ['dateiupload'] ['type'] = $files ['dateiupload'] ['type'] [$i];
-			$_FILES ['dateiupload'] ['tmp_name'] = $files ['dateiupload'] ['tmp_name'] [$i];
-			$_FILES ['dateiupload'] ['error'] = $files ['dateiupload'] ['error'] [$i];
-			$_FILES ['dateiupload'] ['size'] = $files ['dateiupload'] ['size'] [$i];
 			
 			if ($filename) {
-				$prod_name = $this->get_name ( $filename );
+				$prod_name = Product::get_name ( $filename );
 				$prod_filepath = $filename;
 				
 				$data = array (
@@ -96,6 +141,15 @@ class Product extends CI_Controller {
 				
 				// Produkt einfügen
 				$new_prod_id = $this->product_model->insert_product ( $data );
+				
+				// Den neuen Dateinamen aus der ID des Bildes generieren
+				$new_filename = $new_prod_id . Product::get_fileext ( $filename );
+				$data ['prod_filepath'] = $new_filename;
+				$files ['dateiupload'] ['name'] [$i] = $new_filename;
+				
+				// Den neuen Dateinamen in der Datenbank abspeichern
+				$this->product_model->update_product ( $new_prod_id, $data );
+				
 				if ($new_prod_id) {
 					// Varianten mit Preisprofil aus Event anlegen
 					$this->insert_product_variant ( $new_prod_id, $event [0] );
@@ -103,25 +157,35 @@ class Product extends CI_Controller {
 					// error
 					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
 				}
+				
+				$file = array (
+						'name' => $files ['dateiupload'] ['name'] [$i],
+						'type' => $files ['dateiupload'] ['type'] [$i],
+						'tmp_name' => $files ['dateiupload'] ['tmp_name'] [$i],
+						'error' => $files ['dateiupload'] ['error'] [$i],
+						'size' => $files ['dateiupload'] ['size'] [$i] 
+				);
+				
+				// Originalbild hochladen
+				$this->upload ( '..' . Product::base_path, $file );
+				
+				$newPath = $this->upload ( '.' . Product::base_path, $file );
+				
+				// // Wasserzeichen hochladen erzeugen
+				Watermarkdemo::watermark ( $newPath );
+				Watermarkdemo::thumb ($newPath);
+				
+				//
 			} else {
 				// error
-				$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' . $dateiupload . '' );
+				$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
 			}
 		}
-		
-		// Wasserzeichen hochladen
-		/*
-		 * HIer muss noch etwas passieren
-		 */
-		$this->upload ( './Images/' );
-		
-		// Orginal-Dateien uploaden
-		$this->upload ( '../Images/' );
 		
 		// Eventseite neu laden
 		redirect ( 'event/' . $event [0]->even_url );
 	}
-	function get_name($filename) {
+	static function get_name($filename) {
 		$name = "";
 		$pos = strpos ( $filename, "\\" );
 		$pos2 = strrpos ( $filename, "." );
@@ -129,29 +193,45 @@ class Product extends CI_Controller {
 		$name = substr ( $filename, $pos, $pos2 );
 		return $name;
 	}
-	function get_fileext($filename) {
+	static function get_fileext($filename) {
 		$pos2 = strrpos ( $filename, "." );
 		
 		$ext = substr ( $filename, $pos2, strlen ( $filename ) - $pos2 );
 		return $ext;
 	}
-	function upload($path) {
+	function upload($path, $file) {
 		// Monat und Jahr für Uploadordner festlegen
 		$month = date ( 'm' );
 		$year = date ( 'Y' );
 		
-		$config ['upload_path'] = $path . $year . '/' . $month;
-		$config ['allowed_types'] = 'gif|jpg|png';
+		$upload_path = $path . $year . '/' . $month . '/';
 		
+		// Verzeichnis anlegen wenn nicht vorhanden
+		if (! file_exists ( $upload_path )) {
+			mkdir ( $upload_path, 0777, true );
+		}
+		
+		// Upload-Einstellungen setzten
+		$config ['upload_path'] = $upload_path;
+		$config ['allowed_types'] = 'gif|jpg|png';
 		$this->load->library ( 'upload', $config );
 		$this->upload->initialize ( $config );
+		// Den Kontainer für den Upload füllen
+		$_FILES ['dateiupload'] ['name'] = $file ['name'];
+		$_FILES ['dateiupload'] ['type'] = $file ['type'];
+		$_FILES ['dateiupload'] ['tmp_name'] = $file ['tmp_name'];
+		$_FILES ['dateiupload'] ['error'] = $file ['error'];
+		$_FILES ['dateiupload'] ['size'] = $file ['size'];
 		
-		if (! $this->upload->do_upload ()) {
+		// Jetzt der Upload einer einzelner Datei
+		if (! $this->upload->do_upload ( 'dateiupload' )) {
 			$this->session->set_flashdata ( 'msg', $this->upload->display_errors () );
 		} else {
 			$finfo = $this->upload->data ();
 			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
 		}
+		
+		return $upload_path . $file ['name'];
 	}
 	function insert_product_variant($prod_id, $event) {
 		$prpr_id = $event->even_prpr_id;

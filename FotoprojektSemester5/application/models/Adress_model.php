@@ -1,5 +1,6 @@
 	<?php
 	class Adress_model extends CI_Model {
+		private static $allAdresses;
 		Public function __construct() {
 			parent::__construct ();
 		}
@@ -26,10 +27,23 @@
 				$return = $query->result ();
 				
 				// bind countries to adresses as "country"
-				$return = bindCountries ( $return );
+				$return = $this->bindCountries ( $return );
 			}
 			
 			return $return;
+		}
+		Public function getSingleAdress($adre_id) {
+			if (! isset ( $GLOBALS ["allAdresses"] )) {
+				$GLOBALS ["allAdresses"] = $this->getAllAdresses ( true );
+			}
+			
+			foreach ( $GLOBALS ["allAdresses"] as $adress ) {
+				if ($adress->adre_id == $adre_id) {
+					return $adress;
+				}
+			}
+			
+			return NULL;
 		}
 		/**
 		 * Return all adresses for specific user
