@@ -23,6 +23,10 @@ class Newsletter extends CI_Controller {
 	}
 	public function assignUser($userid) {
 	}
-	public function addUnregistered($email) {
+	public function addUnregistered() {
+		$this->load->template ( 'newsletter/success_newsletter_view.php' );
+	}
+	public function call_unregister_view() {
+		$this->load->template ( 'newsletter/newsletterunregister_view.php' );
 	}
 }

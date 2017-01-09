@@ -23,9 +23,22 @@ class PriceProfile_model extends CI_Model {
 		$query = $this->db->get ( "price_product_type" );
 		return $query->result ();
 	}
+	Public function getPricesByPrinterId($prsu_id) {
+		$this->db->join ( 'product_type', 'prty_id = prsp_prty_id', 'INNER' );
+		$this->db->where ( 'prsp_prsu_id', $prsu_id );
+		$query = $this->db->get ( "print_supplier_price" );
+		return $query->result ();
+	}
 	Public function getPriceByProductType($prpr_id, $prty_id) {
 		$this->db->where ( 'prpt_prpr_id', $prpr_id );
 		$this->db->where ( 'prpt_prty_id', $prty_id );
+		$query = $this->db->get ( "price_product_type" );
+		return $query->result ();
+	}
+	Public function getPriceByPrinterId($prsu_id, $prty_id) {
+		$this->db->join ( 'product_type', 'prty_id = prsp_prty_id', 'INNER' );
+		$this->db->where ( 'prsp_prsu_id', $prsu_id );
+		$this->db->where ( 'prsp_prty_id', $prty_id );
 		$query = $this->db->get ( "price_product_type" );
 		return $query->result ();
 	}
@@ -51,6 +64,10 @@ class PriceProfile_model extends CI_Model {
 	// insert price_product_type
 	function insert_price_product_type($data) {
 		return $this->db->insert ( 'price_product_type', $data );
+	}
+	// insert print_supplier_price
+	function insert_print_supplier_price($data) {
+		return $this->db->insert ( 'print_supplier_price', $data );
 	}
 }
 ?>
