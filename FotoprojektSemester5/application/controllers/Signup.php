@@ -10,6 +10,7 @@ class Signup extends CI_Controller
 		$this->load->library(array('form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
+		$this->load->model ( 'adress_model' );
 	}
 	
 	function index()
@@ -41,6 +42,7 @@ class Signup extends CI_Controller
 		$newsletter = $this->input->post('checknewsletter');
 		
 		$role = $this->input->post('type_hidden_field');
+		
 			
 		// set form validation rules
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
@@ -59,7 +61,12 @@ class Signup extends CI_Controller
 			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
-  			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
+			
+			if (empty($_FILES['tradelicense']['name']))
+			{
+				$this->form_validation->set_rules('tradelicense', 'Traderlicense', 'required');
+			}
+//    			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
 		}
 		
 		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
@@ -70,8 +77,13 @@ class Signup extends CI_Controller
 		// submit
 		if ($this->form_validation->run() == FALSE)
         {
-			// fails
-        	$this->load->template('user/signup_view');       	     
+			// set user default role
+        	if($role == null){
+				$role = UserRole::User;
+			}
+        	$data['type_hidden_field'] = $role;
+        	
+         	$this->load->template('user/signup_view',$data); 
 //         	$this->session->set_flashdata('msgReg','Füllen Sie bitte alle Pflichtfelder aus!');
 
         }
@@ -90,6 +102,7 @@ class Signup extends CI_Controller
 			
 			//insert user details into db
 			$data = array(
+				'user_firstname' => $title,
 				'user_firstname' => $firstname,
 				'user_name' => $name,
 				'user_email' => $email,
@@ -113,10 +126,11 @@ class Signup extends CI_Controller
 				'adre_city' => $city,
 				'adre_street' => $streetAndNr,
 				'adre_name' => $fullname,
-				'adre_coun_id' => '80'
+					'adre_coun_id' => '80',
+					'adre_status' => 1 
 			);
-			$addressIsSet = $this->user_model->insert_address($address);
-				
+			$addressIsSet = $this->adress_model->addAdressObj ( $address );
+			
 			if (UserRole::Photograph) {
 				
 				$bankaccountData = array(
@@ -132,11 +146,8 @@ class Signup extends CI_Controller
 				$this->uploadTradeLicense($user_id);
 			}
 			if($newsletter == true){
-				$newsletterData = array(
-						'nele_user_id' => $user_id,
-						'nele_email' => $email
-				);
-				$this->user_model->insert_UserToNewsletter($newsletterData);
+
+				$this->user_model->update_addUserToNewsletter($user_id);
 			}
 			
 			if ($addressIsSet && $UserIsSet)
@@ -181,7 +192,7 @@ class Signup extends CI_Controller
 		{
 			//safe url in DB
 			$user_tradelicenseurl= $basefolder.$newfile_name;
-			$this->user_model->update_userTradelicenseByID($user_id);
+			$this->user_model->update_userTradelicenseByID($user_id,$user_tradelicenseurl);
 			$this->session->set_flashdata('msgReg','Gewerbeschein wurde erfolgreich hochgeladen');
 
 		}
