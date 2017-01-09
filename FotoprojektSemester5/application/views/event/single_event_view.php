@@ -135,28 +135,42 @@ function openModal(img){
 
 
 										<br />
-										<div class="form-group"> 
-											<select class="form-control" id="größeSelect"> 
-												<option style="color: grey">Größe wählen*</option>
-												<option>Small</option>
-												<option>Medium</option>
-											    <option>Large</option>
-											    <option>ExtraLarge</option>
-									    	</select>
-									    </div>
-										
-										<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/>
-		 								<br />
 										
 										<div class="col-md-3">
-											<p>Preis:							
-											
-											<p />
+											<p>Größe: </p>
+										</div>
+										
+										<div class="col-md-9">
+											<div class="form-group"> 
+												<select class="form-control" id="größeSelect"> 
+													<option style="color: grey">Größe wählen*</option>
+													<option>Small</option>
+													<option>Medium</option>
+												    <option>Large</option>
+												    <option>ExtraLarge</option>
+										    	</select>
+										    	
+										    </div>
+									    </div>
+										
+										<div class="col-md-3">
+											<p>Menge: <p/>
 										</div>
 										<div class="col-md-9">
-											<textarea class="form-control" rows="1" cols="3"
-												style="overflow: auto; resize: none" readonly="readonly"></textarea>
+											<input type="text" class="form-control input-sm chat-input" placeholder="Menge wählen" name="menge"/>
 										</div>
+																				
+										<div class="col-md-3">
+											<p>Preis: <p/>
+										</div>
+										<div class="col-md-9">
+											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
+										</div>
+										
+										
+										
+										
+									
 						
 
 								</div> 	<!--  Ende tabpanel -->
