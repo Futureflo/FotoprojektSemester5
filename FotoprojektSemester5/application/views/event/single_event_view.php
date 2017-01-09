@@ -97,6 +97,7 @@ function openModal(img){
 </script> 
 
 
+
 <!-- Modal -->
 <div id="bestellungModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -112,9 +113,9 @@ function openModal(img){
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-
-							<img	class="img-responsive" id="modalImg">
-
+							<a data-toggle="modal" href="#imgModal">
+							<img	class="img-responsive" id="modalImg" onclick="openModalImg(this)" >
+							</a>
 						</div>
 					
 						<div class="col-md-6">
@@ -235,6 +236,36 @@ function openModal(img){
 					<button type="button" class="btn btn-default">In den Warenkorb</button>
 				</div>
 			
+
+		</div>
+		<!--  modal content -->
+	</div>
+	<!--  modal dialog-->
+</div>
+<!--  modal -->
+
+
+
+
+
+<!-- Modal -->
+<div id="imgModal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div> <!--  Ende Header -->
+			<div class="modal-body">
+		
+		
+			</div> <!--  modal body -->
+
+			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+				</div>
 
 		</div>
 		<!--  modal content -->
