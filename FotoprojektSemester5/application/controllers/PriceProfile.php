@@ -16,8 +16,8 @@ class PriceProfile extends CI_Controller {
 			array_push ( $prty_ids, $price->prpt_prty_id );
 		}
 		$this->load->model ( 'product_type_model' );
-		$data ['unused_prty'] = $this->product_type_model->getAllUnusedProductTypeByPriceProfile ( $user_id, $prty_ids );
 		
+		$price_profile->unused_prty = $this->product_type_model->getAllUnusedProductTypeByPriceProfile ( $user_id, $prty_ids );
 		$data ['price_profile'] = $price_profile;
 		$this->load->template ( 'price/single_price_profile_view.php', $data );
 	}
@@ -37,18 +37,16 @@ class PriceProfile extends CI_Controller {
 		if ($user [0]->user_role_id == UserRole::Admin)
 			$price_profiles = $CI->PriceProfile_model->getAllPriceProfiles ();
 		else {
-			$price_profiles_sys = $CI->PriceProfile_model->getPriceProfilesByUser ( 0 );
 			
 			// Wenn der Benutzer gesetzt ist dann können die Profile geladen werden
 			if ($user_id != 0) {
 				$price_profiles_user = $CI->PriceProfile_model->getPriceProfilesByUser ( $user_id );
-				$price_profiles = array_merge ( $price_profiles_sys, $price_profiles_user );
-			} else
-				$price_profiles = $price_profiles_sys;
-			
-			foreach ( $price_profiles as $price_profile ) {
-				$price_profile = PriceProfile::getPriceProfile ( $price_profile->prpr_id );
+				$price_profiles = $price_profiles_user;
 			}
+		}
+		
+		foreach ( $price_profiles as $price_profile ) {
+			$price_profile = PriceProfile::getPriceProfile ( $price_profile->prpr_id );
 		}
 		
 		return $price_profiles;
@@ -75,6 +73,18 @@ class PriceProfile extends CI_Controller {
 			return NULL;
 		}
 	}
+	
+	// Liefert Preisen aus Format und Printer
+	public static function getPriceByPrinter($prsu_id, $prty_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'PriceProfile_model' );
+		$price = $CI->PriceProfile_model->getPriceByPrinter ( $prsu_id, $prty_id );
+		if (isset ( $price [0] )) {
+			return $price [0];
+		} else {
+			return NULL;
+		}
+	}
 	public function addPriceProductType() {
 		$this->load->model ( 'PriceProfile_model' );
 		$prpr_id = $this->input->post ( 'prpt_prpr_id' );
@@ -86,5 +96,17 @@ class PriceProfile extends CI_Controller {
 		
 		$price_profile = $this->PriceProfile_model->insert_price_product_type ( $data );
 		redirect ( 'PriceProfile/showSinglePriceProfile/' . $prpr_id );
+	}
+	public function addPricePrinter() {
+		$this->load->model ( 'PriceProfile_model' );
+		$prsu_id = $this->input->post ( 'prsu_id' );
+		$data = array (
+				'prsp_prsu_id' => $prsu_id,
+				'prsp_prty_id' => $this->input->post ( 'prsp_prty_id' ),
+				'prsp_price' => $this->input->post ( 'prsp_price' ) 
+		);
+		
+		$price_profile = $this->PriceProfile_model->insert_print_supplier_price ( $data );
+		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
 }
