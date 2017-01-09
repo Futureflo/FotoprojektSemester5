@@ -144,11 +144,8 @@ class Signup extends CI_Controller
 				$this->uploadTradeLicense($user_id);
 			}
 			if($newsletter == true){
-				$newsletterData = array(
-						'nele_user_id' => $user_id,
-						'nele_email' => $email
-				);
-				$this->user_model->insert_UserToNewsletter($newsletterData);
+
+				$this->user_model->update_addUserToNewsletter($user_id);
 			}
 			
 			if ($addressIsSet && $UserIsSet)
