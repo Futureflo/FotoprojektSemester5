@@ -59,6 +59,11 @@ class Signup extends CI_Controller
 			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
+			
+			if (empty($_FILES['tradelicense']['name']))
+			{
+				$this->form_validation->set_rules('tradelicense', 'Traderlicense', 'required');
+			}
 //    			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
 		}
 		
