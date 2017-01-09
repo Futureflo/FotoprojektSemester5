@@ -85,7 +85,7 @@ class DownloadManager extends CI_Controller {
 	 * @param array $imagePathArray = viele Quellpfade der zu zippenden Dateien.
 	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
-	public function zipDir($userID, $orderID, array $productsArray) {
+	public function zipDir($orderID, array $productsArray) {
 		// TODO: checken ob ziel und quellordner existieren
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
@@ -99,7 +99,7 @@ class DownloadManager extends CI_Controller {
 		// name für das Zip Archiv
 		// dateiname = userID, orderID, datum, uhrzeit
 		$myDate = date('omdGis');
-		$zipFileName = "Download_Zip_Archive_". $userID ."_". $orderID  ."_". $myDate .".zip";
+		$zipFileName = "Download_Zip_Archive_". $orderID  ."_". $myDate .".zip";
 		
 		// Zip Archiv Name wird an Pfad aus parameter2 angehängt
 		$outZipPath = $outZipFolder ."/". $zipFileName;
@@ -143,7 +143,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
 		$products = $this->order_model->getProductInformationByOrderId(1);
-		$this->zipDir(1, 1, $products);
+		$this->zipDir(1, $products);
 	
 	}
 	
