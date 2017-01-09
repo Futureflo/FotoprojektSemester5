@@ -182,7 +182,7 @@
 								<div class="form-insert_product">
 
 									<div class="col-sm-6">
-										<input type="file" name="tradelicense"  onchange="checkFile(this)" />
+										<input type="file" name="tradelicense" onchange="checkFile(this)" />
 									</div>
 									<span class="text-danger">
 									<?php
