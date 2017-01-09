@@ -284,7 +284,7 @@
 
 
 			</div>
-			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value="">
+			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value= <?php echo $type_hidden_field?>>
 			<?php
 			
 			echo form_close ();
@@ -293,7 +293,7 @@
 	</div>
 </section>
 
-
+<?php echo $type_hidden_field?>
 
 
 <script type="text/javascript">

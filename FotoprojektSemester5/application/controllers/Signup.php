@@ -41,6 +41,7 @@ class Signup extends CI_Controller
 		$newsletter = $this->input->post('checknewsletter');
 		
 		$role = $this->input->post('type_hidden_field');
+		
 			
 		// set form validation rules
 		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
@@ -75,8 +76,13 @@ class Signup extends CI_Controller
 		// submit
 		if ($this->form_validation->run() == FALSE)
         {
-			// fails
-        	$this->load->template('user/signup_view');       	     
+			// set user default role
+        	if($role == null){
+				$role = UserRole::User;
+			}
+        	$data['type_hidden_field'] = $role;
+        	
+         	$this->load->template('user/signup_view',$data); 
 //         	$this->session->set_flashdata('msgReg','Füllen Sie bitte alle Pflichtfelder aus!');
 
         }
@@ -95,6 +101,7 @@ class Signup extends CI_Controller
 			
 			//insert user details into db
 			$data = array(
+				'user_firstname' => $title,
 				'user_firstname' => $firstname,
 				'user_name' => $name,
 				'user_email' => $email,
