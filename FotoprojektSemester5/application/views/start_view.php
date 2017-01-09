@@ -154,7 +154,7 @@ var old = '';
                     old = search;
                 }
 		    }
-	});        
+	});  
     	
     
 function searchEvent(ev){
@@ -178,7 +178,7 @@ function searchEvent(ev){
 
                            for (var i in events){
                                if(events[i].products.length > 0){
-                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[0].even_status));
+                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[i].even_status));
                                 } else {
                                     ceateEvent(events[i].even_name, events[i].even_url)
                                 }
