@@ -68,7 +68,7 @@
 			echo "<!--";
 // 			echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
 			echo " <img data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
-					src=../../" . $product->prod_filepath . " onclick='openModal(this)'>";
+					src=../../" . $product->prod_filepath . " onclick='openModal(".json_encode($product).")'>";
 // 			echo "</a>";
 			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
 			echo "-->";
@@ -85,16 +85,17 @@
 
 <script>
 
-function openModal(img){
+function openModal(product){
 	document.getElementById("buttonModal").click();
 	var modalImg=document.getElementById("modalImg");
 
-	modalImg.setAttribute("alt",img.getAttribute("alt"));
-	modalImg.setAttribute("src",img.getAttribute("src"));
-	modalImg.setAttribute("data-src",img.getAttribute("data-src"));
+	modalImg.setAttribute("alt",product.prod_name);
+	modalImg.setAttribute("src","../../".product.prod_filepath);
+	modalImg.setAttribute("data-src","../..".product.prod_filepath);
 }
 
 </script> 
+
 
 
 
@@ -113,38 +114,21 @@ function openModal(img){
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<a data-toggle="modal" href="#imgModal">
 							<img	class="img-responsive" id="modalImg" onclick="openModalImg(this)" >
 							</a>
-						</div>
-					
-						<div class="col-md-6">
 						
-						<ul class="nav nav-tabs" role="tablist">
-						  <li class="nav-item">
-						    <a class="nav-link active" href="#digital" role="tab" data-toggle="tab">Digital</a>
-						  </li>
-						  <li class="nav-item">
-						    <a class="nav-link" href="#analog" role="tab" data-toggle="tab">Analog</a>
-						  </li>
-										  
-						</ul>
-										
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane fade in active" id="digital">
-
-
-										<br />
-										
-										<div class="col-md-3">
-											<p>Größe:</p>
-										</div>
-										
-										<div class="col-md-9">
+							<br />
+						<div class="col-md-7">
+							<div class="col-md-2">									
+										<p>Art:<p/>
+							</div>
+									
+								<div class="col-md-10">
+									
 											<div class="form-group"> 
-												<select class="form-control" id="größeSelect"> 
+												<select class="form-control" id="beschreibungSelect"> 
 													<option style="color: grey">Größe wählen*</option>
 													<option>Small</option>
 													<option>Medium</option>
@@ -152,114 +136,24 @@ function openModal(img){
 												    <option>ExtraLarge</option>
 										    	</select>
 										    </div>
-									    </div>
+									</div>	    
+					    </div>
+						
+						<div class="col-md-1">
+						
+						</div>		
+							
+						<div class="col-md-1">		   				
 										
-										<div class="col-md-3">
-											<p>Menge:<p/>
-										</div>
-										<div class="col-md-9">
-											<input type="text" class="form-control input-sm chat-input" placeholder="Menge wählen" name="menge"/>
-											<br />
-										</div>
-																				
-										<div class="col-md-3">
-										 
 											<p>Preis:<p/>
-										</div>
-										<div class="col-md-9">
+						 </div>
+										
+						<div class="col-md-3">			
 											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
-										</div>
-										
-									</div> 	<!--  Ende tabpanel -->
-								
-								
-								<div role="tabpanel" class="tab-pane fade" id="analog">
-
-							
-										<br />
-										
-										<div class="col-md-3">
-											<p>Format:</p>
-										</div>
-										
-										<div class="col-md-9">
-											<div class="form-group">
-												<select class="form-control" id="formatSelect">
-													<option style="color: grey">Format wählen*</option>
-													<option>Bild</option>
-													<option>Tasse</option>
-													<option>Format</option>
-												</select>
-											</div>
-										</div>
-										
-
-										
-										<div class="col-md-3">
-											<p>Größe:<p/>
-										</div>
-										
-										<div class="col-md-9">
-											<div class="form-group">
-												<select class="form-control" id="größeSelect">
-													<option style="color: grey">Größe wählen*</option>
-													<option>Small</option>
-													<option>Medium</option>
-													<option>Large</option>
-													<option>ExtraLarge</option>
-												</select>
-											</div>											
-										</div>
-										
-
-										
-										<div class="col-md-3">
-											<p>Rahmen:<p/>
-										</div>
-										
-										<div class="col-md-9">
-										
-											<div class="form-group">
-												<select class="form-control" id="rahmenSelect">
-													<option style="color: grey">Bilderrahmen wählen*</option>
-													<option>Mit Bilderrahmen</option>
-													<option>Ohne Bilderrahmen</option>
-												</select>
-											</div>
-													
-										</div>
 									
-										<div class="col-md-3">
-											<p>Material:<p/>
-										</div>
-										
-										<div class="col-md-9">
-											<div class="form-group">
-												<select class="form-control" id="materialSelect">
-													<option style="color: grey">Material wählen*</option>
-													<option>Matt</option>
-													<option>Glänzend</option>
-													<option>Hochwertig</option>
-	
-												</select>
-											</div>
-										</div>
-										
-										
-										
-											<div class="col-md-3">
-										 
-											<p>Preis: <p/>
-										</div>
-										<div class="col-md-9">
-											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
-										</div>
-								
-								</div> 	<!--  Ende tabpanel -->
-
-							</div> 	<!--  Ende Tabcontent-->
-							
-						</div> <!--  col-md-6 -->
+						  </div>				
+					
+						</div> <!--  col-md-12 -->
 					
 
 					</div> 	<!--  row -->
@@ -281,37 +175,3 @@ function openModal(img){
 	<!--  modal dialog-->
 </div>
 <!--  modal -->
-
-
-
-
-
-<!-- Modal -->
-<div id="imgModal" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-lg">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div> <!--  Ende Header -->
-			<div class="modal-body">
-		
-		
-			</div> <!--  modal body -->
-
-			
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
-				</div>
-
-		</div>
-		<!--  modal content -->
-	</div>
-	<!--  modal dialog-->
-</div>
-<!--  modal -->
-
-<br />
-<br />
-
