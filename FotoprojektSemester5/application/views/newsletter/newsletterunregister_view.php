@@ -2,13 +2,11 @@
 	<section class="text-xs-left">
 		<div class="container">
 			<?php
-			echo form_open ( 'Newsletter/addUnregistered' );
+			echo form_open ( 'Newsletter/' );
 			?>
 			<div class="">
-				<h2>Newsletteranmeldung:</h2>
-				<br> 
-				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname*" name="name"/>
-				<br />
+				<h2>Newsletterabmeldung:</h2>
+				<br>
 				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email"/>
 				<br />
 				<div class="form-group">
@@ -20,7 +18,7 @@
 				echo $this->session->flashdata ( 'newsletterMsg' );
 				?></div>
 				<span class="group-btn">    
-		            	<button name="submit" type="submit" class="btn btn-primary btn-md">Anmelden</button>
+		            	<button name="submit" type="submit" class="btn btn-primary btn-md">Abmelden</button>
 		        </span>
 			</div>
 		</div>

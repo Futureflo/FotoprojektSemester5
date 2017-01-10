@@ -91,6 +91,8 @@
 	</div>
 </div>
 
+
+
 <script>
 $(document).ready(function(){ 
 	  $("#payment_adress_btn").click(function() { 

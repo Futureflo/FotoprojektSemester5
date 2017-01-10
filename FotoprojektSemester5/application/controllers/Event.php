@@ -52,44 +52,58 @@ class Event extends CI_Controller {
 		
 		$this->showEvents ();
 	}
+	
+
+	
 	public function showEvents() {
 		$this->load->model ( 'event_model' );
-		$data ['events'] = $this->event_model->getAllEvents ();
+		$id = $this->session->userdata ( 'user_id' );
+		$data ['events'] = $this->event_model->getEventsFromUser( $id );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
+	
+	//Methoden um den Status zu aendern
 	public function lockEventById($even_id) {
-		$CI = & get_instance ();
-		$CI->load->model ( 'event_model' );
-		
-		$event = $CI->event_model->getSingleEventById ( $even_id );
-		
-		if (isset ( $event [0] )) {
-			$event [0]->even_status = EventStatus::locked;
-			$CI->event_model->update_event ( $even_id, $event [0] );
+		$this->changeEventStatus($even_id, EventStatus::locked);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich gesperrt! </div>' );
 		}
-	}
 	public function unlockEventById($even_id) {
-		$CI = & get_instance ();
-		$CI->load->model ( 'event_model' );
-		
-		$event = $CI->event_model->getSingleEventById ( $even_id );
-		
-		if (isset ( $event [0] )) {
-			// Nur ein gesperrtes Event kann entsperrt werden
-			if ($event [0]->even_status == EventStatus::locked) {
-				$event [0]->even_status = EventStatus::prv;
-				$CI->event_model->update_event ( $even_id, $event [0] );
-			}
-		}
+		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich entsperrt! </div>' );
 	}
 	public function changeStateToPublicById($even_id) {
+		$this->changeEventStatus($even_id, EventStatus::pbl);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde &ouml;ffentlich gestellt! </div>' );
+	}
+	
+	public function changeStateToPrivateById($even_id) {
+		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde privat gestellt! </div>' );
+	}
+	
+	public function deleteEventById($even_id) {
+		$this->changeEventStatus($even_id, EventStatus::deleted);
+		$this->load->model ( 'event_model' );
+		$id = $this->session->userdata ( 'user_id' );
+		$data ['events'] = $this->event_model->getEventsFromUser( $id );
+		$data ['message'] = "<div class='alert alert-success'>Dein Event wurde erfolgreich gelöscht</div>";
+		$this->load->template ( 'event/all_event_view', $data );
+	}
+	
+	public function changeEventStatus($even_id, $even_status)
+	{
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
 		
 		$event = $CI->event_model->getSingleEventById ( $even_id );
 		
 		if (isset ( $event [0] )) {
-			$event [0]->even_status = EventStatus::public;
+			
+			if ($event [0]->even_status == EventStatus::locked) {
+				$event [0]->even_status = EventStatus::prv;
+			}
+			else $event [0]->even_status = $even_status;
+			
 			$CI->event_model->update_event ( $even_id, $event [0] );
 		}
 	}

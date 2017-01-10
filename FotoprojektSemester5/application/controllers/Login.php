@@ -49,6 +49,14 @@ class Login extends CI_Controller {
 					redirect ( "start/" );
 					
 					break;
+				
+				case UserStatus::deleted :
+					// message for deleted user
+					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gelöscht. Kontaktieren Sie bitte den Admin' );
+					redirect ( "start/" );
+					
+					break;
+				
 				case UserStatus::activated :
 					
 					// check for user credentials
@@ -73,7 +81,7 @@ class Login extends CI_Controller {
 								'user_role' => $uresult [0]->user_role 
 						);
 						$this->session->set_userdata ( $sess_data );
- 						redirect ( $_SERVER['HTTP_REFERER'] );
+						redirect ( $_SERVER ['HTTP_REFERER'] );
 					} else {
 						
 						$passwordAttempt = $uresult [0]->user_passwordattempt;
@@ -91,6 +99,12 @@ class Login extends CI_Controller {
 						
 						redirect ( "start/" );
 					}
+					
+					break;
+				default :
+					// default
+					$this->session->set_flashdata ( 'msg', 'Allgemeiner Fehler bei der Anmeldung. Kontaktieren Sie bitte den Admin!' );
+					redirect ( "start/" );
 					
 					break;
 			}

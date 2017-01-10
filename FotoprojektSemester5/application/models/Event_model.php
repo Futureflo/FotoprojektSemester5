@@ -26,6 +26,12 @@
       	return $query->result();
       }
       
+	   public function getEventsFromUser($id){
+      	$this->db->where('even_user_id', $id);
+      	$query = $this->db->get("event");
+      	return $query->result();
+      }
+	  
       public function getAllEvents()
       {
       	$query = $this->db->get("event");

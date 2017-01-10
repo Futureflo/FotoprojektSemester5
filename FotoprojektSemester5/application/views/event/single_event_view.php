@@ -39,10 +39,8 @@
 </div>
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info" data-toggle="modal"
-	data-target="#myModal">Modal Version 1</button>
-<button type="button" class="btn btn-info" data-toggle="modal"
-	data-target="#myModal2">Modal Version 2</button>
+<!-- <button type="button" class="btn btn-info" data-toggle="modal" -->
+<!-- 	data-target="#bestellungModal">Modal Version 1</button> -->
 
 <div class="table-responsive">
 
@@ -68,10 +66,10 @@
 			echo "<div class=\"card\">";
 			echo "<div class=\"lazyload\">";
 			echo "<!--";
-			echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
+// 			echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
 			echo " <img data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
-					src=../../" . $product->prod_filepath . ">";
-			echo "</a>";
+					src=../../" . $product->prod_filepath . " onclick='openModal(this)'>";
+// 			echo "</a>";
 			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
 			echo "-->";
 			echo "</div>";
@@ -83,74 +81,105 @@
 	</div>
 </div>
 
+<button type="button" id="buttonModal" data-toggle="modal" data-target="#bestellungModal" style="display: none"> </button>
 
+<script>
+
+function openModal(img){
+	document.getElementById("buttonModal").click();
+	var modalImg=document.getElementById("modalImg");
+
+	modalImg.setAttribute("alt",img.getAttribute("alt"));
+	modalImg.setAttribute("src",img.getAttribute("src"));
+	modalImg.setAttribute("data-src",img.getAttribute("data-src"));
+}
+
+</script> 
 
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="bestellungModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Bilder kaufen</h4>
-			</div>
+				<h4 class="modal-title">Bestellung aufgeben</h4>
+			</div> <!--  Ende Header -->
+			
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-
-							<img
-								src="http://www.basteldichblue.com/Public/BMDE/12/Viereckiges%20Scoubidou%20x4/4726_200x200.jpg"
-								class="img-responsive" alt="Cinque Terre">
-
+							<a data-toggle="modal" href="#imgModal">
+							<img	class="img-responsive" id="modalImg" onclick="openModalImg(this)" >
+							</a>
 						</div>
+					
 						<div class="col-md-6">
-							<ul class="nav nav-tabs" role="tablist">
-								<li class="nav-item"><a class="nav-link active" href="#digital"
-									role="tab" data-toggle="tab">Digital</a></li>
-								<li class="nav-item"><a class="nav-link" href="#analog" role="tab"
-									data-toggle="tab">Analog</a></li>
-							</ul>
-
+						
+						<ul class="nav nav-tabs" role="tablist">
+						  <li class="nav-item">
+						    <a class="nav-link active" href="#digital" role="tab" data-toggle="tab">Digital</a>
+						  </li>
+						  <li class="nav-item">
+						    <a class="nav-link" href="#analog" role="tab" data-toggle="tab">Analog</a>
+						  </li>
+										  
+						</ul>
+										
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane fade in active"
-									id="digital">
+								<div role="tabpanel" class="tab-pane fade in active" id="digital">
 
 
-									<div id="digital" class="collapse">
 										<br />
-										<!-- 								<div class="form-group"> -->
-										<!-- 								    <select class="form-control" id="größeSelect"> -->
-										<!-- 								      <option style="color: grey">Größe wählen*</option> -->
-										<!-- 								      <option>Small</option> -->
-										<!-- 								      <option>Medium</option> -->
-										<!-- 								      <option>Large</option> -->
-										<!-- 								      <option>ExtraLarge</option> -->
-										<!-- 								    </select> -->
-										<!-- 							    </div>  -->
-										<!-- 								<input type="text" class="form-control input-sm chat-input" placeholder="Menge" name="menge"/> -->
-										<!-- 								<br /> -->
-
+										
 										<div class="col-md-3">
-											<p>Preis:
-											
-											
-											<p />
+											<p>Größe: </p>
+										</div>
+										
+										<div class="col-md-9">
+											<div class="form-group"> 
+												<select class="form-control" id="größeSelect"> 
+													<option style="color: grey">Größe wählen*</option>
+													<option>Small</option>
+													<option>Medium</option>
+												    <option>Large</option>
+												    <option>ExtraLarge</option>
+										    	</select>
+										    	
+										    </div>
+									    </div>
+										
+										<div class="col-md-3">
+											<p>Menge: <p/>
 										</div>
 										<div class="col-md-9">
-											<textarea class="form-control" rows="1" cols="3"
-												style="overflow: auto; resize: none" readonly="readonly"></textarea>
+											<input type="text" class="form-control input-sm chat-input" placeholder="Menge wählen" name="menge"/>
 										</div>
-									</div>
+																				
+										<div class="col-md-3">
+											<p>Preis: <p/>
+										</div>
+										<div class="col-md-9">
+											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
+										</div>
+										
+										
+										
+										
+									
+						
 
-								</div>
+								</div> 	<!--  Ende tabpanel -->
+								
+								
 								<div role="tabpanel" class="tab-pane fade" id="analog">
 
-									<div id="analog" class="collapse">
+							
 										<br />
 										<div class="form-group">
 											<select class="form-control" id="formatSelect">
@@ -187,26 +216,56 @@
 										</div>
 										<textarea class="form-control" rows="1" cols="10"
 											placeholder="Preis" readonly="readonly"></textarea>
-									</div>
-								</div>
+								
+								</div> 	<!--  Ende tabpanel -->
 
-							</div>
-							<!--  col-md-6 -->
-						</div>
-						<!--  row -->
+							</div> 	<!--  Ende Tabcontent-->
+							
+						</div> <!--  col-md-6 -->
+					
 
-					</div>
-					<!--  container -->
-				</div>
-				<!--  modal body -->
+					</div> 	<!--  row -->
+				
+				</div> 	<!--  container -->
+				
 
-
+			</div> <!--  modal body -->
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
 					<button type="button" class="btn btn-default">In den Warenkorb</button>
 				</div>
-			</div>
+			
+
+		</div>
+		<!--  modal content -->
+	</div>
+	<!--  modal dialog-->
+</div>
+<!--  modal -->
+
+
+
+
+
+<!-- Modal -->
+<div id="imgModal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div> <!--  Ende Header -->
+			<div class="modal-body">
+		
+		
+			</div> <!--  modal body -->
+
+			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+				</div>
 
 		</div>
 		<!--  modal content -->

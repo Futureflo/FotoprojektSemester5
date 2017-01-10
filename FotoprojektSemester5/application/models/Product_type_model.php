@@ -31,6 +31,18 @@ class Product_type_model extends CI_Model {
 			$this->db->where_not_in ( 'prty_id', $prty_ids );
 		}
 		$this->db->where ( 'prty_user_id', $user_id );
+		// System
+		$this->db->or_where ( 'prty_user_id', 0 );
+		$query = $this->db->get ( 'product_type' );
+		return $query->result ();
+	}
+	function getAllUnusedProductTypeByPrinter($prsu_id, $prty_ids) {
+		if (isset ( $prty_ids [0] )) {
+			$this->db->where_not_in ( 'prty_id', $prty_ids );
+		}
+		$this->db->join ( 'print_supplier', 'prsu_user_id = prty_user_id OR prty_user_id = 0', 'INNER JOIN' );
+		$this->db->where ( 'prsu_id', $prsu_id );
+		
 		$query = $this->db->get ( 'product_type' );
 		return $query->result ();
 	}
