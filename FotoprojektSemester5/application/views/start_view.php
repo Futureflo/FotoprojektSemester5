@@ -46,7 +46,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 offset-md-1 col-xs-10 offset-xs-1">
+		<div class="col-md-10 offset-md-1 col-xs-10 offset-xs-1 ui-widget">
 			<input type="text" id="searchEvent" class="form-control" onkeyup="" placeholder="Search for event..." style="margin: 1.25rem 0.625rem" />
 		</div>
 	</div>
@@ -138,9 +138,23 @@
 	</div>
 </div>
 
+<script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<?php
+echo '<script>';
+echo '$( function() { var availableTags = [';
+foreach ( $allevents as $e ) {
+	echo "\"" . $e->even_name . "\",";
+}
+echo ']; $( "#searchEvent" ).autocomplete({ source: availableTags }); } );';
+echo '</script>';
+
+?>
 
 <script type="text/javascript">  
 var old = '';
+
+
     
     document.getElementById("searchEvent")
     	.addEventListener("keyup", function(event) {

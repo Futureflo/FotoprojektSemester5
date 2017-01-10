@@ -14,7 +14,7 @@ class Contact extends CI_Controller
     {
     	$this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[3]|max_length[30]');
      	$this->form_validation->set_rules('email', '"Email"', 'trim|required');
-     	$this->form_validation->set_rules('telNum', 'Telefon Number', 'trim|required|min_length[3]|max_length[30]');
+     	$this->form_validation->set_rules('telNum', 'Telefon Number', 'trim|min_length[3]|max_length[30]');
      	$this->form_validation->set_rules('subject', 'Subject', 'required');
      	$this->form_validation->set_rules('message', 'Message', 'required');
     	 

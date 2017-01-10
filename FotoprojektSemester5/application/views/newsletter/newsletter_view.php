@@ -6,8 +6,6 @@
 			?>
 			<div class="">
 				<h2>Newsletteranmeldung:</h2>
-				<br> 
-				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname*" name="name"/>
 				<br />
 				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email"/>
 				<br />

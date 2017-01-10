@@ -43,8 +43,8 @@
 			// Spalte 4: Menge
 			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
 			echo '<div class="form-group col-sm-2">';
-			echo "<p>" . '<input type="number" pattern="[0-9]" min="1" max="999" class="form-control" class="anzahl" value=' . $amount . ' onchange=change(this) >' . "</p>";
-            echo '<input type="hidden" class="one" value=' . $price . '>';
+			echo "<p>" . '<input type="text" min="1" max="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
+			echo '<input type="hidden" class="one" value=' . $price . '>';
 			echo "</div>";
 			
 			// Spalte 5: Button
@@ -135,7 +135,7 @@
 
 
 
-<script>
+<script type="text/javascript">
     function login(){
         document.getElementById("login-btn").click();
     }
@@ -183,6 +183,8 @@ function articleSum(){
         var price = row.getElementsByClassName('aktuellerpreis')[0];
         var number = e.value;
         var one = row.getElementsByClassName('one')[0].value;
+
+        console.log(number);
         
         if (isNaN ( number )) {
             number = parseFloat(1);

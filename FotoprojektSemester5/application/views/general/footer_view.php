@@ -3,27 +3,27 @@
 
 <footer class="footer">
 	<div class="container">
-		<div class="row offset-md-2">
+		<div class="row offset-md-1">
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php
-			
-echo base_url ();
+			echo base_url ();
 			?>legalnotice/">Impressum</a></p> </div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php
 			
-echo base_url ();
+			echo base_url ();
 			?>contact/">Kontakt</a></p></div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php
 			
-echo base_url ();
+			echo base_url ();
 			?>termsandconditions/">AGB</a></p></div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php
 			
-echo base_url ();
-			?>privacypolicy/">Datenschutzrichtlinie</a></p></div>
+			echo base_url ();
+			?>newsletter/">Newsletter</a></p></div>
 			<div class="col-md-2 text-center"><p><a class="text-muted" href="<?php
 			
-echo base_url ();
-			?>newsletter/">Newsletter</a></p></div>
+			echo base_url ();
+			?>privacypolicy/">Datenschutzrichtlinie</a></p></div>
+			
 		</div>
 	</div>
 </footer>
@@ -59,7 +59,7 @@ echo base_url ();
 <script
 	src="<?php
 	
-echo base_url ();
+	echo base_url ();
 	?>temp/ie10-viewport-bug-workaround.js.Download"></script>
 <link rel="stylesheet" href="<?php
 

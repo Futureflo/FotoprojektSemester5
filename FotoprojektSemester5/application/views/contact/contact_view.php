@@ -5,11 +5,11 @@
 			<div class="">
 				<h2>Kontaktiere uns:</h2>
 				<br> 
-				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname*" name="name"/>
+				<input type="text" class="form-control input-sm chat-input" placeholder="Vor- und Nachname*" name="name" value="<?php echo set_value ( 'name' );?>"/>
 				<br />
-				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email"/>
+				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email" value="<?php echo set_value ( 'email' );?>"/>
 				<br />
-				<input type="text" class="form-control input-sm chat-input" placeholder="Telefonnummer" name="telNum"/>
+				<input type="text" class="form-control input-sm chat-input" placeholder="Telefonnummer" name="telNum" value="<?php echo set_value ( 'telNum' );?>"/>
 				<br />
 				<div class="form-group">
 			    <select class="form-control" id="subject" name="subject">
@@ -22,7 +22,7 @@
 			  </div>
 				<div class="form-group">
 
-  <textarea class="form-control" rows="5" placeholder="Nachricht eingeben*" id="message" name="message"></textarea>
+  <textarea class="form-control" rows="5" placeholder="Nachricht eingeben*" id="message" name="message" value="<?php echo set_value ( 'telNum' );?>"></textarea>
 				</div>
 				<div id="fehler_span" class="text-danger"><?php  echo $this->session->flashdata('contactMsg'); ?></div>
 				<span class="group-btn">    
