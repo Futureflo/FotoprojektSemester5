@@ -86,5 +86,8 @@ class Admin extends CI_Controller {
 		$data ['users'] = $this->User_model->get_AllArchivedUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
+	public function printers_creation() {
+		$this->load->template ( 'admin/printers_creation_view' );
+	}
 }
 ?>
