@@ -64,10 +64,54 @@ class DownloadManager extends CI_Controller {
 		zipDir($userID, $orderID, $products);
 	}
 	
+	/**
+	 * Mehtode um einen sicheren und einzigartigen downloadlink zu erstellen soll orderID enthalten sowie "verschlüsselung"
+	 * 
+	 * @param unknown $orderID
+	 */
+	public function createDownloadLink($orderID) {
+		// load helper for generating new salt(simple random integer)
+		$this->load->helper ( array (
+				'hash_helper'
+		) );
+		
+		$this->load->model('Download_Password_model');
+		$downloadPasswordArray = $this->Download_Password_model->getDownloadPasswords();
+		
+		$download_password = generate_salt (30);
+		
+		// check if this new $download_password already exists or is a new one(shall be unique).
+		// generates new $download_password until a new unique one is found.
+		while($this->existsInArray($download_password, $downloadPasswordArray))
+		{
+			$download_password = generate_salt (30);
+		}
+
+		// create a new tupel
+		$data = array (
+				'dopa_password' => $download_password,
+				'dopa_orde_id' => $orderID,
+				'dopa_status' => 0,			// status == already downloaded with this password. 0=no, 1=yes.	
+		);
+		
+		// Produkt einfügen
+		$new_dopa_id = $this->Download_Password_model->insertDownloadPassword ( $data );
+		return $download_password;
+	}
 	
-	public static function createDownloadLink($orderID, $userID) {
-		// Mehtod um einen sicheren und einzigartigen downloadlink zu erstellen
-		// soll orderID und nutzerID enthalten sowie "verschlüsselung"
+	/**
+	 * cheks if something already exists
+	 * @param unknown $testArray
+	 */
+	public function existsInArray($checker, $testArray) {
+		$result = false;
+		for ($i = 0; $i < count($testArray); $i++) {
+			if($checker == $testArray[$i]->dopa_password){
+				$result = true;
+			}
+		}
+		// echo $result;
+		return $result;
 	}
 	
 	/**
@@ -140,10 +184,14 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	public function test(){
-		$this->load->model('order_model');
+// 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
-		$products = $this->order_model->getProductInformationByOrderId(1);
-		$this->zipDir(1, $products);
+		$this->load->model('Download_Password_model');
+// 		$products = $this->order_model->getProductInformationByOrderId(1);
+// 		$this->zipDir(1, $products);
+// 		$this->createDownloadLink(1);
+		
+		$this->createDownloadLink(39);
 	
 	}
 	
