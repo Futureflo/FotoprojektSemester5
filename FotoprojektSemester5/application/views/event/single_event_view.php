@@ -98,7 +98,7 @@ function openModal(product){
 	product.product_variants.forEach(function(entry) {
 	    //alert(entry.prty_description);
 	    var option = document.createElement("option");
-		option.text = entry.prty_description;
+		option.text = entry.prty_description + " - " + entry.price.price_sum + "€";
 		bestelloptionen.add(option);
 	});
 	//.
@@ -107,9 +107,6 @@ function openModal(product){
 }
 
 </script> 
-
-
-
 
 
 <!-- Modal -->
@@ -141,7 +138,7 @@ function openModal(product){
 									
 											<div class="form-group"> 
 												<select class="form-control" id="beschreibungSelect"> 
-													<option style="color: grey">Größe wählen*</option>
+													<option style="color: grey">Art wählen*</option>
 										    	</select>
 										    </div>
 									</div>	    
@@ -157,10 +154,8 @@ function openModal(product){
 						 </div>
 										
 						<div class="col-md-3">			
-											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
-									
-						 				
-					
+									<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
+								
 						</div> <!--  col-md-12 -->
 					
 
