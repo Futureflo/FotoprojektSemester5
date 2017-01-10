@@ -164,12 +164,12 @@ class User_model extends CI_Model {
 		$this->db->set ( 'user_newsletter', TRUE);
 		$this->db->where ( 'user_id', $user_id );
 		$this->db->update ( 'user' );
-		return $afftectedRows = $this->db->affected_rows ();	}
+		return $afftectedRows = $this->db->affected_rows ();
 	}
+	
 	// add unkonwn User to Newsletter
 	function insert_UserToNewsletter($data) {
 		return $this->db->insert ( 'newsletter', $data );
 	}
-	
-
+}
 ?>
