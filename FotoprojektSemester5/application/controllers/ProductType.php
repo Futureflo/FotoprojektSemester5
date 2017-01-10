@@ -55,7 +55,8 @@ class ProductType extends CI_Controller {
 					'prty_type' => $prty_type,
 					'prty_height' => $prty_height,
 					'prty_width' => $prty_width,
-					'prty_user_id' => $prty_user_id 
+					'prty_user_id' => $prty_user_id,
+					'prty_status' => ProductTypeStatus::activ 
 			);
 			
 			$price_profile = $this->product_type_model->insert_product_type ( $data );
@@ -69,4 +70,9 @@ abstract class ProductPrintType {
 	const download = 2;
 	const mixed = 3;
 	const article = 4;
+}
+abstract class ProductTypeStatus {
+	const undefined = 0;
+	const activ = 1;
+	const deleted = 2;
 }
