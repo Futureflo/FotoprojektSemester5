@@ -38,11 +38,15 @@ class PriceProfile extends CI_Controller {
 			$price_profiles = $CI->PriceProfile_model->getAllPriceProfiles ();
 		else {
 			
+			$price_profiles_sys = $CI->PriceProfile_model->getPriceProfilesByUser ( 0 );
+			
 			// Wenn der Benutzer gesetzt ist dann können die Profile geladen werden
 			if ($user_id != 0) {
 				$price_profiles_user = $CI->PriceProfile_model->getPriceProfilesByUser ( $user_id );
-				$price_profiles = $price_profiles_user;
-			}
+				// $price_profiles = $price_profiles_user;
+				$price_profiles = array_merge ( $price_profiles_sys, $price_profiles_user );
+			} else
+				$price_profiles = $price_profiles_sys;
 		}
 		
 		foreach ( $price_profiles as $price_profile ) {
