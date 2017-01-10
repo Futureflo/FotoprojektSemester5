@@ -63,6 +63,7 @@
 		<div class="row">
 		<?php
 		foreach ( $products as $product ) {
+			$product->prod_complete_filepath = base_url() . $product->prod_filepath;
 			echo "<div class=\"card\">";
 			echo "<div class=\"lazyload\">";
 			echo "<!--";
@@ -90,8 +91,19 @@ function openModal(product){
 	var modalImg=document.getElementById("modalImg");
 
 	modalImg.setAttribute("alt",product.prod_name);
-	modalImg.setAttribute("src","../../".product.prod_filepath);
-	modalImg.setAttribute("data-src","../..".product.prod_filepath);
+	modalImg.setAttribute("src",product.prod_complete_filepath);
+	modalImg.setAttribute("data-src",product.prod_complete_filepath);
+
+	var bestelloptionen = document.getElementById("beschreibungSelect");
+	product.product_variants.forEach(function(entry) {
+	    //alert(entry.prty_description);
+	    var option = document.createElement("option");
+		option.text = entry.prty_description;
+		bestelloptionen.add(option);
+	});
+	//.
+	//
+	//x.add(option);
 }
 
 </script> 
@@ -130,10 +142,6 @@ function openModal(product){
 											<div class="form-group"> 
 												<select class="form-control" id="beschreibungSelect"> 
 													<option style="color: grey">Größe wählen*</option>
-													<option>Small</option>
-													<option>Medium</option>
-												    <option>Large</option>
-												    <option>ExtraLarge</option>
 										    	</select>
 										    </div>
 									</div>	    
