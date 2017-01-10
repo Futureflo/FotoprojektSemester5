@@ -41,12 +41,12 @@ class User_model extends CI_Model {
 		$query = $this->db->get ( 'user' );
 		return $query->result ();
 	}
-
+	
 	// get useraddress by id
 	function get_address_by_id($id) {
 		$this->db->where ( 'adre_user_id', $id );
 		$query = $this->db->get ( 'adress' );
-		return $query->result();
+		return $query->result ();
 	}
 	
 	// get user by passwordRestoreCode
@@ -115,7 +115,7 @@ class User_model extends CI_Model {
 	
 	// update user email by id
 	function update_userEmailByID($user_id, $user_email) {
-		$this->db->set ( 'user_email', $user_email);
+		$this->db->set ( 'user_email', $user_email );
 		$this->db->where ( 'user_id', $user_id );
 		$this->db->update ( 'user' );
 		return $afftectedRows = $this->db->affected_rows ();
@@ -161,7 +161,7 @@ class User_model extends CI_Model {
 	
 	// add User to Newsletter
 	function update_addUserToNewsletter($user_id) {
-		$this->db->set ( 'user_newsletter', TRUE);
+		$this->db->set ( 'user_newsletter', TRUE );
 		$this->db->where ( 'user_id', $user_id );
 		$this->db->update ( 'user' );
 		return $afftectedRows = $this->db->affected_rows ();
@@ -170,6 +170,19 @@ class User_model extends CI_Model {
 	// add unkonwn User to Newsletter
 	function insert_UserToNewsletter($data) {
 		return $this->db->insert ( 'newsletter', $data );
+	}
+	
+	// add unkonwn User to Newsletter
+	function update_NewsletterStatusUnregister($email) {
+		$this->db->set ( 'user_newsletter', false );
+		$this->db->where ( 'user_id', $email );
+		$this->db->update ( 'user' );
+		$returnUserNele = $afftectedRows = $this->db->affected_rows ();
+		
+		$this->db->set ( 'nele_status', 2 );
+		$this->db->where ( 'nele_email', $email );
+		$this->db->update ( 'newsletter' );
+		return $afftectedRows = $this->db->affected_rows ();
 	}
 }
 ?>
