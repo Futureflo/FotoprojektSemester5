@@ -40,8 +40,8 @@
       
       public function getAllActivEvents()
       {
+      	$this->db->where ( 'even_status !=', 4);
       	$query = $this->db->get("event");
-      	$this->db->where ( 'even_status !=', 4); 
       	return $query->result();
       }
       public function getAllPublicEvents()
