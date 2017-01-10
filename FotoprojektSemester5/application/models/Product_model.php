@@ -32,11 +32,13 @@ class Product_model extends CI_Model {
 		return $query->result ();
 	}
 	Public function getProductVariant($prod_id, $prty_id) {
-		$this->db->join ( 'product_type', 'prty_id = prva_prty_id', 'LEFT OUTER' );
-		$this->db->join ( 'product', 'prod_id = prva_prod_id', 'INNER JOIN' );
-		$this->db->where ( 'prva_prod_id', $prod_id );
-		$this->db->where ( 'prva_prty_id', $prty_id );
-		$query = $this->db->get ( "product_variant" );
+		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
+		$this->db->join ( 'price_product_type', 'prpt_prpr_id = even_prpr_id', 'INNER JOIN' );
+		$this->db->join ( 'print_supplier_price', 'prsp_prsu_id = even_prsu_id', 'INNER JOIN' );
+		$this->db->join ( 'product_type', 'prty_id = prsp_prty_id AND prty_id = prpt_prty_id', 'INNER JOIN' );
+		$this->db->where ( 'prod_id', $prod_id );
+		$this->db->where ( 'prty_id', $prty_id );
+		$query = $this->db->get ( "product" );
 		$result = $query->result ();
 		return $result [0];
 	}

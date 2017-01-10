@@ -75,6 +75,7 @@ class Checkout extends CI_Controller {
 		$user_id = $this->session->userdata ( 'user_id' );
 		
 		$user = $this->user_model->get_user_by_id ( $user_id );
+		$address = $this->user_model->get_address_by_id ( $user_id );
 		
 		$data ['user_title'] = $user [0]->user_title;
 		$data ['user_name'] = $user [0]->user_name;
