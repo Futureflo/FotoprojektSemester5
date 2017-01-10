@@ -2,7 +2,7 @@
 	<section class="text-xs-left">
 		<div class="container">
 			<?php
-			echo form_open ( 'Newsletter/' );
+			echo form_open ( 'Newsletter/unregister' );
 			?>
 			<div class="">
 				<h2>Newsletterabmeldung:</h2>

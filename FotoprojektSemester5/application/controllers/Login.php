@@ -39,7 +39,7 @@ class Login extends CI_Controller {
 					break;
 				case UserStatus::locked :
 					
-					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Password über "Password vergessen" zurück' );
+					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Password über "Passwort vergessen" zurück' );
 					redirect ( "start/" );
 					
 					break;
@@ -91,7 +91,7 @@ class Login extends CI_Controller {
 						$passwordAttempt ++;
 						
 						$this->user_model->update_userPasswordAttempt ( $email, $passwordAttempt );
-						if ($passwordAttempt > 5) {
+						if ($passwordAttempt > 4) {
 							$this->user_model->update_userStatusByID ( $uresult [0]->user_id, UserStatus::locked );
 						} else {
 							$this->session->set_flashdata ( 'msg', 'Falsche E-Mail-Adresse oder Passwort' );
@@ -151,8 +151,8 @@ class Login extends CI_Controller {
 		
 		$this->email->from ( 'noReply@snap-gallery.de', 'Snap Gallery' );
 		$this->email->to ( $user_email );
-		$this->email->subject ( 'Snap-Gallery.de Password zurücksetzen' );
-		$this->email->message ( 'Sie können unter dem Folgenden Link ihr neues Password eingeben ' . base_url () . "login/restorePassword/" . $PassowrdForgotCode );
+		$this->email->subject ( 'Snap-Gallery.de Passwort zurücksetzen' );
+		$this->email->message ( 'Sie können unter dem Folgenden Link ihr neues Passwort eingeben ' . base_url () . "login/restorePassword/" . $PassowrdForgotCode );
 		$this->email->send ();
 	}
 	function user_exists($str) {
@@ -188,7 +188,8 @@ class Login extends CI_Controller {
 		} else {
 			
 			$this->changePassword ( $user_id, $newPassword );
-			// Warum hier redirect und nicht Aufruf von template() ?!
+			$this->user_model->update_unsetUserRestoreCode ( $user_id );
+				
 			redirect ( "start/" );
 		}
 	}
