@@ -1,13 +1,13 @@
 <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">Vielen Dank</h1>
+		<h1 class="jumbotron-heading">Schade</h1>
 		<p class="lead text-muted">Sie haben sich mit der E-Mail Adresse "<?php
 		echo $nele_email;
-		?>" für den Newsletter registriert.
+		?>" von unserem Newsleter wieder abgemeldet.
 		<br>
-		Info: Sie können sich jederzeit <a href=" <?php
+		Info: Das war sicherlich nur ein Versehen. <a href=" <?php
 		echo base_url ();
-		?>Newsletter/call_unregister_view"> hier</a> wieder abmelden.
+		?>Newsletter/index"> Hier</a> können Sie sich wieder anmelden.
 		</p>
 	</div>
 </section>

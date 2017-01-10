@@ -98,6 +98,7 @@ function openModal(img){
 
 
 
+
 <!-- Modal -->
 <div id="bestellungModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -138,7 +139,7 @@ function openModal(img){
 										<br />
 										
 										<div class="col-md-3">
-											<p>Größe: </p>
+											<p>Größe:</p>
 										</div>
 										
 										<div class="col-md-9">
@@ -150,72 +151,109 @@ function openModal(img){
 												    <option>Large</option>
 												    <option>ExtraLarge</option>
 										    	</select>
-										    	
 										    </div>
 									    </div>
 										
 										<div class="col-md-3">
-											<p>Menge: <p/>
+											<p>Menge:<p/>
 										</div>
 										<div class="col-md-9">
 											<input type="text" class="form-control input-sm chat-input" placeholder="Menge wählen" name="menge"/>
+											<br />
 										</div>
 																				
 										<div class="col-md-3">
-											<p>Preis: <p/>
+										 
+											<p>Preis:<p/>
 										</div>
 										<div class="col-md-9">
 											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
 										</div>
 										
-										
-										
-										
-									
-						
-
-								</div> 	<!--  Ende tabpanel -->
+									</div> 	<!--  Ende tabpanel -->
 								
 								
 								<div role="tabpanel" class="tab-pane fade" id="analog">
 
 							
 										<br />
-										<div class="form-group">
-											<select class="form-control" id="formatSelect">
-												<option style="color: grey">Format wählen*</option>
-												<option>Bild</option>
-												<option>Tasse</option>
-												<option>Format</option>
-											</select>
+										
+										<div class="col-md-3">
+											<p>Format:</p>
 										</div>
-										<div class="form-group">
-											<select class="form-control" id="größeSelect">
-												<option style="color: grey">Größe wählen*</option>
-												<option>Small</option>
-												<option>Medium</option>
-												<option>Large</option>
-												<option>ExtraLarge</option>
-											</select>
+										
+										<div class="col-md-9">
+											<div class="form-group">
+												<select class="form-control" id="formatSelect">
+													<option style="color: grey">Format wählen*</option>
+													<option>Bild</option>
+													<option>Tasse</option>
+													<option>Format</option>
+												</select>
+											</div>
 										</div>
-										<div class="form-group">
-											<select class="form-control" id="rahmenSelect">
-												<option style="color: grey">Bilderrahmen wählen*</option>
-												<option>Mit Bilderrahmen</option>
-												<option>Ohne Bilderrahmen</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<select class="form-control" id="materialSelect">
-												<option style="color: grey">Material wählen*</option>
-												<option>Matt</option>
-												<option>Glänzend</option>
-												<option>Hochwertig</option>
+										
 
-											</select>
+										
+										<div class="col-md-3">
+											<p>Größe:<p/>
 										</div>
-										<textarea class="form-control" rows="1" cols="10"
-											placeholder="Preis" readonly="readonly"></textarea>
+										
+										<div class="col-md-9">
+											<div class="form-group">
+												<select class="form-control" id="größeSelect">
+													<option style="color: grey">Größe wählen*</option>
+													<option>Small</option>
+													<option>Medium</option>
+													<option>Large</option>
+													<option>ExtraLarge</option>
+												</select>
+											</div>											
+										</div>
+										
+
+										
+										<div class="col-md-3">
+											<p>Rahmen:<p/>
+										</div>
+										
+										<div class="col-md-9">
+										
+											<div class="form-group">
+												<select class="form-control" id="rahmenSelect">
+													<option style="color: grey">Bilderrahmen wählen*</option>
+													<option>Mit Bilderrahmen</option>
+													<option>Ohne Bilderrahmen</option>
+												</select>
+											</div>
+													
+										</div>
+									
+										<div class="col-md-3">
+											<p>Material:<p/>
+										</div>
+										
+										<div class="col-md-9">
+											<div class="form-group">
+												<select class="form-control" id="materialSelect">
+													<option style="color: grey">Material wählen*</option>
+													<option>Matt</option>
+													<option>Glänzend</option>
+													<option>Hochwertig</option>
+	
+												</select>
+											</div>
+										</div>
+										
+										
+										
+											<div class="col-md-3">
+										 
+											<p>Preis: <p/>
+										</div>
+										<div class="col-md-9">
+											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
+										</div>
 								
 								</div> 	<!--  Ende tabpanel -->
 
@@ -273,3 +311,7 @@ function openModal(img){
 	<!--  modal dialog-->
 </div>
 <!--  modal -->
+
+<br />
+<br />
+
