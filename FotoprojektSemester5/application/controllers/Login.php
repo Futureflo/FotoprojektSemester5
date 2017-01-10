@@ -39,7 +39,7 @@ class Login extends CI_Controller {
 					break;
 				case UserStatus::locked :
 					
-					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Password über "Passwort vergessen" zurück' );
+					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Passwort über "Passwort vergessen" zurück' );
 					redirect ( "start/" );
 					
 					break;
