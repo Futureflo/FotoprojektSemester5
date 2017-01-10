@@ -64,6 +64,15 @@ class User_model extends CI_Model {
 		return $afftectedRows = $this->db->affected_rows ();
 	}
 	
+	// unset restorecode
+	function update_unsetUserRestoreCode($user_id) {
+		$this->db->set ( 'user_passwordrestore', "" );
+		$this->db->where ( 'user_id', $user_id );
+		$this->db->update ( 'user' );
+		return $afftectedRows = $this->db->affected_rows ();
+	}
+	
+	
 	// insert new User
 	function insert_user($data) {
 		return $this->db->insert ( 'user', $data );
