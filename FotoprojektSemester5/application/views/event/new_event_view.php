@@ -10,10 +10,9 @@
 </head>
 <body>
 	<section class="jumbotron text-xs-center">
-		<div class="container">
+
 			
-		</div>
-	</section>
+		
 	<div class="new_event">
 
 		<div class="container">
@@ -144,4 +143,5 @@
 			</div>
 		</div>
 
+	</section>
 </body>
