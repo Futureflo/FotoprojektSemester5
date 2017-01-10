@@ -188,7 +188,8 @@ class Login extends CI_Controller {
 		} else {
 			
 			$this->changePassword ( $user_id, $newPassword );
-			// Warum hier redirect und nicht Aufruf von template() ?!
+			$this->user_model->update_unsetUserRestoreCode ( $user_id );
+				
 			redirect ( "start/" );
 		}
 	}
