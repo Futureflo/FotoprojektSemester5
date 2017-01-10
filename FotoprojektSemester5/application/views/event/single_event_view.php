@@ -25,8 +25,7 @@
 			) );
 			?>
 				<div class="form-insert_product">
-				<input type="file" multiple name="dateiupload[]" /> <input
-					type="submit" name="btn[upload]" class="btn btn-success" />
+				<input type="file" multiple name="dateiupload[]" /> <input type="submit" name="btn[upload]" class="btn btn-success" />
 			</div>
 			</form>
 			
@@ -63,14 +62,14 @@
 		<div class="row">
 		<?php
 		foreach ( $products as $product ) {
-			$product->prod_complete_filepath = base_url() . $product->prod_filepath;
+			$product->prod_complete_filepath = base_url () . $product->prod_filepath;
 			echo "<div class=\"card\">";
 			echo "<div class=\"lazyload\">";
 			echo "<!--";
-// 			echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
+			// echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
 			echo " <img data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
-					src=../../" . $product->prod_filepath . " onclick='openModal(".json_encode($product).")'>";
-// 			echo "</a>";
+					src=../../" . $product->prod_filepath . " onclick='openModal(" . json_encode ( $product ) . ")'>";
+			// echo "</a>";
 			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
 			echo "-->";
 			echo "</div>";
@@ -82,7 +81,7 @@
 	</div>
 </div>
 
-<button type="button" id="buttonModal" data-toggle="modal" data-target="#bestellungModal" style="display: none"> </button>
+<button type="button" id="buttonModal" data-toggle="modal" data-target="#bestellungModal" style="display: none"></button>
 
 <script>
 
@@ -106,7 +105,7 @@ function openModal(product){
 	//x.add(option);
 }
 
-</script> 
+</script>
 
 
 <!-- Modal -->
@@ -118,59 +117,67 @@ function openModal(product){
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Bestellung aufgeben</h4>
-			</div> <!--  Ende Header -->
-			
+			</div>
+			<!--  Ende Header -->
+
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<a data-toggle="modal" href="#imgModal">
-							<img	class="img-responsive" id="modalImg" onclick="openModalImg(this)" >
+							<a data-toggle="modal" href="#imgModal"> <img class="img-responsive" id="modalImg" onclick="openModalImg(this)">
 							</a>
 						</div>
-							<br />
+						<br />
 						<div class="col-md-7">
-							<div class="col-md-2">									
-										<p>Art:<p/>
-							</div>
-									
-								<div class="col-md-10">
-									
-											<div class="form-group"> 
-												<select class="form-control" id="beschreibungSelect"> 
-													<option style="color: grey">Art wählen*</option>
-										    	</select>
-										    </div>
-									</div>	    
-					    </div>
-						
-						<div class="col-md-1">
-						
-						</div>		
-							
-						<div class="col-md-1">		   				
-										
-											<p>Preis:<p/>
-						 </div>
-										
-						<div class="col-md-3">			
-									<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
+							<div class="col-md-2">
+								<p>Art:
 								
-						</div> <!--  col-md-12 -->
-					
+								
+								<p />
+							</div>
 
-					</div> 	<!--  row -->
-				
-				</div> 	<!--  container -->
-				
+							<div class="col-md-10">
 
-			</div> <!--  modal body -->
+								<div class="form-group">
+									<select class="form-control" id="beschreibungSelect">
+										<option style="color: grey">Art wählen*</option>
+									</select>
+								</div>
+							</div>
+						</div>
 
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-					<button type="button" class="btn btn-default">In den Warenkorb</button>
+						<div class="col-md-1"></div>
+
+						<div class="col-md-1">
+
+							<p>Preis:
+							
+							
+							<p />
+						</div>
+
+						<div class="col-md-3">
+							<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis" />
+
+						</div>
+						<!--  col-md-12 -->
+
+
+					</div>
+					<!--  row -->
+
 				</div>
-			
+				<!--  container -->
+
+
+			</div>
+			<!--  modal body -->
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				<button type="button" class="btn btn-default">In den Warenkorb</button>
+			</div>
+
 
 		</div>
 		<!--  modal content -->
