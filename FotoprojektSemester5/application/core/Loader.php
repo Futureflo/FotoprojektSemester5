@@ -479,22 +479,22 @@ class CI_Loader {
 				switch ($userrolle) {
 					default :
 					case 0 : // undefiniert
-					         // code...
+					       $content .= $this->view ( 'general/navbar_visitor_view', $vars, $return );
 						break;
 					case 1 : // Admin
-					         // code...
+					      $content .= $this->view ( 'general/navbar_loggedin_admin_view', $vars, $return );
 						break;
 					case 2 : // Besteller
-					         // code...
+					      $content .= $this->view ( 'general/navbar_loggedin_view', $vars, $return );
 						break;
 					case 3 : // Fotograf
-					         // code...
+					       $content .= $this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return );
 						break;
 					case 4 : // Veranstalter
-					         // code...
+					       $content .= $this->view ( 'general/navbar_loggedin_view', $vars, $return );
 						break;
 				}
-				$content .= $this->view ( 'general/navbar_loggedin_view', $vars, $return );
+				
 			} else {
 				$content .= $this->view ( 'general/navbar_visitor_view', $vars, $return );
 			}
