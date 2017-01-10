@@ -15,7 +15,7 @@ echo form_open ( "Order/newOrder", '', array (
 <div class="container">
 	<div class="row">
 
-		<div class="col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+		<div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
 			<div class="form-group col-xs-12">
 				<label class="h5" for="delivery">Lieferadresse</label>
 			    <?php

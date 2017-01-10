@@ -57,27 +57,37 @@ class Event extends CI_Controller {
 	
 	public function showEvents() {
 		$this->load->model ( 'event_model' );
-		$data ['events'] = $this->event_model->getAllEvents ();
+		$id = $this->session->userdata ( 'user_id' );
+		$data ['events'] = $this->event_model->getEventsFromUser( $id );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	
 	//Methoden um den Status zu aendern
 	public function lockEventById($even_id) {
-		changeEventStatus($even_id, EventStatus::locked);
+		$this->changeEventStatus($even_id, EventStatus::locked);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich gesperrt! </div>' );
 		}
 	public function unlockEventById($even_id) {
-		changeEventStatus($even_id, EventStatus::prv);
+		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich entsperrt! </div>' );
 	}
 	public function changeStateToPublicById($even_id) {
-		changeEventStatus($even_id, EventStatus::public);
+		$this->changeEventStatus($even_id, EventStatus::pbl);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde &ouml;ffentlich gestellt! </div>' );
 	}
 	
 	public function changeStateToPrivateById($even_id) {
-		changeEventStatus($even_id, EventStatus::prv);
+		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde privat gestellt! </div>' );
 	}
 	
 	public function deleteEventById($even_id) {
-		changeEventStatus($even_id, EventStatus::deleted);
+		$this->changeEventStatus($even_id, EventStatus::deleted);
+		$this->load->model ( 'event_model' );
+		$id = $this->session->userdata ( 'user_id' );
+		$data ['events'] = $this->event_model->getEventsFromUser( $id );
+		$data ['message'] = "<div class='alert alert-success'>Dein Event wurde erfolgreich gelöscht</div>";
+		$this->load->template ( 'event/all_event_view', $data );
 	}
 	
 	public function changeEventStatus($even_id, $even_status)

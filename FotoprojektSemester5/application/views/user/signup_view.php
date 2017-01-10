@@ -35,7 +35,10 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" class="form-control" name="firstname" value="<?php echo set_value('firstname'); ?>" placeholder="Vorname"> <span class="text-danger">
+					<input type="text" class="form-control" name="firstname" value="<?php
+					
+echo set_value ( 'firstname' );
+					?>" placeholder="Vorname"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'firstname' );
@@ -46,7 +49,10 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" class="form-control" name="lastname" value="<?php echo set_value('lastname'); ?>" placeholder="Nachname"> <span class="text-danger">
+					<input type="text" class="form-control" name="lastname" value="<?php
+					
+echo set_value ( 'lastname' );
+					?>" placeholder="Nachname"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'lastname' );
@@ -71,7 +77,10 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3 col-xs-3">
-					<input type="text" class="form-control" name="zip" value="<?php echo set_value('zip'); ?>" placeholder="PLZ"> <span class="text-danger">
+					<input type="text" class="form-control" name="zip" value="<?php
+					
+echo set_value ( 'zip' );
+					?>" placeholder="PLZ"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'zip' );
@@ -79,7 +88,10 @@
 							</span>
 				</div>
 				<div class="col-sm-9 col-xs-9">
-					<input type="text" class="form-control" name="city"  value="<?php echo set_value('city'); ?>"placeholder="Ort"> <span class="text-danger">
+					<input type="text" class="form-control" name="city"  value="<?php
+					
+echo set_value ( 'city' );
+					?>"placeholder="Ort"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'city' );
@@ -90,7 +102,10 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-9 col-xs-9">
-					<input type="text" class="form-control" name="street" value="<?php echo set_value('street'); ?>" placeholder="Straße"> <span class="text-danger">
+					<input type="text" class="form-control" name="street" value="<?php
+					
+echo set_value ( 'street' );
+					?>" placeholder="Straße"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'street' );
@@ -98,7 +113,10 @@
 							</span>
 				</div>
 				<div class="col-sm-3 col-xs-3">
-					<input type="text" class="form-control" name="housenumber" value="<?php echo set_value('housenumber'); ?>" placeholder="Hausnr"> <span class="text-danger">
+					<input type="text" class="form-control" name="housenumber" value="<?php
+					
+echo set_value ( 'housenumber' );
+					?>" placeholder="Hausnr"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'housenumber' );
@@ -125,7 +143,10 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="email" class="form-control" name="email" value="<?php echo set_value('email'); ?>" placeholder="E-Mail"> <span class="text-danger">
+					<input type="email" class="form-control" name="email" value="<?php
+					
+echo set_value ( 'email' );
+					?>" placeholder="E-Mail"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'email' );
@@ -136,7 +157,10 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="email" class="form-control" name="cemail" value="<?php echo set_value('cemail'); ?>" placeholder="E-Mail wiederholen"> <span class="text-danger">
+					<input type="email" class="form-control" name="cemail" value="<?php
+					
+echo set_value ( 'cemail' );
+					?>" placeholder="E-Mail wiederholen"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'cemail' );
@@ -181,7 +205,8 @@
 							<div class="col-sm-12">
 								<div class="form-insert_product">
 
-									<div class="col-sm-6">
+									<div class="col-sm-10">
+										<label>Gewerbeschein: &nbsp</label>
 										<input type="file" name="tradelicense" onchange="checkFile(this)" />
 									</div>
 									<span class="text-danger">
@@ -201,7 +226,10 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="accountholder" value="<?php echo set_value('accountholder'); ?>" placeholder="Kontoinhaber"> <span class="text-danger">
+								<input type="text" class="form-control" name="accountholder" value="<?php
+								
+echo set_value ( 'accountholder' );
+								?>" placeholder="Kontoinhaber"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'accountholder' );
@@ -212,7 +240,10 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="iban" value="<?php echo set_value('iban'); ?>" placeholder="IBAN"> <span class="text-danger">
+								<input type="text" class="form-control" name="iban" value="<?php
+								
+echo set_value ( 'iban' );
+								?>" placeholder="IBAN"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'iban' );
@@ -223,7 +254,10 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="bic" value="<?php echo set_value('bic'); ?>" placeholder="BIC"> <span class="text-danger">
+								<input type="text" class="form-control" name="bic" value="<?php
+								
+echo set_value ( 'bic' );
+								?>" placeholder="BIC"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'bic' );
@@ -284,7 +318,9 @@
 
 
 			</div>
-			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value= <?php echo $type_hidden_field?>>
+			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value= <?php
+			
+echo $type_hidden_field?>>
 			<?php
 			
 			echo form_close ();
@@ -293,7 +329,9 @@
 	</div>
 </section>
 
-<?php echo $type_hidden_field?>
+<?php
+
+echo $type_hidden_field?>
 
 
 <script type="text/javascript">

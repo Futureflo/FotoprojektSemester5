@@ -478,23 +478,12 @@ class CI_Loader {
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :
-					case 0 : // undefiniert
-					         // code...
-						break;
-					case 1 : // Admin
-					         // code...
-						break;
-					case 2 : // Besteller
-					         // code...
-						break;
-					case 3 : // Fotograf
-					         // code...
-						break;
-					case 4 : // Veranstalter
-					         // code...
-						break;
+					case 0 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 1 : $this->view ( 'general/navbar_loggedin_admin_view', $vars, $return ); break;
+					case 2 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 3 : $this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return ); break;
+					case 4 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
 				}
-				$content .= $this->view ( 'general/navbar_loggedin_view', $vars, $return );
 			} else {
 				$content .= $this->view ( 'general/navbar_visitor_view', $vars, $return );
 			}
@@ -509,23 +498,13 @@ class CI_Loader {
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :
-					case 0 : // undefiniert
-					         // code...
-						break;
-					case 1 : // Admin
-					         // code...
-						break;
-					case 2 : // Besteller
-					         // code...
-						break;
-					case 3 : // Fotograf
-					         // code...
-						break;
-					case 4 : // Veranstalter
-					         // code...
-						break;
+					case 0 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 1 : $this->view ( 'general/navbar_loggedin_admin_view', $vars, $return ); break;
+					case 2 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 3 : $this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return ); break;
+					case 4 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
 				}
-				$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+				
 			} else {
 				$this->view ( 'general/navbar_visitor_view', $vars );
 			}

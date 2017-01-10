@@ -21,7 +21,12 @@
 		</p>
 		</div>
 		<div class="col-md-2">
-			<a class="btn btn-primary" href="#"> <i
+			<a
+				href="<?php
+				
+				echo base_url ();
+				?>admin/printers_creation/"
+				class="btn btn-primary" role="button" href="printers_creation"> <i
 				class="fa fa-plus-square fa-lg"></i> Druckerei anlegen
 			</a>
 		</div>

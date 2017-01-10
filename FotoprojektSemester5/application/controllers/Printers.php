@@ -18,6 +18,32 @@ class Printers extends CI_Controller {
 		$data ['printer'] = $printer;
 		$this->load->template ( 'printers/single_printers_view.php', $data );
 	}
+	
+	public function showPrinters() {
+		$this->load->model ( 'Printers_model' );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		
+		$user_id = $this->session->userdata ( 'user_id' );
+		$data ['printers'] = $this->Printers_model->getPrintersForUser ($user_id);
+		$this->load->template ( 'printers/printers_view', $data );
+	}
+	public function deletePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gel&ouml;scht";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
+		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$this->load->template ( 'printers/printers_view', $data );
+	}
+	public function product_types() {
+		redirect ( 'ProductType/product_types' );
+	}
+	public function price_profiles() {
+		redirect ( 'PriceProfile/price_profiles' );
+	}
+	
 	public static function getPrinter($prsu_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'Printers_model' );
