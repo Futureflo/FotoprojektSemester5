@@ -11,22 +11,15 @@
 <body>
 	<section class="jumbotron text-xs-center">
 		<div class="container">
-			<h1 class="jumbotron-heading">Neues Event erstellen</h1>
-			<p class="lead text-muted">Something short and leading about the
-				collection below—its contents, the creator, etc. Make it short and
-				sweet, but not too short so folks don't simply skip over it
-				entirely.</p>
-			<p>
-				<a href="#" class="btn btn-primary">Main call to action</a> <a
-					href="#" class="btn btn-secondary">Secondary action</a>
-			</p>
+			
 		</div>
 	</section>
 	<div class="new_event">
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1">
-		
+			<h1 class="jumbotron-heading">Neues Event erstellen</h1>
 					<?php
 					$attributes = array (
 							"name" => "newevent" 
@@ -42,8 +35,7 @@
 							
 							echo set_value ( 'even_name' );
 							?>"/>  -->
-							<input type="text" class="form-control input-sm chat-input"
-								placeholder="Event Name" name="even_name" value="TEST" /> <span
+							<input type="text" class="form-control input-sm chat-input" name="even_name" placeholder="Event Name" /> <span
 								class="text-danger"><?php
 								
 								echo form_error ( 'even_name' );
@@ -52,41 +44,83 @@
 							
 							echo set_value ( 'even_date' );
 							?>"/>  -->
-							<input type="date" class="form-control input-sm chat-input"
-								placeholder="Datum" name="even_date" value="2016-12-08" /> <span
-								class="text-danger"><?php
+							
+							<div class="row">
+							<div class="col-sm-12">
+							<div class="form-group">
+							<input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php echo(date("Y-m-d")); ?>" /> 
+							<span class="text-danger"><?php
 								
 								echo form_error ( 'even_date' );
-								?></span> <br> <input type="checkbox"
-								class="form-control input-sm chat-input"
-								placeholder="Öffentliches Event" name="even_status"
-								value="<?php
+								?></span></span>
+							</div>
+							</div>
+							</div>
 								
-								echo set_value ( 'even_status' );
-								?>" /> Öffentliches event <span class="text-danger"><?php
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<select class="form-control" name="even_status">
+												<option value="">&Ouml;ffentlich</option>
+												<option value="">Privat</option>
+											</select> <span class="text-danger">
+												<?php
+												
+												echo form_error ( 'even_status' );
+												?>
+												</span>
+										</div>
+									</div>
+								</div>
 								
-								echo form_error ( 'even_status' );
-								?>
+								
+								
+						<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<select class="form-control" name="even_prpr_id">
 							
-							</span> <br>
-						
-							
-		                    <?php
-																						echo 'Preisprofil: <select name="even_prpr_id">';
+		                    															<?php
 																						foreach ( $price_profiles as $price_profile ) {
 																							echo '<option value=' . $price_profile->prpr_id . '>' . $price_profile->prpr_description . '</option>';
 																						}
-																						echo '</select>';
 																						?>
-							<br>       
-		                    <?php
-																						echo 'Druckerei: <select name="even_prsu_id">';
+																						</select>
+																						<span class="text-danger">
+												<?php
+												
+												echo form_error ( 'even_prpr_id' );
+												?>
+												</span>
+										</div>
+									</div>
+								</div>
+							      
+							
+							
+							<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<select class="form-control" name="even_prsu_id">
+							
+		                   														 <?php
+																						
 																						foreach ( $printers as $printer ) {
 																							echo '<option value=' . $printer->prsu_id . '>' . $printer->prsu_email . '</option>';
 																						}
-																						echo '</select>';
+																						
 																						?>
-		
+																							</select>
+																						<span class="text-danger">
+												<?php
+												
+												echo form_error ( 'even_prpr_id' );
+												?>
+												</span>
+										</div>
+									</div>
+								</div>
+							     
 
 		                    <div class="event-btn-wrapper">
 								<span class="group-btn">
