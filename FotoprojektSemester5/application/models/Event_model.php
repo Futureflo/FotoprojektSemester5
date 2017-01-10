@@ -37,6 +37,13 @@
       	$query = $this->db->get("event");
       	return $query->result();
       }
+      
+      public function getAllActivEvents()
+      {
+      	$query = $this->db->get("event");
+      	$this->db->where ( 'even_status !=', 4); 
+      	return $query->result();
+      }
       public function getAllPublicEvents()
       {
       	$this->db->where('even_status', EventStatus::pbl);
