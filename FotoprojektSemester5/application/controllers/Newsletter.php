@@ -18,6 +18,16 @@ class Newsletter extends CI_Controller {
 	 *
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper(array('form'));
+		$this->load->library(array('form_validation'));
+		$this->load->database();
+		$this->load->model('user_model');
+	}
+	
 	public function index() {
 		$this->load->template ( 'newsletter/newsletter_view.php' );
 	}
