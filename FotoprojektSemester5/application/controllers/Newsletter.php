@@ -21,10 +21,16 @@ class Newsletter extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'newsletter/newsletter_view.php' );
 	}
-	public function assignUser($userid) {
-	}
+
 	public function addUnregistered() {
-		$this->load->template ( 'newsletter/success_newsletter_view.php' );
+		$email = $this->input->post('email');
+		
+		$neleData = array(
+				'nele_status' => 1,
+				'nele_email' => $email
+				);
+		$this->user_model->insert_UserToNewsletter($neleData);
+		$this->load->template ( 'newsletter/success_newsletter_view.php',$neleData );
 	}
 	public function call_unregister_view() {
 		$this->load->template ( 'newsletter/newsletterunregister_view.php' );
