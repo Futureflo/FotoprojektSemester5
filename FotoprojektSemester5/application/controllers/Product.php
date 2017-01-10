@@ -50,7 +50,10 @@ class Product extends CI_Controller {
 		
 		// Varianten zu Produkt laden
 		foreach ( $product_variants as $product_variant => $pv ) {
-			$product_variants [$product_variant] = Product::getProductVariant ( $prod_id, $pv->prva_prty_id );
+			
+			// $pv->price = Product::getVariantPrice ( $pv );
+			$product_variants [$product_variant]->price = Product::getVariantPrice ( $pv );
+			// $product_variants [$product_variant] = Product::getProductVariant ( $prod_id, $pv->prty_id );
 		}
 		
 		return $product_variants;
@@ -59,7 +62,7 @@ class Product extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'product_model' );
 		$pv = $CI->product_model->getProductVariant ( $prod_id, $prty_id );
-		$pv->price = Product::getPrice ( $pv );
+		$pv->price = Product::getVariantPrice ( $pv );
 		
 		return $pv;
 	}
@@ -69,7 +72,7 @@ class Product extends CI_Controller {
 		$PrinterPrice = $CI->printers_model->getPrinterPriceByProducttype ( $prsu_id, $prty_id );
 		return $PrinterPrice->prsp_price;
 	}
-	public static function getPrice($product_variant) {
+	public static function getVariantPrice($product_variant) {
 		// Basispreis aus Preisprofil
 		// event-Cache
 		if (isset ( $GLOBALS ["event"] ) == false) {
@@ -79,17 +82,24 @@ class Product extends CI_Controller {
 			$event = $GLOBALS ["event"];
 		}
 		
-		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prva_prty_id );
+		// Basispreis
+		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prty_id );
 		if (isset ( $profile ))
 			$price_basic = $profile->prpt_price;
 		else
 			$price_basic = 0;
 			
 			// Preisaufschlag Fotograf
-		$prva_price_specific = $product_variant->prva_price_specific;
-		
-		// Preisaufschlag von Druckerei
-		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prva_prty_id );
+		if (isset ( $product_variant->prva_price_specific )) {
+			$prva_price_specific = $product_variant->prva_price_specific;
+		} else
+			$prva_price_specific = 0;
+			
+			// Preisaufschlag von Druckerei
+		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prty_id );
+		if (! isset ( $price_supplier )) {
+			$price_supplier = 0;
+		}
 		
 		// Provision
 		$price_provision = 0;
@@ -150,13 +160,6 @@ class Product extends CI_Controller {
 				// Den neuen Dateinamen in der Datenbank abspeichern
 				$this->product_model->update_product ( $new_prod_id, $data );
 				
-				if ($new_prod_id) {
-					// Varianten mit Preisprofil aus Event anlegen
-					$this->insert_product_variant ( $new_prod_id, $event [0] );
-				} else {
-					// error
-					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
-				}
 				
 				$file = array (
 						'name' => $files ['dateiupload'] ['name'] [$i],
@@ -173,7 +176,7 @@ class Product extends CI_Controller {
 				
 				// // Wasserzeichen hochladen erzeugen
 				Watermarkdemo::watermark ( $newPath );
-				Watermarkdemo::thumb ($newPath);
+				Watermarkdemo::thumb ( $newPath );
 				
 				//
 			} else {
