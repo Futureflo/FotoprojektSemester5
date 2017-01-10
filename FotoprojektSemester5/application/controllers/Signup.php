@@ -153,7 +153,7 @@ class Signup extends CI_Controller
 			if ($addressIsSet && $UserIsSet)
 			{
 				
-				$this->sendConfirmEmail($this->input->post('user_email'),$confirmCode);
+				$this->sendConfirmEmail($email, $confirmCode);
  				$this->load->template ( 'user/success_signup_view' );
 					}
 			else
