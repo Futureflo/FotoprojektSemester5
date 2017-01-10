@@ -6,7 +6,7 @@ class Signup extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper(array('form', 'hash_helper'));
+		$this->load->helper(array('form', 'hash_helper','html'));
 		$this->load->library(array('form_validation'));
 		$this->load->database();
 		$this->load->model('user_model');
@@ -66,7 +66,6 @@ class Signup extends CI_Controller
 			{
 				$this->form_validation->set_rules('tradelicense', 'Traderlicense', 'required');
 			}
-//    			$this->form_validation->set_rules ( 'tradelicense', 'Traderlicense', 'required' );			
 		}
 		
 		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
@@ -84,7 +83,6 @@ class Signup extends CI_Controller
         	$data['type_hidden_field'] = $role;
         	
          	$this->load->template('user/signup_view',$data); 
-//         	$this->session->set_flashdata('msgReg','Füllen Sie bitte alle Pflichtfelder aus!');
 
         }
 		else
@@ -117,9 +115,8 @@ class Signup extends CI_Controller
 			$UserIsSet= $this->user_model->insert_user($data);
 			$result = $this->user_model->get_user($email);
 			$user_id = $result[0]->user_id;
+			
 			//insert address
-			
-			
 			$address = array(
 				'adre_user_id' => $user_id,
 				'adre_zip' => $zip,
@@ -152,9 +149,8 @@ class Signup extends CI_Controller
 			
 			if ($addressIsSet && $UserIsSet)
 			{
-				
 				$this->sendConfirmEmail($email, $confirmCode);
- 				$this->load->template ( 'user/success_signup_view' );
+  				$this->load->template ( 'user/success_signup_view' );
 					}
 			else
 			{
