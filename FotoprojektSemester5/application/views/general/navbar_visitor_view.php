@@ -12,13 +12,10 @@
 		<!--  <li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle" href="http://example.com"
 				id="supNportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 				<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-					<a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/">Dashboard</a> <a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/users/">Alle Benutzer</a> <a class="dropdown-item" href="<?php
+					 <a class="dropdown-item" href="<?php
+						
+						echo base_url ();
+						?>admin/users/">Alle Benutzer</a> <a class="dropdown-item" href="<?php
 					
 					echo base_url ();
 					?>admin/archivedUsers/">Benutzer Archiv</a> <a class="dropdown-item" href="<?php
