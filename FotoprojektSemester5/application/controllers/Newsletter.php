@@ -30,28 +30,69 @@ class Newsletter extends CI_Controller {
 		$this->load->model ( 'user_model' );
 	}
 	public function index() {
-		$this->load->template ( 'newsletter/newsletter_view.php' );
+		$this->load->template ( 'Newsletter/newsletter_view.php' );
 	}
 	public function addUnregistered() {
+		$this->form_validation->set_rules ( "email", "Email-ID", "trim|required|valid_email" );
 		$email = $this->input->post ( 'email' );
-		
 		$neleData = array (
 				'nele_status' => 1,
 				'nele_email' => $email 
 		);
-		$this->user_model->insert_UserToNewsletter ( $neleData );
-		$this->load->template ( 'newsletter/success_newsletter_view.php', $neleData );
+		if ($this->form_validation->run () == FALSE) {
+			// validation fail
+			$this->load->template ( 'Newsletter/newsletter_view' );
+		} else {
+			if ($this->user_model->mail_exists ( $email )) {
+				$result_user = $this->user_model->get_user ( $email );
+				$userID = $result_user [0]->user_id;
+				$this->user_model->update_addUserToNewsletter ( $userID );
+				$this->load->template ( 'Newsletter/success_newsletter_view.php', $neleData );
+			} else {
+				$this->user_model->insert_UserToNewsletter ( $neleData );
+				$this->load->template ( 'Newsletter/success_newsletter_view.php', $neleData );
+			}
+		}
 	}
 	public function call_unregister_view() {
-		$this->load->template ( 'newsletter/newsletterunregister_view.php' );
+		$this->load->template ( 'Newsletter/newsletterunregister_view.php' );
 	}
 	public function unregister() {
+		$this->form_validation->set_rules ( "email", "Email-ID", "trim|required|valid_email|callback_is_user_already_registered" );
+		$this->form_validation->set_message ( 'is_user_already_registered', 'E-Mail kann nicht abgemeldet werden, da E-Mail nicht bekannt.' );
 		$email = $this->input->post ( 'email' );
 		$neleData = array (
 				'nele_email' => $email 
 		);
-		
-		$this->user_model->update_NewsletterStatusUnregister ( $email );
-		$this->load->template ( 'newsletter/success_unregister_newsletter_view.php', $neleData );
+		if ($this->form_validation->run () == FALSE) {
+			// validation fail
+			$this->load->template ( 'Newsletter/newsletterunregister_view' );
+		} else {
+			if ($this->user_model->mail_exists ( $email )) {
+				$result_user = $this->user_model->get_user ( $email );
+				$userID = $result_user [0]->user_id;
+				$this->user_model->update_unregisterUserToNewsletter ( $userID );
+				$this->load->template ( 'Newsletter/success_unregister_newsletter_view.php', $neleData );
+			} else {
+				$this->user_model->update_NewsletterStatusUnregister ( $email );
+				$this->load->template ( 'Newsletter/success_unregister_newsletter_view.php', $neleData );
+			}
+		}
+	}
+	function is_user_already_registered($email) {
+		$field_value = $email; // this is redundant, but it's to show you how
+		                       // the content of the fields gets automatically passed to the method
+		if ($this->user_model->mail_exists ( $email )) {
+			$result_user = $this->user_model->get_user ( $email );
+			$userID = $result_user [0]->user_id;
+			$userNewsletter = $result_user [0]->user_newsletter;
+			if ($userNewsletter == FALSE) {
+				return TRUE;
+			}
+		} elseif ($this->user_model->checkNewsletterEmail ( $email ) == True) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 }

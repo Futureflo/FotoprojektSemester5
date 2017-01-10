@@ -7,7 +7,15 @@
 			<div class="">
 				<h2>Newsletterabmeldung:</h2>
 				<br>
-				<input type="text" class="form-control input-sm chat-input" placeholder="E-Mail Adresse*" name="email"/>
+				<input type="text" class="form-control input-sm chat-input" placeholder="EMail-ID" name="email"  value="<?php
+				
+				echo set_value ( 'email' );
+				?>"/>
+						<?php
+						if (validation_errors ( 'email' ) != null) {
+							echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . validation_errors () . "</div>";
+						}
+						?>
 				<br />
 				<div class="form-group">
 			   
