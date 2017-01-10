@@ -63,17 +63,21 @@
 		<?php
 		foreach ( $products as $product ) {
 			$product->prod_complete_filepath = base_url () . $product->prod_filepath;
+			
+			echo "<div class=\"col-lg-4 col-md-6 col-xs-8\">";
 			echo "<div class=\"card\">";
 			echo "<div class=\"lazyload\">";
 			echo "<!--";
-			// echo "<a href=\"" . base_url () . "Product/showSinglePicture/" . $product->prod_id . "/\">";
+			echo "<a class=\"thumbnail\">";
 			echo " <img data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
 					src=../../" . $product->prod_filepath . " onclick='openModal(" . json_encode ( $product ) . ")'>";
-			// echo "</a>";
+			echo "</a>";
 			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
 			echo "-->";
 			echo "</div>";
 			echo "</div>";
+			echo "</div>";
+
 		}
 		
 		?>
