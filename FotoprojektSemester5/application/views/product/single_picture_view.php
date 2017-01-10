@@ -44,8 +44,8 @@
 			}
 			function btnorder($product_variant) {
 				echo form_open ( "ShoppingCart/insert", '', array (
-						'scpo_prod_id' => $product_variant->prva_prod_id,
-						'scpo_prty_id' => $product_variant->prva_prty_id,
+						'scpo_prod_id' => $product_variant->prod_id,
+						'scpo_prty_id' => $product_variant->prty_id,
 						'scpo_amount' => 1 
 				) );
 				echo " <input type=\"submit\" name=\"Bestellen\" value=\"Bestellen\" class=\"btn btn-success\" />";

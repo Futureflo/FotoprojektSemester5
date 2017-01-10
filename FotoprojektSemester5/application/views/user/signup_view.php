@@ -7,8 +7,18 @@
 
 		<div class="row">
 			<ul class="nav nav-pills" role="tablist">
-				<li class="nav-item"><a class="nav-link active" href="#customer" data-toggle="tab" onmouseout="checkType()">Kunde</a></li>
-				<li class="nav-item"><a class="nav-link" href="#photographer" data-toggle="tab" onmouseout="checkType()">Fotograf</a></li>
+				<li class="nav-item"><a class="nav-link <?php
+				
+				if ($type_hidden_field == 2) {
+					echo "active";
+				}
+				?>" href="#customer" data-toggle="tab" onmouseout="checkType()">Kunde</a></li>
+				<li class="nav-item"><a class="nav-link <?php
+				
+				if ($type_hidden_field == 3) {
+					echo "active";
+				}
+				?>" href="#photographer" data-toggle="tab" onmouseout="checkType()">Fotograf</a></li>
 			</ul>
 					<?php
 					echo form_open_multipart ( 'signup/' );
@@ -329,11 +339,6 @@
 	</div>
 </section>
 
-<?php
-
-echo $type_hidden_field?>
-
-
 <script type="text/javascript">
   function checkFile(i){
 	var check = document.getElementById('check');
@@ -349,6 +354,7 @@ echo $type_hidden_field?>
   }  
 
 	function checkType(){
+		console.log('start');
         var customer = document.getElementById('customer');
         var photograph = document.getElementById('photographer');
         var field = document.getElementById('type_hidden_field');
@@ -359,6 +365,4 @@ echo $type_hidden_field?>
             field.value = "3";
         }
 	}
-    
-    window.addEventListener('load', checkType, false);
 </script>
