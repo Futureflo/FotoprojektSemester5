@@ -194,5 +194,16 @@ class User_model extends CI_Model {
 		$this->db->update ( 'newsletter' );
 		return $afftectedRows = $this->db->affected_rows ();
 	}
+	function checkNewsletterEmail($email) {
+		$this->db->where ( 'nele_email', $email );
+		$query = $this->db->get ( 'newsletter' );
+		if ($query->num_rows () > 0) {
+			// email exists already
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	
 }
 ?>
