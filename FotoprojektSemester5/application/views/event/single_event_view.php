@@ -130,7 +130,7 @@ function openModal(product){
 							<a data-toggle="modal" href="#imgModal">
 							<img	class="img-responsive" id="modalImg" onclick="openModalImg(this)" >
 							</a>
-						
+						</div>
 							<br />
 						<div class="col-md-7">
 							<div class="col-md-2">									
@@ -159,7 +159,7 @@ function openModal(product){
 						<div class="col-md-3">			
 											<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis"/>
 									
-						  </div>				
+						 				
 					
 						</div> <!--  col-md-12 -->
 					
