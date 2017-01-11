@@ -34,14 +34,14 @@ class Contact extends CI_Controller
     		$subject = $this->input->post('subject');
     		$message = $this->input->post('message');
     		$this->email->from($email, $name);
-    		$this->email->to("service@snap-gallery.de");
+    		$this->email->to("service@snapUp.de");
     		$this->email->subject($subject);
     		$this->email->message($message."\nTelefon Nummer:".$telNum);
     		$this->email->send();
     		
-    		$this->email->from("service@snap-gallery.de", "Snap-Gallery");
+    		$this->email->from("service@snapUp.de", "SnapUp");
     		$this->email->to($email);
-    		$this->email->subject("Snap-Gallery Kontaktanfrage: ".$subject);
+    		$this->email->subject("SnapUp Kontaktanfrage: ".$subject);
     		$this->email->message("Vielen Dank für Ihre Kontaktaufnahme. Wir werden uns so schnellst möglich bei Ihnen melden");
     		$this->email->send();
     		$this->load->template ( 'contact/success_kontact_request_view.php' );
