@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __DIR__ ) . "/controllers/User.php");

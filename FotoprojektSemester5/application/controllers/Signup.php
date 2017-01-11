@@ -198,9 +198,9 @@ class Signup extends CI_Controller
 
 		$this->load->library('email');
 		
-		$this->email->from('noReply@snap-gallery.de', 'Snap-Gallery');
+		$this->email->from('noReply@snapUp.de', 'SnapUp');
 		$this->email->to($user_email);
-		$this->email->subject('Bestätigung zu Ihrem Snap Gallery Account');
+		$this->email->subject('Bestätigung zu Ihrem SnapUp Account');
 		$this->email->message('Sie haben erfolgreich ihren Account bestätigt '. base_url()."login/confirmAccount/".$confirmCode);
 		$this->email->send();		
 	}

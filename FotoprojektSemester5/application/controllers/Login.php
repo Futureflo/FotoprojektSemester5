@@ -149,9 +149,9 @@ class Login extends CI_Controller {
 	function sendPassowrdForgotEmail($user_email, $PassowrdForgotCode) {
 		$this->load->library ( 'email' );
 		
-		$this->email->from ( 'noReply@snap-gallery.de', 'Snap Gallery' );
+		$this->email->from ( 'noReply@snapUp.de', 'SnapUp' );
 		$this->email->to ( $user_email );
-		$this->email->subject ( 'Snap-Gallery.de Passwort zurücksetzen' );
+		$this->email->subject ( 'SnapUp Passwort zurücksetzen' );
 		$this->email->message ( 'Sie können unter dem Folgenden Link ihr neues Passwort eingeben ' . base_url () . "login/restorePassword/" . $PassowrdForgotCode );
 		$this->email->send ();
 	}
