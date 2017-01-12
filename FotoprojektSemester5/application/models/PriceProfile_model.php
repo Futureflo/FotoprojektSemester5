@@ -20,18 +20,22 @@ class PriceProfile_model extends CI_Model {
 	Public function getPricesById($prpr_id) {
 		$this->db->join ( 'product_type', 'prty_id = prpt_prty_id', 'INNER' );
 		$this->db->where ( 'prpt_prpr_id', $prpr_id );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
 		$query = $this->db->get ( "price_product_type" );
 		return $query->result ();
 	}
 	Public function getPricesByPrinterId($prsu_id) {
 		$this->db->join ( 'product_type', 'prty_id = prsp_prty_id', 'INNER' );
 		$this->db->where ( 'prsp_prsu_id', $prsu_id );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
 		$query = $this->db->get ( "print_supplier_price" );
 		return $query->result ();
 	}
 	Public function getPriceByProductType($prpr_id, $prty_id) {
+		$this->db->join ( 'product_type', 'prty_id = prpt_prty_id', 'INNER' );
 		$this->db->where ( 'prpt_prpr_id', $prpr_id );
 		$this->db->where ( 'prpt_prty_id', $prty_id );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
 		$query = $this->db->get ( "price_product_type" );
 		return $query->result ();
 	}
@@ -39,6 +43,7 @@ class PriceProfile_model extends CI_Model {
 		$this->db->join ( 'product_type', 'prty_id = prsp_prty_id', 'INNER' );
 		$this->db->where ( 'prsp_prsu_id', $prsu_id );
 		$this->db->where ( 'prsp_prty_id', $prty_id );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
 		$query = $this->db->get ( "price_product_type" );
 		return $query->result ();
 	}

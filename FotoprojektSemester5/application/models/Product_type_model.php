@@ -19,6 +19,13 @@ class Product_type_model extends CI_Model {
 		$query = $this->db->get ( 'product_type' );
 		return $query->result ();
 	}
+	function getAllActiveProductType() {
+		$this->db->join ( 'user', 'user_id = prty_user_id', 'INNER JOIN' );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
+		$query = $this->db->get ( 'product_type' );
+		
+		return $query->result ();
+	}
 	function getAllProductTypeForUser($user_id) {
 		$this->db->where ( 'prty_user_id', $user_id );
 		$this->db->or_where ( 'prty_user_id', 0 );
@@ -26,13 +33,26 @@ class Product_type_model extends CI_Model {
 		$query = $this->db->get ( 'product_type' );
 		return $query->result ();
 	}
+	function getAllActiveProductTypeForUser($user_id) {
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
+		$this->db->where ( 'prty_user_id', $user_id );
+		$this->db->join ( 'user', 'user_id = prty_user_id', 'INNER JOIN' );
+		$query = $this->db->get ( 'product_type' );
+		return $query->result ();
+	}
 	function getAllUnusedProductTypeByPriceProfile($user_id, $prty_ids) {
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
+		
 		if (isset ( $prty_ids [0] )) {
 			$this->db->where_not_in ( 'prty_id', $prty_ids );
 		}
+		
+		// Benutzer Formate oder System-Formate auslesen
+		$this->db->group_start ();
 		$this->db->where ( 'prty_user_id', $user_id );
-		// System
 		$this->db->or_where ( 'prty_user_id', 0 );
+		$this->db->group_end ();
+		
 		$query = $this->db->get ( 'product_type' );
 		return $query->result ();
 	}
@@ -54,7 +74,7 @@ class Product_type_model extends CI_Model {
 	
 	// delete product_type
 	function update_product_type($prty_id, $data) {
-		$this->db->where ( 'prpr_id', $prty_id );
+		$this->db->where ( 'prty_id', $prty_id );
 		$this->db->update ( 'product_type', $data );
 	}
 	

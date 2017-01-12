@@ -53,11 +53,14 @@
 				}
 				echo "</select>";
 				echo "</td>";
-				
-				echo "<td>";
-				echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
-				echo "</td>";
+				btn_add ();
 				echo form_close ();
+				// Hinzufügen button
+				function btn_add() {
+					echo "<td>";
+					echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
+					echo "</td>";
+				}
 				?>
 				
 								<?php
@@ -92,7 +95,21 @@
 									echo "<td>" . $pt->prty_height . "</td>";
 									echo "<td>" . $pt->user_name . "</td>";
 									
+									if ($pt->user_flag == 1)
+										btn_delete ( $pt );
+									
 									echo "<tr>";
+								}
+								// Löschen button
+								function btn_delete($pt) {
+									echo form_open ( "ProductType/deleteProductType", '', array (
+											'prty_id' => $pt->prty_id,
+											'prty_description' => $pt->prty_description 
+									) );
+									echo "<td>";
+									echo " <input type=\"submit\" name=\"Bestellen\" value=\"Löschen\" class=\"btn btn-danger\" />";
+									echo "</td>";
+									echo form_close ();
 								}
 								?>
 				
