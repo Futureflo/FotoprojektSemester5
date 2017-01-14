@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
 			$this->session->set_flashdata ( 'msg', 'Falsche E-Mail-Adresse oder Passwort' );
-			redirect ( "start/" );
+			redirect ( "/" );
 		} else {
 			$uresult = $this->user_model->get_user ( $email );
 			$status = $uresult [0]->user_status;
@@ -35,25 +35,25 @@ class Login extends CI_Controller {
 				
 				case UserStatus::unconfirmed :
 					$this->session->set_flashdata ( 'msg', 'Sie müssen ihre E-Mail-Adresse bestätigen bevor Sie sich einloggen' );
-					redirect ( "start/" );
+					redirect ( "/" );
 					break;
 				case UserStatus::locked :
 					
 					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt, da Sie Ihr Passwort zu oft falsch eingegeben haben. Kontaktieren Sie den Admin oder setzten Sie ihr Passwort über "Passwort vergessen" zurück' );
-					redirect ( "start/" );
+					redirect ( "/" );
 					
 					break;
 				case UserStatus::lockedByAdmin :
 					
 					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gesperrt. Kontaktieren Sie bitte den Admin' );
-					redirect ( "start/" );
+					redirect ( "/" );
 					
 					break;
 				
 				case UserStatus::deleted :
 					// message for deleted user
 					$this->session->set_flashdata ( 'msg', 'Ihr Account wurde gelöscht. Kontaktieren Sie bitte den Admin' );
-					redirect ( "start/" );
+					redirect ( "/" );
 					
 					break;
 				
@@ -97,14 +97,14 @@ class Login extends CI_Controller {
 							$this->session->set_flashdata ( 'msg', 'Falsche E-Mail-Adresse oder Passwort' );
 						}
 						
-						redirect ( "start/" );
+						redirect ( "/" );
 					}
 					
 					break;
 				default :
 					// default
 					$this->session->set_flashdata ( 'msg', 'Allgemeiner Fehler bei der Anmeldung. Kontaktieren Sie bitte den Admin!' );
-					redirect ( "start/" );
+					redirect ( "/" );
 					
 					break;
 			}
@@ -114,9 +114,9 @@ class Login extends CI_Controller {
 		$confrimcodeExists = $this->user_model->update_userStatus ( $user_confirmcode );
 		if ($confrimcodeExists == 1) {
 			$this->session->set_flashdata ( 'msg', 'Ihre E-Mail wurde erfolgreich bestätigt' );
-			redirect ( 'start/' );
+			redirect ( '/' );
 		} else {
-			redirect ( 'start/' );
+			redirect ( '/' );
 		}
 	}
 	public function forgotPassword() {
@@ -173,7 +173,7 @@ class Login extends CI_Controller {
 			
 			$this->load->template ( 'user/password_reset_view', $data );
 		} else {
-			redirect ( 'start/' );
+			redirect ( '/' );
 		}
 	}
 	function getNewPassword() {
@@ -190,7 +190,7 @@ class Login extends CI_Controller {
 			$this->changePassword ( $user_id, $newPassword );
 			$this->user_model->update_unsetUserRestoreCode ( $user_id );
 				
-			redirect ( "start/" );
+			redirect ( "/" );
 		}
 	}
 	private function changePassword($user_id, $newPassword) {

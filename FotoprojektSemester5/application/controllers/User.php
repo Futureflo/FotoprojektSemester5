@@ -128,7 +128,7 @@ class User extends CI_Controller {
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();
-		redirect ('start/');
+		redirect ('/');
 	}
 }
 abstract class UserStatus
