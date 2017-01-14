@@ -29,11 +29,25 @@ class ProductType extends CI_Controller {
 		$CI->load->model ( 'product_type_model' );
 		$user_id = $CI->session->userdata ( 'user_id' );
 		$user = $CI->User_model->get_user_by_id ( $user_id );
-		if ($user [0]->user_role_id == UserRole::Admin)
-			$product_types = $CI->product_type_model->getAllProductType ();
-		else
-			$product_types = $CI->product_type_model->getAllProductTypeForUser ( $user_id );
 		
+		// Als Admin alle Formate mit Änderungsrecht zurückgeben
+		if ($user [0]->user_role_id == UserRole::Admin) {
+			$product_types = $CI->product_type_model->getAllActiveProductType ();
+			foreach ( $product_types as $pt )
+				$pt->user_flag = 1;
+		} else {
+			
+			// Alle aktiven Formate für den angemeldeten Benutzer
+			$product_types_user = $CI->product_type_model->getAllActiveProductTypeForUser ( $user_id );
+			foreach ( $product_types_user as $pt )
+				$pt->user_flag = 1;
+				// Alle aktiven System-Formate suchen
+			$product_types_sys = $CI->product_type_model->getAllActiveProductTypeForUser ( 0 );
+			foreach ( $product_types_sys as $pt )
+				$pt->user_flag = 0;
+			
+			$product_types = array_merge ( $product_types_sys, $product_types_user );
+		}
 		return $product_types;
 	}
 	public function addProductType() {
@@ -62,6 +76,18 @@ class ProductType extends CI_Controller {
 			$price_profile = $this->product_type_model->insert_product_type ( $data );
 			redirect ( 'ProductType\product_types' );
 		}
+	}
+	public function deleteProductType() {
+		$prty_id = $this->input->post ( 'prty_id' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		
+		$this->load->model ( 'product_type_model' );
+		$data = array (
+				'prty_status' => ProductTypeStatus::deleted 
+		);
+		$this->product_type_model->update_product_type ( $prty_id, $data );
+		redirect ( 'ProductType\product_types' );
+		$this->session->set_flashdata ( '', 'Format \"' . $prty_description . '\" gelöscht!' );
 	}
 }
 abstract class ProductPrintType {
