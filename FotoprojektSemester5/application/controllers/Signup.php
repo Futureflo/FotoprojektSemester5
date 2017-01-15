@@ -45,31 +45,31 @@ class Signup extends CI_Controller
 		
 			
 		// set form validation rules
-		$this->form_validation->set_rules('firstname', 'First Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|alpha|min_length[3]|max_length[30]');
-		$this->form_validation->set_rules('email', 'Email ID', 'trim|required|valid_email|is_unique[user.user_email]');
- 		$this->form_validation->set_rules('cemail', 'Confirm Email', 'trim|required|matches[email]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[cpassword]');
-		$this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required');
- 		$this->form_validation->set_rules('zip', 'ZIP', 'trim|required');
- 		$this->form_validation->set_rules('city', 'City', 'trim|required');
- 		$this->form_validation->set_rules('street', 'Street', 'trim|required');
- 		$this->form_validation->set_rules('housenumber', 'Housenumber', 'trim|required');
- 		$this->form_validation->set_rules('birthday', 'Birthday', 'required');
+		$this->form_validation->set_rules('firstname', 'Vorname', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('lastname', 'Nachname', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('email', 'E-Mail Addresse', 'trim|required|valid_email|is_unique[user.user_email]');
+ 		$this->form_validation->set_rules('cemail', 'Bestätigung der E-Mail Addresse', 'trim|required|matches[email]');
+		$this->form_validation->set_rules('password', 'Passwort', 'trim|required|matches[cpassword]|min_length[6]');
+		$this->form_validation->set_rules('cpassword', 'Bestätigung Password', 'trim|required|min_length[6]');
+ 		$this->form_validation->set_rules('zip', 'PLZ', 'trim|required');
+ 		$this->form_validation->set_rules('city', 'Stadt', 'trim|required');
+ 		$this->form_validation->set_rules('street', 'Straße', 'trim|required');
+ 		$this->form_validation->set_rules('housenumber', 'Hausnummer', 'trim|required');
+ 		$this->form_validation->set_rules('birthday', 'Geburtsdatum', 'required');
 
 		if ($role == UserRole::Photograph){
-			$this->form_validation->set_rules ( 'accountholder', 'Accountholder', 'trim|required' );
+			$this->form_validation->set_rules ( 'accountholder', 'Kontoinhaber', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
 			
 			if (empty($_FILES['tradelicense']['name']))
 			{
-				$this->form_validation->set_rules('tradelicense', 'Traderlicense', 'required');
+				$this->form_validation->set_rules('tradelicense', 'Gewerbeschein', 'required');
 			}
 		}
 		
 		$this->form_validation->set_rules('checktermsandconditions', 'AGB', 'required');
-		$this->form_validation->set_rules('checklegalnotice', 'Privacy Policy', 'required');
+		$this->form_validation->set_rules('checklegalnotice', 'Datenschutzrichtlinien', 'required');
 		
 		
 		
