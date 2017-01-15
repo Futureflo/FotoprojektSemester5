@@ -292,7 +292,7 @@
 						<div class="form-check">
 							<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="checktermsandconditions"> <a href="<?php
 							
-echo base_url ()?>/termsandconditions/termsandconditions_view.php">AGB</a> zustimmen
+							echo base_url ()?>/termsandconditions">AGB</a> zustimmen
 							</label> <span class="text-danger">
 							<?php
 							
