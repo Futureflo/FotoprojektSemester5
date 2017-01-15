@@ -11,7 +11,7 @@
 <div class="container">
 	<form action="<?php
 	
-echo base_url ();
+	echo base_url ();
 	?>" method="post">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
@@ -25,19 +25,19 @@ echo base_url ();
 				<div class="form-group col-xs-7">
 					<label for="vorname">Vorname</label> <input type="text" class="form-control" id="vorname" value="<?php
 					
-echo $user_firstname;
+					echo $user_firstname;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
 					<label for="nachname">Nachname</label> <input type="text" class="form-control" id="nachname" value="<?php
 					
-echo $user_name;
+					echo $user_name;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
 					<label for="birthday">Geburtsdatum</label> <input class="form-control" type="date" id="birthday" value="<?php
 					
-echo $user_birthday;
+					echo $user_birthday;
 					?>">
 				</div>
 			</div>
@@ -47,25 +47,25 @@ echo $user_birthday;
 				<div class="form-group col-xs-7">
 					<label for="number">Name</label> <input type="text" class="form-control" id="number" value="<?php
 					
-echo $adre_name;
+					echo $adre_name;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
 					<label for="street">Straße</label> <input type="text" class="form-control" id="street" value="<?php
 					
-echo $adre_street;
+					echo $adre_street;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
 					<label for="plz">PLZ</label> <input class="form-control" type="text" id="plz" value="<?php
 					
-echo $adre_zip;
+					echo $adre_zip;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
 					<label for="city">Stadt</label> <input type="text" class="form-control" id="city" value="<?php
 					
-echo $adre_city;
+					echo $adre_city;
 					?>">
 				</div>
 			</div>
@@ -84,7 +84,7 @@ echo $adre_city;
 <div class="container">
 	<form action="<?php
 	
-echo base_url ();
+	echo base_url ();
 	?>" method="post">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
@@ -112,7 +112,7 @@ echo base_url ();
 <div class="container">
 	<form action="<?php
 	
-echo base_url ();
+	echo base_url ();
 	?>" method="post">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
@@ -120,7 +120,7 @@ echo base_url ();
 				<div class="form-group col-xs-7">
 					<label for="mail">Email-Adresse</label> <input type="text" class="form-control" id="mail" value="<?php
 					
-echo $user_email;
+					echo $user_email;
 					?>">
 				</div>
 				<div class="form-group col-xs-7">
@@ -133,4 +133,46 @@ echo $user_email;
 			</div>
 		</div>
 	</form>
+</div>
+
+<hr>
+<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<a class="btn btn-danger" data-toggle="modal" data-target="#delete" title="Benutzer löschen">
+					<i class="fa fa-trash-o fa-lg" aria-hidden="True" style="color:white;"></i>
+						<span style="color:white;">Benutzer löschen</span>
+				</a>				
+			</div>
+		</div>
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        	<h4 class="modal-title custom_align" id="Heading">Benutzer löschen?</h4>
+	 		</div>
+	   		<div class="modal-body">   
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
+		       		</span>Möchten Sie Ihren Benutzeraccount unwiderruflich löschen?
+		       	</div>
+	 		</div>
+		  	<div class="modal-footer ">
+		        <form action="<?php
+										
+										echo base_url ();
+										?>user/deleteUser/" method="post">
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
+		        </form>
+			</div>
+		</div>
+    	<!-- /.modal-content --> 
+	</div>
+      <!-- /.modal-dialog --> 
 </div>
