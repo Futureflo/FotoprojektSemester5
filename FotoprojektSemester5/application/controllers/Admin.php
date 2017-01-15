@@ -7,19 +7,19 @@ include_once (dirname ( __FILE__ ) . "/Printers.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model ( 'User_model' );
+		$this->load->model ( 'user_model' );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 	}
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
 	public function users() {
-		$data ['users'] = $this->User_model->getAllUsers ();
+		$data ['users'] = $this->user_model->getAllUsers ();
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function archivedUsers() {
-		$data ['users'] = $this->User_model->get_AllArchivedUsers ();
+		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
 		$data ['UsersViewHeader'] = "Archivierte Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
@@ -52,38 +52,38 @@ class Admin extends CI_Controller {
 	}
 	public function deleteUser() {
 		$user_id = $this->input->post ( "userDelete_hidden_field" );
-		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$userInformation = $this->user_model->get_user_by_id ( $user_id );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gelöscht";
-		$this->User_model->update_userStatusByID ( $user_id, UserStatus::deleted );
-		$data ['users'] = $this->User_model->getAllUsers ();
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::deleted );
+		$data ['users'] = $this->user_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function lockUser() {
 		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$userInformation = $this->user_model->get_user_by_id ( $user_id );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gesperrt";
-		$this->User_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
-		$data ['users'] = $this->User_model->getAllUsers ();
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
+		$data ['users'] = $this->user_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function unlockUser() {
 		$user_id = $this->input->post ( "userUnlock_hidden_field" );
-		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$userInformation = $this->user_model->get_user_by_id ( $user_id );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde wieder entsperrt";
-		$this->User_model->update_userStatusByID ( $user_id, UserStatus::activated );
-		$data ['users'] = $this->User_model->getAllUsers ();
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::activated );
+		$data ['users'] = $this->user_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function recycleUser() {
 		$user_id = $this->input->post ( "userRecycle_hidden_field" );
-		$userInformation = $this->User_model->get_user_by_id ( $user_id );
+		$userInformation = $this->user_model->get_user_by_id ( $user_id );
 		$data ['UsersViewHeader'] = "Archivierte Benutzer";
 		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde wieder hergestellt";
-		$this->User_model->update_userStatusByID ( $user_id, UserStatus::activated );
-		$data ['users'] = $this->User_model->get_AllArchivedUsers ();
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::activated );
+		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function printers_creation() {
