@@ -159,7 +159,7 @@
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>Möchten Sie Ihren Benutzeraccount unwiderruflich löschen?
+		       		</span>Möchten Sie Ihren Benutzeraccount unwiderruflich löschen? <br> Durch die Bestätigung werden Sie direkt ausgeloggt. Ihre Daten werden unwiderruflich gelöscht und Sie haben keinen Zugriff mehr auf Ihren Account.
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
