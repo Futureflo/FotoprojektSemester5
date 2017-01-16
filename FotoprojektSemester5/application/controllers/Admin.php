@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
+		$this->load->model ( 'event_model' );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 	}
 	public function index() {
@@ -24,10 +25,10 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function events() {
-		$this->load->model ( 'Event_model' );
-		$data ['events'] = $this->Event_model->getAllActivEvents ();
+		$data ['events'] = $this->event_model->getAllActivEvents ();
 		$this->load->template ( 'admin/events_view', $data );
 	}
+	
 	public function printers() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";

@@ -24,6 +24,7 @@
 							<tr>
 								<th>ID</th>
 								<th>Bezeichnung</th>
+								<th>Fotograf</th>
 								<th>URL</th>
 								<th>Status</th>
 								<th>Aktion</th>
@@ -35,6 +36,7 @@
 									echo "<tr class='searchable'>";
 									echo "<td>" . $event->even_id. "</td>";
 									echo "<td>" . $event->even_name. "</td>";
+									echo "<td>" . $event->user_name. "</td>";
 									//echo "<td>" . $event->even_status . "</td>";
 									echo "<td> <a href=http://www.snap-gallery.de/event/" . $event->even_url . " target='_blank'>www.snap-gallery.de/event/" . $event->even_url . "</a></td>";
 									
