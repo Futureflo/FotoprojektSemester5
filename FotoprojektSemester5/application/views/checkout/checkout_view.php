@@ -38,7 +38,7 @@
 			echo '</div>';
 			
 			// Spalte 3: Preis
-			echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price . '</i>€</h5></div>';
+			echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 			
 			// Spalte 4: Menge
 			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
