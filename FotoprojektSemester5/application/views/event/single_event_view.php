@@ -94,8 +94,8 @@ function openModal(product){
 	var modalImg=document.getElementById("modalImg");
 
 	modalImg.setAttribute("alt",product.prod_name);
-	modalImg.setAttribute("src",product.prod_complete_filepath);
-	modalImg.setAttribute("data-src",product.prod_complete_filepath);
+	modalImg.setAttribute("src",product.prod_complete_filepath.replace("_thumb",""));
+	modalImg.setAttribute("data-src",product.prod_complete_filepath.replace("_thumb",""));
 
 	removeOptions(document.getElementById("beschreibungSelect"));
 	
@@ -142,8 +142,8 @@ function removeOptions(selectbox)
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
-							<img class="img-responsive" id="modalImg">
+						<div class="col-md-12" >
+							<img class="img-responsive" id="modalImg" style="width:700px;height:400px;">
 						</div>
 						<br />
 					
