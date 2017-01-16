@@ -27,7 +27,7 @@
 				<div class="form-insert_product">
 				<input type="file" multiple name="dateiupload[]" /> <input type="submit" name="btn[upload]" class="btn btn-success" />
 			</div>
-			</form>
+<!-- 			</form> -->
 			
 			<?php
 			
@@ -97,17 +97,32 @@ function openModal(product){
 	modalImg.setAttribute("src",product.prod_complete_filepath);
 	modalImg.setAttribute("data-src",product.prod_complete_filepath);
 
+	removeOptions(document.getElementById("beschreibungSelect"));
+	
+// 	var select = document.getElementById("beschreibungSelect");
+// 	var length = select.options.length;
+// 	for (i = 0; i < length; i++) {
+// 	  select.options[i] = null;
+// 	}
+	
 	var bestelloptionen = document.getElementById("beschreibungSelect");
 	product.product_variants.forEach(function(entry) {
-	    //alert(entry.prty_description);
-	    var option = document.createElement("option");
+	   	var option = document.createElement("option");
 		option.text = entry.prty_description + " - " + entry.price.price_sum + "€";
 		bestelloptionen.add(option);
 	});
-	//.
-	//
-	//x.add(option);
+
 }
+
+function removeOptions(selectbox)
+{
+    var i;
+    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
+}
+
 
 </script>
 
@@ -128,58 +143,52 @@ function openModal(product){
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<a data-toggle="modal" href="#imgModal"> <img class="img-responsive" id="modalImg" onclick="openModalImg(this)">
-							</a>
+							<img class="img-responsive" id="modalImg">
 						</div>
 						<br />
-						<div class="col-md-7">
-							<div class="col-md-2">
-								<p>Art:
-								
-								
-								<p />
-							</div>
-
-							<div class="col-md-10">
-
-								<div class="form-group">
-									<select class="form-control" id="beschreibungSelect">
-										<option style="color: grey">Art wählen*</option>
-									</select>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-1"></div>
-
-						<div class="col-md-1">
-
-							<p>Preis:
-							
-							
-							<p />
-						</div>
-
-						<div class="col-md-3">
-							<input type="text" class="form-control input-sm chat-input" readonly="readonly" name="preis" />
-
-						</div>
+					
 						<!--  col-md-12 -->
-
-
 					</div>
 					<!--  row -->
-
 				</div>
 				<!--  container -->
-
-
 			</div>
 			<!--  modal body -->
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-				<button type="button" class="btn btn-default">In den Warenkorb</button>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							
+								<div class="col-md-1">
+									<p>Art:<p />		
+								</div>
+			
+								<div class="col-md-5">
+			
+									<div class="form-group">
+										<select class="form-control" id="beschreibungSelect">
+											<option style="color: grey">Art wählen*</option>
+										</select>
+									</div>
+								</div>
+					
+								<div class="col-md-1">
+									
+								</div>
+			
+					
+								<div class="col-md-2">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+								</div>				
+						
+								<div class="col-md-2">
+									<button type="button" class="btn btn-success">In den Warenkorb</button>
+								</div>		
+							
+						</div>
+					</div>
+				</div>
 			</div>
 
 
