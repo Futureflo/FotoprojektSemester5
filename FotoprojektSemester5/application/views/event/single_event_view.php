@@ -45,7 +45,7 @@
 
 	<table class="table table-striped">
 			<?php
-			echo "<tr>" . "<th>ID:</th>" . "<th>" . $event->even_id . "</th></tr>";
+// 			echo "<tr>" . "<th>ID:</th>" . "<th>" . $event->even_id . "</th></tr>";
 			echo "<tr>" . "<th>Bezeichung:</th>" . "<th>" . $event->even_name . "</th></tr>";
 			echo "<tr>" . "<th>Datum:</th>" . "<th>" . $event->even_date . "</th></tr>";
 			echo "<tr>" . "<th>URL:</th>" . "<th>" . $event->even_url . "</th></tr>";
