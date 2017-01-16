@@ -12,6 +12,7 @@ class Order_model extends CI_Model {
 		return $query->result ();
 	}
 	Public function getProductInformationByOrderId($orde_id) {
+		$this->db->reset_query();
 		$this->db->join ( 'order_position', 'orde_id = orpo_orde_id', 'LEFT OUTER' );
 		$this->db->join ( 'product', 'orpo_prod_id = prod_id', 'LEFT OUTER' );
 		
