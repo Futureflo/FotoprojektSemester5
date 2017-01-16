@@ -41,6 +41,7 @@
       public function getAllActivEvents()
       {
       	$this->db->where ( 'even_status !=', 4);
+      	$this->db->join('user', 'even_user_id = user_id');      	 
       	$query = $this->db->get("event");
       	return $query->result();
       }
