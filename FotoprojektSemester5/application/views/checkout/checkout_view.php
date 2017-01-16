@@ -64,7 +64,7 @@
 		<div class="col-sm-2 col-xs-10">
 			<h6>Nettopreis:</h6>
 			<h6>Mehrwertsteuer(19%):</h6>
-			<h6>Versandkosten:</h6>
+			<!-- <h6>Versandkosten:</h6> -->
 			<h5>Gesamtpreis:</h5>
 		</div>
 
@@ -75,7 +75,7 @@
 			<h6>
 				<i id="mehrwertsteuer">0.38</i>€
 			</h6>
-			<h6 id="versandkosten">0.00€</h6>
+		<!-- <h6 id="versandkosten">0.00€</h6> -->	
 			<h5>
 				<i id="gesamtpreis">2.99</i>€
 			</h5>

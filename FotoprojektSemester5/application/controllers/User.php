@@ -91,8 +91,14 @@ class User extends CI_Controller {
 		$data['orders'] = $orders;
 		$this->load->template ( 'user/my_order_view', $data );
 	}
+	public function deleteUser() {
 
-
+		$user_id = $this->session->userdata('user_id');
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::deleted );
+		$this->logout();
+	}
+	
+	
 // 	public function userProfile(){
 // 	$id = $this->session->userdata('user_id');
 	
@@ -128,7 +134,7 @@ class User extends CI_Controller {
 		);
 		$this->session->unset_userdata ( $data );
 		$this->session->sess_destroy ();
-		redirect ('start/');
+		redirect ('/');
 	}
 }
 abstract class UserStatus
