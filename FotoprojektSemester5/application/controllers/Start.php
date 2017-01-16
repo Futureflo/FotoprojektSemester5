@@ -12,6 +12,11 @@ class Start extends CI_Controller {
 	}
 	public function search() {
 		$search = $this->uri->segment ( 3 );
+		
+		if (strpos ( $search, '%20' ) !== false) {
+			$search = str_replace ( '%20', ' ', $search );
+		}
+		
 		$data ['events'] = Event::searchEvents ( $search );
 		echo json_encode ( $data );
 	}

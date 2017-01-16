@@ -181,7 +181,7 @@ function searchEvent(ev){
     		  dataType: 'html',
     		  success:function(data){
     			  try{  
-    				  //console.log(data);
+    				  console.log(data);
     				   var response = jQuery.parseJSON(data);
 
     				   var events = response.events;
