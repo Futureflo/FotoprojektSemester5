@@ -191,7 +191,7 @@ function articleSum(){
         } else if (number < 1) {
             number = 1;
         } else {
-            price.innerHTML = parseFloat ( one ) * parseFloat ( number );
+            price.innerHTML = (parseFloat ( one ) * parseFloat ( number )).toFixed(2);
         }
         
         articleSum();
