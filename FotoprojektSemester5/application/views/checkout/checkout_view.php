@@ -38,7 +38,7 @@
 			echo '</div>';
 			
 			// Spalte 3: Preis
-			echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price . '</i>€</h5></div>';
+			echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 			
 			// Spalte 4: Menge
 			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
@@ -70,14 +70,18 @@
 
 		<div class="col-sm-1 col-xs-2">
 			<h6>
-				<i id="nettopreis">1.62</i>€
+				<i id="nettopreis"></i>€
 			</h6>
 			<h6>
-				<i id="mehrwertsteuer">0.38</i>€
+				<i id="mehrwertsteuer"></i>€
 			</h6>
-			<h6 id="versandkosten">0.00€</h6>
+	
+			<h6>
+				<i id="versandkosten"></i>€
+			</h6> 
+	
 			<h5>
-				<i id="gesamtpreis">2.99</i>€
+				<i id="gesamtpreis"></i>€
 			</h5>
 		</div>
 	</div>
@@ -191,7 +195,7 @@ function articleSum(){
         } else if (number < 1) {
             number = 1;
         } else {
-            price.innerHTML = parseFloat ( one ) * parseFloat ( number );
+            price.innerHTML = (parseFloat ( one ) * parseFloat ( number )).toFixed(2);
         }
         
         articleSum();
