@@ -65,7 +65,10 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	/**
-	 * Mehtode um einen sicheren und einzigartigen downloadlink zu erstellen soll orderID enthalten sowie "verschlüsselung"
+	 * 
+	 * Mehtode um einen sicheren und einzigartigen downloadlink zu erstellen. Das Passwort wird in der Datenbank auf die OrderID referenziert.
+	 * Die Methode wird aufgerufen um eine Order "downloadbar" zu machen. Dabei wird dem Nutzer ein Downloadlink, der das PW enthält per Email zugesendet. 
+	 * Der Link ist nur ein einziges mal aufrufbar, da danach das Passwort in der Datenbank als benutzt gesetzt wird.
 	 * 
 	 * @param unknown $orderID
 	 */
@@ -99,8 +102,28 @@ class DownloadManager extends CI_Controller {
 		return $download_password;
 	}
 	
+	public function startDownload(){
+		$this->load->model('Download_Password_model');
+		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+		$path_parts = pathinfo($url);
+		$downloadPasswordArray = $this->Download_Password_model->getDownloadPasswords();
+		
+		// sent passwort is url-addition --> $path_parts['basename'];
+		if($this->existsInArray($path_parts['basename'], $downloadPasswordArray) == true){
+			// downloadprocess
+			$this->load->model('order_model');
+			$entry = $this->Download_Password_model->getDownloadPasswordEntryByPassword($path_parts['basename']);
+			$orderID = $entry[0]->dopa_orde_id;
+			
+			$products = $this->order_model->getProductInformationByOrderId($orderID);
+			$downloadableZipFile = $this->zipDir($orderID, $products);
+			// path to new zipFile: echo $downloadableZipFile;
+		}// else $this->session->set_flashdata ( 'msg', 'Datensatz existiert nicht.' );
+	}
+	
+	
 	/**
-	 * cheks if something already exists
+	 * cheks if the password already exists
 	 * @param unknown $testArray
 	 */
 	public function existsInArray($checker, $testArray) {
@@ -119,7 +142,7 @@ class DownloadManager extends CI_Controller {
 	 * @param unknown $downloadLink
 	 * @return zipPath
 	 */
-	public static function getZipArchiveByDownloadLink($downloadLink) {
+	public function getZipArchiveByDownloadLink($downloadLink) {
 		// methode zum auflösen des downloadlinks zu einem auffindbaren zipPfad
 		return $zipPath;
 	}
@@ -164,7 +187,7 @@ class DownloadManager extends CI_Controller {
 		}
 		// Zip Archiv schließen
 		$zipArchive->close();
-		
+		return $outZipPath;
 	}
 	
 
@@ -190,9 +213,9 @@ class DownloadManager extends CI_Controller {
 // 		$products = $this->order_model->getProductInformationByOrderId(1);
 // 		$this->zipDir(1, $products);
 // 		$this->createDownloadLink(1);
-		
-		$this->createDownloadLink(39);
-	
+// 		$this->createDownloadLink(39);
+		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+		echo $url;
 	}
 	
 }
