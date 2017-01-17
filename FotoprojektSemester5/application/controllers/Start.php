@@ -30,7 +30,8 @@ class Start extends CI_Controller {
 		if ($checked) {
 			redirect ( $shortcode );
 		} else {
-			$this->index ();
+			$this->session->set_flashdata ( 'wrong_code', 'Falscher Bestätigungscode!' );
+			redirect ( '/' );
 		}
 	}
 }
