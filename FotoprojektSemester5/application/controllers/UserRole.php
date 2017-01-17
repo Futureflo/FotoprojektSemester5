@@ -3,6 +3,6 @@ abstract class UserRole {
 	const Admin = 1;
 	const User = 2;
 	const Photograph = 3;
-	const Owner = 4;
+	const AnonymousUser  = 4;	
 }
 ?>

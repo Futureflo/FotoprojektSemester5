@@ -1,9 +1,12 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
+include_once (dirname ( __FILE__ ) . "/UserRole.php");
 include_once (dirname ( __FILE__ ) . "/Product.php");
 class ShoppingCart extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
+		$this->load->model('user_model');
+		
 		$this->load->library ( array (
 				'form_validation' 
 		) );
@@ -13,6 +16,13 @@ class ShoppingCart extends CI_Controller {
 		$this->load->model ( 'shoppingcart_model' );
 		
 		$user_id = $this->session->userdata ( 'user_id' );
+		// ceck if user is logged in 
+		if ($user_id == Null){
+			$this->creatAnonymousUser();
+			$user_id = $this->session->userdata ( 'user_id' );
+		}
+		
+			
 		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
 		if (! isset ( $cart )) {
 			
@@ -40,14 +50,43 @@ class ShoppingCart extends CI_Controller {
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;
 		$data ['cart'] = $cart;
-		$this->load->template ( 'checkout/checkout_view', $data );
+ 		$this->load->template ( 'checkout/checkout_view', $data );
+		
 	}
+	// if costumer is not logged in -> create anonymous user
+	function creatAnonymousUser(){
+		do {
+			$userIdExists = true;
+			$user_id = rand(100000,1000000000);
+			$user = $this->user_model->get_user_by_id($user_id);
+			if($user == Null){
+				// set session
+				$sess_data = array (
+						'login' => FALSE,
+						'user_id' => $user_id
+				);
+				$this->session->set_userdata ( $sess_data );
+				$userIdExists = FALSE;
+				//insert User in db
+				$data = array(
+						'user_id' => $user_id,
+						'user_role_id' => UserRole::AnonymousUser
+				);
+				$UserIsSet= $this->user_model->insert_user($data);
+			}
+		} while ($userIdExists == TRUE);
+	}
+	
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
 		$scpo_prty_id = $this->input->post ( 'scpo_prty_id' );
 		$scpo_amount = $this->input->post ( 'scpo_amount' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$shca_id = 0;
+		
+		if ($user_id == Null){			
+			$this->creatAnonymousUser();
+		}		
 		
 		// // Shoppingcart-Kopf suchen/anlegen
 		$shopping_cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
@@ -88,6 +127,7 @@ class ShoppingCart extends CI_Controller {
 		
 		// Testseite wieder aufrufen
 		redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
+	
 	}
 	public static function getSingleShoppingCartById($shca_id) {
 		$CI = & get_instance ();
