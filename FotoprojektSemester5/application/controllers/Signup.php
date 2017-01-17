@@ -112,10 +112,8 @@ class Signup extends CI_Controller
 				'user_confirmcode' => $confirmCode	
 			);
 			//insert User in db
-			$UserIsSet= $this->user_model->insert_user($data);
-			$result = $this->user_model->get_user($email);
-			$user_id = $result[0]->user_id;
-			
+			$user_id = $this->user_model->insert_user($data);
+
 			//insert address
 			$address = array(
 				'adre_user_id' => $user_id,
@@ -147,7 +145,7 @@ class Signup extends CI_Controller
 				$this->user_model->update_addUserToNewsletter($user_id);
 			}
 			
-			if ($addressIsSet && $UserIsSet)
+			if ($addressIsSet && $user_id =! NULL)
 			{
 				$this->sendConfirmEmail($email, $confirmCode);
   				$this->load->template ( 'user/success_signup_view' );

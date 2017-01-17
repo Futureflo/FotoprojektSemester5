@@ -74,7 +74,7 @@ class User_model extends CI_Model {
 	
 	// insert new User
 	function insert_user($data) {
-		return $this->db->insert ( 'user', $data );
+		return $this->db->insert_id ( 'user', $data );
 	}
 	
 	// insert new Useraddress

@@ -55,26 +55,18 @@ class Shoppingcart extends CI_Controller {
 	}
 	// if costumer is not logged in -> create anonymous user
 	function creatAnonymousUser(){
-		do {
-			$userIdExists = true;
-			$user_id = rand(100000,1000000000);
-			$user = $this->user_model->get_user_by_id($user_id);
-			if($user == Null){
-				// set session
-				$sess_data = array (
-						'login' => FALSE,
-						'user_id' => $user_id
-				);
-				$this->session->set_userdata ( $sess_data );
-				$userIdExists = FALSE;
-				//insert User in db
-				$data = array(
-						'user_id' => $user_id,
-						'user_role_id' => UserRole::AnonymousUser
-				);
-				$UserIsSet= $this->user_model->insert_user($data);
-			}
-		} while ($userIdExists == TRUE);
+
+		// insert AnonymousUser in db
+		$data = array ('user_role_id' => UserRole::AnonymousUser );
+		$user_id = $this->user_model->insert_user ( $data );
+		
+		// set session
+		$sess_data = array (
+				'login' => FALSE,
+				'user_id' => $user_id
+		);
+		$this->session->set_userdata ( $sess_data );
+
 	}
 	
 	function insert() {
