@@ -469,20 +469,30 @@ class CI_Loader {
 		) );
 	}
 	public function template($template_name, $vars = array(), $return = FALSE) {
-		$userrolle = lh_getUser () ["user_role"];
 		if ($return) :
 			
 			$content = $this->view ( 'general/header_view', $vars, $return );
 			
 			if (lh_isUserLoggedin ()) {
+				$userrolle = $this->session->user_role;
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :
-					case 0 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
-					case 1 : $this->view ( 'general/navbar_loggedin_admin_view', $vars, $return ); break;
-					case 2 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
-					case 3 : $this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return ); break;
-					case 4 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 0 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
+					case 1 :
+						$this->view ( 'general/navbar_loggedin_admin_view', $vars, $return );
+						break;
+					case 2 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
+					case 3 :
+						$this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return );
+						break;
+					case 4 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
 				}
 			} else {
 				$content .= $this->view ( 'general/navbar_visitor_view', $vars, $return );
@@ -495,16 +505,26 @@ class CI_Loader {
 			$this->view ( 'general/header_view', $vars );
 			
 			if (lh_isUserLoggedin ()) {
+				$userrolle = $this->session->user_role;
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :
-					case 0 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
-					case 1 : $this->view ( 'general/navbar_loggedin_admin_view', $vars, $return ); break;
-					case 2 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
-					case 3 : $this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return ); break;
-					case 4 : $this->view ( 'general/navbar_loggedin_view', $vars, $return ); break;
+					case 0 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
+					case 1 :
+						$this->view ( 'general/navbar_loggedin_admin_view', $vars, $return );
+						break;
+					case 2 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
+					case 3 :
+						$this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return );
+						break;
+					case 4 :
+						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						break;
 				}
-				
 			} else {
 				$this->view ( 'general/navbar_visitor_view', $vars );
 			}
