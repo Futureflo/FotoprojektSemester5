@@ -2,14 +2,14 @@
 	<section class="text-xs-left">
 		<div class="container">
 			<?php
-			echo form_open ( 'Newsletter/addUnregistered' );
+			echo form_open ( 'newsletter/addUnregistered' );
 			?>
 			<div class="">
 				<h2>Newsletteranmeldung:</h2>
 				<br />
 				<input type="text" class="form-control input-sm chat-input" placeholder="Email-ID" name="email" value="<?php
 				
-echo set_value ( 'email' );
+				echo set_value ( 'email' );
 				?>"/>
 						<?php
 						if (validation_errors ( 'email' ) != null) {
