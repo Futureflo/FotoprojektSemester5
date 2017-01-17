@@ -64,19 +64,18 @@
 		foreach ( $products as $product ) {
 			$product->prod_complete_filepath = base_url () . $product->prod_filepath;
 			
-			echo "<div class=\"col-lg-4 col-md-6 col-xs-8\">";
-			echo "<div class=\"card\">";
+			echo "<div class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard\">";
 			echo "<div class=\"lazyload\">";
 			echo "<!--";
 			echo "<a class=\"thumbnail\">";
-			echo " <img data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
+			echo " <img class=\"mypictureborder\" data-src='../../" . $product->prod_filepath . "'" . " alt=" . $product->prod_name . " style=\"width:304px;height:228px; display: block;\"
 					src=../../" . $product->prod_filepath . " onclick='openModal(" . json_encode ( $product ) . ")'>";
 			echo "</a>";
-			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
+// 			echo "<p class=\"card-text\">" . $product->prod_name . "</p>";
 			echo "-->";
 			echo "</div>";
 			echo "</div>";
-			echo "</div>";
+		
 
 		}
 		
@@ -143,7 +142,7 @@ function removeOptions(selectbox)
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12" >
-							<img class="img-responsive" id="modalImg" style="width:700px;height:400px;">
+							<img class="img-responsive" id="modalImg" style="max-width:100%; height:auto;">
 						</div>
 						<br />
 					
@@ -158,35 +157,39 @@ function removeOptions(selectbox)
 			<div class="modal-footer">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
-							
-								<div class="col-md-1">
-									<p>Art:<p />		
+						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">	
+							<div class="col-md-3 col-sm-2 col-xs-2">
+								<p>Art:<p />		
+							</div>
+		
+							<div class="col-md-9 col-sm-10 col-xs-10">
+		
+								<div class="form-group">
+									<select class="form-control" id="beschreibungSelect">
+									</select>
 								</div>
-			
-								<div class="col-md-5">
-			
-									<div class="form-group">
-										<select class="form-control" id="beschreibungSelect">
-											<option style="color: grey">Art wählen*</option>
-										</select>
-									</div>
-								</div>
-					
-								<div class="col-md-1">
-									
-								</div>
-			
-					
-								<div class="col-md-2">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-								</div>				
-						
-								<div class="col-md-2">
-									<button type="button" class="btn btn-success">In den Warenkorb</button>
-								</div>		
-							
+							</div>
 						</div>
+				
+							
+		
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+<!-- 								<div class="col-md-6 col-sm-6 col-xs-12">	 -->
+<!-- 									<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> -->
+<!-- 								</div>				 -->
+					
+							 <form action="<?php							
+									echo base_url ();
+									?>shoppingCart/insert/" method="post">
+					        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span>In den Warenkorb</button>
+				     		   </form>
+						</div>	
+
+							<input type="hidden" class="form-control" id="scpo_amount" value="1">
+							<input type="hidden" class="form-control" id="scpo_prty_id" value="">
+							<input type="hidden" class="form-control" id="scpo_prod_id" value="">
+							
+
 					</div>
 				</div>
 			</div>
