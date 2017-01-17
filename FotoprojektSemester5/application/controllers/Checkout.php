@@ -5,24 +5,42 @@ class Checkout extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 	}
-	public function index() {
+
+	
+	public function stepone() {
+		$this->load->model ( 'user_model' );
+		$this->load->model ( 'adress_model' );
+		
+		$user_id = $this->session->userdata ( 'user_id' );
+		
+		$user = $this->user_model->get_user_by_id ( $user_id );
+		$address = $this->user_model->get_address_by_id ( $user_id );
+		
+		$data ['user_title'] = $user [0]->user_title;
+		$data ['user_name'] = $user [0]->user_name;
+		$data ['user_firstname'] = $user [0]->user_firstname;
+		
+		$data ['adre_name'] = $address [0]->adre_name;
+		$data ['adre_street'] = $address [0]->adre_street;
+		$data ['adre_zip'] = $address [0]->adre_zip;
+		$data ['adre_city'] = $address [0]->adre_city;
+		
+		$this->load->template ( 'checkout/checkout_customer.php', $data );
+	}
+	public function stepone2() {
+		$this->load->template ( 'checkout/checkout_guest.php' );
+	}
+	public function stepone3() {
+		$this->load->template ( 'checkout/checkout_login.php' );
+	}
+	public function stepone4() {
 		$this->load->model ( 'shoppingcart_model' );
+		$this->load->model ( 'adress_model' );
 		
 		$user_id = $this->session->userdata ( 'user_id' );
 		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
-		if (! isset ( $cart )) {
-			
-			$shopping_cart = array (
-					'shca_id' => 0,
-					// 'shca_commission' => 0,
-					// 'shca_sum' => 0,
-					// 'shca_delivery_charge' => 0,
-					'shca_user_id' => $user_id 
-			);
-			$shca_id = $this->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
-			$cart->shoppingcart_positions = array ();
-		} else
-			$shca_id = $cart->shca_id;
+		
+		$shca_id = $cart->shca_id;
 		
 		$shoppingcart_positions = $this->shoppingcart_model->getShoppingCartPositions ( $shca_id );
 		
@@ -36,8 +54,20 @@ class Checkout extends CI_Controller {
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;
 		$data ['cart'] = $cart;
-		$this->load->template ( 'checkout/checkout_view', $data );
+		$data ['adresses'] = $this->adress_model->getAdressesForUser ( $user_id );
+		$this->load->template ( 'checkout/checkout_overview', $data );
 	}
+	public function stepone5() {
+		$this->load->template ( 'checkout/checkout_payment.php' );
+	}
+
+	public function stepone6() {
+		$this->load->template ( 'checkout/checkout_view.php' );
+	}
+
+
+
+
 	public function overview() {
 		$this->load->model ( 'shoppingcart_model' );
 		$this->load->model ( 'adress_model' );

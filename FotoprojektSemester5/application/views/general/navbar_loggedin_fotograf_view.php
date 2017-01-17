@@ -110,7 +110,7 @@ echo base_url ();
 				<li class="nav-item"><a class="nav-link" href="<?php
 				
 				echo base_url ();
-				?>checkout/"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
+				?>shoppingcart/"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
 
 				<!-- <li><p class="nav-item nav-link">Hallo <?php
 				

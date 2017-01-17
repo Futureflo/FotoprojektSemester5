@@ -87,7 +87,7 @@
 				<li class="nav-item "><a class="nav-link" href="<?php
 				
 				echo base_url ();
-				?>checkout/"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
+				?>shoppingcart/"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i></a></li>
 
 				<li class="nav-item active "><button type="button" id="login-btn" class="nav-link btn btn-success btn-md" data-toggle="modal"
 						data-target="#loginModal">Anmelden</button></li>
