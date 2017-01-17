@@ -25,7 +25,17 @@
 					?>admin/users/">Alle Benutzer</a> <a class="dropdown-item" href="<?php
 					
 					echo base_url ();
-					?>admin/archivedUsers/">Benutzer Archiv</a> <a class="dropdown-item" href="<?php
+					?>admin/archivedUsers/">Benutzer Archiv</a> 
+					
+					
+					<a class="dropdown-item" href="<?php
+					
+					echo base_url ();
+					?>admin/archivedEvents/">Event Archiv</a>
+					
+					
+					
+					<a class="dropdown-item" href="<?php
 					
 					echo base_url ();
 					?>admin/events/">Alle Events</a> <a class="dropdown-item" href="<?php

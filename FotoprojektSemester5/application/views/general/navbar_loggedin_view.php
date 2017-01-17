@@ -5,7 +5,7 @@
 	<div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar">
 		<a class="navbar-brand" href="<?php
 		echo base_url ();
-		?>">FPS5</a>
+		?>">SNAP-UP</a>
 		<ul class="nav navbar-nav">
 
 			<div class="float-sm-right">
@@ -15,7 +15,7 @@
 				echo base_url ();
 				?>">Home <span class="sr-only"></span></a></li>
 
-				<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"
+					<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"
 					id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-lg"
 						aria-hidden="true"></i></a>
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">

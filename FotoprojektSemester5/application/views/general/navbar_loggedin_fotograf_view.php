@@ -21,13 +21,11 @@
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 						<a class="dropdown-item" href="<?php
 						
-						echo base_url ();
-						?>event/uebersicht/">&Uuml;bersicht Events</a> <a class="dropdown-item" href="<?php
-						
-						echo base_url ();
+						?>event/uebersicht/">&Uuml;bersicht Events</a><a class="dropdown-item" href="<?php
 						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php
 						
 						echo base_url ();
+						
 						?>event/">&Uuml;bersicht Druckerei</a>
 					</div></li>
 
