@@ -16,9 +16,13 @@
 						
 						echo base_url ();
 						?>admin/users/">Alle Benutzer</a> <a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/archivedUsers/">Benutzer Archiv</a> <a class="dropdown-item" href="<?php
+						
+						echo base_url ();
+						?>admin/archivedUsers/">Benutzer Archiv</a> 
+						<a class="dropdown-item" href="<?php
+						
+						echo base_url ();
+						?>admin/archivedEvents/">Event Archiv</a><a class="dropdown-item" href="<?php
 					
 					echo base_url ();
 					?>admin/events/">Alle Events</a> <a class="dropdown-item" href="<?php
@@ -80,15 +84,15 @@
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 						<a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>event/uebersicht/">&Uuml;bersicht Events</a> 
 						<a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>event/">Neues Event</a> 
 						<a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>printers/showPrinters/">&Uuml;bersicht Druckerei</a> 
 					</div></li>
 
