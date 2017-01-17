@@ -1,3 +1,9 @@
+.mypictureborder {
+	
+	border-style:solid;
+}
+
+
 .ui-autocomplete {
     position: absolute;
     top: 100%;
