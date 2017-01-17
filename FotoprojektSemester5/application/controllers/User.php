@@ -31,7 +31,54 @@ class User extends CI_Controller {
 		$data['adre_zip'] = $address[0]->adre_zip;
 		$data['adre_city'] = $address[0]->adre_city;
 		
+		$adressId = $address[0]->adre_id;
 		$this->load->template ( 'user/single_user_view', $data );
+	
+	
+	// changeUserData
+		$title = $this->input->post('gender');
+		$name = $this->input->post('lastname');
+		$firstname = $this->input->post('firstname');
+		$fullname = $firstname." ".$name;
+		$zip = $this->input->post('zip');
+		$city = $this->input->post('city');
+		$street = $this->input->post('street');
+		$birthday = $this->input->post('birthday');
+		
+		$this->form_validation->set_rules('firstname', 'Vorname', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('lastname', 'Nachname', 'trim|required|min_length[3]|max_length[30]');
+		$this->form_validation->set_rules('zip', 'PLZ', 'trim|required');
+		$this->form_validation->set_rules('city', 'Stadt', 'trim|required');
+		$this->form_validation->set_rules('street', 'Straße', 'trim|required');
+		$this->form_validation->set_rules('birthday', 'Geburtsdatum', 'required');
+		// submit
+		if ($this->form_validation->run() == FALSE)
+		{
+
+		}
+		else
+		{
+			$data = array(
+					'user_id' => $user_id = $this->session->userdata('user_id'),
+					'user_firstname' => $title,
+					'user_firstname' => $firstname,
+					'user_name' => $name,
+					'user_birthday' => $birthday,
+			);
+			//insert User in db
+			$UserIsSet= $this->user_model->update_user($data);
+				
+			//insert address
+			$address = array(
+					'adre_id' => $adressId,
+					'adre_user_id' => $user_id,
+					'adre_zip' => $zip,
+					'adre_city' => $city,
+					'adre_street' => $streetAndNr,
+					'adre_name' => $fullname,
+			);
+			$addressIsSet = $this->adress_model->updateAdress ( $address );
+		}
 	}
 	
 	public function changeEmail(){
@@ -61,8 +108,8 @@ class User extends CI_Controller {
 		$newPassword = $this->input->post ( "user_newPassword" );
 		$newCPassword = $this->input->post ( "user_newCPassword" );
 		$user_id = $this->input->post ( 'user_id' );
-		$this->form_validation->set_rules ( 'user_newPassword', 'New Password', 'trim|required|matches[user_newCPassword]' );
-		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required' );
+		$this->form_validation->set_rules ( 'user_newPassword', 'New Password', 'trim|required|matches[user_newCPassword]|min_length[6]' );
+		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required|min_length[6]' );
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
 			$this->session->set_flashdata ( 'pwChange', 'Das Passwort mit dem wiederholten Passwort übereinstimmen' );
