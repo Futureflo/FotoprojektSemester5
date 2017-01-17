@@ -108,6 +108,10 @@
 <div id="proofModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 
+<?php
+
+echo form_open ( "Start/checkCode", '' )?>
+
 		<!-- Modal content-->
 		<div class="modal-content">
 
@@ -120,7 +124,7 @@
 			<div class="modal-body">
 
 				<input type="text" class="form-control input-sm chat-input" placeholder="Bestätigungscode" id="event_code" name="event_code" />
-
+				<input type="hidden" value="" id="event_id" name="event_id">
 			</div>
 
 
@@ -128,12 +132,15 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 offset-md-2">
-							<a class="btn btn-success btn-md btn-block" role="button" id="send_code">Absenden</a>
+							<button type="submit" class="btn btn-success btn-md btn-block" role="button" id="send_code">Absenden</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php
+		
+		echo form_close ()?>
 	</div>
 </div>
 
@@ -180,7 +187,7 @@ function searchEvent(ev){
     		  dataType: 'html',
     		  success:function(data){
     			  try{  
-    				  console.log(data);
+    				  //console.log(data);
     				   var response = jQuery.parseJSON(data);
 
     				   var events = response.events;
@@ -191,7 +198,7 @@ function searchEvent(ev){
 
                            for (var i in events){
                                if(events[i].products.length > 0){
-                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[i].even_status));
+                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[i].even_status, events[i].even_id));
                                 } else {
                                     ceateEvent(events[i].even_name, events[i].even_url)
                                 }
@@ -213,9 +220,12 @@ function noresults(searchtext){
     document.getElementById('noresults').innerHTML = "Es konnten keine Events mit dem Namen \"" + searchtext +"\" gefunden werden!";
 }    
    
-function proofEvent(i){
+function proofEvent(i, d){
     var ai = i.parentNode.parentNode;
     var url = ai.getAttribute("href");
+    var hidden = document.getElementById('event_id')
+    
+    hidden.value = d;
     
     ai.setAttribute("href", "#"+i.getAttribute("id"));
     
@@ -228,10 +238,11 @@ function proofEvent(i){
 
 function clickProofModal(url){
 	document.getElementById('proof-btn').click();
-	document.getElementById('send_code').setAttribute("href", url);
+	//var hidden = document.getElementById('event_url'). value = url;
+	document.getElementById('send_code').setAttribute("href", '#');
 }
     
-function createPic(prodfile, prodname, status){
+function createPic(prodfile, prodname, status, id){
     var count = 0;
     
     if(status == 2){
@@ -246,7 +257,7 @@ function createPic(prodfile, prodname, status){
         i.style.textAlign = "center";
         i.setAttribute("aria-hidden","true");
         i.setAttribute("id", "place"+count);
-        i.onclick = function(){proofEvent(this);};
+        i.onclick = function(){proofEvent(this, id);};
         count++;
         
         div.appendChild(i);

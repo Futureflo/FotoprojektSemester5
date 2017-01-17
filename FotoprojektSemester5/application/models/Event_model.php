@@ -52,6 +52,15 @@ class Event_model extends CI_Model {
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
+	public function checkCode($event_id, $code) {
+		$this->db->where ( 'even_id', $event_id );
+		$this->db->where ( 'even_password', $code );
+		$query = $this->db->get ( "event" );
+		if ($query) {
+			return true;
+		}
+		return false;
+	}
 	
 	// insert
 	function insert_event($data) {
