@@ -1,7 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/Product.php");
-class ShoppingCart extends CI_Controller {
+class Shoppingcart extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->library ( array (
@@ -40,7 +40,7 @@ class ShoppingCart extends CI_Controller {
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;
 		$data ['cart'] = $cart;
-		$this->load->template ( 'checkout/checkout_view', $data );
+		$this->load->template ( 'shoppingcart/overview', $data );
 	}
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
