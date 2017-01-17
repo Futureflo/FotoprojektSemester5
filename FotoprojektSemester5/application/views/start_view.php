@@ -123,8 +123,8 @@ echo form_open ( "Start/checkCode", '' )?>
 
 			<div class="modal-body">
 
-				<input type="text" class="form-control input-sm chat-input" placeholder="Bestätigungscode" id="event_code" name="event_code" />
-				<input type="hidden" value="" id="event_id" name="event_id">
+				<input type="text" class="form-control input-sm chat-input" placeholder="Bestätigungscode" id="event_code" name="event_code" /> <input
+					type="hidden" value="" id="event_id" name="event_id"> <input type="hidden" value="" id="shortcode" name="shortcode">
 			</div>
 
 
@@ -223,9 +223,12 @@ function noresults(searchtext){
 function proofEvent(i, d){
     var ai = i.parentNode.parentNode;
     var url = ai.getAttribute("href");
-    var hidden = document.getElementById('event_id')
+    var hidden = document.getElementById('event_id');
+    var shortcode = document.getElementById('shortcode');
     
     hidden.value = d;
+    
+    shortcode.value = url;
     
     ai.setAttribute("href", "#"+i.getAttribute("id"));
     
@@ -238,7 +241,6 @@ function proofEvent(i, d){
 
 function clickProofModal(url){
 	document.getElementById('proof-btn').click();
-	//var hidden = document.getElementById('event_url'). value = url;
 	document.getElementById('send_code').setAttribute("href", '#');
 }
     

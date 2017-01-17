@@ -23,13 +23,14 @@ class Start extends CI_Controller {
 	public function checkCode() {
 		$code = $this->input->post ( 'event_code' );
 		$event_id = $this->input->post ( 'event_id' );
+		$shortcode = $this->input->post ( 'shortcode' );
 		$this->load->model ( 'event_model' );
 		$checked = $this->event_model->checkCode ( $event_id, $code );
-		echo $checked;
+		
 		if ($checked) {
-			$this->load->template ( 'start_view' );
+			redirect ( $shortcode );
 		} else {
-			$this->load->template ( 'user/signup_view' );
+			$this->index ();
 		}
 	}
 }

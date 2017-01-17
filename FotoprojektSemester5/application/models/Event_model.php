@@ -56,7 +56,7 @@ class Event_model extends CI_Model {
 		$this->db->where ( 'even_id', $event_id );
 		$this->db->where ( 'even_password', $code );
 		$query = $this->db->get ( "event" );
-		if ($query) {
+		if ($query->result ()) {
 			return true;
 		}
 		return false;
