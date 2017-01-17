@@ -25,7 +25,7 @@
 			) );
 			?>
 				<div class="form-insert_product">
-				<input type="file" multiple name="dateiupload[]" /> <input type="submit" name="btn[upload]" class="btn btn-success" />
+<!-- 				<input type="file" multiple name="dateiupload[]" /> <input type="submit" name="btn[upload]" class="btn btn-success" /> -->
 			</div>
 <!-- 			</form> -->
 			
@@ -84,7 +84,7 @@
 	</div>
 </div>
 
-<button type="button" id="buttonModal" data-toggle="modal" data-target="#bestellungModal" style="display: none"></button>
+<button type="button" id="buttonModal" data-toggle="modal" data-target="#bestellungModal" style="display:none"></button>
 
 <script>
 
@@ -96,21 +96,21 @@ function openModal(product){
 	modalImg.setAttribute("src",product.prod_complete_filepath.replace("_thumb",""));
 	modalImg.setAttribute("data-src",product.prod_complete_filepath.replace("_thumb",""));
 
+// 	alert(product.prod_id);
+// 	alert(entry.prty_id);
+
 	removeOptions(document.getElementById("beschreibungSelect"));
-	
-// 	var select = document.getElementById("beschreibungSelect");
-// 	var length = select.options.length;
-// 	for (i = 0; i < length; i++) {
-// 	  select.options[i] = null;
-// 	}
-	
+		
 	var bestelloptionen = document.getElementById("beschreibungSelect");
 	product.product_variants.forEach(function(entry) {
 	   	var option = document.createElement("option");
 		option.text = entry.prty_description + " - " + entry.price.price_sum + "€";
+		option.id = product.prod_id;
+		option.prty_id = entry.prty_id;
 		bestelloptionen.add(option);
+		
 	});
-
+ 
 }
 
 function removeOptions(selectbox)
@@ -178,16 +178,26 @@ function removeOptions(selectbox)
 <!-- 									<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> -->
 <!-- 								</div>				 -->
 					
-							 <form action="<?php							
-									echo base_url ();
-									?>shoppingCart/insert/" method="post">
-					        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span>In den Warenkorb</button>
-				     		   </form>
+							<?php							
+							
+							 	echo form_open ( "ShoppingCart/insert", '',
+							 			'');
+// 							 			array (
+// 							 			'scpo_prod_id' => $product_variant->prod_id,
+// 							 			'scpo_prty_id' => $product_variant->prty_id,
+// 							 			'scpo_amount' => 1
+// 							 	) );
+							 	echo " <input type=\"submit\" name=\"In den Warenkorb\" value=\"In den Warenkorb\" class=\"btn btn-success\" />";
+							 	echo form_close ();
+							 
+							 ?>
+					
+				     		 
 						</div>	
 
-							<input type="hidden" class="form-control" id="scpo_amount" value="1">
-							<input type="hidden" class="form-control" id="scpo_prty_id" value="">
-							<input type="hidden" class="form-control" id="scpo_prod_id" value="">
+<!-- 							<input type="hidden" class="form-control" name="scpo_amount" value="1"> -->
+<!-- 							<input type="hidden" class="form-control" name="scpo_prty_id" value=""> -->
+<!-- 							<input type="hidden" class="form-control" name="scpo_prod_id" value=""> -->
 							
 
 					</div>

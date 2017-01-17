@@ -19,37 +19,14 @@
 				<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle" href="http://example.com"
 				id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 				<div class="dropdown-menu dropdown-menu-admin" aria-labelledby="supportedContentDropdown">
-					<a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/users/">Alle Benutzer</a> <a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/archivedUsers/">Benutzer Archiv</a> 
-					
-					
-					<a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/archivedEvents/">Event Archiv</a>
-					
-					
-					
-					<a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/events/">Alle Events</a> <a class="dropdown-item" href="<?php
-					
-					echo base_url ();
-					?>admin/printers/">Alle Druckereien (System)</a> <a class="dropdown-item"
-						href="<?php
-						
-						echo base_url ();
-						?>admin/product_types/">Alle Formate</a> <a class="dropdown-item" href="<?php
-						
-						echo base_url ();
-						?>admin/price_profiles/">Alle Preisprofile</a>
-
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/users/">Alle Benutzer</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/events/">Alle Events</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/printers/">Alle Druckereien (System)</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/product_types/">Alle Formate</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/price_profiles/">Alle Preisprofile</a>
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedUsers/">Benutzer Archiv</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedEvents/">Event Archiv</a>
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedPrinters/">Druckereien (System) Archiv</a> 
 				</div></li>
 
 				<li class="nav-item"><a class="nav-link" href="<?php
