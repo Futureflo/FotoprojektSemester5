@@ -78,7 +78,7 @@ class Login extends CI_Controller {
 								'user_name' => $uresult [0]->user_name,
 								'user_firstname' => $uresult [0]->user_firstname,
 								'user_status' => $uresult [0]->user_status,
-								'user_role' => $uresult [0]->user_role 
+								'user_role' => $uresult [0]->user_role_id
 						);
 						$this->session->set_userdata ( $sess_data );
 						redirect ( $_SERVER ['HTTP_REFERER'] );
