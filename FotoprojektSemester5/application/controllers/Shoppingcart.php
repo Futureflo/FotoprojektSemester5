@@ -21,9 +21,6 @@ class Shoppingcart extends CI_Controller {
 			$user_id = $this->session->userdata ( 'user_id' );
 
 		}
-		
-		redirect("id".$user_id);
-		
 			
 		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
 		if (! isset ( $cart )) {
