@@ -102,8 +102,11 @@ class DownloadManager extends CI_Controller {
 		return $download_password;
 	}
 	
+	/**
+	 * Method to start the Download of a zipfile. This Method checks the integrity of the download call and initiaties if positive.
+	 */
 	public function startDownload(){
-		echo "DEBUG: step into startDownload() /DEBUG <br>"; // DEBUG
+// 		echo "<br>DEBUG: step into startDownload() /DEBUG<br>"; // DEBUG
 		$this->load->model('Download_Password_model');
 		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 		$path_parts = pathinfo($url);
@@ -115,28 +118,45 @@ class DownloadManager extends CI_Controller {
 			$this->load->model('order_model');
 			$entry = $this->Download_Password_model->getDownloadPasswordEntryByPassword($path_parts['basename']);
 			$orderID = $entry[0]->dopa_orde_id;
-// 			echo $orderID ." <br>";
-			
-			echo "drei <br>";
 			$products = $this->order_model->getProductInformationByOrderId($orderID);
-			echo "vier <br>";
 
-// 			//	test
-// 			$ID = 39;
-// 			$this->load->model('order_model');
-// 			$this->load->helper('hash_helper');
-// 			$this->load->model('Download_Password_model');
-// 			$products = $this->order_model->getProductInformationByOrderId($ID);
-// 			echo $products[0]->prod_name ."<br>";
-// 			//	/test
-			
-			echo "bier <br>";
 			$downloadableZipFile = $this->zipDir($orderID, $products);
 			// path to new zipFile: echo $downloadableZipFile;
 		}// else $this->session->set_flashdata ( 'msg', 'Datensatz existiert nicht.' );
-		echo "DEBUG: step out startDownload() /DEBUG <br>"; // DEBUG
+// 		echo "<br>DEBUG: step out startDownload() /DEBUG<br>"; // DEBUG
 	}
 	
+
+	/**
+	 * Method to actually force the local machine to downlaod the file given im parameter as basename.extension
+	 * @param unknown $filePath (for example: PDF_Name.pdf).
+	 */
+	public function downloadFile($filePath) {
+// http://localhost/FotoprojektSemester5/FotoprojektSemester5/downloadmanager/downloadfile/Download_Zip_Archive_1_1_20161223140213.zip
+
+		while (ob_get_level()) {
+			ob_end_clean();
+		}
+		ob_start();
+		
+		$sourcePathPrefix = "ImagesDownloadZips/";
+		$conjunctedPath = join('/', array(trim($sourcePathPrefix, '/'), trim($filePath, '/')));
+		
+		// Header Informationen
+		header( "Content-Type: application/force-download" );
+// 		header('Content-type: application/zip');
+		header( "Content-Disposition: attachment; filename=" .$filePath );
+		header( "Content-Length: " . filesize($conjunctedPath) );
+		
+// 		$fp = fopen($conjunctedPath, "r");
+// 		fpassthru($fp);
+// 		fclose($fp);
+		
+		ob_flush();
+		ob_clean();
+		readfile($conjunctedPath);
+		exit;
+	}
 	
 	/**
 	 * cheks if the password already exists
@@ -169,7 +189,7 @@ class DownloadManager extends CI_Controller {
 	 * @param unknown $outZipFolder = Zielordner des Zip Archives.
 	 */
 	public function zipDir($orderID, array $productsArray) {
-		echo "step into zipDir() <br>"; // DEBUG
+// 		echo "<br>DEBUG: step into zipDir() /DEBUG<br>"; // DEBUG
 		// TODO: checken ob ziel und quellordner existieren
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
@@ -207,8 +227,8 @@ class DownloadManager extends CI_Controller {
 		}
 		// Zip Archiv schließen
 		$zipArchive->close();
-		return $outZipPath;
-		echo "step out zipDir() <br>"; // DEBUG
+// 		echo "<br>DEBUG: step out zipDir() /DEBUG<br>"; // DEBUG
+		return $outZipPath;	
 	}
 	
 
@@ -228,16 +248,20 @@ class DownloadManager extends CI_Controller {
 	}
 	
 	public function test(){
-		$this->load->model('order_model');
-		$this->load->helper('hash_helper');
-		$this->load->model('Download_Password_model');
-		$products = $this->order_model->getProductInformationByOrderId(39);
-		echo $products[0]->prod_name;
-// 		$this->zipDir(1, $products);
-// 		$this->createDownloadLink(1);
-// 		$this->createDownloadLink(39);
-		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-		echo $url;
+// 		$this->load->model('order_model');
+// 		$this->load->helper('hash_helper');
+// 		$this->load->model('Download_Password_model');
+// 		$products = $this->order_model->getProductInformationByOrderId(39);
+// 		echo $products[0]->prod_name;
+// // 		$this->zipDir(1, $products);
+// // 		$this->createDownloadLink(1);
+// // 		$this->createDownloadLink(39);
+// 		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+// 		echo $url;
+		$sourcePathPrefix = "/hallo/abc/de/";
+		$filePath = "/fg/x.php";
+		$conjunctedPath = join('/', array(trim($sourcePathPrefix, '/'), trim($filePath, '/')));
+		echo $conjunctedPath;
 	}
 	
 }
