@@ -469,12 +469,14 @@ class CI_Loader {
 		) );
 	}
 	public function template($template_name, $vars = array(), $return = FALSE) {
-		$userrolle = lh_getUser () ["user_role"];
+		
 		if ($return) :
 			
 			$content = $this->view ( 'general/header_view', $vars, $return );
 			
 			if (lh_isUserLoggedin ()) {
+			$userrolle = $this->session->userdata("user_role");
+			
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :
@@ -495,6 +497,8 @@ class CI_Loader {
 			$this->view ( 'general/header_view', $vars );
 			
 			if (lh_isUserLoggedin ()) {
+			$userrolle = $this->session->userdata("user_role");
+			
 				// TODO: Benutzerrollenspezifische Navbar laden
 				switch ($userrolle) {
 					default :

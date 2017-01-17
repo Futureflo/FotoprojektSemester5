@@ -27,7 +27,7 @@
 					http://www.snap-gallery.de .<br />
 					<br /> <strong>(2) Im Falle des Vertragsschlusses kommt der Vertrag
 						mit<br />
-					<br /> FPS5<br /> Klaus Muster<br /> Beispielstraße 42<br />
+					<br /> SnapUp<br /> Klaus Muster<br /> Beispielstraße 42<br />
 						D-98765 Musterstadt<br /> Registernummer 12131415<br />
 						Registergericht Amtsgericht Musterstadt<br />
 					<br /> zustande.
@@ -63,8 +63,8 @@
 					<br /> (5) Speicherung des Vertragstextes bei Bestellungen über
 					unseren Internetshop: Wir speichern den Vertragstext und senden
 					Ihnen die Bestelldaten und unsere AGB per E-Mail zu. Die AGB können
-					Sie jederzeit auch unter
-					http://www.snap-gallery.de/termsandconditions/ einsehen. <br />
+					Sie jederzeit auch unter <a href="http://www.snap-gallery.de/termsandconditions/">
+					http://www.snap-gallery.de/termsandconditions/</a> einsehen. <br />
 					<br />
 				</p>
 				<p>
@@ -118,9 +118,9 @@
 					<br /> Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von
 					Gründen diesen Vertrag zu widerrufen.<br /> Die Widerrufsfrist
 					beträgt vierzehn Tage, ab dem Tag des Vertragsabschlusses.<br />
-					<br /> Um Ihr Widerrufsrecht auszuüben, müssen Sie uns<br /> FPS5<br />
+					<br /> Um Ihr Widerrufsrecht auszuüben, müssen Sie uns<br /> SnapUp<br />
 					Klaus Muster<br /> Beispielstraße 42<br /> D-98765 Musterstadt<br />
-					E-Mail shop@fps5.com<br /> Telefax 05123 45678910<br /> mittels
+					E-Mail shop@snap-gallery.de<br /> Telefax 05123 45678910<br /> mittels
 					einer eindeutigen Erklärung (z.B. ein mit der Post versandter
 					Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen Vertrag
 					zu widerrufen, informieren. Sie können dafür das beigefügte
@@ -156,8 +156,8 @@
 					<strong>§7 Widerrufsformular<br />Muster-Widerrufsformular
 					</strong><br /> (Wenn Sie den Vertrag widerrufen wollen, dann
 					füllen Sie bitte dieses Formular aus und senden Sie es zurück.)<br />
-					An:<br /> FPS5<br /> Klaus Muster<br /> Beispielstraße 42<br />
-					D-98765 Musterstadt<br /> E-Mail shop@fps5.com<br />
+					An:<br /> SnapUp<br /> Klaus Muster<br /> Beispielstraße 42<br />
+					D-98765 Musterstadt<br /> E-Mail shop@snap-gallery.de<br />
 					<br /> Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*)
 					abgeschlossenen Vertrag über den Kauf der folgenden Waren (*)/die
 					Erbringung der folgenden Dienstleistung (*)<br />
@@ -192,7 +192,7 @@
 						Beanstandungen steht Ihnen werktags von 9:00 Uhr bis 17:30 Uhr
 						unter<br />
 					<br /> Telefon: 05123 45678911<br /> Telefax: 05123 45678912<br />
-						E-Mail: service@fps5.com<br /> zur Verfügung.
+						E-Mail: service@snap-gallery.de<br /> zur Verfügung.
 					</strong>
 				</p>
 			</div>
