@@ -469,7 +469,7 @@ class CI_Loader {
 		) );
 	}
 	public function template($template_name, $vars = array(), $return = FALSE) {
-		$userrolle = lh_getUser () ["user_role_id"];
+		$userrolle = lh_getUser () ["user_role"];
 		if ($return) :
 			
 			$content = $this->view ( 'general/header_view', $vars, $return );
