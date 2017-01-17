@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/UserRole.php");
 include_once (dirname ( __FILE__ ) . "/Product.php");
-class ShoppingCart extends CI_Controller {
+class Shoppingcart extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model('user_model');
@@ -86,6 +86,7 @@ class ShoppingCart extends CI_Controller {
 		
 		if ($user_id == Null){			
 			$this->creatAnonymousUser();
+			$user_id = $this->session->userdata ( 'user_id' );
 		}		
 		
 		// // Shoppingcart-Kopf suchen/anlegen
