@@ -13,8 +13,8 @@
 				<tr>
 					<th>Bezeichnung</th>
 					<th>Typ</th>
-					<th>Breite</th>
-					<th>Höhe</th>
+<!-- 					<th>Breite</th> -->
+<!-- 					<th>Höhe</th> -->
 					<th>Fotograf</th>
 				</tr>
 			</thead>
@@ -36,13 +36,13 @@
 				echo "</select>";
 				echo "</td>";
 				
-				echo "<td>";
-				echo "<input id=\"prty_width\" name=\"prty_width\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
-				echo "</td>";
+				// echo "<td>";
+				// echo "<input id=\"prty_width\" name=\"prty_width\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
+				// echo "</td>";
 				
-				echo "<td>";
-				echo "<input id=\"prty_height\" name=\"prty_height\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
-				echo "</td>";
+				// echo "<td>";
+				// echo "<input id=\"prty_height\" name=\"prty_height\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
+				// echo "</td>";
 				
 				echo "<td>";
 				echo "<select name=\"prty_user_id\">";
@@ -91,8 +91,8 @@
 											}
 									}
 									
-									echo "<td>" . $pt->prty_width . "</td>";
-									echo "<td>" . $pt->prty_height . "</td>";
+									// echo "<td>" . $pt->prty_width . "</td>";
+									// echo "<td>" . $pt->prty_height . "</td>";
 									echo "<td>" . $pt->user_name . "</td>";
 									
 									if ($pt->user_flag == 1)
