@@ -53,17 +53,10 @@ class Shoppingcart extends CI_Controller {
 		
 	}
 	// if costumer is not logged in -> create anonymous user
-<<<<<<< HEAD
-	function creatAnonymousUser(){
-
-		// insert AnonymousUser in db
-		$data = array ('user_role_id' => UserRole::AnonymousUser );
-=======
 	function creatAnonymousUser(){
 
 		// insert AnonymousUser in db
 		$data = array ('user_role_id' => UserRole::AnonymousUser);
->>>>>>> origin/master
 		$user_id = $this->user_model->insert_user ( $data );
 		// set session
 		$sess_data = array (
