@@ -13,15 +13,14 @@ class Shoppingcart extends CI_Controller {
 		$this->load->model ( 'shoppingcart_model' );
 	}
 	public function index() {
-		$this->load->model ( 'shoppingcart_model' );
 		
 		$user_id = $this->session->userdata ( 'user_id' );
 		// ceck if user is logged in 
 		if ($user_id == Null){
 			$this->creatAnonymousUser();
 			$user_id = $this->session->userdata ( 'user_id' );
+
 		}
-		
 			
 		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
 		if (! isset ( $cart )) {
@@ -54,12 +53,18 @@ class Shoppingcart extends CI_Controller {
 		
 	}
 	// if costumer is not logged in -> create anonymous user
+<<<<<<< HEAD
 	function creatAnonymousUser(){
 
 		// insert AnonymousUser in db
 		$data = array ('user_role_id' => UserRole::AnonymousUser );
+=======
+	function creatAnonymousUser(){
+
+		// insert AnonymousUser in db
+		$data = array ('user_role_id' => UserRole::AnonymousUser);
+>>>>>>> origin/master
 		$user_id = $this->user_model->insert_user ( $data );
-		
 		// set session
 		$sess_data = array (
 				'login' => FALSE,
@@ -67,6 +72,7 @@ class Shoppingcart extends CI_Controller {
 		);
 		$this->session->set_userdata ( $sess_data );
 
+		
 	}
 	
 	function insert() {
