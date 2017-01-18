@@ -88,4 +88,42 @@ background-color: #000000;
 {
 background-color: #CCCCCC;
 }
+.mypictureborder { 
+   border-style:solid;
+ }
 
+.checkout_border{
+    border: solid #f7f7f9 .2rem;
+    padding: 10px;
+
+}
+.checkout_overviewelements_connector{
+    height: 1px;
+    width: 74%;
+    left: 13%;
+    background-color: #000;
+    position: absolute;
+    z-index: -1;
+    top: 15px;
+
+}
+.checkout_overviewelement_left{ float: left; width: 25%; }
+.checkout_overviewelement_middle{ float: left; width: 50%;}
+.checkout_overviewelement_right{ float: left; width: 25%;}
+.checkout_overviewelement{
+    width: 30px; 
+    height: 30px; 
+    border: #000 solid 1px; 
+    background-color: #FFF;
+    text-align: center;
+    margin: 0 auto;
+}
+.checkout_overviewelement_text{
+    text-align: center;
+}
+.checkout_overviewelement_selected{
+    background-color: #ededed;
+}
+.checkout_overviewelement_active{
+    background-color: #b5b5b5;
+}

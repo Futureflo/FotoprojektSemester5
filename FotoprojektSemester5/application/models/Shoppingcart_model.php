@@ -46,6 +46,9 @@ class Shoppingcart_model extends CI_Model {
 		$this->db->where ( 'scpo_prty_id', $scpo_prty_id );
 		$query = $this->db->get ( 'shopping_cart_position' );
 		$return = $query->result ();
+		$rowcount = $query->num_rows();
+		if($rowcount == 0)
+			return null;
 		return $return [0];
 	}
 	

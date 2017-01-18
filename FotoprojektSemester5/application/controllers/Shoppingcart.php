@@ -72,6 +72,17 @@ class Shoppingcart extends CI_Controller {
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
 		$scpo_prty_id = $this->input->post ( 'scpo_prty_id' );
+
+		//MB: special from single_event_view 
+		if(isset($_POST['beschreibungSelect'])){			
+			$parts = explode("-", $_POST['beschreibungSelect']);
+			if(count($parts) == 2){
+				$scpo_prod_id = $parts[0];
+				$scpo_prty_id = $parts[1];
+			}
+		}
+
+
 		$scpo_amount = $this->input->post ( 'scpo_amount' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$shca_id = 0;
@@ -119,7 +130,8 @@ class Shoppingcart extends CI_Controller {
 		// Jetzt den Warenkorb aktualisieren
 		
 		// Testseite wieder aufrufen
-		redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
+		if(isset($_POST['beschreibungSelect']) == false) //if beschriebungsSelect isset don't redirect (from single_event_view)
+			redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
 	
 	}
 	public static function getSingleShoppingCartById($shca_id) {
