@@ -158,26 +158,6 @@ class User extends CI_Controller {
 		$this->logout ();
 	}
 	
-	// public function userProfile(){
-	// $id = $this->session->userdata('user_id');
-	
-	// $user = $this->order_model->get_user_by_id($user_id);
-	// $address = $this->order_model->get_address_by_id($user_id);
-	
-	// $data['user_title'] = $user[0]->user_title;
-	// $data['user_name'] = $user[0]->user_name;
-	// $data['user_firstname'] = $user[0]->user_firstname;
-	// $data['user_email'] = $user[0]->user_email;
-	// $data['user_birthday'] = $user[0]->user_birthday;
-	
-	// $data['adre_name'] = $user[0]->adre_name;
-	// $data['adre_street'] = $user[0]->adre_street;
-	// $data['adre_zip'] = $user[0]->adre_zip;
-	// $data['adre_city'] = $user[0]->adre_city;
-	
-	// $this->load->view('user/profile_view', $data);
-	
-	// }
 	function logout() {
 		// destroy session
 		$data = array (

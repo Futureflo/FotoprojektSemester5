@@ -66,9 +66,25 @@ class Login extends CI_Controller {
 					$hashpw = generate_hash ( $user_salt, $password, $algo );
 					$user_password = $uresult [0]->user_password;
 					
-					if (strcmp ( $hashpw, $user_password ) == 0) {
+					if (strcmp ( $hashpw, $user_password ) == 0) {						
 						// reset password attemps
 						$this->user_model->update_userPasswordAttempt ( $email, 0 );
+						
+						//check shoppingcart and transfer positions
+						$user_id = $this->session->userdata ( 'user_id' );
+						if($user_id != null){
+							$this->load->model ( 'shoppingcart_model' );								
+							$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
+							
+							//destroy AnonymousUser session
+							$data = array (
+									'login' => '',
+									'user_id' => '',
+									'user_role' => ''
+							);
+							$this->session->unset_userdata ( $data );
+							$this->session->sess_destroy ();
+						}
 						
 						// set session
 						$sess_data = array (
