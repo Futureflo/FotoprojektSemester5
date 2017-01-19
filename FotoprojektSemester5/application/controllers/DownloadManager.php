@@ -264,8 +264,8 @@ class DownloadManager extends CI_Controller {
 		$zipArchive->close();
 // 		echo "<br>DEBUG: step out zipDir() /DEBUG<br>"; // DEBUG
 
-		return $outZipPath;	
-// 		return $zipFileName;
+// 		return $outZipPath;	
+		return $zipFileName;
 	}
 	
 
@@ -310,6 +310,18 @@ class DownloadManager extends CI_Controller {
 		
 // 		$this->downloadFile($zipPath);
 
+	}
+	
+	public function test(){
+		echo "<br>testing 123 <br>";
+		$this->load->model('order_model');
+		$this->load->helper('hash_helper');
+		$this->load->model('Download_Password_model');
+		
+// 		$downloadLink = $this->createDownloadLink(39);
+// 		$this->sendDownloadEmail("Severin.Klug@gmx.de", $downloadLink);
+		
+// 		downloadFile("Download_Zip_Archive_39_20170119103947.zip");
 	}
 	
 }
