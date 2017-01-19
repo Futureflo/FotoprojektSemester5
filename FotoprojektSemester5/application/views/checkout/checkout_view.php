@@ -9,65 +9,81 @@
 <div class="container">
 	<div class="row" id="cart_div">	
 		<?php
-		$shoppingcart_positions = $cart->shoppingcart_positions;
-		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
-			
-			$price = $shoppingcart_position->product_variant->price ['price_sum'];
-			$amount = $shoppingcart_position->scpo_amount;
-			$prodname = $shoppingcart_position->product_variant->prod_name;
-			$size = $shoppingcart_position->product_variant->prty_description;
-			$prod_filepath = $shoppingcart_position->product_variant->prod_filepath;
-			
-			// Event zu Produkt-Variante ermitteln
-			$even_id = $shoppingcart_position->product_variant->prod_even_id;
-			$event = Event::getSingleEventById ( $even_id );
-			
-			echo form_open_multipart ( "Shoppingcart/delete", array (
-					'prod_id' => $shoppingcart_position->scpo_prod_id,
-					'prod_type' => $shoppingcart_position->scpo_prty_id,
-					'amount' => $amount,
-					'cart_id' => $shcaid 
-			) );
-			
-			// Für jede Warenkorpostion eine neue HTML-Zeile
-			// echo '<div class="row"> ';
-			
-			// Spalte 1: Bild
-			echo '<div class="col-sm-2 col-xs-6">';
-			
-			echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . ">";
-			echo '</div>';
-			
-			// Spalte 2: Produktinfo
-			echo '<div class="col-sm-4 col-xs-6">';
-			echo '<ul style="list-style-type: none">';
-			echo '<li><h6>' . $prodname . '</h6></li>';
-			echo '<li>Veranstaltung: ' . $event->even_name . '</li>';
-			echo '<li>Größe: ' . $size . '</li>';
-			echo '<li>Digital/Analog</li>';
-			echo '</div>';
-			
-			// Spalte 3: Preis
-			echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
-			
-			// Spalte 4: Menge
-			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
-			echo '<div class="form-group col-sm-2">';
-			echo "<p>" . '<input type="text" maxLength="3" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
-			echo '<input type="hidden" class="one" value=' . $price . '>';
-			echo "</div>";
-			
-			// Spalte 5: Button
-			echo '<div class="col-sm-1">';
-			echo '<button class="btn btn-danger btn-sm">';
-			echo '<i class="fa fa-trash-o"></i>';
-			echo '</button>';
-			echo '</div>';
-			
-			// Ende der HTML-Zeile
-			// echo '</div>';
-			
-			echo '</form>';
+		if (isset ( $cart->shoppingcart_positions )) {
+			$shoppingcart_positions = $cart->shoppingcart_positions;
+			foreach ( $shoppingcart_positions as $shoppingcart_position ) {
+				
+				$price = $shoppingcart_position->product_variant->price ['price_sum'];
+				$amount = $shoppingcart_position->scpo_amount;
+				$prodname = $shoppingcart_position->product_variant->prod_name;
+				$size = $shoppingcart_position->product_variant->prty_description;
+				$prod_filepath = $shoppingcart_position->product_variant->prod_filepath;
+				
+				// Event zu Produkt-Variante ermitteln
+				$even_id = $shoppingcart_position->product_variant->prod_even_id;
+				$event = Event::getSingleEventById ( $even_id );
+				
+				// Für jede Warenkorpostion eine neue HTML-Zeile
+				echo '<div class="row"> ';
+				
+				// Spalte 1: Bild
+				echo '<div class="col-sm-2 col-xs-6">';
+				
+				echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . " style=\"width:auto ;height:auto; display: block;\">";
+				echo '</div>';
+				
+				// Spalte 2: Produktinfo
+				echo '<div class="col-sm-4 col-xs-6">';
+				echo '<ul style="list-style-type: none">';
+				echo '<li><h6>' . $prodname . '</h6></li>';
+				echo '<li>Veranstaltung: ' . $event->even_name . '</li>';
+				echo '<li>Größe: ' . $size . '</li>';
+				echo '<li>Digital/Analog</li>';
+				echo '</div>';
+				
+				// Spalte 3: Preis
+				echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
+				
+				// Spalte 4: Menge
+				echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
+				echo '<div class="form-group col-sm-2">';
+				echo "<p>" . '<input type="text" maxLength="3" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
+				echo '<input type="hidden" class="one" value=' . $price . '>';
+				echo "</div>";
+				
+				// Spalte 5: Button
+				echo form_open ( "Shoppingcart/delete", '', array (
+						'scpo_prod_id' => $shoppingcart_position->scpo_prod_id,
+						'scpo_prty_id' => $shoppingcart_position->scpo_prty_id,
+						'scpo_amount' => $amount,
+						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
+				) );
+				
+				echo '<div class="col-sm-1">';
+				echo '<button class="btn btn-danger btn-sm">';
+				echo '<i class="fa fa-trash-o"></i>';
+				echo '</button>';
+				echo '</div>';
+				
+				// // Spalte 6: aktualisieren
+				// echo form_open ( "Shoppingcart/delete", '', array (
+				// 'scpo_prod_id' => $shoppingcart_position->scpo_prod_id,
+				// 'scpo_prty_id' => $shoppingcart_position->scpo_prty_id,
+				// 'scpo_amount' => $amount,
+				// 'scpo_shca_id' => $shoppingcart_position->scpo_shca_id
+				// ) );
+				
+				// echo '<div class="col-sm-1">';
+				// echo '<button class="btn btn-success btn-sm">';
+				// echo '<i class="fa fa fa-check"></i>';
+				// echo '</button>';
+				// echo '</div>';
+				
+				// Ende der HTML-Zeile
+				echo '</div>';
+				
+				echo form_close ();
+			}
 		}
 		?>
 		</div>
