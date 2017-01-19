@@ -1,6 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/User.php");
+include_once (dirname ( __FILE__ ) . "/Shoppingcart.php");
 class Login extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
@@ -73,7 +74,7 @@ class Login extends CI_Controller {
 						//check shoppingcart and transfer positions
 						$user_id = $this->session->userdata ( 'user_id' );
 						if($user_id != null){
-							$this->load->model ( 'shoppingcart_model' );								
+							$this->load->model ( 'shoppingcart_model' );
 							$shoppingcart_positionsOld = $this->shoppingcart_model->getShoppingCartPositionsByUserId ( $user_id );
 								
 							
@@ -98,21 +99,20 @@ class Login extends CI_Controller {
 								'user_role' => $uresult [0]->user_role_id
 						);
 						$this->session->set_userdata ( $sess_data );
-						
-// 						if ($shoppingcart_positionsOld != NULL){
-// 							$shoppingcart_positionsNew = $this->shoppingcart_model->getShoppingCartPositions( $user_id );
-// 							$shca_idNew = $shoppingcart_position->shca_id;
+						// transfer shoppingcart position from annonymouse user to logged in user
+						if ($shoppingcart_positionsOld != NULL){
+							$user_id = $this->session->userdata ( 'user_id' );
+							$cartNew = $this->shoppingcart_model->getShoppingCart( $user_id );
+							$shca_idNew = $cartNew->shca_id;
+	
+							foreach ( $shoppingcart_positionsOld as $shoppingcart_positionOld ) {
+								$prod_idOld = $shoppingcart_positionOld->scpo_prod_id;
+								$prty_idOld = $shoppingcart_positionOld->scpo_prty_id;
+								$scpo_amountOld = $shoppingcart_positionOld->scpo_amount;
 								
-							
-// 							foreach ( $shoppingcart_positionsOld as $shoppingcart_positionOld ) {
-// 								$prod_idOld = $shoppingcart_positionOld->scpo_prod_id;
-// 								$prty_idOld = $shoppingcart_positionOld->scpo_prty_id;
-// 								$scpo_amountOld = $shoppingcart_positionOld->scpo_amount;
-								
-// 								Shoppingcart::insert_update_positon($shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld);
-// 							}					
-// 						}
-						
+								Shoppingcart::insert_update_positon($shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld);
+							}					
+						}						
 						redirect ( $_SERVER ['HTTP_REFERER'] );
 					} else {
 						
