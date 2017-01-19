@@ -55,13 +55,11 @@
 				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
 				echo '<input type="hidden" name="amount_hidden" value="">';
+				echo '<input type="hidden" name="scpo_prod_id" value=' . $shoppingcart_position->scpo_prod_id . '>';
+				echo '<input type="hidden" name="scpo_prty_id" value=' . $shoppingcart_position->scpo_prty_id . '>';
+				echo '<input type="hidden" name="scpo_shca_id" value=' . $shoppingcart_position->scpo_shca_id . '>';
 				echo "</div>";
 				
-				array (
-						'scpo_prod_id' => $shoppingcart_position->scpo_prod_id,
-						'scpo_prty_id' => $shoppingcart_position->scpo_prty_id,
-						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
-				);
 				echo form_close ();
 				
 				// Spalte 5: Button
