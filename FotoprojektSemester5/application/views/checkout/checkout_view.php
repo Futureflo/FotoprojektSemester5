@@ -2,10 +2,12 @@
 <section class="jumbotron text-xs-center">
 	<div class="container">
 		<h1 class="jumbotron-heading">Ihr Warenkorb</h1>
-		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
+		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer
+			Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
 	</div>
 </section>
-<div class="container">	
+<div class="container">
+	<div class="row" id="cart_div">	
 		<?php
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
@@ -20,8 +22,15 @@
 			$even_id = $shoppingcart_position->product_variant->prod_even_id;
 			$event = Event::getSingleEventById ( $even_id );
 			
+			echo form_open_multipart ( "Shoppingcart/delete", array (
+					'prod_id' => $shoppingcart_position->scpo_prod_id,
+					'prod_type' => $shoppingcart_position->scpo_prty_id,
+					'amount' => $amount,
+					'cart_id' => $shcaid 
+			) );
+			
 			// Für jede Warenkorpostion eine neue HTML-Zeile
-			echo '<div class="row"> ';
+			// echo '<div class="row"> ';
 			
 			// Spalte 1: Bild
 			echo '<div class="col-sm-2 col-xs-6">';
@@ -44,7 +53,7 @@
 			// Spalte 4: Menge
 			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
 			echo '<div class="form-group col-sm-2">';
-			echo "<p>" . '<input type="text" min="1" max="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
+			echo "<p>" . '<input type="text" maxLength="3" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
 			echo '<input type="hidden" class="one" value=' . $price . '>';
 			echo "</div>";
 			
@@ -56,10 +65,13 @@
 			echo '</div>';
 			
 			// Ende der HTML-Zeile
-			echo '</div>';
+			// echo '</div>';
+			
+			echo '</form>';
 		}
 		?>
-		<hr>
+		</div>
+	<hr>
 	<div class="row">
 		<div class="col-sm-0 col-s-0"></div>
 		<div class="col-sm-2 col-xs-10">
@@ -76,11 +88,11 @@
 			<h6>
 				<i id="mehrwertsteuer"></i>€
 			</h6>
-	
+
 			<h6>
 				<i id="versandkosten"></i>€
-			</h6> 
-	
+			</h6>
+
 			<h5>
 				<i id="gesamtpreis"></i>€
 			</h5>
@@ -93,7 +105,8 @@
 			echo form_open ( "Checkout", '' );
 		}
 		?>
-<button name="submit" type="submit" class="btn btn-success btn-block btn-md"
+<button name="submit" type="submit"
+			class="btn btn-success btn-block btn-md" id="checkout-btn"
 			<?php
 			
 			if (! $this->session->userdata ( 'login' )) {
@@ -112,14 +125,16 @@
 
 
 <!-- Modal -->
-<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1"
+	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -127,8 +142,10 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-8 offset-sm-3">
-						<a onclick="login()" id="login_from_modal" href="#" class="btn btn-primary">Anmelden</a> <a href="<?php
-						echo base_url ()?>checkout"
+						<a onclick="login()" id="login_from_modal" href="#"
+							class="btn btn-primary">Anmelden</a> <a
+							href="<?php
+							echo base_url ()?>checkout"
 							class="btn btn-secondary">Als Gast bestellen</a>
 					</div>
 				</div>
@@ -145,7 +162,15 @@
         document.getElementById("login-btn").click();
     }
 
-
+    function minmax(value, min, max) 
+    {
+        if(parseInt(value) < min || isNaN(parseInt(value))) 
+            return 1; 
+        else if(parseInt(value) > max) 
+            return 1000; 
+        else return value;
+    }
+    
     function nettopreis() {
         var sum = document . getElementById ( "gesamtpreis" ) . innerHTML;
         var netto = document.getElementById("nettopreis"); 
@@ -166,8 +191,20 @@
     
     $(document).ready(function(){
 	   articleSum();
+		checkCart();
 	});
-    
+
+function checkCart(){
+	var button = document.getElementById('checkout-btn');
+	var div = document.getElementById('cart_div');
+	console.log('start');
+	console.log(div.childElementCount);
+	if(div.childElementCount <= 0){
+		button.disabled = "true";
+		console.log('dis');
+	}
+}
+      
 function articleSum(){
     var price = document.getElementsByClassName("aktuellerpreis");
     

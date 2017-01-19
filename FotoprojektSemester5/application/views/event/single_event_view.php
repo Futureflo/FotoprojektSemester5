@@ -260,9 +260,9 @@ $("#addToCartForm").submit(function(e) {
 
 // hide user upload and picture
 $(document).ready(function(){ 
-	$("#private").fadeOut("slow");
+	$("#private").hide();
 	if(userrole == 2){
-		$("#upload_div").fadeIn("slow");
+		$("#upload_div").hide();
 	}
 });
 
