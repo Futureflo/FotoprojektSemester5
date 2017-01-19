@@ -2,11 +2,12 @@
 <section class="jumbotron text-xs-center">
 	<div class="container">
 		<h1 class="jumbotron-heading">Ihr Warenkorb</h1>
-		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
+		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer
+			Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
 	</div>
 </section>
-<div class="container">	
-	<div class="row" id="cart_div">
+<div class="container">
+	<div class="row" id="cart_div">	
 		<?php
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
@@ -20,6 +21,13 @@
 			// Event zu Produkt-Variante ermitteln
 			$even_id = $shoppingcart_position->product_variant->prod_even_id;
 			$event = Event::getSingleEventById ( $even_id );
+			
+			echo form_open_multipart ( "Shoppingcart/delete", array (
+					'prod_id' => $shoppingcart_position->scpo_prod_id,
+					'prod_type' => $shoppingcart_position->scpo_prty_id,
+					'amount' => $amount,
+					'cart_id' => $shcaid 
+			) );
 			
 			// Für jede Warenkorpostion eine neue HTML-Zeile
 			// echo '<div class="row"> ';
@@ -58,10 +66,12 @@
 			
 			// Ende der HTML-Zeile
 			// echo '</div>';
+			
+			echo '</form>';
 		}
 		?>
 		</div>
-		<hr>
+	<hr>
 	<div class="row">
 		<div class="col-sm-0 col-s-0"></div>
 		<div class="col-sm-2 col-xs-10">
@@ -78,11 +88,11 @@
 			<h6>
 				<i id="mehrwertsteuer"></i>€
 			</h6>
-	
+
 			<h6>
 				<i id="versandkosten"></i>€
-			</h6> 
-	
+			</h6>
+
 			<h5>
 				<i id="gesamtpreis"></i>€
 			</h5>
@@ -95,7 +105,8 @@
 			echo form_open ( "Checkout", '' );
 		}
 		?>
-<button name="submit" type="submit" class="btn btn-success btn-block btn-md" id="checkout-btn"
+<button name="submit" type="submit"
+			class="btn btn-success btn-block btn-md" id="checkout-btn"
 			<?php
 			
 			if (! $this->session->userdata ( 'login' )) {
@@ -114,14 +125,16 @@
 
 
 <!-- Modal -->
-<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1"
+	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -129,8 +142,10 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-8 offset-sm-3">
-						<a onclick="login()" id="login_from_modal" href="#" class="btn btn-primary">Anmelden</a> <a href="<?php
-						echo base_url ()?>checkout"
+						<a onclick="login()" id="login_from_modal" href="#"
+							class="btn btn-primary">Anmelden</a> <a
+							href="<?php
+							echo base_url ()?>checkout"
 							class="btn btn-secondary">Als Gast bestellen</a>
 					</div>
 				</div>
