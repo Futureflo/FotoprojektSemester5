@@ -180,7 +180,7 @@ class Product extends CI_Controller {
 				//
 			} else {
 				// error
-				$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
+				$this->session->set_flashdata ( 'upload_file', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
 			}
 		}
 		
