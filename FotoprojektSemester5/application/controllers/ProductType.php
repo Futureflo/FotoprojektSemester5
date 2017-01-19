@@ -93,10 +93,10 @@ class ProductType extends CI_Controller {
 }
 abstract class ProductPrintType {
 	const undefined = 0;
-	const print = 1;
+	const prints = 1;
 	const download = 2;
-	const mixed = 3;
-	const article = 4;
+	const mixed = 2;
+	const article = 2;
 }
 abstract class ProductTypeStatus {
 	const undefined = 0;

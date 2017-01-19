@@ -14,7 +14,7 @@
 					ausdrücklich mit der Erhebung, der Verarbeitung und der Nutzung
 					Ihrer personenbezogenen Daten durch die Webseite einverstanden.
 					Sollten Sie Fragen in Bezug auf diese Richtlinie haben, wenden Sie 
-					sich bitte an unseren Ansprechpartner klausmustermann@fps5.de.</p>
+					sich bitte an unseren Ansprechpartner klausmustermann@snap-gallery.de.</p>
 				<p>
 					<strong>1. Nutzer</strong><br /> <br /> Die Nutzung dieser
 					Webseite setzt die Volljährigkeit des Nutzers voraus. Minderjährige
@@ -88,7 +88,7 @@
 				</p>
 				<p>
 					<strong>4. Dritte Parteien</strong><br /> <br /> Diese Webseite
-					nutzt den Service von Drittfirmen, wie Paypal für Zahlungen auf der FPS5
+					nutzt den Service von Drittfirmen, wie Paypal für Zahlungen auf der SnapUp
 					Webseite. Zudem kann unsere Seite gelegentlich Links zu anderen
 					Seiten enthalten. Durch das Anklicken dieser Links verlassen Sie
 					die Webseite. Diese Webseite übernimmt keinerlei Haftung für den
@@ -169,7 +169,7 @@
 				</p>
 				<p>
 					<strong>7. Optionen</strong><br /> <br /> Sie können die von Ihnen
-					bei der Registrierung auf der FPS5 Webseite gemachten Angaben
+					bei der Registrierung auf der SnapUp Webseite gemachten Angaben
 					jederzeit im Mitgliedsbereich unter "Profil" einsehen und
 					korrigieren. Sie können im Profil auch einstellen, ob Sie unseren
 					Newsletter oder andere Service-Informationen erhalten möchten oder
@@ -178,7 +178,7 @@
 					FPS5 hat jedoch das Recht, Ihnen weiterhin Nachrichten zu senden,
 					um Sie über wichtige Änderungen zu informieren, inklusive und
 					uneingeschränkt Nachrichten zu veränderten Dienstleistungsbereichen
-					oder insbesondere Nachrichten zu Änderungen von FPS5 Richtlinien
+					oder insbesondere Nachrichten zu Änderungen von SnapUp Richtlinien
 					("Erforderliche Hinweise"), Nachrichten bei technischen Störungen
 					oder Nichterreichbarkeit der Webseite. Um auch den Empfang der
 					Erforderlichen Hinweise zu unterbinden, ist die Schließung des
@@ -187,8 +187,8 @@
 				<p>
 					<strong>8. Offenlegungspflichten</strong><br /> <br /> Auf
 					Verlangen von befugten Behörden oder resultierend aus gesetzlichen
-					Vorschriften ist FPS5 verpflichtet, personenbezogene Daten
-					offenzulegen. Ist dieses der Fall, behält sich FPS5 das Recht vor,
+					Vorschriften ist SnapUp verpflichtet, personenbezogene Daten
+					offenzulegen. Ist dieses der Fall, behält sich SnapUp das Recht vor,
 					angefragte Daten gemäß den gesetzlichen Vorschriften zur Verfügung
 					zu stellen, einschließlich und ohne jede Einschränkung durch
 					Gerichtsbeschluss, Haftbefehl, Strafandrohung erwirkte oder für
@@ -196,19 +196,19 @@
 					wichtige Daten. <br /> <br />
 				</p>
 				<p>
-					<strong>9. Bekanntmachung von Änderungen</strong><br /> <br /> FPS5
+					<strong>9. Bekanntmachung von Änderungen</strong><br /> <br /> SnapUp
 					behält sich das Recht vor, diese Richtlinien nach eigenem Ermessen
 					zu ändern. Bitte nehmen Sie das „Datum der letzten Aktualisierung“
 					zur Kenntnis, wie am Anfang dieses Dokuments ausgewiesen. Mit
 					dieser Information ist es Ihnen möglich herauszufinden, ob diese
 					Bestimmungen kürzlich geändert wurden.<br /> <br /> Bitte beachten
 					Sie, dass, wenn Sie die Einstellungen Ihres Mitgliedskontos im
-					Profil einschränken, FPS5 diese Einstellung nicht ohne Ihre
-					Zustimmung ändern wird. Sollten überwiegende Anteile von FPS5
+					Profil einschränken, SnapUp diese Einstellung nicht ohne Ihre
+					Zustimmung ändern wird. Sollten überwiegende Anteile von SnapUp
 					verkauft werden oder in den Besitz einer anderen Firma übergehen,
-					werden Sie darüber informiert. FPS5 hat das Recht, dem
+					werden Sie darüber informiert. SnapUp hat das Recht, dem
 					Neueigentümer dann Zugang auf personenbezogene Daten zu gewähren.
-					Bei Verkäufen von Teilbereichen von FPS5 hat FPS5 das Recht, dem
+					Bei Verkäufen von Teilbereichen von SnapUp hat SnapUp das Recht, dem
 					Käufer personenbezogene Daten zur Verfügung zu stellen ohne dafür
 					Ihre Zustimmung einzuholen, eine entsprechende Benachrichtigung
 					wird dann an die Mitglieder gesandt. <br /> <br />
@@ -216,7 +216,7 @@
 				<p>
 					<strong>10. Im Streitfall</strong><br /> <br /> Alle Streitigkeiten
 					bezüglich Ihres Datenschutzes sind Gegenstand dieser
-					Datenschutzerklärung und FPS5s Nutzungsbedingungen, einschließlich
+					Datenschutzerklärung und SnapUps Nutzungsbedingungen, einschließlich
 					aber nicht beschränkt auf jede Bestimmung bezüglich Schadensersatz,
 					Haftungsbegrenzung und Rechtswahl.
 				</p>
