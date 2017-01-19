@@ -26,28 +26,32 @@
 				// Für jede Warenkorpostion eine neue HTML-Zeile
 				echo '<div class="row"> ';
 				
-				// Spalte 1: Bild
-				echo '<div class="col-sm-2 col-xs-6">';
+				echo '<div class="col-md-6 col-sm-12">';
 				
-				echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . " style=\"width:auto ;height:auto; display: block;\">";
+				// Spalte 1: Bild
+				echo '<div class="col-md-6 col-sm-6">';
+				
+				echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . " style=\"width:auto ;height:auto; display: inline;\">";
 				echo '</div>';
 				
 				// Spalte 2: Produktinfo
-				echo '<div class="col-sm-4 col-xs-6">';
+				echo '<div class="col-md-6 col-sm-6">';
 				echo '<ul style="list-style-type: none">';
 				echo '<li><h6>' . $prodname . '</h6></li>';
 				echo '<li>Veranstaltung: ' . $event->even_name . '</li>';
 				echo '<li>Größe: ' . $size . '</li>';
 				echo '<li>Digital/Analog</li>';
 				echo '</div>';
+				echo '</div>';
 				
+				echo '<div class="col-md-6 col-sm-12">';
 				// Spalte 3: Preis
-				echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
+				echo '<div class="col-md-2 col-sm-3"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 				
 				echo form_open ( '/', 'id="updateAmountForm"' );
 				// Spalte 4: Menge
-				echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
-				echo '<div class="form-group col-sm-2">';
+				echo '<div class="col-md-4 col-sm-3"><h5>Anzahl:</h5> </div>';
+				echo '<div class="form-group col-md-4 col-sm-3">';
 				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
 				echo "</div>";
@@ -67,7 +71,7 @@
 						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
 				) );
 				
-				echo '<div class="col-sm-1">';
+				echo '<div class="col-md-2 col-sm-3">';
 				echo '<button class="btn btn-danger btn-sm">';
 				echo '<i class="fa fa-trash-o"></i>';
 				echo '</button>';
@@ -89,7 +93,7 @@
 				
 				// Ende der HTML-Zeile
 				echo '</div>';
-				
+				echo '</div>';
 				echo form_close ();
 			}
 		}
@@ -183,7 +187,6 @@
 
 <script type="text/javascript">
 function updateAmount() {
-	console.log('work');
     var insertURL = "<?php
 				
 				echo base_url ()?>/Shoppingcart/update";
