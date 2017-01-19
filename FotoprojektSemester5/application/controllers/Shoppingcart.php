@@ -222,10 +222,8 @@ class Shoppingcart extends CI_Controller {
 		$scpo_shca_id = $shoppingcart_position['scpo_shca_id'];
 		$scpo_prod_id = $shoppingcart_position['scpo_prod_id'];
 		$scpo_prty_id = $shoppingcart_position['scpo_prty_id'];
-		$scpo_amount = $shoppingcart_position['scpo_amount'];
+		$scpo_amount = $shoppingcart_position['amount_hidden'];
 		
-// 		$scpo_amount = $this->input->post( 'scpo_amount' );
-		print_r($shoppingcart_position);
 
 		$shoppingcart_positionOb = new stdClass ();
 		
@@ -233,7 +231,7 @@ class Shoppingcart extends CI_Controller {
 		$shoppingcart_positionOb->scpo_prod_id = $scpo_prod_id;
 		$shoppingcart_positionOb->scpo_prty_id = $scpo_prty_id;
 		$shoppingcart_positionOb->scpo_amount = $scpo_amount;
-// 		print_r($shoppingcart_positionOb);
+ 		print_r($shoppingcart_positionOb);
 		$this->shoppingcart_model->update_shopping_cart_position($shoppingcart_positionOb);
 	}
 }
