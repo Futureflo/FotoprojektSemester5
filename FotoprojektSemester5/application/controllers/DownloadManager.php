@@ -31,38 +31,39 @@ class DownloadManager extends CI_Controller {
 	 * @param unknown $orderID
 	 * @return downloadLink
 	 */
-	public function manageDownload($userID, $orderID) {
+	public function manageDownload($orderID) {
 // 		$pathArray = orderIDtoImagePathArray($orderID);
 // 		$zipPath =  zipDir($pathArray);
 // 		$downloadLink = createDownloadLink($orderID, $userID);
 // 		return $downloadLink;
+// 		$this->load->model('order_model');
+// 		// Zip passwortschützen
+// 		$mySalt = generate_salt();
+// 		echo $mySalt;	
+// 		$userID = $this->session->userdata('user_id');
+// 		$products = $this->order_model->getProductsFromOrder($orderID);
+// 		foreach ($products as $p)    {
+// 			$path = Product::buildFilePath($p);
+// 			$p->prod_filepath = $path;
+// 		}
+// 		$pfade = array(
+// 				"path" => " "
+// 		);
+// 		foreach ($products as $p)    {
+// 			$path = Product::buildFilePath($p);
+// 			$p->prod_filepath = $path;
+// 			array_push($pfade, $p->prod_filepath);
+// 		}
+		
+// 		$zipPath = zipDir($userID, $orderID, $products);
+		
 		$this->load->model('order_model');
+		$this->load->helper('hash_helper');
+		$this->load->model('Download_Password_model');
 		
-
-		// Zip passwortschützen
-		$mySalt = generate_salt();
-		echo $mySalt;
-		
-		$userID = $this->session->userdata('user_id');
-		$products = $this->order_model->getProductsFromOrder($orderID);
-		
-		foreach ($products as $p)    {
-			$path = Product::buildFilePath($p);
-			$p->prod_filepath = $path;
-		}
-		
-		$pfade = array(
-				"path" => " "
-		);
-		
-		foreach ($products as $p)    {
-			$path = Product::buildFilePath($p);
-			$p->prod_filepath = $path;
-			array_push($pfade, $p->prod_filepath);
-		}
-		
-		$zipPath = zipDir($userID, $orderID, $products);
-		
+		$downloadLink = $this->createDownloadLink($orderID);
+		$userEmail = $this->session->userdata ( 'user_email' );
+		$this->sendDownloadEmail($userEmail, $downloadLink);
 	}
 	
 	/**
@@ -101,7 +102,7 @@ class DownloadManager extends CI_Controller {
 		// Produkt einfügen
 		$new_dopa_id = $this->Download_Password_model->insertDownloadPassword ( $data );
 		
-		$webPageURL = "http://localhost/FotoprojektSemester5/FotoprojektSemester5/downloadmanager/startdownload/";
+		$webPageURL = "http://snap-gallery.de/DownloadManager/startDownload/";
 		$downloadLink = $webPageURL . $download_password;
 		return $downloadLink;
 	}
@@ -114,11 +115,11 @@ class DownloadManager extends CI_Controller {
 		$this->email->to($user_email);
 		$this->email->subject('Ihr Download-Link zu Ihrer Bestellung');
 		$this->email->message(
-				'SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.<br><br>'
-				.'Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.<br>'
-				.'Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.<br><br>'
-				. $downloadLink. '<br><br>'
-				.'Ihr Snapup-Team'
+				'SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.\n\n'
+				.'Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.\n'
+				.'Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.\n\n'
+				. $downloadLink. '\n\n'
+				.'Ihr Snapup-Team.'
 				);
 		$this->email->send();
 	}
@@ -186,7 +187,10 @@ class DownloadManager extends CI_Controller {
 		ob_flush();
 		ob_clean();
 		readfile($conjunctedPath);
+
 		exit;
+		redirect("/");
+// 		return true;
 	}
 	
 	/**
@@ -318,10 +322,12 @@ class DownloadManager extends CI_Controller {
 		$this->load->helper('hash_helper');
 		$this->load->model('Download_Password_model');
 		
-		$downloadLink = $this->createDownloadLink(39);
-		$this->sendDownloadEmail("Severin.Klug@gmx.de", $downloadLink);
+// 		$downloadLink = $this->createDownloadLink(39);
+// 		$this->sendDownloadEmail("Severin.Klug@gmx.de", $downloadLink);
 		
-// 		downloadFile("Download_Zip_Archive_39_20170119103947.zip");
+		
+		$this->downloadFile("Download_Zip_Archive_39_20170119103947.zip");
+		redirect('/');	
 	}
 	
 }
