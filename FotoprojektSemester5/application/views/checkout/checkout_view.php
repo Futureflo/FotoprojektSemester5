@@ -180,11 +180,14 @@
 
     function minmax(value, min, max) 
     {
-        if(parseInt(value) < min || isNaN(parseInt(value))) 
+        change(value);
+        if(parseInt(value) < min || isNaN(parseInt(value))){
+        	change(1); 
             return 1; 
-        else if(parseInt(value) > max) 
+        }else if(parseInt(value) > max){
+        	change(100); 
             return 1000; 
-        else return value;
+        }else return value;
     }
     
     function nettopreis() {
@@ -237,12 +240,10 @@ function articleSum(){
     
     
     function change(e){
-        var row = e.parentNode.parentElement.parentElement;
-        var price = row.getElementsByClassName('aktuellerpreis')[0];
-        var number = e.value;
-        var one = row.getElementsByClassName('one')[0].value;
 
-        console.log(number);
+        var price = document.getElementsByClassName('aktuellerpreis')[0];
+        var number = e;
+        var one = document.getElementsByClassName('one')[0].value;
         
         if (isNaN ( number )) {
             number = parseFloat(1);
@@ -253,7 +254,6 @@ function articleSum(){
         }
         
         articleSum();
-        console.log(number);
     }
     
     
