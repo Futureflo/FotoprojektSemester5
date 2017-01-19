@@ -5,7 +5,9 @@ class dashboard_model extends CI_Model {
 	}
 	
 	public function getInformations() {
-		return null;
+		$this->db->join ( 'user', 'orde_user_id = user_id' );
+		$query = $this->db->get ( "order" );
+		return $query->result ();
 	}
 }	
 ?>
