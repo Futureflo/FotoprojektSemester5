@@ -16,6 +16,11 @@ class User extends CI_Controller {
 		$data ['user_email'] = $user [0]->user_email;
 		$this->load->template ( 'user/email_change_view', $data );
 	}
+	public function call_change_password_view() {
+		$user_id = $this->session->userdata ( 'user_id' );
+		$user = $this->user_model->get_user_by_id ( $user_id );
+		$this->load->template ( 'user/password_change_view', $data );
+	}
 	public function showSingleUser($userid) {
 		$user_id = $this->session->userdata ( 'user_id' );
 		
@@ -50,7 +55,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules ( 'lastname', 'Nachname', 'trim|required|min_length[3]|max_length[30]' );
 		$this->form_validation->set_rules ( 'zip', 'PLZ', 'trim|required' );
 		$this->form_validation->set_rules ( 'city', 'Stadt', 'trim|required' );
-		$this->form_validation->set_rules ( 'street', 'StraÃŸe', 'trim|required' );
+		$this->form_validation->set_rules ( 'street', 'Straße', 'trim|required' );
 		$this->form_validation->set_rules ( 'birthday', 'Geburtsdatum', 'required' );
 		// submit
 		if ($this->form_validation->run () == FALSE) {
@@ -85,7 +90,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules ( 'confirm_email', 'E-Mail', 'trim|required|valid_email|matches[new_email]|is_unique[user.user_email]' );
 		
 		$this->form_validation->set_message ( 'is_unique', 'Es existiert bereits ein Benutzer mit der angegebenen E-Mail Adresse' );
-		$this->form_validation->set_message ( 'matches', 'Die angegebenen E-Mail Adressen stimmen nicht Ã¼berein' );
+		$this->form_validation->set_message ( 'matches', 'Die angegebenen E-Mail Adressen stimmen nicht überein' );
 		
 		if ($this->form_validation->run () == FALSE) {
 			// fails
@@ -96,9 +101,9 @@ class User extends CI_Controller {
 		} else {
 			$emailChanged = $this->user_model->update_userEmailByID ( $user_id, $new_email );
 			if ($emailChanged == 1) {
-				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse wurde erfolgreich geÃ¤ndert.' );
+				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse wurde erfolgreich geändert.' );
 			} else {
-				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse konnte nicht geÃ¤ndert werden. Versuchen Sie es spÃ¤ter noch einmal.' );
+				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse konnte nicht geändert werden. Versuchen Sie es später noch einmal.' );
 			}
 			
 			$user_id = $this->session->userdata ( 'user_id' );
@@ -130,7 +135,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required|min_length[6]' );
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
-			$this->session->set_flashdata ( 'pwChange', 'Das Passwort mit dem wiederholten Passwort Ã¼bereinstimmen' );
+			$this->session->set_flashdata ( 'pwChange', 'Das Passwort mit dem wiederholten Passwort übereinstimmen' );
 		} else {
 			
 			$this->changePassword ( $user_id, $newPassword );
@@ -141,7 +146,7 @@ class User extends CI_Controller {
 		$newSalt = generate_salt ( 10 );
 		$newHashpw = generate_hash ( $newSalt, $newPassword, $algo );
 		$this->user_model->update_userPassword ( $user_id, $newHashpw, $newSalt, UserStatus::activated );
-		$this->session->set_flashdata ( 'pwChange', 'Ihr Passwort wurde erfolgreich geÃ¤ndert' );
+		$this->session->set_flashdata ( 'pwChange', 'Ihr Passwort wurde erfolgreich geändert' );
 	}
 	public function myOrders() {
 		$this->load->model ( 'order_model' );
@@ -157,7 +162,6 @@ class User extends CI_Controller {
 		$this->user_model->update_userStatusByID ( $user_id, UserStatus::deleted );
 		$this->logout ();
 	}
-	
 	function logout() {
 		// destroy session
 		$data = array (
