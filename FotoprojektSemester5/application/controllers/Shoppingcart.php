@@ -5,7 +5,7 @@ include_once (dirname ( __FILE__ ) . "/Product.php");
 class Shoppingcart extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model('user_model');
+		$this->load->model ( 'user_model' );
 		
 		$this->load->library ( array (
 				'form_validation' 
@@ -13,15 +13,13 @@ class Shoppingcart extends CI_Controller {
 		$this->load->model ( 'shoppingcart_model' );
 	}
 	public function index() {
-		
 		$user_id = $this->session->userdata ( 'user_id' );
-		// ceck if user is logged in 
-		if ($user_id == Null){
-			$this->creatAnonymousUser();
+		// ceck if user is logged in
+		if ($user_id == Null) {
+			$this->creatAnonymousUser ();
 			$user_id = $this->session->userdata ( 'user_id' );
-
 		}
-			
+		
 		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
 		if (! isset ( $cart )) {
 			
@@ -43,53 +41,53 @@ class Shoppingcart extends CI_Controller {
 			$prod_id = $shoppingcart_position->scpo_prod_id;
 			$prty_id = $shoppingcart_position->scpo_prty_id;
 			
-			$shoppingcart_position->product_variant = Product::getProductVariant ( $prod_id, $prty_id );
+			$product_variant = Product::getProductVariant ( $prod_id, $prty_id );
+			$prod_filepath = Product::buildFilePath ( $product_variant, true );
+			$product_variant->prod_filepath = $prod_filepath;
+			$shoppingcart_position->product_variant = $product_variant;
 		}
 		$cart->shoppingcart_positions = $shoppingcart_positions;
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;
 		$data ['cart'] = $cart;
- 		$this->load->template ( 'checkout/checkout_view', $data );
-		
+		$this->load->template ( 'checkout/checkout_view', $data );
 	}
 	// if costumer is not logged in -> create anonymous user
-	function creatAnonymousUser(){
-
+	function creatAnonymousUser() {
+		
 		// insert AnonymousUser in db
-		$data = array ('user_role_id' => UserRole::AnonymousUser);
+		$data = array (
+				'user_role_id' => UserRole::AnonymousUser 
+		);
 		$user_id = $this->user_model->insert_user ( $data );
 		// set session
 		$sess_data = array (
 				'login' => FALSE,
-				'user_id' => $user_id
+				'user_id' => $user_id 
 		);
 		$this->session->set_userdata ( $sess_data );
-
-		
 	}
-	
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
 		$scpo_prty_id = $this->input->post ( 'scpo_prty_id' );
-
-		//MB: special from single_event_view 
-		if(isset($_POST['beschreibungSelect'])){			
-			$parts = explode("-", $_POST['beschreibungSelect']);
-			if(count($parts) == 2){
-				$scpo_prod_id = $parts[0];
-				$scpo_prty_id = $parts[1];
+		
+		// MB: special from single_event_view
+		if (isset ( $_POST ['beschreibungSelect'] )) {
+			$parts = explode ( "-", $_POST ['beschreibungSelect'] );
+			if (count ( $parts ) == 2) {
+				$scpo_prod_id = $parts [0];
+				$scpo_prty_id = $parts [1];
 			}
 		}
-
-
+		
 		$scpo_amount = $this->input->post ( 'scpo_amount' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$shca_id = 0;
 		
-		if ($user_id == Null){			
-			$this->creatAnonymousUser();
+		if ($user_id == Null) {
+			$this->creatAnonymousUser ();
 			$user_id = $this->session->userdata ( 'user_id' );
-		}		
+		}
 		
 		// // Shoppingcart-Kopf suchen/anlegen
 		$shopping_cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
@@ -129,9 +127,8 @@ class Shoppingcart extends CI_Controller {
 		// Jetzt den Warenkorb aktualisieren
 		
 		// Testseite wieder aufrufen
-		if(isset($_POST['beschreibungSelect']) == false) //if beschriebungsSelect isset don't redirect (from single_event_view)
+		if (isset ( $_POST ['beschreibungSelect'] ) == false) // if beschriebungsSelect isset don't redirect (from single_event_view)
 			redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
-	
 	}
 	public static function getSingleShoppingCartById($shca_id) {
 		$CI = & get_instance ();
@@ -152,8 +149,6 @@ class Shoppingcart extends CI_Controller {
 		$cart->shoppingcart_positions = $shoppingcart_positions;
 		return $cart;
 	}
-
-	
 	public function overview() {
 		$this->load->model ( 'shoppingcart_model' );
 		$this->load->model ( 'adress_model' );

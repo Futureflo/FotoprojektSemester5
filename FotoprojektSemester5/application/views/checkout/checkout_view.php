@@ -14,6 +14,7 @@
 			$amount = $shoppingcart_position->scpo_amount;
 			$prodname = $shoppingcart_position->product_variant->prod_name;
 			$size = $shoppingcart_position->product_variant->prty_description;
+			$prod_filepath = $shoppingcart_position->product_variant->prod_filepath;
 			
 			// Event zu Produkt-Variante ermitteln
 			$even_id = $shoppingcart_position->product_variant->prod_even_id;
@@ -24,9 +25,9 @@
 			
 			// Spalte 1: Bild
 			echo '<div class="col-sm-2 col-xs-6">';
-			echo '<img src="http://placehold.it/100x100" alt="..."
-					class="img-responsive" />
-					</div>';
+			
+			echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . ">";
+			echo '</div>';
 			
 			// Spalte 2: Produktinfo
 			echo '<div class="col-sm-4 col-xs-6">';
