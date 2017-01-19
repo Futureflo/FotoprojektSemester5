@@ -37,6 +37,19 @@ class Shoppingcart_model extends CI_Model {
 		$return = $query->result ();
 		return $return;
 	}
+	public function getShoppingCartPositionsByUserId($user_id) {
+		// initialize return variable
+		$return = array ();
+		
+		// get the items of a specific shoppingCart
+		$this->db->join ( 'shopping_cart', 'shca_id = scpo_shca_id', 'INNER JOIN' );
+		$this->db->where ( 'shca_user_id', $user_id );
+		$this->db->order_by ( 'scpo_prod_id, scpo_prty_id' );
+		$query = $this->db->get ( 'shopping_cart_position' );
+		$return = $query->result ();
+		return $return;
+	}
+	
 	// Get a specific shopping cart position
 	public function getShoppingCartPosition($scpo_shca_id, $scpo_prod_id, $scpo_prty_id) {
 		

@@ -106,7 +106,7 @@ echo ($event->even_name);
 								echo base_url ();
 								?>event/deleteEventById/<?php
 								
-echo ($event->even_id);
+echo ($event->	);
 								?>" method="post">
 													<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Event löschen</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>

@@ -7,7 +7,7 @@ class Printers extends CI_Controller {
 		$printer = Printers::getPrinter ( $prsu_id );
 		$user_id = $printer->prsu_user_id;
 		
-		// nicht verwendete IDs speichern und in der Auswahl ausschließen
+		// nicht verwendete IDs speichern und in der Auswahl ausschlieï¿½en
 		$prty_ids = array ();
 		foreach ( $printer->prices as $price ) {
 			array_push ( $prty_ids, $price->prsp_prty_id );
@@ -18,13 +18,12 @@ class Printers extends CI_Controller {
 		$data ['printer'] = $printer;
 		$this->load->template ( 'printers/single_printers_view.php', $data );
 	}
-	
 	public function showPrinters() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";
 		
 		$user_id = $this->session->userdata ( 'user_id' );
-		$data ['printers'] = $this->Printers_model->getPrintersForUser ($user_id);
+		$data ['printers'] = $this->Printers_model->getPrintersForUser ( $user_id );
 		$this->load->template ( 'printers/printers_view', $data );
 	}
 	public function deletePrinter() {
@@ -37,13 +36,22 @@ class Printers extends CI_Controller {
 		$data ['printers'] = $this->Printers_model->getAllPrinters ();
 		$this->load->template ( 'printers/printers_view', $data );
 	}
+	public function recyclePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
+		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$this->load->template ( 'printers/printers_view', $data );
+	}
 	public function product_types() {
 		redirect ( 'ProductType/product_types' );
 	}
 	public function price_profiles() {
 		redirect ( 'PriceProfile/price_profiles' );
 	}
-	
 	public static function getPrinter($prsu_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'Printers_model' );
