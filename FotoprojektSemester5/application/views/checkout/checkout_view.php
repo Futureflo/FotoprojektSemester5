@@ -6,6 +6,7 @@
 	</div>
 </section>
 <div class="container">	
+	<div class="row" id="cart_div">
 		<?php
 		$shoppingcart_positions = $cart->shoppingcart_positions;
 		foreach ( $shoppingcart_positions as $shoppingcart_position ) {
@@ -21,7 +22,7 @@
 			$event = Event::getSingleEventById ( $even_id );
 			
 			// Für jede Warenkorpostion eine neue HTML-Zeile
-			echo '<div class="row"> ';
+			// echo '<div class="row"> ';
 			
 			// Spalte 1: Bild
 			echo '<div class="col-sm-2 col-xs-6">';
@@ -44,7 +45,7 @@
 			// Spalte 4: Menge
 			echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
 			echo '<div class="form-group col-sm-2">';
-			echo "<p>" . '<input type="text" min="1" max="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
+			echo "<p>" . '<input type="text" maxLength="3" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
 			echo '<input type="hidden" class="one" value=' . $price . '>';
 			echo "</div>";
 			
@@ -56,9 +57,10 @@
 			echo '</div>';
 			
 			// Ende der HTML-Zeile
-			echo '</div>';
+			// echo '</div>';
 		}
 		?>
+		</div>
 		<hr>
 	<div class="row">
 		<div class="col-sm-0 col-s-0"></div>
@@ -93,7 +95,7 @@
 			echo form_open ( "Checkout", '' );
 		}
 		?>
-<button name="submit" type="submit" class="btn btn-success btn-block btn-md"
+<button name="submit" type="submit" class="btn btn-success btn-block btn-md" id="checkout-btn"
 			<?php
 			
 			if (! $this->session->userdata ( 'login' )) {
@@ -145,7 +147,15 @@
         document.getElementById("login-btn").click();
     }
 
-
+    function minmax(value, min, max) 
+    {
+        if(parseInt(value) < min || isNaN(parseInt(value))) 
+            return 1; 
+        else if(parseInt(value) > max) 
+            return 1000; 
+        else return value;
+    }
+    
     function nettopreis() {
         var sum = document . getElementById ( "gesamtpreis" ) . innerHTML;
         var netto = document.getElementById("nettopreis"); 
@@ -166,8 +176,20 @@
     
     $(document).ready(function(){
 	   articleSum();
+		checkCart();
 	});
-    
+
+function checkCart(){
+	var button = document.getElementById('checkout-btn');
+	var div = document.getElementById('cart_div');
+	console.log('start');
+	console.log(div.childElementCount);
+	if(div.childElementCount <= 0){
+		button.disabled = "true";
+		console.log('dis');
+	}
+}
+      
 function articleSum(){
     var price = document.getElementsByClassName("aktuellerpreis");
     
