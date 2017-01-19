@@ -74,16 +74,17 @@ class Login extends CI_Controller {
 						$user_id = $this->session->userdata ( 'user_id' );
 						if($user_id != null){
 							$this->load->model ( 'shoppingcart_model' );								
-							$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
+							$shoppingcart_positionsOld = $this->shoppingcart_model->getShoppingCartPositionsByUserId ( $user_id );
+								
 							
-							//destroy AnonymousUser session
-							$data = array (
-									'login' => '',
-									'user_id' => '',
-									'user_role' => ''
-							);
-							$this->session->unset_userdata ( $data );
-							$this->session->sess_destroy ();
+// 							//destroy AnonymousUser session
+// 							$data = array (
+// 									'login' => '',
+// 									'user_id' => '',
+// 									'user_role' => ''
+// 							);
+// 							$this->session->unset_userdata ( $data );
+// 							$this->session->sess_destroy ();
 						}
 						
 						// set session
@@ -97,6 +98,21 @@ class Login extends CI_Controller {
 								'user_role' => $uresult [0]->user_role_id
 						);
 						$this->session->set_userdata ( $sess_data );
+						
+// 						if ($shoppingcart_positionsOld != NULL){
+// 							$shoppingcart_positionsNew = $this->shoppingcart_model->getShoppingCartPositions( $user_id );
+// 							$shca_idNew = $shoppingcart_position->shca_id;
+								
+							
+// 							foreach ( $shoppingcart_positionsOld as $shoppingcart_positionOld ) {
+// 								$prod_idOld = $shoppingcart_positionOld->scpo_prod_id;
+// 								$prty_idOld = $shoppingcart_positionOld->scpo_prty_id;
+// 								$scpo_amountOld = $shoppingcart_positionOld->scpo_amount;
+								
+// 								Shoppingcart::insert_update_positon($shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld);
+// 							}					
+// 						}
+						
 						redirect ( $_SERVER ['HTTP_REFERER'] );
 					} else {
 						
