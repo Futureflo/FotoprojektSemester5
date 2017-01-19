@@ -90,7 +90,7 @@
 		
 		<?php
 		if ($this->session->userdata ( 'login' )) {
-			echo form_open ( "Checkout/customer", '' );
+			echo form_open ( "Checkout", '' );
 		}
 		?>
 <button name="submit" type="submit" class="btn btn-success btn-block btn-md"
@@ -128,7 +128,7 @@
 				<div class="row">
 					<div class="col-sm-8 offset-sm-3">
 						<a onclick="login()" id="login_from_modal" href="#" class="btn btn-primary">Anmelden</a> <a href="<?php
-						echo base_url ()?>checkout/guest"
+						echo base_url ()?>checkout"
 							class="btn btn-secondary">Als Gast bestellen</a>
 					</div>
 				</div>
