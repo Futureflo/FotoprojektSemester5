@@ -52,10 +52,11 @@
 										echo "<td>" . $op->prty_description . "</td>";
 									
 										if ($op->prty_type == ProductPrintType::download) {
-											echo "<td>" . 'Download' . "</td>";
-										} else
-											echo "<td>" . 'Druck' . "</td";
-									}
+										
+												echo "<td>" . btnDownload($order) . "</td>";										
+											} else
+												echo "<td>" . 'Druck' . "</td";
+										}
 									echo "</tr>";
 									echo "</tbody>";
 								//Ende Tabelle
@@ -72,8 +73,23 @@
 			//Div-Ende für Row
 			echo '</div>';
 		}
+		
+		
+		function btnDownload($order)
+		{
+			return '<button title="Download" onclick="btnSendDownload(' . $order->orde_id .')" class="btn btn-info fa fa-download fa-lg" style="margin-right:1rem"></button>';
+		}
 		?>
 	
 </div>
-
- 
+<script>
+function btnSendDownload(OrderID) {
+    $.ajax({
+		  type: "POST",
+		  url: "<?php echo site_url (); ?>/DownloadManager/manageDownload/"+OrderID,
+		  dataType: 'html',
+		});
+	alert ('Email wurde versendet!');
+	location.reload();
+}
+ </script>
