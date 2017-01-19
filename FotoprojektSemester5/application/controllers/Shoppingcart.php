@@ -121,7 +121,6 @@ class Shoppingcart extends CI_Controller {
 				$this->shoppingcart_model->insert_shopping_cart_position ( $shopping_cart_position );
 			}
 			
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center">Postion angelegt!</div>' );
 		}
 		
 		// Jetzt den Warenkorb aktualisieren
