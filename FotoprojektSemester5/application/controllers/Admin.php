@@ -57,8 +57,8 @@ class Admin extends CI_Controller {
 	public function archivedProduct_types() {
 		$this->load->model ( 'product_type_model' );
 		$this->load->model ( 'User_model' );
-		$data ['ProductViewHeader'] = "Archivierte Druckereien";
-		$data ['product_types'] = $this->ProductType->getAllArichvedProductType ();
+		$data ['ProductViewHeader'] = "Archivierte Formate";
+		$data ['product_types'] = $this->product_type_model->getAllArichvedProductType ();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 	public function archivedPrice_profiles() {
