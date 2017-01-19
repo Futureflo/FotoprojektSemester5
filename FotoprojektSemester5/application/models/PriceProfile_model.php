@@ -1,4 +1,5 @@
 <?php
+include_once (dirname ( __DIR__ ) . "/controllers/ProductType.php");
 class PriceProfile_model extends CI_Model {
 	Public function __construct() {
 		parent::__construct ();
@@ -73,6 +74,21 @@ class PriceProfile_model extends CI_Model {
 	// insert print_supplier_price
 	function insert_print_supplier_price($data) {
 		return $this->db->insert ( 'print_supplier_price', $data );
+	}
+	
+	// update print_supplier_price
+	function update_print_supplier_price($data) {
+		$this->db->where ( 'prsp_prsu_id', $data ['prsp_prsu_id'] );
+		$this->db->where ( 'prsp_prty_id', $data ['prsp_prty_id'] );
+		return $this->db->update ( 'print_supplier_price', $data );
+	}
+	
+	// delete print_supplier_price
+	function delete_print_supplier_price($data) {
+		return $this->db->delete ( 'print_supplier_price', array (
+				'prsp_prsu_id' => $data ['prsp_prsu_id'],
+				'prsp_prty_id' => $data ['prsp_prty_id'] 
+		) );
 	}
 }
 ?>

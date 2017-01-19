@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 	}
 	public function dashboard() {
 		$this->load->model ( 'dashboard_model' );
-		$data ['users'] = $this->dashboard_model->getInformations ();
+		$data ['orders'] = $this->dashboard_model->getInformations ();
 		$data ['DashboardViewHeader'] = "Dashboard";
 		$this->load->template ( 'admin/dashboard', $data );
 	}

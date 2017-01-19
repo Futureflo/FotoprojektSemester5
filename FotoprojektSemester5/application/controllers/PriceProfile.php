@@ -113,4 +113,36 @@ class PriceProfile extends CI_Controller {
 		$price_profile = $this->PriceProfile_model->insert_print_supplier_price ( $data );
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
+	public function updatePricePrinter() {
+		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		$prsp_price = $this->input->post ( 'prsp_price' );
+		$data = array (
+				'prsp_prsu_id' => $prsu_id = $this->input->post ( 'prsu_id' ),
+				'prsp_prty_id' => $this->input->post ( 'prty_id' ),
+				'prsp_price' => $prsp_price 
+		);
+		
+		$this->PriceProfile_model->update_print_supplier_price ( $data );
+		
+		$this->session->set_flashdata ( 'PrintSupplierPrice', 'Format: ' . $prty_description . ' erfolgreich auf ' . $prsp_price . '€ geändert.' );
+		
+		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
+	}
+	public function deletePricePrinter() {
+		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		$prsp_price = $this->input->post ( 'prsp_price' );
+		$data = array (
+				'prsp_prsu_id' => $prsu_id = $this->input->post ( 'prsu_id' ),
+				'prsp_prty_id' => $this->input->post ( 'prty_id' ),
+				'prsp_price' => $prsp_price 
+		);
+		
+		$this->PriceProfile_model->delete_print_supplier_price ( $data );
+		
+		$this->session->set_flashdata ( 'PrintSupplierPrice', 'Format: ' . $prty_description . ' gelöscht.' );
+		
+		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
+	}
 }
