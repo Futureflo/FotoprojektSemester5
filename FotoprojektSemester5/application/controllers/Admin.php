@@ -47,7 +47,17 @@ class Admin extends CI_Controller {
 		$data ['PrintersViewHeader'] = "Druckereien";
 		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
 		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function recyclePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
+		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {

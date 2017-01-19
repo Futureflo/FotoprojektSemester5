@@ -79,13 +79,13 @@
 				echo "</tr>";
 			}
 			function btnDelete($printer) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinterDelete(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnRecycle($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btneditprinter($printer) {
 				echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
@@ -142,7 +142,7 @@
 			<div class="modal-body">
 				<div class="alert alert-danger">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
-					die Druckerei "<span id="printer"></span>" unwiderruflich löschen?
+					die Druckerei "<span id="printerDelete"></span>" unwiderruflich löschen?
 				</div>
 			</div>
 			<div class="modal-footer ">
@@ -152,7 +152,7 @@
 					echo base_url ();
 					?>admin/deletePrinter/"
 					method="post">
-					<input id="printer_hidden_field" type="hidden"
+					<input id="printerDelete_hidden_field" type="hidden"
 						name="printerDelete_hidden_field" value="">
 					<button type="submit" class="btn btn-danger">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei löschen
@@ -186,7 +186,7 @@
 			<div class="modal-body">
 				<div class="alert alert-danger">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
-					die Druckerei "<span id="printer"></span>" wiederherstellen?
+					die Druckerei "<span id="printerRecycle"></span>" wiederherstellen? 
 				</div>
 			</div>
 			<div class="modal-footer ">
@@ -196,8 +196,8 @@
 					echo base_url ();
 					?>admin/recyclePrinter/"
 					method="post">
-					<input id="printer_hidden_field" type="hidden"
-						name="printerDelete_hidden_field" value="">
+					<input id="printerRecycle_hidden_field" type="hidden"
+						name="printerRecycle_hidden_field" value="">
 					<button type="submit" class="btn btn-danger">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei wiederherstellen
 					</button>
@@ -287,11 +287,18 @@
           }
     }
 
-    function whichPrinter(name, id){
-        document.getElementById("printer").innerHTML = name;
-        document.getElementById("printer_hidden_field").value = id;
+    function whichPrinterDelete(name, id){
+        document.getElementById("printerDelete").innerHTML = name;
+        document.getElementById("printerDelete_hidden_field").value = id;
     }
-    
+    function whichPrinterRecycle(name, id){
+        document.getElementById("printerRecycle").innerHTML = name;
+        document.getElementById("printerRecycle_hidden_field").value = id;
+    }
+    function whichPrinterEdit(name, id){
+        document.getElementById("printerEdit").innerHTML = name;
+        document.getElementById("printerEdit_hidden_field").value = id;
+    }
     /**
         Die Daten werden auf 10 Datensätze pro Seite aufgeteilt
     */
