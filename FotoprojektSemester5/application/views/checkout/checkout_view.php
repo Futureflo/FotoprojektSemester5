@@ -52,8 +52,9 @@
 				// Spalte 4: Menge
 				echo '<div class="col-md-4 col-sm-3"><h5>Anzahl:</h5> </div>';
 				echo '<div class="form-group col-md-4 col-sm-3">';
-				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
+				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
+				echo '<input type="hidden" name="amount_hidden" value="">';
 				echo "</div>";
 				
 				array (
@@ -213,17 +214,21 @@ function updateAmount() {
     function login(){
         document.getElementById("login-btn").click();
     }
-
+    
     function minmax(value, min, max) 
     {
-        change(value);
-        if(parseInt(value) < min || isNaN(parseInt(value))){
+    	value.parentNode.nextSibling.nextSibling.value = value.value;
+        
+        
+        console.log(value.parentNode.nextSibling.nextSibling);
+        change(value.value);
+        if(parseInt(value.value) < min || isNaN(parseInt(value.value))){
         	change(1); 
             return 1; 
-        }else if(parseInt(value) > max){
+        }else if(parseInt(value.value) > max){
         	change(100); 
             return 1000; 
-        }else return value;
+        }else return value.value;
     }
     
     function nettopreis() {
