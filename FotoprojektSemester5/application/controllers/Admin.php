@@ -11,6 +11,8 @@ class Admin extends CI_Controller {
 		$this->load->model ( 'event_model' );
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 	}
+	
+	// Aufruf der Views
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
@@ -19,13 +21,9 @@ class Admin extends CI_Controller {
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function archivedUsers() {
-		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
-		$data ['UsersViewHeader'] = "Archivierte Benutzer";
-		$this->load->template ( 'admin/users_view', $data );
-	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
+		$data ['EventsViewHeader'] = "Archivierte Events";
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
@@ -34,12 +32,41 @@ class Admin extends CI_Controller {
 		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
+	public function product_types() {
+		redirect ( 'ProductType/product_types' );
+	}
+	public function price_profiles() {
+		redirect ( 'PriceProfile/price_profiles' );
+	}
+	public function archivedUsers() {
+		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
+		$data ['UsersViewHeader'] = "Archivierte Benutzer";
+		$this->load->template ( 'admin/users_view', $data );
+	}
+	public function archivedEvents() {
+		$data ['events'] = $this->event_model->getAllArchivedEvents ();
+		$data ['EventsViewHeader'] = "Archivierte Events";
+		$this->load->template ( 'admin/events_view', $data );
+	}
 	public function archivedPrinters() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
 		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
+	public function archivedProduct_types() {
+		$this->load->model ( 'product_type_model' );
+		$this->load->model ( 'User_model' );
+		$data ['ProductViewHeader'] = "Archivierte Druckereien";
+		$data ['product_types'] = $this->ProductType->getAllArichvedProductType ();
+		$this->load->template ( 'admin/product_type_view', $data );
+	}
+	public function archivedPrice_profiles() {
+		$this->load->model ( 'price_type_model' );
+	}
+	
+	
+	// Funktionen für die View/Controller (DKM -> Wieso hier und nicht in de spez. Models/Controller?)
 	public function deletePrinter() {
 		$this->load->model ( 'Printers_model' );
 		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
@@ -59,12 +86,6 @@ class Admin extends CI_Controller {
 		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
 		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
-	}
-	public function product_types() {
-		redirect ( 'ProductType/product_types' );
-	}
-	public function price_profiles() {
-		redirect ( 'PriceProfile/price_profiles' );
 	}
 	public function deleteUser() {
 		$user_id = $this->input->post ( "userDelete_hidden_field" );

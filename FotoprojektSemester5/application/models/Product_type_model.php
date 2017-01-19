@@ -26,6 +26,13 @@ class Product_type_model extends CI_Model {
 		
 		return $query->result ();
 	}
+	function getAllArichvedProductType() {
+		$this->db->join ( 'user', 'user_id = prty_user_id', 'INNER JOIN' );
+		$this->db->where ( 'prty_status =', ProductTypeStatus::deleted );
+		$query = $this->db->get ( 'product_type' );
+	
+		return $query->result ();
+	}
 	function getAllProductTypeForUser($user_id) {
 		$this->db->where ( 'prty_user_id', $user_id );
 		$this->db->or_where ( 'prty_user_id', 0 );

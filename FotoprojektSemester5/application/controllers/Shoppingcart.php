@@ -31,7 +31,6 @@ class Shoppingcart extends CI_Controller {
 					'shca_user_id' => $user_id 
 			);
 			$shca_id = $this->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
-			$cart->shoppingcart_positions = array ();
 		} else
 			$shca_id = $cart->shca_id;
 		
@@ -106,28 +105,34 @@ class Shoppingcart extends CI_Controller {
 		}
 		
 		// Wenn Warenkorb vorhanden, die Positon im Warenkorb anlegen
-		if ($shca_id) {
-			$shopping_cart_position = $this->shoppingcart_model->getShoppingCartPosition ( $shca_id, $scpo_prod_id, $scpo_prty_id );
-			if (isset ( $shopping_cart_position )) {
-				$shopping_cart_position->scpo_amount = $shopping_cart_position->scpo_amount + $scpo_amount;
-				$this->shoppingcart_model->update_shopping_cart_position ( $shopping_cart_position );
-			} else {
-				$shopping_cart_position = array (
-						'scpo_shca_id' => $shca_id,
-						'scpo_prod_id' => $scpo_prod_id,
-						'scpo_prty_id' => $scpo_prty_id,
-						'scpo_amount' => $scpo_amount 
-				);
-				$this->shoppingcart_model->insert_shopping_cart_position ( $shopping_cart_position );
-			}
-			
-		}
+		Shoppingcart::insert_update_positon ( $shca_id, $scpo_prod_id, $scpo_prty_id, $scpo_amount );
 		
 		// Jetzt den Warenkorb aktualisieren
 		
 		// Testseite wieder aufrufen
 		if (isset ( $_POST ['beschreibungSelect'] ) == false) // if beschriebungsSelect isset don't redirect (from single_event_view)
 			redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
+	}
+	// add postion to shopping cart or update amount of shoppingcart position
+	public static function insert_update_positon($shca_id, $prod_id, $prty_id, $scpo_amount) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'shoppingcart_model' );
+		
+		if ($shca_id) {
+			$shopping_cart_position = $CI->shoppingcart_model->getShoppingCartPosition ( $shca_id, $prod_id, $prty_id );
+			if (isset ( $shopping_cart_position )) {
+				$shopping_cart_position->scpo_amount = $shopping_cart_position->scpo_amount + $scpo_amount;
+				$CI->shoppingcart_model->update_shopping_cart_position ( $shopping_cart_position );
+			} else {
+				$shopping_cart_position = array (
+						'scpo_shca_id' => $shca_id,
+						'scpo_prod_id' => $prod_id,
+						'scpo_prty_id' => $prty_id,
+						'scpo_amount' => $scpo_amount 
+				);
+				$CI->shoppingcart_model->insert_shopping_cart_position ( $shopping_cart_position );
+			}
+		}
 	}
 	public static function getSingleShoppingCartById($shca_id) {
 		$CI = & get_instance ();

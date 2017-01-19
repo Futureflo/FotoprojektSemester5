@@ -13,6 +13,7 @@ class ProductType extends CI_Controller {
 	public function product_types() {
 		$this->load->model ( 'product_type_model' );
 		$this->load->model ( 'User_model' );
+		$data ['ProductViewHeader'] = "Alle Formate";
 		$data ['product_types'] = ProductType::getAllProductType ();
 		
 		$user_id = $this->session->userdata ( 'user_id' );

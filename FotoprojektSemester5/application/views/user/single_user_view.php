@@ -21,7 +21,7 @@
 			?>
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
-				<h2 style="text-decoration: underline;">PersÃ¶nliche Daten</h2>
+				<h2 style="text-decoration: underline;">Persönliche Daten</h2>
 
 				<div class="form-group col-xs-12">
 					<label for="gender">Anrede</label> <select class="form-control" id="gender">
@@ -66,7 +66,7 @@
 					?>">
 				</div>
 				<div class="form-group col-xs-12">
-					<label for="street">StraÃŸe</label> <input type="text" class="form-control" id="street" value="<?php
+					<label for="street">Straße</label> <input type="text" class="form-control" id="street" value="<?php
 					
 					echo $adre_street;
 					?>">
@@ -103,7 +103,7 @@
 	?>" method="post">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
-				<h2 style="text-decoration: underline;">Passwort Ã¤ndern</h2>
+				<h2 style="text-decoration: underline;">Passwort Ändern</h2>
 				<div class="form-group col-xs-7">
 					<label for="oldpassword">Altes Passwort</label> <input type="password" class="form-control" id="oldpassword">
 				</div>
@@ -111,7 +111,7 @@
 					<label for="newpassword">Neues Passwort</label> <input type="password" class="form-control" id="newpassword">
 				</div>
 				<div class="form-group col-xs-7">
-					<label for="proofpassword">Passwort bestÃ¤tigen</label> <input class="form-control" type="password" id="proofpassword" />
+					<label for="proofpassword">Passwort bestätigen</label> <input class="form-control" type="password" id="proofpassword" />
 				</div>
 				<br>
 				<div class="form-group col-xs-12">
@@ -131,7 +131,7 @@ echo base_url ();
 ?>user/call_change_email_view" method="post">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
-				<h2>Email-Adresse Ã¤ndern</h2>
+				<h2>Email-Adresse Ändern</h2>
 				<div class="form-group col-xs-7">
 					<input type="text" class="form-control" id="mail" value="<?php
 					
@@ -140,7 +140,7 @@ echo base_url ();
 				</div>
 				
 				<div class="form-group col-xs-12">
-					<button name="submit" type="submit" id="save-mail-btn" class="btn btn-success btn-md">E-Mail Adresse Ã¤ndern</button>
+					<button name="submit" type="submit" id="save-mail-btn" class="btn btn-success btn-md">E-Mail Adresse Ändern</button>
 				</div>
 			</div>
 		</div>
@@ -151,9 +151,9 @@ echo base_url ();
 <div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<a class="btn btn-danger" data-toggle="modal" data-target="#delete" title="Benutzer lÃ¶schen">
+				<a class="btn btn-danger" data-toggle="modal" data-target="#delete" title="Benutzer löschen">
 					<i class="fa fa-trash-o fa-lg" aria-hidden="True" style="color:white;"></i>
-						<span style="color:white;">Benutzer lÃ¶schen</span>
+						<span style="color:white;">Benutzer löschen</span>
 				</a>				
 			</div>
 		</div>
@@ -167,11 +167,11 @@ echo base_url ();
 	    	<div class="modal-header">
 	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-	        	<h4 class="modal-title custom_align" id="Heading">Benutzer lÃ¶schen?</h4>
+	        	<h4 class="modal-title custom_align" id="Heading">Benutzer löschen?</h4>
 	 		</div>
 	   		<div class="modal-body">   
 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>MÃ¶chten Sie Ihren Benutzeraccount unwiderruflich lÃ¶schen? <br> Durch die BestÃ¤tigung werden Sie direkt ausgeloggt. Ihre Daten werden unwiderruflich gelÃ¶scht und Sie haben keinen Zugriff mehr auf Ihren Account.
+		       		</span>Möchten Sie Ihren Benutzeraccount unwiderruflich löschen? <br> Durch die Bestätigung werden Sie direkt ausgeloggt. Ihre Daten werden unwiderruflich gelöscht und Sie haben keinen Zugriff mehr auf Ihren Account.
 		       	</div>
 	 		</div>
 		  	<div class="modal-footer ">
@@ -179,7 +179,7 @@ echo base_url ();
 										
 										echo base_url ();
 										?>user/deleteUser/" method="post">
-			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer lÃ¶schen</button>
+			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
 		        </form>
 			</div>
