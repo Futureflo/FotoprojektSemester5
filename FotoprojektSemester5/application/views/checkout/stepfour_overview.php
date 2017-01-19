@@ -75,7 +75,7 @@ echo form_open ( "checkout", '', array (
 			echo '<td>' . $event->even_name . '<br/>';
 			echo '' . $prodname . '<br/>';
 			echo '' . $size . '<br/>';
-			if ($prty_type == ProductPrintType::print) {
+			if ($prty_type == ProductPrintType::prints) {
 				echo '' . 'Druck' . '<br/>';
 			} else {
 				echo '' . 'Download' . '</td>';
@@ -152,20 +152,19 @@ echo form_open ( "checkout", '', array (
 	<div class="container">
 		<hr>
 		<div class="row">
-			<div class="col-md-4 offset-md-4">
-				<button name="submit" type="submit"
-					class="btn btn-success btn-block btn-md">zahlungspflichtig
-					bestellen</button>
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<button type="submit" class="btn btn-default" name="action" value="back">Abbrechen</button>
+			</div>
+			<div
+				class="col-md-4 offset-md-4 col-sm-4  col-xs-4">
+				<button type="submit" class="btn btn-success" name="action" value="next">Zahlungspflichtig bestellen	</button>
+				<?php
+				echo form_close ();
+				?>
 			</div>
 		</div>
-
-
 		<hr />
 	</div>
-
-<?php
-echo form_close ();
-?>
 
 <script type="text/javascript">
 function sum(f){

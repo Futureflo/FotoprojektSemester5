@@ -50,9 +50,12 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-4">
+				<button type="submit" class="btn btn-default" name="action" value="back">Abbrechen</button>
+			</div>
 			<div
-				class="col-md-4 offset-md-8 col-sm-4 offset-sm-4 col-xs-4 offset-xs-4">
-				<button type="submit" class="btn btn-primary">Weiter zu
+				class="col-md-4 offset-md-4 col-sm-4  col-xs-4">
+				<button type="submit" class="btn btn-primary" name="action" value="next">Weiter zu
 					Best&auml;tigung</button>
 				<?php
 				echo form_close ();
