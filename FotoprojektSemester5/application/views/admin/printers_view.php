@@ -20,16 +20,16 @@
 		echo $PrintersViewHeader?>
 		</p>
 		</div>
-		<div class="col-md-2">
-			<a
-				href="<?php
-				
-				echo base_url ();
-				?>admin/printers_creation/"
-				class="btn btn-primary" role="button" href="printers_creation"> <i
-				class="fa fa-plus-square fa-lg"></i> Druckerei anlegen
-			</a>
-		</div>
+			<div class="col-md-2">
+				<?php
+				if ($PrintersViewHeader != "Archivierte Druckereien") {
+					echo '<a
+					href="' . base_url () . 'admin/printers_creation/"
+					class="btn btn-primary" role="button" href="printers_creation"> <i
+					class="fa fa-plus-square fa-lg"></i> Druckerei</a>';
+				}
+				?>
+			</div>
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Suche Druckerei.." />
@@ -72,12 +72,17 @@
 					echo btnEdit ( $printer );
 					echo btnDelete ( $printer );
 					echo btneditprinter ( $printer );
+				} elseif ($printer->prsu_status == 2) {
+					echo btnRecycle ( $printer );
 				}
 				echo "</td>";
 				echo "</tr>";
 			}
 			function btnDelete($printer) {
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			function btnRecycle($printer) {
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
@@ -163,6 +168,49 @@
 	<!-- /.modal-dialog -->
 </div>
 
+
+
+
+<div class="modal fade" id="recycle" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Druckerei wiederherstellen?</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-danger">
+					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
+					die Druckerei "<span id="printer"></span>" wiederherstellen?
+				</div>
+			</div>
+			<div class="modal-footer ">
+				<form
+					action="<?php
+					
+					echo base_url ();
+					?>admin/recyclePrinter/"
+					method="post">
+					<input id="printer_hidden_field" type="hidden"
+						name="printerDelete_hidden_field" value="">
+					<button type="submit" class="btn btn-danger">
+						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei wiederherstellen
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>Abbrechen
+					</button>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
 
 
 <script type="text/javascript">
