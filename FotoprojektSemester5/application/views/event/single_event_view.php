@@ -236,13 +236,14 @@ echo '</script>';
 
 <script>
 $("#addToCartForm").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
 
-    var url = $("#shoppingCartInsertURL").html();
+    var insertURL = $("#shoppingCartInsertURL").html();
     // alert(url);
     // the script where you handle the form input.
-    $.ajax({
+    var request = $.ajax({
            type: "POST",
-           url: url,
+           url: insertURL,
            data: $("#addToCartForm").serialize(), // serializes the form's elements.
            success: function(data)
            {
@@ -250,8 +251,11 @@ $("#addToCartForm").submit(function(e) {
                $('#bestellungModal').modal('hide')
            }
          });
+    request.fail(function (jqXHR, textStatus) {
+	    alert("Das gewählte Produkt kann aktuell nicht hinzugefügt werden, wenden Sie sich bitte an den Administrator.")
+        $('#bestellungModal').modal('hide')
+	});
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.
 });
 
 // hide user upload and picture
