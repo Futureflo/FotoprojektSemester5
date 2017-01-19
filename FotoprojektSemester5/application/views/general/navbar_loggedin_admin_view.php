@@ -27,6 +27,8 @@
 					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedUsers/">Benutzer Archiv</a> 
 					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedEvents/">Event Archiv</a>
 					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedPrinters/">Druckereien (System) Archiv</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedProduct_types/">Formate Archiv</a> 
+					 <a class="dropdown-item" href="<?php echo base_url (); ?>admin/archivedPrice_profiles/">Preisprofile Archiv</a> 
 				</div></li>
 
 				<li class="nav-item"><a class="nav-link" href="<?php

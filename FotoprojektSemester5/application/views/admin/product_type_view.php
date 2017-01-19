@@ -1,7 +1,7 @@
 
 <section class="jumbotron text-xs-center">
 	<div class="container">
-		<h1 class="jumbotron-heading">Alle Formate</h1>
+		<h1 class="jumbotron-heading"><?php echo $ProductViewHeader; ?></h1>
 	</div>
 </section>
 
@@ -30,7 +30,7 @@
 				
 				echo "<td>";
 				echo "<select name=\"prty_type\">";
-				echo "<option value=" . ProductPrintType::print . ">" . "Druck" . "</option>";
+				echo "<option value=" . ProductPrintType::prints . ">" . "Druck" . "</option>";
 				echo "<option value=" . ProductPrintType::download . ">" . "Download" . "</option>";
 				echo "<option value=" . ProductPrintType::article . ">" . "Artikel" . "</option>";
 				echo "</select>";
@@ -69,7 +69,7 @@
 									echo "<td>" . $pt->prty_description . "</td>";
 									
 									switch ($pt->prty_type) {
-										case ProductPrintType::print :
+										case ProductPrintType::prints :
 											{
 												echo "<td>" . 'Druck' . "</td>";
 												break;
