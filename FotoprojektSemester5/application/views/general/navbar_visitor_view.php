@@ -119,7 +119,7 @@
 </div>
 
 <script type="text/javascript">
-    window.onload = function(){
+    function loadError(){
         if(document.getElementById("fehler_span").innerHTML.length > 0){
             var text = document.getElementById("fehler_span").innerHTML;
             document.getElementById("login-btn").click();
@@ -131,6 +131,10 @@
             }
         }
     }
+
+    $( document ).ready(function() {
+    	loadError();
+    });
     
     document.getElementById("user_password")
     	.addEventListener("keyup", function(event) {
