@@ -106,6 +106,23 @@ class DownloadManager extends CI_Controller {
 		return $downloadLink;
 	}
 	
+	
+	function sendDownloadEmail($user_email, $downloadLink){
+		$this->load->library('email');
+	
+		$this->email->from('noReply@snapUp.de', 'SnapUp');
+		$this->email->to($user_email);
+		$this->email->subject('Ihr Download-Link zu Ihrer Bestellung');
+		$this->email->message(
+				'SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.<br><br>'
+				.'Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.<br>'
+				.'Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.<br><br>'
+				. $downloadLink. '<br><br>'
+				.'Ihr Snapup-Team'
+				);
+		$this->email->send();
+	}
+	
 	/**
 	 * Method to start the Download of a zipfile. This Method checks the integrity of the download call and initiaties if positive.
 	 */
@@ -226,15 +243,19 @@ class DownloadManager extends CI_Controller {
 		if ($zipArchive->open($outZipPath, ZipArchive::CREATE)!==TRUE) {
 			exit("cannot open <$outZipPath>\n");
 		}
-
+		
+// 		echo "größe: ". count($productsArray) ."<br>";
 		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
 		for ($i = 0; $i < count($productsArray); $i++) {
 			// name der hinzugefügten Datei wird ursprungs
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
 			$pathComplete = Product::buildFilePath($productsArray[$i]);
+// 			echo "pfad: ". $pathComplete ."<br>";
 			$path_parts = pathinfo($pathComplete);
-			$zipArchive->addFile("../". $pathComplete, $path_parts['basename']);
-
+// 			echo "name: ". $path_parts['basename'] ."<br>";
+			$conjunctedPath = join('/', array(trim("../", '/'), trim($pathComplete, '/')));
+// 			$zipArchive->addFile("../". $pathComplete, $path_parts['basename']);
+			$zipArchive->addFile($conjunctedPath, $path_parts['basename']);
 		}
 // 		if(count($productsArray)==0){
 // 			echo "empty product array";
