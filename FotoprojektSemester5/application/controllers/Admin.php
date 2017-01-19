@@ -23,18 +23,13 @@ class Admin extends CI_Controller {
 	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
+		$data ['EventsViewHeader'] = "Archivierte Events";
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";
 		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
-		$this->load->template ( 'admin/printers_view', $data );
-	}
-	public function archivedPrinters() {
-		$this->load->model ( 'Printers_model' );
-		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
-		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {
