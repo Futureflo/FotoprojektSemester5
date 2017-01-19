@@ -16,6 +16,12 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
+	public function dashboard() {
+		$this->load->model ( 'dashboard_model' );
+		$data ['users'] = $this->dashboard_model->getInformations ();
+		$data ['DashboardViewHeader'] = "Dashboard";
+		$this->load->template ( 'admin/dashboard', $data );
+	}
 	public function users() {
 		$data ['users'] = $this->user_model->getAllUsers ();
 		$data ['UsersViewHeader'] = "Alle Benutzer";
