@@ -138,15 +138,13 @@ class Product extends CI_Controller {
 			if ($filename) {
 				$prod_name = Product::get_name ( $filename );
 				$prod_filepath = $filename;
-				$prod_filesize = $files ['dateiupload'] ['size'] [$i];
 				
 				$data = array (
 						'prod_date' => $prod_date,
 						'prod_even_id' => $prod_even_id,
 						'prod_name' => $prod_name,
 						'prod_status' => $prod_status,
-						'prod_filepath' => $prod_filepath,
-						'prod_filesize' => $prod_filesize 
+						'prod_filepath' => $prod_filepath 
 				);
 				
 				$this->load->model ( 'product_model' );
@@ -182,7 +180,7 @@ class Product extends CI_Controller {
 				//
 			} else {
 				// error
-				$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
+				$this->session->set_flashdata ( 'upload_file', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
 			}
 		}
 		
@@ -229,10 +227,10 @@ class Product extends CI_Controller {
 		
 		// Jetzt der Upload einer einzelner Datei
 		if (! $this->upload->do_upload ( 'dateiupload' )) {
-			$this->session->set_flashdata ( 'msg', $this->upload->display_errors () );
+			$this->session->set_flashdata ( 'upload', $this->upload->display_errors () );
 		} else {
 			$finfo = $this->upload->data ();
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
+			$this->session->set_flashdata ( 'upload', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
 		}
 		
 		return $upload_path . $file ['name'];
