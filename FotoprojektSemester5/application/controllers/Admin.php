@@ -21,35 +21,15 @@ class Admin extends CI_Controller {
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
-<<<<<<< Updated upstream
-	public function archivedUsers() {
-		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
-		$data ['UsersViewHeader'] = "Archivierte Benutzer";
-		$this->load->template ( 'admin/users_view', $data );
-	}
-=======
->>>>>>> Stashed changes
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
+		$data ['EventsViewHeader'] = "Archivierte Events";
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";
-<<<<<<< Updated upstream
 		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
-		$this->load->template ( 'admin/printers_view', $data );
-	}
-	public function archivedPrinters() {
-		$this->load->model ( 'Printers_model' );
-		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
-		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-=======
-<<<<<<< Updated upstream
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
-=======
-		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
->>>>>>> Stashed changes
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {
@@ -72,14 +52,13 @@ class Admin extends CI_Controller {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
 		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
->>>>>>> Stashed changes
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function archivedProduct_types() {
 		$this->load->model ( 'product_type_model' );
 		$this->load->model ( 'User_model' );
-		$data ['ProductViewHeader'] = "Archivierte Druckereien";
-		$data ['product_types'] = $this->ProductType->getAllArichvedProductType ();
+		$data ['ProductViewHeader'] = "Archivierte Formate";
+		$data ['product_types'] = $this->product_type_model->getAllArichvedProductType ();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 	public function archivedPrice_profiles() {
@@ -95,7 +74,17 @@ class Admin extends CI_Controller {
 		$data ['PrintersViewHeader'] = "Druckereien";
 		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
 		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
+		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function recyclePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
+		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function deleteUser() {

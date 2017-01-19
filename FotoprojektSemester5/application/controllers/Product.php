@@ -160,7 +160,6 @@ class Product extends CI_Controller {
 				// Den neuen Dateinamen in der Datenbank abspeichern
 				$this->product_model->update_product ( $new_prod_id, $data );
 				
-				
 				$file = array (
 						'name' => $files ['dateiupload'] ['name'] [$i],
 						'type' => $files ['dateiupload'] ['type'] [$i],
@@ -228,10 +227,10 @@ class Product extends CI_Controller {
 		
 		// Jetzt der Upload einer einzelner Datei
 		if (! $this->upload->do_upload ( 'dateiupload' )) {
-			$this->session->set_flashdata ( 'msg', $this->upload->display_errors () );
+			$this->session->set_flashdata ( 'upload', $this->upload->display_errors () );
 		} else {
 			$finfo = $this->upload->data ();
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
+			$this->session->set_flashdata ( 'upload', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
 		}
 		
 		return $upload_path . $file ['name'];

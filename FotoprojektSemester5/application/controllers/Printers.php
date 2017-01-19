@@ -26,26 +26,6 @@ class Printers extends CI_Controller {
 		$data ['printers'] = $this->Printers_model->getPrintersForUser ( $user_id );
 		$this->load->template ( 'printers/printers_view', $data );
 	}
-	public function deletePrinter() {
-		$this->load->model ( 'Printers_model' );
-		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
-		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
-		$data ['PrintersViewHeader'] = "Druckereien";
-		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gel&ouml;scht";
-		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
-		$this->load->template ( 'printers/printers_view', $data );
-	}
-	public function recyclePrinter() {
-		$this->load->model ( 'Printers_model' );
-		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
-		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
-		$data ['PrintersViewHeader'] = "Druckereien";
-		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
-		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
-		$this->load->template ( 'printers/printers_view', $data );
-	}
 	public function product_types() {
 		redirect ( 'ProductType/product_types' );
 	}
