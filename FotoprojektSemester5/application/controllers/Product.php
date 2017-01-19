@@ -138,13 +138,15 @@ class Product extends CI_Controller {
 			if ($filename) {
 				$prod_name = Product::get_name ( $filename );
 				$prod_filepath = $filename;
+				$prod_filesize = $files ['dateiupload'] ['size'] [$i];
 				
 				$data = array (
 						'prod_date' => $prod_date,
 						'prod_even_id' => $prod_even_id,
 						'prod_name' => $prod_name,
 						'prod_status' => $prod_status,
-						'prod_filepath' => $prod_filepath 
+						'prod_filepath' => $prod_filepath,
+						'prod_filesize' => $prod_filesize 
 				);
 				
 				$this->load->model ( 'product_model' );
@@ -159,7 +161,6 @@ class Product extends CI_Controller {
 				
 				// Den neuen Dateinamen in der Datenbank abspeichern
 				$this->product_model->update_product ( $new_prod_id, $data );
-				
 				
 				$file = array (
 						'name' => $files ['dateiupload'] ['name'] [$i],
