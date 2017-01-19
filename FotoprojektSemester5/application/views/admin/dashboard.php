@@ -15,13 +15,7 @@
 	
 	foreach ( $orders as $order ) {
 		
-		$orderDate = date("m/d/Y", strtotime($order->orde_date));
-
-		if ($orderDate == date('01/09/2017'))
-		{
-			$SumDaily += $order->orde_sum;
-		}
-		
+		checkDaily($order);
 		
 	}
 		echo '<p></p>';
@@ -47,6 +41,17 @@
 		//Div-Ende für Row
 		echo '</div>';
 
+		
+		function checkDaily($order)
+		{
+			$orderDate = date("m/d/Y", strtotime($order->orde_date));
+			
+			if ($orderDate == date('01/09/2017'))
+			{
+				return true;
+			}
+			return false;
+		}
 		
 	
 	
