@@ -141,6 +141,7 @@ function lockEvent(eventID) {
 	    		  url: "<?php echo site_url (); ?>/event/lockEventById/"+eventID,
 	    		  dataType: 'html',
 	    		});
+	    alert('Die Änderung wurde übernommen!');
 	    location.reload();
 }
 
@@ -150,6 +151,7 @@ function unlockEvent(eventID) {
 		  url: "<?php echo site_url (); ?>/event/unlockEventById/"+eventID,
 		  dataType: 'html',
 		});
+    alert('Die Änderung wurde übernommen!');
 	location.reload();
 }
 
@@ -159,6 +161,7 @@ function setPublicById(eventID) {
 		  url: "<?php echo site_url (); ?>/event/changeStateToPublicById/"+eventID,
 		  dataType: 'html',
 		});
+    alert('Die Änderung wurde übernommen!');
 	location.reload();
 }
 
@@ -168,6 +171,7 @@ function setPrivateById(eventID) {
 		  url: "<?php echo site_url (); ?>/event/changeStateToPrivateById/"+eventID,
 		  dataType: 'html',
 		});
+    alert('Die Änderung wurde übernommen!');
 	location.reload();
 }
 
