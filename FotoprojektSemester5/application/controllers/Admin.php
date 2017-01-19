@@ -21,14 +21,6 @@ class Admin extends CI_Controller {
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
-<<<<<<< Updated upstream
-	public function archivedUsers() {
-		$data ['users'] = $this->user_model->get_AllArchivedUsers ();
-		$data ['UsersViewHeader'] = "Archivierte Benutzer";
-		$this->load->template ( 'admin/users_view', $data );
-	}
-=======
->>>>>>> Stashed changes
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
 		$this->load->template ( 'admin/events_view', $data );
@@ -36,7 +28,6 @@ class Admin extends CI_Controller {
 	public function printers() {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Druckereien";
-<<<<<<< Updated upstream
 		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
@@ -44,12 +35,6 @@ class Admin extends CI_Controller {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
 		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-=======
-<<<<<<< Updated upstream
-		$data ['printers'] = $this->Printers_model->getAllPrinters ();
-=======
-		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
->>>>>>> Stashed changes
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {
@@ -72,7 +57,6 @@ class Admin extends CI_Controller {
 		$this->load->model ( 'Printers_model' );
 		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
 		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
->>>>>>> Stashed changes
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function archivedProduct_types() {
