@@ -84,7 +84,7 @@
 				// 1. Bild des Events anzeigen ansonsten Platzhalter
 				if (isset ( $products [0] )) {
 					echo " <img class=\"img-responsive\" data-src=./" . $products [0]->prod_filepath . "\" alt=" . $products [0]->prod_name . "\"
-						style=\"width:100%;height:280px; display: block; filter: blur(5px);\"
+						style=\"width:100%;height:280px; display: block;\"
 						src=./" . $products [0]->prod_filepath . ">";
 				} else {
 					echo "<img data-src=\"holder.js/100px280/thumb\" alt=\"100%x280\"

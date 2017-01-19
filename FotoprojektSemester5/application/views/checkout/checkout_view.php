@@ -44,12 +44,20 @@
 				// Spalte 3: Preis
 				echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 				
+				echo form_open ( '/', 'id="updateAmountForm"' );
 				// Spalte 4: Menge
 				echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
 				echo '<div class="form-group col-sm-2">';
-				echo "<p>" . '<input type="text" maxLength="3" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' onkeyup=change(this) >' . "</p>";
+				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
 				echo "</div>";
+				
+				array (
+						'scpo_prod_id' => $shoppingcart_position->scpo_prod_id,
+						'scpo_prty_id' => $shoppingcart_position->scpo_prty_id,
+						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
+				);
+				echo form_close ();
 				
 				// Spalte 5: Button
 				echo form_open ( "Shoppingcart/delete", '', array (
@@ -174,17 +182,45 @@
 
 
 <script type="text/javascript">
+function updateAmount() {
+	console.log('work');
+    var insertURL = "<?php
+				
+				echo base_url ()?>/Shoppingcart/update";
+   
+    // the script where you handle the form input.
+    var request = $.ajax({
+           type: "POST",
+           url: insertURL,
+           data: $("#updateAmountForm").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               //alert(data); // show response from the php script.
+           }
+         });
+    request.fail(function (jqXHR, textStatus) {
+	    alert("Das gewählte Produkt kann aktuell nicht aktualisiert werden, wenden Sie sich bitte an den Administrator.")
+	});
+
+}
+
+
+
+
     function login(){
         document.getElementById("login-btn").click();
     }
 
     function minmax(value, min, max) 
     {
-        if(parseInt(value) < min || isNaN(parseInt(value))) 
+        change(value);
+        if(parseInt(value) < min || isNaN(parseInt(value))){
+        	change(1); 
             return 1; 
-        else if(parseInt(value) > max) 
+        }else if(parseInt(value) > max){
+        	change(100); 
             return 1000; 
-        else return value;
+        }else return value;
     }
     
     function nettopreis() {
@@ -237,12 +273,10 @@ function articleSum(){
     
     
     function change(e){
-        var row = e.parentNode.parentElement.parentElement;
-        var price = row.getElementsByClassName('aktuellerpreis')[0];
-        var number = e.value;
-        var one = row.getElementsByClassName('one')[0].value;
 
-        console.log(number);
+        var price = document.getElementsByClassName('aktuellerpreis')[0];
+        var number = e;
+        var one = document.getElementsByClassName('one')[0].value;
         
         if (isNaN ( number )) {
             number = parseFloat(1);
@@ -253,7 +287,6 @@ function articleSum(){
         }
         
         articleSum();
-        console.log(number);
     }
     
     
