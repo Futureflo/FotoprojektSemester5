@@ -31,12 +31,6 @@ class Admin extends CI_Controller {
 		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
 		$this->load->template ( 'admin/printers_view', $data );
 	}
-	public function archivedPrinters() {
-		$this->load->model ( 'Printers_model' );
-		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
-		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-		$this->load->template ( 'admin/printers_view', $data );
-	}
 	public function product_types() {
 		redirect ( 'ProductType/product_types' );
 	}
