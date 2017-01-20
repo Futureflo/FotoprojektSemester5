@@ -9,9 +9,9 @@
 
 		
 <div class="container">
-	<div class="alert alert-success"><?php
+	<?php
 	echo $this->session->flashdata ( 'PrintSupplierPrice' );
-	?></div>
+	?>
 		
 		<div class="row">
 			<div class="col-sm-12 col-md-12">

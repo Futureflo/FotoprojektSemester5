@@ -125,7 +125,7 @@ class PriceProfile extends CI_Controller {
 		
 		$this->PriceProfile_model->update_print_supplier_price ( $data );
 		
-		$this->session->set_flashdata ( 'PrintSupplierPrice', 'Format: ' . $prty_description . ' erfolgreich auf ' . $prsp_price . '€ geändert.' );
+		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Forma: ' . $prty_description . ' erfolgreich auf ' . $prsp_price . '€ geändert!</div>' );
 		
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
@@ -141,7 +141,7 @@ class PriceProfile extends CI_Controller {
 		
 		$this->PriceProfile_model->delete_print_supplier_price ( $data );
 		
-		$this->session->set_flashdata ( 'PrintSupplierPrice', 'Format: ' . $prty_description . ' gelöscht.' );
+		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' gelöscht.</div>' );
 		
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
