@@ -70,7 +70,10 @@ class Product extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'printers_model' );
 		$PrinterPrice = $CI->printers_model->getPrinterPriceByProducttype ( $prsu_id, $prty_id );
-		return $PrinterPrice->prsp_price;
+		if ($PrinterPrice)
+			return $PrinterPrice->prsp_price;
+		else
+			return NULL;
 	}
 	public static function getVariantPrice($product_variant) {
 		// Basispreis aus Preisprofil
@@ -121,7 +124,19 @@ class Product extends CI_Controller {
 		// $this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
 		
 		// Konstanten setzten
-		$prod_status = ProductStatus::locked;
+		// Administatoren und Fotografen uploaden öffentliche Bilder
+		// Alle anderen Uploads werden bis zur Freigabe gesperrt erstmal
+		$userrolle = $this->session->user_role;
+		switch ($userrolle) {
+			case UserRole::Admin :
+			case UserRole::Photograph :
+				$prod_status = ProductStatus::pbl;
+				break;
+			default :
+				$prod_status = ProductStatus::prv_locked;
+				break;
+		}
+		
 		$prod_date = date ( "Y-m-d H:i:s" );
 		
 		// Event laden
@@ -251,7 +266,8 @@ class Product extends CI_Controller {
 }
 abstract class ProductStatus {
 	const undefined = 0;
-	const locked = 1;
-	const approved = 2;
-	const deleted = 3;
+	const pbl = 1;
+	const prv_locked = 2;
+	const prv_approved = 3;
+	const deleted = 4;
 }
