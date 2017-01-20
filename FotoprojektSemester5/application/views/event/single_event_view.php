@@ -193,7 +193,9 @@ function removeOptions(selectbox)
 					<div class="row">
 						<?php
 						
-						echo form_open ( '/', 'id="addToCartForm"' );
+						echo form_open ( '/', 'id="addToCartForm"', array (
+								'even_prsu_id' => $event->even_prsu_id 
+						) );
 						?>
 						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 							<div class="col-md-3 col-sm-2 col-xs-2">
