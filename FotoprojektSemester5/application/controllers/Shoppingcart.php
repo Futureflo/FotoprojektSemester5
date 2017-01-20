@@ -210,7 +210,28 @@ class Shoppingcart extends CI_Controller {
 	}
 	function delete() {
 		$shoppingcart_position = $this->input->post ();
+		$scpo_shca_id = $shoppingcart_position['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position['scpo_prty_id'];
+		$this->shoppingcart_model->delete_shopping_cart_position($scpo_shca_id, $scpo_prod_id, $scpo_prty_id);
+		redirect("shoppingcart/");
+	}
+	
+	function update() {
+		$shoppingcart_position = $this->input->post ();
+		$scpo_shca_id = $shoppingcart_position['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position['scpo_prty_id'];
+		$scpo_amount = $shoppingcart_position['amount_hidden'];
 		
-		print_r ( $shoppingcart_position );
+
+		$shoppingcart_positionOb = new stdClass ();
+		
+		$shoppingcart_positionOb->scpo_shca_id = $scpo_shca_id;
+		$shoppingcart_positionOb->scpo_prod_id = $scpo_prod_id;
+		$shoppingcart_positionOb->scpo_prty_id = $scpo_prty_id;
+		$shoppingcart_positionOb->scpo_amount = $scpo_amount;
+ 		print_r($shoppingcart_positionOb);
+		$this->shoppingcart_model->update_shopping_cart_position($shoppingcart_positionOb);
 	}
 }

@@ -26,37 +26,40 @@
 				// Für jede Warenkorpostion eine neue HTML-Zeile
 				echo '<div class="row"> ';
 				
-				// Spalte 1: Bild
-				echo '<div class="col-sm-2 col-xs-6">';
+				echo '<div class="col-md-6 col-sm-12">';
 				
-				echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . " style=\"width:auto ;height:auto; display: block;\">";
+				// Spalte 1: Bild
+				echo '<div class="col-md-6 col-sm-6">';
+				
+				echo " <img data-src='../" . $prod_filepath . "'" . " alt=" . $prodname . " . src=../" . $prod_filepath . " style=\"width:auto ;height:auto; display: inline;\">";
 				echo '</div>';
 				
 				// Spalte 2: Produktinfo
-				echo '<div class="col-sm-4 col-xs-6">';
+				echo '<div class="col-md-6 col-sm-6">';
 				echo '<ul style="list-style-type: none">';
 				echo '<li><h6>' . $prodname . '</h6></li>';
 				echo '<li>Veranstaltung: ' . $event->even_name . '</li>';
 				echo '<li>Größe: ' . $size . '</li>';
 				echo '<li>Digital/Analog</li>';
 				echo '</div>';
+				echo '</div>';
 				
+				echo '<div class="col-md-6 col-sm-12">';
 				// Spalte 3: Preis
-				echo '<div class="col-sm-1"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
+				echo '<div class="col-md-2 col-sm-3"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 				
-				echo form_open ( '/', 'id="updateAmountForm"' );
+				echo form_open ( '/', '' );
 				// Spalte 4: Menge
-				echo '<div class="col-sm-1"><h5>Anzahl:</h5> </div>';
-				echo '<div class="form-group col-sm-2">';
-				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this.value, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
+				echo '<div class="col-md-4 col-sm-3"><h5>Anzahl:</h5> </div>';
+				echo '<div class="form-group col-md-4 col-sm-3">';
+				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount(this)" onchange="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
+				echo '<input type="hidden" name="amount_hidden" value="">';
+				echo '<input type="hidden" name="scpo_prod_id" value=' . $shoppingcart_position->scpo_prod_id . '>';
+				echo '<input type="hidden" name="scpo_prty_id" value=' . $shoppingcart_position->scpo_prty_id . '>';
+				echo '<input type="hidden" name="scpo_shca_id" value=' . $shoppingcart_position->scpo_shca_id . '>';
 				echo "</div>";
 				
-				array (
-						'scpo_prod_id' => $shoppingcart_position->scpo_prod_id,
-						'scpo_prty_id' => $shoppingcart_position->scpo_prty_id,
-						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
-				);
 				echo form_close ();
 				
 				// Spalte 5: Button
@@ -67,7 +70,7 @@
 						'scpo_shca_id' => $shoppingcart_position->scpo_shca_id 
 				) );
 				
-				echo '<div class="col-sm-1">';
+				echo '<div class="col-md-2 col-sm-3">';
 				echo '<button class="btn btn-danger btn-sm">';
 				echo '<i class="fa fa-trash-o"></i>';
 				echo '</button>';
@@ -89,7 +92,7 @@
 				
 				// Ende der HTML-Zeile
 				echo '</div>';
-				
+				echo '</div>';
 				echo form_close ();
 			}
 		}
@@ -114,7 +117,7 @@
 			</h6>
 
 			<h6>
-				<i id="versandkosten"></i>€
+				<i id="versandkosten"></i>0.00€
 			</h6>
 
 			<h5>
@@ -182,8 +185,7 @@
 
 
 <script type="text/javascript">
-function updateAmount() {
-	console.log('work');
+function updateAmount(element) {
     var insertURL = "<?php
 				
 				echo base_url ()?>/Shoppingcart/update";
@@ -192,7 +194,7 @@ function updateAmount() {
     var request = $.ajax({
            type: "POST",
            url: insertURL,
-           data: $("#updateAmountForm").serialize(), // serializes the form's elements.
+           data: $(element.parentNode.parentNode.parentNode).serialize(), // serializes the form's elements.
            success: function(data)
            {
                //alert(data); // show response from the php script.
@@ -210,17 +212,21 @@ function updateAmount() {
     function login(){
         document.getElementById("login-btn").click();
     }
-
+    
     function minmax(value, min, max) 
     {
+    	value.parentNode.nextSibling.nextSibling.value = value.value;
+
         change(value);
-        if(parseInt(value) < min || isNaN(parseInt(value))){
-        	change(1); 
+        if(parseInt(value.value) < min || isNaN(parseInt(value.value))){
+        	change(value); 
+        	value.parentNode.nextSibling.nextSibling.value = 1;
             return 1; 
-        }else if(parseInt(value) > max){
-        	change(100); 
+        }else if(parseInt(value.value) > max){
+        	change(value); 
+        	value.parentNode.nextSibling.nextSibling.value = 1000;
             return 1000; 
-        }else return value;
+        }else return value.value;
     }
     
     function nettopreis() {
@@ -243,7 +249,6 @@ function updateAmount() {
     
     $(document).ready(function(){
 	   articleSum();
-		checkCart();
 	});
 
 function checkCart(){
@@ -273,10 +278,11 @@ function articleSum(){
     
     
     function change(e){
-
-        var price = document.getElementsByClassName('aktuellerpreis')[0];
-        var number = e;
-        var one = document.getElementsByClassName('one')[0].value;
+    	console.log(e);
+    	 var row = e.parentNode.parentNode.parentNode.parentNode.parentNode;
+         var price = row.getElementsByClassName('aktuellerpreis')[0];
+         var number = e.value;
+         var one = row.getElementsByClassName('one')[0].value;
         
         if (isNaN ( number )) {
             number = parseFloat(1);

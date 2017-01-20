@@ -17,8 +17,8 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
 	public function dashboard() {
-		$this->load->model ( 'dashboard_model' );
-		$data ['orders'] = $this->dashboard_model->getInformations ();
+		$this->load->model ( 'Dashboard_model' );
+		$data ['orders'] = $this->Dashboard_model->getInformations ();
 		$data ['DashboardViewHeader'] = "Dashboard";
 		$this->load->template ( 'admin/dashboard', $data );
 	}
@@ -70,7 +70,6 @@ class Admin extends CI_Controller {
 	public function archivedPrice_profiles() {
 		$this->load->model ( 'price_type_model' );
 	}
-	
 	
 	// Funktionen für die View/Controller (DKM -> Wieso hier und nicht in de spez. Models/Controller?)
 	public function deletePrinter() {
