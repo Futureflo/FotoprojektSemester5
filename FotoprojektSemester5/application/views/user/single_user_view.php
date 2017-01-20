@@ -7,6 +7,10 @@
 					echo "<div id='fehler_span' class='alert alert-success'>";
 					echo $this->session->flashdata ( 'emailChange' );
 					echo "</div>";
+				} elseif ($this->session->flashdata ( 'pwChange' ) != "") {
+					echo "<div id='fehler_span' class='alert alert-success'>";
+					echo $this->session->flashdata ( 'pwChange' );
+					echo "</div>";
 				}
 				?>
 	</div>
