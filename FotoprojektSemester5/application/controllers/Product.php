@@ -89,26 +89,28 @@ class Product extends CI_Controller {
 		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prty_id );
 		if (isset ( $profile ))
 			$price_basic = $profile->prpt_price;
-		else
+		else {
 			$price_basic = 0;
-			
-			// Preisaufschlag Fotograf
+		}
+		
+		// Preisaufschlag Fotograf
 		if (isset ( $product_variant->prva_price_specific )) {
 			$prva_price_specific = $product_variant->prva_price_specific;
-		} else
+		} else {
 			$prva_price_specific = 0;
-			
-			// Preisaufschlag von Druckerei
+		}
+		
+		// Preisaufschlag von Druckerei
 		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prty_id );
 		if (! isset ( $price_supplier )) {
 			$price_supplier = 0;
 		}
-		
-		// Provision
-		$price_provision = 0;
-		
 		// Preis zusammensetzen
-		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier ) + floatval ( $price_provision );
+		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier );
+		
+		// Provision ergänzen
+		$price_provision = floatval ( $price_sum ) * floatval ( $event->user_commision );
+		$price_sum = $price_sum + floatval ( $price_provision );
 		
 		$price = array (
 				'price_basic' => $price_basic,

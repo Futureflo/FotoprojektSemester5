@@ -33,6 +33,7 @@ class Event_model extends CI_Model {
 	}
 	Public function getSingleEventById($id) {
 		$this->db->where ( 'even_id', $id );
+		$this->db->join ( 'user', 'even_user_id = user_id' );
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
