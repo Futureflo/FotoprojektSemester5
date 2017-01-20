@@ -95,7 +95,8 @@ class Login extends CI_Controller {
 								'user_name' => $uresult [0]->user_name,
 								'user_firstname' => $uresult [0]->user_firstname,
 								'user_status' => $uresult [0]->user_status,
-								'user_role' => $uresult [0]->user_role_id 
+								'user_role' => $uresult [0]->user_role_id,
+								'user_commission' => $uresult [0]->user_commission 
 						);
 						$this->session->set_userdata ( $sess_data );
 						// transfer shoppingcart position from annonymouse user to logged in user

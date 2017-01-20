@@ -85,8 +85,16 @@ class Product extends CI_Controller {
 			$event = $GLOBALS ["event"];
 		}
 		
+		$prpr_id = $event->even_prpr_id;
+		$prty_id = $product_variant->prty_id;
+		$prsu_id = $event->even_prsu_id;
+		$user_commision = $event->user_commision;
+		
+		return Product::getPrice ( $prpr_id, $prty_id, $prsu_id, $user_commision );
+	}
+	public static function getPrice($prpr_id, $prty_id, $prsu_id, $user_commision) {
 		// Basispreis
-		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prty_id );
+		$profile = PriceProfile::getPriceByProductType ( $prpr_id, $prty_id );
 		if (isset ( $profile ))
 			$price_basic = $profile->prpt_price;
 		else {
@@ -101,7 +109,7 @@ class Product extends CI_Controller {
 		}
 		
 		// Preisaufschlag von Druckerei
-		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prty_id );
+		$price_supplier = Product::getPrintersProductPrice ( $prsu_id, $prty_id );
 		if (! isset ( $price_supplier )) {
 			$price_supplier = 0;
 		}
@@ -109,7 +117,7 @@ class Product extends CI_Controller {
 		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier );
 		
 		// Provision ergänzen
-		$price_provision = floatval ( $price_sum ) * floatval ( $event->user_commision );
+		$price_provision = floatval ( $price_sum ) * floatval ( $user_commision );
 		$price_sum = $price_sum + floatval ( $price_provision );
 		
 		$price = array (
