@@ -48,11 +48,11 @@
 				// Spalte 3: Preis
 				echo '<div class="col-md-2 col-sm-3"><h5><i class="aktuellerpreis">' . $price * $amount . '</i>€</h5></div>';
 				
-				echo form_open ( '/', 'id="updateAmountForm"' );
+				echo form_open ( '/', '' );
 				// Spalte 4: Menge
 				echo '<div class="col-md-4 col-sm-3"><h5>Anzahl:</h5> </div>';
 				echo '<div class="form-group col-md-4 col-sm-3">';
-				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount()" onkeyup="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" onkeyup=change(this) >' . "</p>";
+				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount(this)" onchange="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
 				echo '<input type="hidden" name="amount_hidden" value="">';
 				echo '<input type="hidden" name="scpo_prod_id" value=' . $shoppingcart_position->scpo_prod_id . '>';
@@ -117,7 +117,7 @@
 			</h6>
 
 			<h6>
-				<i id="versandkosten"></i>€
+				<i id="versandkosten"></i>0.00€
 			</h6>
 
 			<h5>
@@ -185,7 +185,7 @@
 
 
 <script type="text/javascript">
-function updateAmount() {
+function updateAmount(element) {
     var insertURL = "<?php
 				
 				echo base_url ()?>/Shoppingcart/update";
@@ -194,7 +194,7 @@ function updateAmount() {
     var request = $.ajax({
            type: "POST",
            url: insertURL,
-           data: $("#updateAmountForm").serialize(), // serializes the form's elements.
+           data: $(element.parentNode.parentNode.parentNode).serialize(), // serializes the form's elements.
            success: function(data)
            {
                //alert(data); // show response from the php script.
@@ -216,15 +216,15 @@ function updateAmount() {
     function minmax(value, min, max) 
     {
     	value.parentNode.nextSibling.nextSibling.value = value.value;
-        
-        
-        console.log(value.parentNode.nextSibling.nextSibling);
-        change(value.value);
+
+        change(value);
         if(parseInt(value.value) < min || isNaN(parseInt(value.value))){
-        	change(1); 
+        	change(value); 
+        	value.parentNode.nextSibling.nextSibling.value = 1;
             return 1; 
         }else if(parseInt(value.value) > max){
-        	change(100); 
+        	change(value); 
+        	value.parentNode.nextSibling.nextSibling.value = 1000;
             return 1000; 
         }else return value.value;
     }
@@ -249,7 +249,6 @@ function updateAmount() {
     
     $(document).ready(function(){
 	   articleSum();
-		checkCart();
 	});
 
 function checkCart(){
@@ -279,10 +278,11 @@ function articleSum(){
     
     
     function change(e){
-
-        var price = document.getElementsByClassName('aktuellerpreis')[0];
-        var number = e;
-        var one = document.getElementsByClassName('one')[0].value;
+    	console.log(e);
+    	 var row = e.parentNode.parentNode.parentNode.parentNode.parentNode;
+         var price = row.getElementsByClassName('aktuellerpreis')[0];
+         var number = e.value;
+         var one = row.getElementsByClassName('one')[0].value;
         
         if (isNaN ( number )) {
             number = parseFloat(1);
