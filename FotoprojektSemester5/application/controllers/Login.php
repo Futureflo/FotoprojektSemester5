@@ -67,25 +67,24 @@ class Login extends CI_Controller {
 					$hashpw = generate_hash ( $user_salt, $password, $algo );
 					$user_password = $uresult [0]->user_password;
 					
-					if (strcmp ( $hashpw, $user_password ) == 0) {						
+					if (strcmp ( $hashpw, $user_password ) == 0) {
 						// reset password attemps
 						$this->user_model->update_userPasswordAttempt ( $email, 0 );
 						
-						//check shoppingcart and transfer positions
+						// check shoppingcart and transfer positions
 						$user_id = $this->session->userdata ( 'user_id' );
-						if($user_id != null){
+						if ($user_id != null) {
 							$this->load->model ( 'shoppingcart_model' );
 							$shoppingcart_positionsOld = $this->shoppingcart_model->getShoppingCartPositionsByUserId ( $user_id );
-								
 							
-// 							//destroy AnonymousUser session
-// 							$data = array (
-// 									'login' => '',
-// 									'user_id' => '',
-// 									'user_role' => ''
-// 							);
-// 							$this->session->unset_userdata ( $data );
-// 							$this->session->sess_destroy ();
+							// //destroy AnonymousUser session
+							// $data = array (
+							// 'login' => '',
+							// 'user_id' => '',
+							// 'user_role' => ''
+							// );
+							// $this->session->unset_userdata ( $data );
+							// $this->session->sess_destroy ();
 						}
 						
 						// set session
@@ -96,23 +95,23 @@ class Login extends CI_Controller {
 								'user_name' => $uresult [0]->user_name,
 								'user_firstname' => $uresult [0]->user_firstname,
 								'user_status' => $uresult [0]->user_status,
-								'user_role' => $uresult [0]->user_role_id
+								'user_role' => $uresult [0]->user_role_id 
 						);
 						$this->session->set_userdata ( $sess_data );
 						// transfer shoppingcart position from annonymouse user to logged in user
-						if ($shoppingcart_positionsOld != NULL){
+						if ($shoppingcart_positionsOld != NULL) {
 							$user_id = $this->session->userdata ( 'user_id' );
-							$cartNew = $this->shoppingcart_model->getShoppingCart( $user_id );
+							$cartNew = $this->shoppingcart_model->getShoppingCart ( $user_id );
 							$shca_idNew = $cartNew->shca_id;
-	
+							
 							foreach ( $shoppingcart_positionsOld as $shoppingcart_positionOld ) {
 								$prod_idOld = $shoppingcart_positionOld->scpo_prod_id;
 								$prty_idOld = $shoppingcart_positionOld->scpo_prty_id;
 								$scpo_amountOld = $shoppingcart_positionOld->scpo_amount;
 								
-								Shoppingcart::insert_update_positon($shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld);
-							}					
-						}						
+								Shoppingcart::insert_update_positon ( $shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld );
+							}
+						}
 						redirect ( $_SERVER ['HTTP_REFERER'] );
 					} else {
 						
@@ -213,7 +212,7 @@ class Login extends CI_Controller {
 		$newCPassword = $this->input->post ( "user_newCPassword" );
 		$user_id = $this->input->post ( 'user_id' );
 		$this->form_validation->set_rules ( 'user_newPassword', 'New Password', 'trim|required|matches[user_newCPassword]' );
-		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required' );
+		$this->form_validation->set_rules ( 'user_newCPassword', 'Confirm New Password', 'trim|required|min_length[6]' );
 		if ($this->form_validation->run () == FALSE) {
 			// validation fail
 			// $this->session->set_flashdata ( 'msg', 'Das Passwort mit dem wiederholten Passwort übereinstimmen' );
@@ -221,7 +220,7 @@ class Login extends CI_Controller {
 			
 			$this->changePassword ( $user_id, $newPassword );
 			$this->user_model->update_unsetUserRestoreCode ( $user_id );
-				
+			
 			redirect ( "/" );
 		}
 	}
