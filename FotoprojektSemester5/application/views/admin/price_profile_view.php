@@ -16,6 +16,14 @@
 			Preisprofile
 			</p>
 		</div>
+		<div class="col-md-2">
+				<?php
+				echo '<a
+					href="' . base_url () . 'admin/priceprofile_creation/"
+					class="btn btn-primary" role="button" href="printers_creation"> <i
+					class="fa fa-plus-square fa-lg"></i> Preisprofil</a>';
+				?>
+			</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">

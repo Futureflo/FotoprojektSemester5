@@ -25,6 +25,54 @@ class PriceProfile extends CI_Controller {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/price_profile_view', $data );
 	}
+	function newPriceProfile() {
+		$prpr_id = $this->input->post ( 'prpr_id' );
+		$prpr_user_id = $this->session->userdata ( 'user_id' );
+		$prpr_description = $this->input->post ( 'prpr_description' );
+		
+		if ($prpr_user_id) {
+			
+			// set form validation rules
+			$this->form_validation->set_rules ( 'prpr_description', 'Preiprofil Name', 'trim|required|min_length[3]|max_length[30]' );
+			
+			// submit
+			if ($this->form_validation->run () == FALSE) {
+				// fails
+				$this->load->redirect ( 'admin/priceprofile_creation' );
+			} else {
+				// insert priceprofile details into db
+				$data = array (
+						'prpr_user_id' => $prpr_user_id,
+						'prpr_description' => $prpr_description 
+				);
+				$this->load->model ( 'PriceProfile_model' );
+				$new_prpr_id = $this->PriceProfile_model->insert_price_profile ( $data );
+				if ($new_prpr_id) {
+					
+					// Alle Einträged des alten Profils kopieren
+					if ($prpr_id) {
+						$prices = $this->PriceProfile_model->getPricesById ( $prpr_id );
+						foreach ( $prices as $price ) {
+							
+							$data = array (
+									'prpt_prpr_id' => $new_prpr_id,
+									'prpt_prty_id' => $price->prty_id,
+									'prpt_price' => $price->prpt_price 
+							);
+							$price_profile = $this->PriceProfile_model->insert_price_product_type ( $data );
+						}
+				} else {
+					// error
+					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
+					redirect ( 'admin/priceprofile_creation' );
+				}
+			}
+		} else {
+			// error
+			$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
+			redirect ( 'admin/priceprofile_creation' );
+		}
+	}
 	
 	// Alle Preisprofile des Systems und des Benutzers/Fotograf laden
 	public static function getAllPriceProfiles() {
@@ -89,6 +137,10 @@ class PriceProfile extends CI_Controller {
 			return NULL;
 		}
 	}
+	
+	//
+	// Preise Preisprofil
+	//
 	public function addPriceProductType() {
 		$this->load->model ( 'PriceProfile_model' );
 		$prty_description = $this->input->post ( 'prty_description' );

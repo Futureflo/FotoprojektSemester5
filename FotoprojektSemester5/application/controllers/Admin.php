@@ -131,5 +131,9 @@ class Admin extends CI_Controller {
 	public function printers_creation() {
 		$this->load->template ( 'admin/printers_creation_view' );
 	}
+	public function priceprofile_creation() {
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
+		$this->load->template ( 'admin/priceprofile_creation_view', $data );
+	}
 }
 ?>

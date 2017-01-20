@@ -31,6 +31,14 @@ class Product_model extends CI_Model {
 		
 		return $query->result ();
 	}
+	Public function getProductVariantsForPrinterPriceProfile($prsp_id, $prpr_id) {
+		$this->db->join ( 'price_product_type', 'prpt_prpr_id = even_prpr_id', 'INNER JOIN' );
+		$this->db->join ( 'print_supplier_price', 'prsp_prsu_id = even_prsu_id', 'INNER JOIN' );
+		$this->db->where ( 'prsp_prsu_id', $prsp_id );
+		$this->db->where ( 'prpt_prpr_id', $prpr_id );
+		$query = $this->db->get ( "product_type" );
+		return $query->result ();
+	}
 	Public function getProductVariant($prod_id, $prty_id) {
 		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
 		$this->db->join ( 'price_product_type', 'prpt_prpr_id = even_prpr_id', 'INNER JOIN' );
