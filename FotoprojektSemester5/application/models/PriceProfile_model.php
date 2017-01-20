@@ -66,11 +66,31 @@ class PriceProfile_model extends CI_Model {
 				'prpr_id' => $prpr_id 
 		) );
 	}
-	
+	//
+	// Druckereipreise
+	//
 	// insert price_product_type
 	function insert_price_product_type($data) {
 		return $this->db->insert ( 'price_product_type', $data );
 	}
+	// update price_product_type
+	function update_price_product_type($data) {
+		$this->db->where ( 'prpt_prpr_id', $data ['prpt_prpr_id'] );
+		$this->db->where ( 'prpt_prty_id', $data ['prpt_prty_id'] );
+		return $this->db->update ( 'price_product_type', $data );
+	}
+	
+	// delete price_product_type
+	function delete_price_product_type($data) {
+		return $this->db->delete ( 'price_product_type', array (
+				'prpt_prpr_id' => $data ['prpt_prpr_id'],
+				'prpt_prty_id' => $data ['prpt_prty_id'] 
+		) );
+	}
+	
+	//
+	// Druckereipreise
+	//
 	// insert print_supplier_price
 	function insert_print_supplier_price($data) {
 		return $this->db->insert ( 'print_supplier_price', $data );

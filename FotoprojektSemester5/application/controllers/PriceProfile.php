@@ -91,6 +91,7 @@ class PriceProfile extends CI_Controller {
 	}
 	public function addPriceProductType() {
 		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
 		$prpr_id = $this->input->post ( 'prpt_prpr_id' );
 		$data = array (
 				'prpt_prpr_id' => $prpr_id,
@@ -99,10 +100,45 @@ class PriceProfile extends CI_Controller {
 		);
 		
 		$price_profile = $this->PriceProfile_model->insert_price_product_type ( $data );
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' hinzugefügt!</div>' );
 		redirect ( 'PriceProfile/showSinglePriceProfile/' . $prpr_id );
 	}
+	public function updatePriceProductType() {
+		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		$prpr_id = $this->input->post ( 'prpt_prpr_id' );
+		$prpt_price = $this->input->post ( 'prpt_price' );
+		$data = array (
+				'prpt_prpr_id' => $prpr_id,
+				'prpt_prty_id' => $this->input->post ( 'prty_id' ),
+				'prpt_price' => $prpt_price 
+		);
+		$this->PriceProfile_model->update_price_product_type ( $data );
+		
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' erfolgreich auf ' . $prpt_price . '€ geändert!</div>' );
+		redirect ( 'PriceProfile/showSinglePriceProfile/' . $prpr_id );
+	}
+	public function deletePriceProductType() {
+		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		$prpr_id = $this->input->post ( 'prpt_prpr_id' );
+		$prpt_price = $this->input->post ( 'prpt_price' );
+		$data = array (
+				'prpt_prpr_id' => $prpr_id,
+				'prpt_prty_id' => $this->input->post ( 'prty_id' ) 
+		);
+		$this->PriceProfile_model->delete_price_product_type ( $data );
+		
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' gelöscht!</div>' );
+		redirect ( 'PriceProfile/showSinglePriceProfile/' . $prpr_id );
+	}
+	
+	//
+	// Druckereipreise
+	//
 	public function addPricePrinter() {
 		$this->load->model ( 'PriceProfile_model' );
+		$prty_description = $this->input->post ( 'prty_description' );
 		$prsu_id = $this->input->post ( 'prsu_id' );
 		$data = array (
 				'prsp_prsu_id' => $prsu_id,
@@ -111,6 +147,7 @@ class PriceProfile extends CI_Controller {
 		);
 		
 		$price_profile = $this->PriceProfile_model->insert_print_supplier_price ( $data );
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' hinzugefügt!</div>' );
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
 	public function updatePricePrinter() {
@@ -125,7 +162,7 @@ class PriceProfile extends CI_Controller {
 		
 		$this->PriceProfile_model->update_print_supplier_price ( $data );
 		
-		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Forma: ' . $prty_description . ' erfolgreich auf ' . $prsp_price . '€ geändert!</div>' );
+		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' erfolgreich auf ' . $prsp_price . '€ geändert!</div>' );
 		
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
@@ -141,7 +178,7 @@ class PriceProfile extends CI_Controller {
 		
 		$this->PriceProfile_model->delete_print_supplier_price ( $data );
 		
-		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' gelöscht.</div>' );
+		$this->session->set_flashdata ( 'PrintSupplierPrice', '<div class="alert alert-success text-center">Format: ' . $prty_description . ' gelöscht!</div>' );
 		
 		redirect ( 'Printers/showPrinterPrice/' . $prsu_id );
 	}
