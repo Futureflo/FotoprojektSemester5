@@ -51,7 +51,8 @@ class PriceProfile_model extends CI_Model {
 	
 	// insert price_profile
 	function insert_price_profile($data) {
-		return $this->db->insert ( 'product', $data );
+		$this->db->insert ( 'price_profile', $data );
+		return $this->db->insert_id ();
 	}
 	
 	// delete price_profile
