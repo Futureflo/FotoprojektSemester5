@@ -62,17 +62,18 @@
 											echo "<tr class='searchable'>";
 											
 											echo "<td>" . $price->prty_description . "</td>";
+											echo form_open ( "PriceProfile/updatePricePrinter", '', array (
+													'prty_description' => $price->prty_description,
+													'prsu_id' => $printer->prsu_id,
+													'prty_id' => $price->prty_id 
+											) );
+											
 											echo "<td>";
 											echo "<input id=\"prsp_price\" name=\"prsp_price\" type=\"number\" min=\"0\" step=\"0.01\" value=" . $price->prsp_price . ">";
 											echo "</td>";
 											
 											// Update Button
 											echo "<td>";
-											echo form_open ( "PriceProfile/updatePricePrinter", '', array (
-													'prty_description' => $price->prty_description,
-													'prsu_id' => $printer->prsu_id,
-													'prty_id' => $price->prty_id 
-											) );
 											echo '<button class="btn btn-info btn-sm">';
 											echo '<i class="fa fa-refresh fa-lg"> aktualisieren</i>';
 											echo '</button>';
