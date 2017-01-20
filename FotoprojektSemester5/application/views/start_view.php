@@ -204,8 +204,8 @@ function searchEvent(ev){
                         } else {
 
                            for (var i in events){
-                               if(events[i].products.length > 0){
-                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products[0].prod_filepath ,events[i].products[0].prod_name, events[i].even_status, events[i].even_id));
+                               if(events[i].products_pbl.length > 0){
+                                    ceateEvent(events[i].even_name, events[i].even_url, createPic(events[i].products_pbl[0].prod_filepath ,events[i].products_pbl[0].prod_name, events[i].even_status, events[i].even_id));
                                 } else {
                                     ceateEvent(events[i].even_name, events[i].even_url)
                                 }
@@ -280,7 +280,6 @@ function createPic(prodfile, prodname, status, id){
         
         img.setAttribute("data-src", "./"+prodfile);
         img.setAttribute("src", "./"+prodfile);
-        img.style.filter = "blur(5px)";
         img.classList.add("img-responsive");
         img.setAttribute("alt", prodname);
         img.style.height = "280px";
