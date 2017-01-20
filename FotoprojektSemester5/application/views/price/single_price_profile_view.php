@@ -11,14 +11,26 @@ form {
 }
 </style>
 
-<section class="jumbotron text-xs-center">
+<section style="padding-top: 70px">
 	<div class="container">
-		<h1 class="jumbotron-heading"> <?php
-		echo 'Preisprofil: ' . $price_profile->prpr_description?></h1>
-	</div>
+		<?php
+		if (isset ( $message )) {
+			echo "<div class='alert alert-danger'>";
+			echo $message . "</div>";
+		}
+		?>
+</div>
 </section>
 
 <div class="container">
+	<div class="row">
+		<div class="col-md-7">
+			<p class="h1" id="test" onclick="setPager()">
+			<?php
+			echo 'Preisprofil: ' . $price_profile->prpr_description?>
+			</p>
+		</div>
+	</div>
 	<?php
 	echo $this->session->flashdata ( 'PriceProfile' );
 	?>
