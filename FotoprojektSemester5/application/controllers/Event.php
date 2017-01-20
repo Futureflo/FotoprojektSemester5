@@ -24,7 +24,8 @@ class Event extends CI_Controller {
 		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
 		$data ['event'] = $event [0];
 		
-		$data ['products'] = Event::getProductsFromEvent ( $event [0] );
+		$data ['products_pbl'] = Event::getProductsFromEvent ( $event [0], false );
+		$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
@@ -114,7 +115,8 @@ class Event extends CI_Controller {
 		$events = $CI->event_model->getAllPublicEvents ();
 		
 		foreach ( $events as $event ) {
-			$event->products = Event::getProductsFromEvent ( $event );
+			$event->products_pbl = Event::getProductsFromEvent ( $event, false );
+			$event->products_prv = Event::getProductsFromEvent ( $event, true );
 		}
 		
 		return $events;
@@ -126,10 +128,10 @@ class Event extends CI_Controller {
 		$event = $CI->event_model->getSingleEventById ( $even_id );
 		return $event [0];
 	}
-	public static function getProductsFromEvent($event) {
+	public static function getProductsFromEvent($event, $private = false) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
-		$products = $CI->event_model->getProductsFromEvent ( $event->even_id );
+		$products = $CI->event_model->getProductsFromEvent ( $event->even_id, $private );
 		foreach ( $products as $product => $p ) {
 			$products [$product] = Product::getProduct ( $p->prod_id, true );
 		}
@@ -141,7 +143,8 @@ class Event extends CI_Controller {
 		
 		$events = $CI->event_model->search ( $search );
 		foreach ( $events as $event ) {
-			$event->products = Event::getProductsFromEvent ( $event );
+			$event->products_pbl = Event::getProductsFromEvent ( $event, false );
+			$event->products_prv = Event::getProductsFromEvent ( $event, true );
 		}
 		
 		return $events;

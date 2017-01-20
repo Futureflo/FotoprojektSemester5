@@ -75,7 +75,7 @@ echo base_url ();
 
 		<div class="row">
 		<?php
-		foreach ( $products as $product ) {
+		foreach ( $products_pbl as $product ) {
 			$product->prod_complete_filepath = base_url () . $product->prod_filepath;
 			
 			echo "<div class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard\">";
@@ -101,7 +101,13 @@ echo base_url ();
 
 		<div class="row">
 		<?php
-		foreach ( $products as $product ) {
+		foreach ( $products_prv as $product ) {
+			
+			// Wenn die Bilder gesperrt sind und ein User angemeldet ist, dann sollen diese nicht angezeigt werden
+			$user_role = $this->session->userdata ( 'user_role' );
+			if ($product->prod_status == ProductStatus::prv_locked && $user_role == UserRole::User)
+				continue;
+			
 			$product->prod_complete_filepath = base_url () . $product->prod_filepath;
 			
 			echo "<div class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard\">";
@@ -193,7 +199,9 @@ function removeOptions(selectbox)
 					<div class="row">
 						<?php
 						
-						echo form_open ( '/', 'id="addToCartForm"' );
+						echo form_open ( '/', 'id="addToCartForm"', array (
+								'even_prsu_id' => $event->even_prsu_id 
+						) );
 						?>
 						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 							<div class="col-md-3 col-sm-2 col-xs-2">

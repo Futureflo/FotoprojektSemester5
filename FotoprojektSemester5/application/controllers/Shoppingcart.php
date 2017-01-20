@@ -86,6 +86,7 @@ class Shoppingcart extends CI_Controller {
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
 		$scpo_prty_id = $this->input->post ( 'scpo_prty_id' );
+		$scpo_prsu_id = $this->input->post ( 'even_prsu_id' );
 		
 		// MB: special from single_event_view
 		if (isset ( $_POST ['beschreibungSelect'] )) {
@@ -110,7 +111,7 @@ class Shoppingcart extends CI_Controller {
 		$shca_id = $shopping_cart->shca_id;
 		
 		// Wenn Warenkorb vorhanden, die Positon im Warenkorb anlegen
-		Shoppingcart::insert_update_positon ( $shca_id, $scpo_prod_id, $scpo_prty_id, $scpo_amount );
+		Shoppingcart::insert_update_positon ( $shca_id, $scpo_prod_id, $scpo_prty_id, $scpo_amount, $scpo_prsu_id );
 		
 		// Jetzt den Warenkorb aktualisieren
 		
@@ -119,7 +120,7 @@ class Shoppingcart extends CI_Controller {
 			redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
 	}
 	// add postion to shopping cart or update amount of shoppingcart position
-	public static function insert_update_positon($shca_id, $prod_id, $prty_id, $scpo_amount) {
+	public static function insert_update_positon($shca_id, $prod_id, $prty_id, $scpo_amount, $scpo_prsu_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'shoppingcart_model' );
 		
@@ -133,7 +134,8 @@ class Shoppingcart extends CI_Controller {
 						'scpo_shca_id' => $shca_id,
 						'scpo_prod_id' => $prod_id,
 						'scpo_prty_id' => $prty_id,
-						'scpo_amount' => $scpo_amount 
+						'scpo_amount' => $scpo_amount,
+						'scpo_prsu_id' => $scpo_prsu_id 
 				);
 				$CI->shoppingcart_model->insert_shopping_cart_position ( $shopping_cart_position );
 			}
@@ -210,28 +212,25 @@ class Shoppingcart extends CI_Controller {
 	}
 	function delete() {
 		$shoppingcart_position = $this->input->post ();
-		$scpo_shca_id = $shoppingcart_position['scpo_shca_id'];
-		$scpo_prod_id = $shoppingcart_position['scpo_prod_id'];
-		$scpo_prty_id = $shoppingcart_position['scpo_prty_id'];
-		$this->shoppingcart_model->delete_shopping_cart_position($scpo_shca_id, $scpo_prod_id, $scpo_prty_id);
-		redirect("shoppingcart/");
+		$scpo_shca_id = $shoppingcart_position ['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position ['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position ['scpo_prty_id'];
+		$this->shoppingcart_model->delete_shopping_cart_position ( $scpo_shca_id, $scpo_prod_id, $scpo_prty_id );
+		redirect ( "shoppingcart/" );
 	}
-	
 	function update() {
 		$shoppingcart_position = $this->input->post ();
-		$scpo_shca_id = $shoppingcart_position['scpo_shca_id'];
-		$scpo_prod_id = $shoppingcart_position['scpo_prod_id'];
-		$scpo_prty_id = $shoppingcart_position['scpo_prty_id'];
-		$scpo_amount = $shoppingcart_position['amount_hidden'];
+		$scpo_shca_id = $shoppingcart_position ['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position ['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position ['scpo_prty_id'];
+		$scpo_amount = $shoppingcart_position ['amount_hidden'];
 		
-
 		$shoppingcart_positionOb = new stdClass ();
 		
 		$shoppingcart_positionOb->scpo_shca_id = $scpo_shca_id;
 		$shoppingcart_positionOb->scpo_prod_id = $scpo_prod_id;
 		$shoppingcart_positionOb->scpo_prty_id = $scpo_prty_id;
 		$shoppingcart_positionOb->scpo_amount = $scpo_amount;
- 		print_r($shoppingcart_positionOb);
-		$this->shoppingcart_model->update_shopping_cart_position($shoppingcart_positionOb);
+		$this->shoppingcart_model->update_shopping_cart_position ( $shoppingcart_positionOb );
 	}
 }

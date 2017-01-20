@@ -108,8 +108,9 @@ class Login extends CI_Controller {
 								$prod_idOld = $shoppingcart_positionOld->scpo_prod_id;
 								$prty_idOld = $shoppingcart_positionOld->scpo_prty_id;
 								$scpo_amountOld = $shoppingcart_positionOld->scpo_amount;
+								$scpo_prsu_id = $shoppingcart_positionOld->scpo_prsu_id;
 								
-								Shoppingcart::insert_update_positon ( $shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld );
+								Shoppingcart::insert_update_positon ( $shca_idNew, $prod_idOld, $prty_idOld, $scpo_amountOld, $scpo_prsu_id );
 							}
 						}
 						redirect ( $_SERVER ['HTTP_REFERER'] );

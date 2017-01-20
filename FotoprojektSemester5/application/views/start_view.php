@@ -71,7 +71,7 @@
 			<?php
 			foreach ( $events as $event ) {
 				// Produkte aus Event in $products zwischenspeichern
-				$products = $event->products;
+				$products = $event->products_pbl;
 				
 				echo "<div class=\"col-lg-4 col-md-6 col-sm-6 col-xs-12 mycard\">";
 				echo "<div class=\"lazyload\">";
