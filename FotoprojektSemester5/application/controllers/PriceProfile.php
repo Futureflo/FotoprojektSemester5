@@ -29,10 +29,15 @@ class PriceProfile extends CI_Controller {
 		$prpr_id = $this->input->post ( 'prpr_id' );
 		$prpr_user_id = $this->session->userdata ( 'user_id' );
 		$prpr_description = $this->input->post ( 'prpr_description' );
+		$user_role = $this->session->userdata ( 'user_role' );
 		
 		if ($prpr_user_id) {
 			
-			// set form validation rules
+			// Admins legen für System an
+			if ($user_role == UserRole::Admin)
+				$prpr_user_id = 0;
+				
+				// set form validation rules
 			$this->form_validation->set_rules ( 'prpr_description', 'Preiprofil Name', 'trim|required|min_length[3]|max_length[30]' );
 			
 			// submit
@@ -61,6 +66,9 @@ class PriceProfile extends CI_Controller {
 							);
 							$price_profile = $this->PriceProfile_model->insert_price_product_type ( $data );
 						}
+					}
+					$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center">Preisprofil angelegt!</div>' );
+					redirect ( 'PriceProfile/showSinglePriceProfile/' . $new_prpr_id );
 				} else {
 					// error
 					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
