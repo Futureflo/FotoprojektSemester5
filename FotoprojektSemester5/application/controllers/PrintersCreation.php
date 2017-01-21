@@ -18,6 +18,7 @@ class PrintersCreation extends CI_Controller {
 	}
 	function newPrinter() {
 		$user_id = $this->session->userdata ( 'user_id' );
+		$user_role = $this->session->userdata ( 'user_role' );
 		
 		$addressname = $this->input->post ( 'addressname' );
 		$country = $this->input->post ( 'country' );
@@ -31,7 +32,11 @@ class PrintersCreation extends CI_Controller {
 		
 		if ($user_id) {
 			
-			// set form validation rules
+			// Admins legen für System an
+			if ($user_role == UserRole::Admin)
+				$prpr_user_id = 0;
+				
+				// set form validation rules
 			$this->form_validation->set_rules ( 'addressname', 'Druckerei Name', 'trim|required|min_length[3]|max_length[30]' );
 			// $this->form_validation->set_rules ( 'even_date', 'Datum', 'trim|required|min_length[10]|max_length[10]' );
 			$this->form_validation->set_rules ( 'email', 'E-Mail Addresse', 'trim|required|valid_email|is_unique[print_supplier.prsu_email]' );

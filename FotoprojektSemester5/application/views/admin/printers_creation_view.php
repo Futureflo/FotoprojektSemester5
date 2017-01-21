@@ -139,3 +139,21 @@ echo $this->session->flashdata ( 'msgReg' );
 		</div>
 	</div>
 </section>
+
+
+
+<script type="text/javascript">
+ 	function checkType(){
+        var customer = document.getElementById('customer');
+        var photograph = document.getElementById('photographer');
+        var field = document.getElementById('type_hidden_field');
+        
+        if(customer.classList.contains('active')){
+            field.value = "2";
+        } else if(photograph.classList.contains('active')){
+            field.value = "3";
+        }
+	}
+    
+    window.addEventListener('load', checkType, false);
+</script>

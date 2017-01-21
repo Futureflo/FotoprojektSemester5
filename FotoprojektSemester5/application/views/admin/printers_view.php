@@ -25,7 +25,7 @@
 					echo '<a
 					href="' . base_url () . 'admin/printers_creation/"
 					class="btn btn-primary" role="button" href="printers_creation"> <i
-					class="fa fa-plus-square fa-lg"></i> Druckerei</a>';
+					class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
 				}
 				?>
 			</div>
