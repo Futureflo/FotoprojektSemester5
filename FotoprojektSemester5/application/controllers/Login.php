@@ -77,14 +77,6 @@ class Login extends CI_Controller {
 							$this->load->model ( 'shoppingcart_model' );
 							$shoppingcart_positionsOld = $this->shoppingcart_model->getShoppingCartPositionsByUserId ( $user_id );
 							
-							// //destroy AnonymousUser session
-							// $data = array (
-							// 'login' => '',
-							// 'user_id' => '',
-							// 'user_role' => ''
-							// );
-							// $this->session->unset_userdata ( $data );
-							// $this->session->sess_destroy ();
 						}
 						
 						// set session

@@ -213,5 +213,23 @@ class User_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	
+	// get all UserEmails Newsletter
+	function getNewsletterEmailsFromExistingUser() {
+		 $this->db->select('user_email, user_title');
+		 $this->db->from('user');
+		 $this->db->where ( 'user_newsletter', TRUE );		 	
+		 $query = $this->db->get()->result();
+		 return $query;		 	
+	}
+	// get all UserEmails Newsletter
+	function getNewsletterEmailsFromUnkownUser() {
+		$this->db->select('nele_email');
+		$this->db->from('newsletter');
+		$query = $this->db->get()->result();	
+		return $query;
+	}
+
+	
 }
 ?>

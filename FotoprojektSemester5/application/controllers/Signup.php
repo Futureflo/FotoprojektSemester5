@@ -100,7 +100,7 @@ class Signup extends CI_Controller
 			
 			//insert user details into db
 			$data = array(
-				'user_firstname' => $title,
+				'user_title' => $title,
 				'user_firstname' => $firstname,
 				'user_name' => $name,
 				'user_email' => $email,
