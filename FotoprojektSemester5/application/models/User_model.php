@@ -229,7 +229,13 @@ class User_model extends CI_Model {
 		$query = $this->db->get()->result();	
 		return $query;
 	}
-
-	
+	// get Abo
+	function getAbo($user_id) {
+		$this->db->join ( 'abo_fotograf', 'user_abof_id = abof_id' );
+		$this->db->where ( 'user_id', $user_id );
+		$query = $this->db->get ( 'user' );
+		$result = $query->result ();
+		return $result [0];
+	}
 }
 ?>

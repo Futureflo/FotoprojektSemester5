@@ -50,6 +50,15 @@ class Product_model extends CI_Model {
 		$result = $query->result ();
 		return $result [0];
 	}
+	Public function getUsedFileSize($user_id) {
+		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
+		$this->db->where ( 'even_user_id', $user_id );
+		$this->db->where ( 'prod_filesize IS NOT NULL' );
+		$this->db->select_sum ( 'prod_filesize' );
+		$query = $this->db->get ( 'product' );
+		$result = $query->result ();
+		return $result [0];
+	}
 	
 	// insert
 	function insert_product($data) {
