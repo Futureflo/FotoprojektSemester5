@@ -12,7 +12,7 @@ class PrintersCreation extends CI_Controller {
 				'form_validation' 
 		) );
 		$this->load->database ();
-		// $this->load->model ( 'user_model' );
+		$this->load->model ( 'user_model' );
 		// $this->load->model ( 'adress_model' );
 		$this->load->model ( 'PrintersCreation_model' );
 	}
@@ -38,27 +38,17 @@ class PrintersCreation extends CI_Controller {
 				
 				// set form validation rules
 			$this->form_validation->set_rules ( 'addressname', 'Druckerei Name', 'trim|required|min_length[3]|max_length[30]' );
-			// $this->form_validation->set_rules ( 'even_date', 'Datum', 'trim|required|min_length[10]|max_length[10]' );
-			$this->form_validation->set_rules ( 'email', 'E-Mail Addresse', 'trim|required|valid_email|is_unique[print_supplier.prsu_email]' );
+			$this->form_validation->set_rules ( 'email', 'E-Mail Addresse', 'trim|required|valid_email' );
 			$this->form_validation->set_rules ( 'cemail', 'Bestätigung der E-Mail Addresse', 'trim|required|matches[email]' );
 			$this->form_validation->set_rules ( 'zip', 'PLZ', 'trim|required' );
 			$this->form_validation->set_rules ( 'city', 'Stadt', 'trim|required' );
 			$this->form_validation->set_rules ( 'street', 'Straße', 'trim|required' );
 			$this->form_validation->set_rules ( 'housenumber', 'Hausnummer', 'trim|required' );
 			
-			// $even_prpr_id = $this->input->post ( 'even_prpr_id' );
-			// $even_prsu_id = $this->input->post ( 'even_prsu_id' );
-			
-			// $even_status = $this->input->post ( 'even_status' );
-			// if (isset ( $even_status ))
-			// $even_status = EventStatus::prv;
-			// else
-			// $even_status = EventStatus::pbl;
-			
 			// submit
 			if ($this->form_validation->run () == FALSE) {
 				// fails
-				$this->load->view ( 'admin/printers_creation/' );
+				redirect ( 'admin/printers_creation' );
 			} else {
 				
 				// insert address details into db
@@ -73,11 +63,15 @@ class PrintersCreation extends CI_Controller {
 				);
 				$address_id = $this->PrintersCreation_model->insert_address ( $address );
 				
+				// Get todays date for prsu_createdon
+				date_default_timezone_set ( "Europe/Berlin" );
+				$timestamp = date ( 'Y-m-d H:i:s', time () );
+				
 				// insert printer details into db
 				$data = array (
 						'prsu_email' => $email,
 						'prsu_status' => 1,
-						'prsu_createdon' => $this->input->post ( 'adre_name' ),
+						'prsu_createdon' => $timestamp,
 						'prsu_user_id' => $user_id,
 						'prsu_adre_id' => $address_id 
 				);
@@ -87,19 +81,20 @@ class PrintersCreation extends CI_Controller {
 				
 				if ($address_id = ! NULL && $user_id = ! NULL) {
 					// Printers::generate_url ( $data );
+					// $data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
+					// $this->load->template ( 'admin/printers', $data );
+					redirect ( 'admin/printers' );
 					$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center">Druckerei angelegt!</div>' );
-					$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-					$this->load->template ( 'admin/printers_view', $data );
 				} else {
 					// error
 					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
-					$this->load->view ( 'admin/printers_creation/' );
+					redirect ( 'admin/printers_creation' );
 				}
 			}
 		} else {
 			// error
 			$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
-			$this->load->view ( 'admin/printers_creation/' );
+			redirect ( 'admin/printers_creation' );
 		}
 	}
 }

@@ -7,7 +7,7 @@ echo $this->session->flashdata ( 'msgReg' );
 
 		<div class="row">
 					<?php
-					echo form_open_multipart ( 'admin/printers_creation/' );
+					echo form_open_multipart ( 'PrintersCreation/newPrinter' );
 					?>
 
 				<div class="form-group">
