@@ -135,5 +135,22 @@ class Admin extends CI_Controller {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/priceprofile_creation_view', $data );
 	}
+	
+	public function createNewsletterCSV(){
+		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser();
+		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
+		$i = 0;
+		foreach ($newsletterEmails1 as $user ){			
+			echo "titel".$newsletterEmails1[$i]-> user_title;
+			echo $newsletterEmails1[$i]-> user_email;
+			$i++;			
+		}
+		$i = 0;		
+		foreach ($newsletterEmails2 as $unkownUser ){
+			echo $newsletterEmails2[$i]-> nele_email;
+			$i++;
+		}
+					
+	}
 }
 ?>
