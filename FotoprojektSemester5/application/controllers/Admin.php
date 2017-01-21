@@ -16,6 +16,12 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'admin/dashboard_view' );
 	}
+	public function dashboard() {
+		$this->load->model ( 'Dashboard_model' );
+		$data ['orders'] = $this->Dashboard_model->getInformations ();
+		$data ['DashboardViewHeader'] = "Dashboard";
+		$this->load->template ( 'admin/dashboard', $data );
+	}
 	public function users() {
 		$data ['users'] = $this->user_model->getAllUsers ();
 		$data ['UsersViewHeader'] = "Alle Benutzer";
@@ -57,14 +63,13 @@ class Admin extends CI_Controller {
 	public function archivedProduct_types() {
 		$this->load->model ( 'product_type_model' );
 		$this->load->model ( 'User_model' );
-		$data ['ProductViewHeader'] = "Archivierte Druckereien";
-		$data ['product_types'] = $this->ProductType->getAllArichvedProductType ();
+		$data ['ProductViewHeader'] = "Archivierte Formate";
+		$data ['product_types'] = $this->product_type_model->getAllArichvedProductType ();
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 	public function archivedPrice_profiles() {
 		$this->load->model ( 'price_type_model' );
 	}
-	
 	
 	// Funktionen für die View/Controller (DKM -> Wieso hier und nicht in de spez. Models/Controller?)
 	public function deletePrinter() {
@@ -125,6 +130,27 @@ class Admin extends CI_Controller {
 	}
 	public function printers_creation() {
 		$this->load->template ( 'admin/printers_creation_view' );
+	}
+	public function priceprofile_creation() {
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
+		$this->load->template ( 'admin/priceprofile_creation_view', $data );
+	}
+	
+	public function createNewsletterCSV(){
+		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser();
+		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
+		$i = 0;
+		foreach ($newsletterEmails1 as $user ){			
+			echo "titel".$newsletterEmails1[$i]-> user_title;
+			echo $newsletterEmails1[$i]-> user_email;
+			$i++;			
+		}
+		$i = 0;		
+		foreach ($newsletterEmails2 as $unkownUser ){
+			echo $newsletterEmails2[$i]-> nele_email;
+			$i++;
+		}
+					
 	}
 }
 ?>

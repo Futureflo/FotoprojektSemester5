@@ -100,7 +100,7 @@ class Signup extends CI_Controller
 			
 			//insert user details into db
 			$data = array(
-				'user_firstname' => $title,
+				'user_title' => $title,
 				'user_firstname' => $firstname,
 				'user_name' => $name,
 				'user_email' => $email,
@@ -199,7 +199,7 @@ class Signup extends CI_Controller
 		$this->email->from('noReply@snapUp.de', 'SnapUp');
 		$this->email->to($user_email);
 		$this->email->subject('Bestätigung zu Ihrem SnapUp Account');
-		$this->email->message('Sie haben erfolgreich ihren Account bestätigt '. base_url()."login/confirmAccount/".$confirmCode);
+		$this->email->message('Vielen Dank, Sie haben sich erfolgreich bei Snap-Up angemeldet. Um Ihren Account zu bestätigen bitte auf folgenden Link klicken.'. base_url()."login/confirmAccount/".$confirmCode);
 		$this->email->send();		
 	}
 }

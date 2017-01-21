@@ -24,7 +24,8 @@ class Event extends CI_Controller {
 		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
 		$data ['event'] = $event [0];
 		
-		$data ['products'] = Event::getProductsFromEvent ( $event [0] );
+		$data ['products_pbl'] = Event::getProductsFromEvent ( $event [0], false );
+		$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
@@ -52,46 +53,39 @@ class Event extends CI_Controller {
 		
 		$this->showEvents ();
 	}
-	
-
-	
 	public function showEvents() {
 		$this->load->model ( 'event_model' );
 		$id = $this->session->userdata ( 'user_id' );
-		$data ['events'] = $this->event_model->getEventsFromUser( $id );
+		$data ['events'] = $this->event_model->getEventsFromUser ( $id );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	
-	//Methoden um den Status zu aendern
+	// Methoden um den Status zu aendern
 	public function lockEventById($even_id) {
-		$this->changeEventStatus($even_id, EventStatus::locked);
+		$this->changeEventStatus ( $even_id, EventStatus::locked );
 		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich gesperrt! </div>' );
-		}
+	}
 	public function unlockEventById($even_id) {
-		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->changeEventStatus ( $even_id, EventStatus::prv );
 		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde erfolgreich entsperrt! </div>' );
 	}
 	public function changeStateToPublicById($even_id) {
-		$this->changeEventStatus($even_id, EventStatus::pbl);
+		$this->changeEventStatus ( $even_id, EventStatus::pbl );
 		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde &ouml;ffentlich gestellt! </div>' );
 	}
-	
 	public function changeStateToPrivateById($even_id) {
-		$this->changeEventStatus($even_id, EventStatus::prv);
+		$this->changeEventStatus ( $even_id, EventStatus::prv );
 		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde privat gestellt! </div>' );
 	}
-	
 	public function deleteEventById($even_id) {
-		$this->changeEventStatus($even_id, EventStatus::deleted);
+		$this->changeEventStatus ( $even_id, EventStatus::deleted );
 		$this->load->model ( 'event_model' );
 		$id = $this->session->userdata ( 'user_id' );
-		$data ['events'] = $this->event_model->getEventsFromUser( $id );
+		$data ['events'] = $this->event_model->getEventsFromUser ( $id );
 		$data ['message'] = "<div class='alert alert-success'>Dein Event wurde erfolgreich gelöscht</div>";
 		$this->load->template ( 'event/all_event_view', $data );
 	}
-	
-	public function changeEventStatus($even_id, $even_status)
-	{
+	public function changeEventStatus($even_id, $even_status) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
 		
@@ -101,8 +95,8 @@ class Event extends CI_Controller {
 			
 			if ($event [0]->even_status == EventStatus::locked) {
 				$event [0]->even_status = EventStatus::prv;
-			}
-			else $event [0]->even_status = $even_status;
+			} else
+				$event [0]->even_status = $even_status;
 			
 			$CI->event_model->update_event ( $even_id, $event [0] );
 		}
@@ -114,7 +108,8 @@ class Event extends CI_Controller {
 		$events = $CI->event_model->getAllPublicEvents ();
 		
 		foreach ( $events as $event ) {
-			$event->products = Event::getProductsFromEvent ( $event );
+			$event->products_pbl = Event::getProductsFromEvent ( $event, false );
+			$event->products_prv = Event::getProductsFromEvent ( $event, true );
 		}
 		
 		return $events;
@@ -126,10 +121,10 @@ class Event extends CI_Controller {
 		$event = $CI->event_model->getSingleEventById ( $even_id );
 		return $event [0];
 	}
-	public static function getProductsFromEvent($event) {
+	public static function getProductsFromEvent($event, $private = false) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
-		$products = $CI->event_model->getProductsFromEvent ( $event->even_id );
+		$products = $CI->event_model->getProductsFromEvent ( $event->even_id, $private );
 		foreach ( $products as $product => $p ) {
 			$products [$product] = Product::getProduct ( $p->prod_id, true );
 		}
@@ -141,7 +136,8 @@ class Event extends CI_Controller {
 		
 		$events = $CI->event_model->search ( $search );
 		foreach ( $events as $event ) {
-			$event->products = Event::getProductsFromEvent ( $event );
+			$event->products_pbl = Event::getProductsFromEvent ( $event, false );
+			$event->products_prv = Event::getProductsFromEvent ( $event, true );
 		}
 		
 		return $events;
@@ -208,6 +204,18 @@ class Event extends CI_Controller {
 		$even_url = base_convert ( $even_id, 20, 36 );
 		$data ['even_url'] = $even_url;
 		$this->event_model->update_event ( $id, $data );
+	}
+	//
+	// Alle Gültigen Formate für die Kombination aus Preisprofil und Druckerei
+	//
+	function getProductVariantsForPrinterPriceProfile($prpr_id, $prsu_id) {
+		$user_commision = $this->session->userdata ( 'user_commision' );
+		$this->load->model ( 'product_model' );
+		$product_variants = $this->product_model->getProductVariantsForPrinterPriceProfile ( $prsu_id, $prpr_id );
+		foreach ( $product_variants as $product_variant ) {
+			$product_variant->price = Product::getPrice ( $prpr_id, $product_variant->prty_id, $prsu_id, $user_commision );
+		}
+		return $product_variants;
 	}
 }
 abstract class EventStatus {

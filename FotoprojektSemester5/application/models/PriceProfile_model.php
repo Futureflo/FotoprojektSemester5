@@ -1,4 +1,5 @@
 <?php
+include_once (dirname ( __DIR__ ) . "/controllers/ProductType.php");
 class PriceProfile_model extends CI_Model {
 	Public function __construct() {
 		parent::__construct ();
@@ -50,7 +51,8 @@ class PriceProfile_model extends CI_Model {
 	
 	// insert price_profile
 	function insert_price_profile($data) {
-		return $this->db->insert ( 'product', $data );
+		$this->db->insert ( 'price_profile', $data );
+		return $this->db->insert_id ();
 	}
 	
 	// delete price_profile
@@ -65,14 +67,49 @@ class PriceProfile_model extends CI_Model {
 				'prpr_id' => $prpr_id 
 		) );
 	}
-	
+	//
+	// Druckereipreise
+	//
 	// insert price_product_type
 	function insert_price_product_type($data) {
 		return $this->db->insert ( 'price_product_type', $data );
 	}
+	// update price_product_type
+	function update_price_product_type($data) {
+		$this->db->where ( 'prpt_prpr_id', $data ['prpt_prpr_id'] );
+		$this->db->where ( 'prpt_prty_id', $data ['prpt_prty_id'] );
+		return $this->db->update ( 'price_product_type', $data );
+	}
+	
+	// delete price_product_type
+	function delete_price_product_type($data) {
+		return $this->db->delete ( 'price_product_type', array (
+				'prpt_prpr_id' => $data ['prpt_prpr_id'],
+				'prpt_prty_id' => $data ['prpt_prty_id'] 
+		) );
+	}
+	
+	//
+	// Druckereipreise
+	//
 	// insert print_supplier_price
 	function insert_print_supplier_price($data) {
 		return $this->db->insert ( 'print_supplier_price', $data );
+	}
+	
+	// update print_supplier_price
+	function update_print_supplier_price($data) {
+		$this->db->where ( 'prsp_prsu_id', $data ['prsp_prsu_id'] );
+		$this->db->where ( 'prsp_prty_id', $data ['prsp_prty_id'] );
+		return $this->db->update ( 'print_supplier_price', $data );
+	}
+	
+	// delete print_supplier_price
+	function delete_print_supplier_price($data) {
+		return $this->db->delete ( 'print_supplier_price', array (
+				'prsp_prsu_id' => $data ['prsp_prsu_id'],
+				'prsp_prty_id' => $data ['prsp_prty_id'] 
+		) );
 	}
 }
 ?>

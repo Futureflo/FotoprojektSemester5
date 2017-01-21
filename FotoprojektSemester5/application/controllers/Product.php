@@ -70,7 +70,10 @@ class Product extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'printers_model' );
 		$PrinterPrice = $CI->printers_model->getPrinterPriceByProducttype ( $prsu_id, $prty_id );
-		return $PrinterPrice->prsp_price;
+		if ($PrinterPrice)
+			return $PrinterPrice->prsp_price;
+		else
+			return NULL;
 	}
 	public static function getVariantPrice($product_variant) {
 		// Basispreis aus Preisprofil
@@ -82,30 +85,40 @@ class Product extends CI_Controller {
 			$event = $GLOBALS ["event"];
 		}
 		
+		$prpr_id = $event->even_prpr_id;
+		$prty_id = $product_variant->prty_id;
+		$prsu_id = $event->even_prsu_id;
+		$user_commision = $event->user_commision;
+		
+		return Product::getPrice ( $prpr_id, $prty_id, $prsu_id, $user_commision );
+	}
+	public static function getPrice($prpr_id, $prty_id, $prsu_id, $user_commision) {
 		// Basispreis
-		$profile = PriceProfile::getPriceByProductType ( $event->even_prpr_id, $product_variant->prty_id );
+		$profile = PriceProfile::getPriceByProductType ( $prpr_id, $prty_id );
 		if (isset ( $profile ))
 			$price_basic = $profile->prpt_price;
-		else
+		else {
 			$price_basic = 0;
-			
-			// Preisaufschlag Fotograf
+		}
+		
+		// Preisaufschlag Fotograf
 		if (isset ( $product_variant->prva_price_specific )) {
 			$prva_price_specific = $product_variant->prva_price_specific;
-		} else
+		} else {
 			$prva_price_specific = 0;
-			
-			// Preisaufschlag von Druckerei
-		$price_supplier = Product::getPrintersProductPrice ( $event->even_prsu_id, $product_variant->prty_id );
+		}
+		
+		// Preisaufschlag von Druckerei
+		$price_supplier = Product::getPrintersProductPrice ( $prsu_id, $prty_id );
 		if (! isset ( $price_supplier )) {
 			$price_supplier = 0;
 		}
-		
-		// Provision
-		$price_provision = 0;
-		
 		// Preis zusammensetzen
-		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier ) + floatval ( $price_provision );
+		$price_sum = floatval ( $price_basic ) + floatval ( $prva_price_specific ) + floatval ( $price_supplier );
+		
+		// Provision ergänzen
+		$price_provision = floatval ( $price_sum ) * floatval ( $user_commision );
+		$price_sum = $price_sum + floatval ( $price_provision );
 		
 		$price = array (
 				'price_basic' => $price_basic,
@@ -121,7 +134,19 @@ class Product extends CI_Controller {
 		// $this->form_validation->set_rules('dateiupload', 'Dateiname', 'trim|required|min_length[3]|max_length[30]');
 		
 		// Konstanten setzten
-		$prod_status = ProductStatus::locked;
+		// Administatoren und Fotografen uploaden öffentliche Bilder
+		// Alle anderen Uploads werden bis zur Freigabe gesperrt erstmal
+		$userrolle = $this->session->user_role;
+		switch ($userrolle) {
+			case UserRole::Admin :
+			case UserRole::Photograph :
+				$prod_status = ProductStatus::pbl;
+				break;
+			default :
+				$prod_status = ProductStatus::prv_locked;
+				break;
+		}
+		
 		$prod_date = date ( "Y-m-d H:i:s" );
 		
 		// Event laden
@@ -182,7 +207,7 @@ class Product extends CI_Controller {
 				//
 			} else {
 				// error
-				$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
+				$this->session->set_flashdata ( 'upload_file', '<div class="alert alert-danger text-center">Keine Datei ausgewählt!!!</div>' );
 			}
 		}
 		
@@ -229,10 +254,10 @@ class Product extends CI_Controller {
 		
 		// Jetzt der Upload einer einzelner Datei
 		if (! $this->upload->do_upload ( 'dateiupload' )) {
-			$this->session->set_flashdata ( 'msg', $this->upload->display_errors () );
+			$this->session->set_flashdata ( 'upload', $this->upload->display_errors () );
 		} else {
 			$finfo = $this->upload->data ();
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
+			$this->session->set_flashdata ( 'upload', '<div class="alert alert-success text-center"> ' . $finfo ['file_name'] . ' hochgeladen!</div>' );
 		}
 		
 		return $upload_path . $file ['name'];
@@ -253,7 +278,8 @@ class Product extends CI_Controller {
 }
 abstract class ProductStatus {
 	const undefined = 0;
-	const locked = 1;
-	const approved = 2;
-	const deleted = 3;
+	const pbl = 1;
+	const prv_locked = 2;
+	const prv_approved = 3;
+	const deleted = 4;
 }

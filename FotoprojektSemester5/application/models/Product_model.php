@@ -31,6 +31,14 @@ class Product_model extends CI_Model {
 		
 		return $query->result ();
 	}
+	Public function getProductVariantsForPrinterPriceProfile($prsp_id, $prpr_id) {
+		$this->db->join ( 'price_product_type', 'prty_id = prpt_prty_id', 'INNER JOIN' );
+		$this->db->join ( 'print_supplier_price', 'prty_id = prsp_prty_id', 'INNER JOIN' );
+		$this->db->where ( 'prsp_prsu_id', $prsp_id );
+		$this->db->where ( 'prpt_prpr_id', $prpr_id );
+		$query = $this->db->get ( "product_type" );
+		return $query->result ();
+	}
 	Public function getProductVariant($prod_id, $prty_id) {
 		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
 		$this->db->join ( 'price_product_type', 'prpt_prpr_id = even_prpr_id', 'INNER JOIN' );
@@ -39,6 +47,15 @@ class Product_model extends CI_Model {
 		$this->db->where ( 'prod_id', $prod_id );
 		$this->db->where ( 'prty_id', $prty_id );
 		$query = $this->db->get ( "product" );
+		$result = $query->result ();
+		return $result [0];
+	}
+	Public function getUsedFileSize($user_id) {
+		$this->db->join ( 'event', 'prod_even_id = even_id', 'INNER JOIN' );
+		$this->db->where ( 'even_user_id', $user_id );
+		$this->db->where ( 'prod_filesize IS NOT NULL' );
+		$this->db->select_sum ( 'prod_filesize' );
+		$query = $this->db->get ( 'product' );
 		$result = $query->result ();
 		return $result [0];
 	}

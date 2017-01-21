@@ -7,6 +7,10 @@
 					echo "<div id='fehler_span' class='alert alert-success'>";
 					echo $this->session->flashdata ( 'emailChange' );
 					echo "</div>";
+				} elseif ($this->session->flashdata ( 'pwChange' ) != "") {
+					echo "<div id='fehler_span' class='alert alert-success'>";
+					echo $this->session->flashdata ( 'pwChange' );
+					echo "</div>";
 				}
 				?>
 	</div>
@@ -97,41 +101,14 @@
 <hr>
 
 <div class="container">
-	<form action="<?php
-	
-	echo base_url ();
-	?>" method="post">
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<h2 style="text-decoration: underline;">Passwort Ändern</h2>
-				<div class="form-group col-xs-7">
-					<label for="oldpassword">Altes Passwort</label> <input type="password" class="form-control" id="oldpassword">
-				</div>
-				<div class="form-group col-xs-7">
-					<label for="newpassword">Neues Passwort</label> <input type="password" class="form-control" id="newpassword">
-				</div>
-				<div class="form-group col-xs-7">
-					<label for="proofpassword">Passwort bestätigen</label> <input class="form-control" type="password" id="proofpassword" />
-				</div>
-				<br>
-				<div class="form-group col-xs-12">
-					<button type="button" id="save-pwd-btn" class="btn btn-success btn-md">Speichern</button>
-				</div>
-			</div>
-		</div>
-	</form>
-</div>
-
-<hr>
-
-<div class="container">
+<div class="row">
 <form action="<?php
 
 echo base_url ();
 ?>user/call_change_email_view" method="post">
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<h2>Email-Adresse Ändern</h2>
+		
+			<div class="col-md-8 col-sm-8">
+				<h2>Benutzerdaten ändern</h2>
 				<div class="form-group col-xs-7">
 					<input type="text" class="form-control" id="mail" value="<?php
 					
@@ -140,11 +117,17 @@ echo base_url ();
 				</div>
 				
 				<div class="form-group col-xs-12">
-					<button name="submit" type="submit" id="save-mail-btn" class="btn btn-success btn-md">E-Mail Adresse Ändern</button>
-				</div>
+					<button name="submit" type="submit" id="save-mail-btn" class="btn btn-success btn-md">E-Mail Adresse ändern</button>
+					<a class="active" href="<?php
+					
+					echo base_url ();
+					?>user/call_change_passwordSettings_view"><button type="button" class="nav-link btn btn-primary btn-md">Passwort ändern</button></a>
+					</div>
 			</div>
 		</div>
 		</form>
+		
+				
 </div>
 
 <hr>

@@ -14,25 +14,15 @@ class Shoppingcart extends CI_Controller {
 	}
 	public function index() {
 		$user_id = $this->session->userdata ( 'user_id' );
-		// ceck if user is logged in
+		// check if user is logged in
 		if ($user_id == Null) {
 			$this->creatAnonymousUser ();
 			$user_id = $this->session->userdata ( 'user_id' );
 		}
 		
-		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
-		if (! isset ( $cart )) {
-			
-			$shopping_cart = array (
-					'shca_id' => 0,
-					// 'shca_commission' => 0,
-					// 'shca_sum' => 0,
-					// 'shca_delivery_charge' => 0,
-					'shca_user_id' => $user_id 
-			);
-			$shca_id = $this->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
-		} else
-			$shca_id = $cart->shca_id;
+		// ShoppingCart anlegen oder aus Datenbank lesen
+		$cart = ShoppingCart::getShoppingCart ( $user_id );
+		$shca_id = $cart->shca_id;
 		
 		$shoppingcart_positions = $this->shoppingcart_model->getShoppingCartPositions ( $shca_id );
 		
@@ -45,7 +35,8 @@ class Shoppingcart extends CI_Controller {
 			$product_variant->prod_filepath = $prod_filepath;
 			$shoppingcart_position->product_variant = $product_variant;
 		}
-		$cart->shoppingcart_positions = $shoppingcart_positions;
+		if ($shoppingcart_positions)
+			$cart->shoppingcart_positions = $shoppingcart_positions;
 		$data ['userid'] = $user_id;
 		$data ['shcaid'] = $shca_id;
 		$data ['cart'] = $cart;
@@ -66,9 +57,36 @@ class Shoppingcart extends CI_Controller {
 		);
 		$this->session->set_userdata ( $sess_data );
 	}
+	static function getShoppingCart($user_id) {
+		$CI = & get_instance ();
+		$CI->load->model ( 'shoppingcart_model' );
+		$cart = NULL;
+		$cart = $CI->shoppingcart_model->getShoppingCart ( $user_id );
+		if (! isset ( $cart )) {
+			
+			$shopping_cart = array (
+					'shca_id' => 0,
+					// 'shca_commission' => 0,
+					// 'shca_sum' => 0,
+					// 'shca_delivery_charge' => 0,
+					'shca_user_id' => $user_id 
+			);
+			$shca_id = $CI->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
+			
+			// Noch keine Shoppingcart /Shoppingcart Objekt vorhanden
+			if (! isset ( $cart )) {
+				$cart = new stdClass ();
+			}
+			$cart->shca_id = $shca_id;
+		} else
+			$shca_id = $cart->shca_id;
+		
+		return $cart;
+	}
 	function insert() {
 		$scpo_prod_id = $this->input->post ( 'scpo_prod_id' );
 		$scpo_prty_id = $this->input->post ( 'scpo_prty_id' );
+		$scpo_prsu_id = $this->input->post ( 'even_prsu_id' );
 		
 		// MB: special from single_event_view
 		if (isset ( $_POST ['beschreibungSelect'] )) {
@@ -88,24 +106,12 @@ class Shoppingcart extends CI_Controller {
 			$user_id = $this->session->userdata ( 'user_id' );
 		}
 		
-		// // Shoppingcart-Kopf suchen/anlegen
-		$shopping_cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
-		if (! isset ( $shopping_cart )) {
-			
-			$shopping_cart = array (
-					'shca_id' => 0,
-					'shca_commission' => 0,
-					'shca_sum' => 0,
-					'shca_delivery_charge' => 0,
-					'shca_user_id' => $user_id 
-			);
-			$shca_id = $this->shoppingcart_model->insert_shopping_cart ( $shopping_cart );
-		} else {
-			$shca_id = $shopping_cart->shca_id;
-		}
+		// Shoppingcart-Kopf suchen/anlegen
+		$shopping_cart = ShoppingCart::getShoppingCart ( $user_id );
+		$shca_id = $shopping_cart->shca_id;
 		
 		// Wenn Warenkorb vorhanden, die Positon im Warenkorb anlegen
-		Shoppingcart::insert_update_positon ( $shca_id, $scpo_prod_id, $scpo_prty_id, $scpo_amount );
+		Shoppingcart::insert_update_positon ( $shca_id, $scpo_prod_id, $scpo_prty_id, $scpo_amount, $scpo_prsu_id );
 		
 		// Jetzt den Warenkorb aktualisieren
 		
@@ -114,7 +120,7 @@ class Shoppingcart extends CI_Controller {
 			redirect ( 'Product/ShowSinglePicture/' . $scpo_prod_id );
 	}
 	// add postion to shopping cart or update amount of shoppingcart position
-	public static function insert_update_positon($shca_id, $prod_id, $prty_id, $scpo_amount) {
+	public static function insert_update_positon($shca_id, $prod_id, $prty_id, $scpo_amount, $scpo_prsu_id) {
 		$CI = & get_instance ();
 		$CI->load->model ( 'shoppingcart_model' );
 		
@@ -128,7 +134,8 @@ class Shoppingcart extends CI_Controller {
 						'scpo_shca_id' => $shca_id,
 						'scpo_prod_id' => $prod_id,
 						'scpo_prty_id' => $prty_id,
-						'scpo_amount' => $scpo_amount 
+						'scpo_amount' => $scpo_amount,
+						'scpo_prsu_id' => $scpo_prsu_id 
 				);
 				$CI->shoppingcart_model->insert_shopping_cart_position ( $shopping_cart_position );
 			}
@@ -158,7 +165,7 @@ class Shoppingcart extends CI_Controller {
 		$this->load->model ( 'adress_model' );
 		
 		$user_id = $this->session->userdata ( 'user_id' );
-		$cart = $this->shoppingcart_model->getShoppingCart ( $user_id );
+		$cart = ShoppingCart::getShoppingCart ( $user_id );
 		
 		$shca_id = $cart->shca_id;
 		
@@ -202,5 +209,28 @@ class Shoppingcart extends CI_Controller {
 		$data ['adre_city'] = $address [0]->adre_city;
 		
 		$this->load->template ( 'checkout/checkout_customer.php', $data );
+	}
+	function delete() {
+		$shoppingcart_position = $this->input->post ();
+		$scpo_shca_id = $shoppingcart_position ['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position ['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position ['scpo_prty_id'];
+		$this->shoppingcart_model->delete_shopping_cart_position ( $scpo_shca_id, $scpo_prod_id, $scpo_prty_id );
+		redirect ( "shoppingcart/" );
+	}
+	function update() {
+		$shoppingcart_position = $this->input->post ();
+		$scpo_shca_id = $shoppingcart_position ['scpo_shca_id'];
+		$scpo_prod_id = $shoppingcart_position ['scpo_prod_id'];
+		$scpo_prty_id = $shoppingcart_position ['scpo_prty_id'];
+		$scpo_amount = $shoppingcart_position ['amount_hidden'];
+		
+		$shoppingcart_positionOb = new stdClass ();
+		
+		$shoppingcart_positionOb->scpo_shca_id = $scpo_shca_id;
+		$shoppingcart_positionOb->scpo_prod_id = $scpo_prod_id;
+		$shoppingcart_positionOb->scpo_prty_id = $scpo_prty_id;
+		$shoppingcart_positionOb->scpo_amount = $scpo_amount;
+		$this->shoppingcart_model->update_shopping_cart_position ( $shoppingcart_positionOb );
 	}
 }
