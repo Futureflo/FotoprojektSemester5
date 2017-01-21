@@ -1,4 +1,4 @@
-
+Printersview
 <section style="padding-top: 70px">
 	<div class="container">
 		<?php
@@ -57,7 +57,8 @@
 				echo "<td>" . $printer->prsu_id . "</td>";
 				echo "<td>" . $printer->adre_name . "</td>";
 				echo "<td>" . $printer->prsu_createdon . "</td>";
-				echo "<td>" . $printer->prsu_createdby . "</td>";
+				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
+				// echo "<td>" . $printer->prsu_createdby . "</td>";
 				switch ($printer->prsu_status) {
 					case 1 :
 						echo "<td> Aktiv </td>";
@@ -90,10 +91,21 @@
 			function btneditprinter($printer) {
 				echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
 				echo "<button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\" bearbeiten' aria-label='delete' >
-							<i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
-							</button>";
+			<i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
+			</button>";
 				echo form_close ();
 			}
+			// function btneditprinter($printer) {
+			// // echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
+			// // redirect ( "Printers/showPrinterPrice/" . $printer->prsu_id );
+			// // "<a href=( 'Printers/showPrinterPrice/' . $printer->prsu_id )></a>";
+			// echo "<button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\"
+			// bearbeiten' aria-label='delete' onClick='redirect(Printers/showPrinterPrice/\"" . $printer->prsu_id . "\")';>
+			
+			// <i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
+			// </button>";
+			// // echo form_close ();
+			// }
 			?>
 			</tbody>
 				</table>
