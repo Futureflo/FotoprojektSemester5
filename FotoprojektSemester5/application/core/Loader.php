@@ -479,19 +479,19 @@ class CI_Loader {
 				switch ($userrolle) {
 					default :
 					case 0 :
-						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						$content .=$this->view ( 'general/navbar_loggedin_view', $vars, $return );
 						break;
 					case 1 :
-						$this->view ( 'general/navbar_loggedin_admin_view', $vars, $return );
+						$content .=$this->view ( 'general/navbar_loggedin_admin_view', $vars, $return );
 						break;
 					case 2 :
-						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						$content .=$this->view ( 'general/navbar_loggedin_view', $vars, $return );
 						break;
 					case 3 :
-						$this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return );
+						$content .=$this->view ( 'general/navbar_loggedin_fotograf_view', $vars, $return );
 						break;
 					case 4 :
-						$this->view ( 'general/navbar_loggedin_view', $vars, $return );
+						$content .=$this->view ( 'general/navbar_loggedin_view', $vars, $return );
 						break;
 				}
 			} else {
