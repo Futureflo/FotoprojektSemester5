@@ -7,7 +7,7 @@ echo $this->session->flashdata ( 'msgReg' );
 
 		<div class="row">
 					<?php
-					echo form_open_multipart ( 'printerscreation/' );
+					echo form_open_multipart ( 'admin/printers_creation/' );
 					?>
 
 				<div class="form-group">
@@ -22,13 +22,13 @@ echo $this->session->flashdata ( 'msgReg' );
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" class="form-control" name="adressname" value="<?php
+					<input type="text" class="form-control" name="addressname" value="<?php
 					
-					echo set_value ( 'adressname' );
+					echo set_value ( 'addressname' );
 					?>" placeholder="Druckerei Name"> <span class="text-danger">
 							<?php
 							
-							echo form_error ( 'adressname' );
+							echo form_error ( 'addressname' );
 							?>
 							</span>
 				</div>
@@ -130,7 +130,6 @@ echo $this->session->flashdata ( 'msgReg' );
 					<div class="col-md-4 offset-md-4">
 						<button name="submit" type="submit" class="btn btn-primary btn-md btn-block">Speichern</button>
 					</div>
-					<div class="col-sm-4"></div>
 			</div>
 			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value="">
 			<?php
@@ -140,22 +139,3 @@ echo $this->session->flashdata ( 'msgReg' );
 		</div>
 	</div>
 </section>
-
-
-
-
-<script type="text/javascript">
- 	function checkType(){
-        var customer = document.getElementById('customer');
-        var photograph = document.getElementById('photographer');
-        var field = document.getElementById('type_hidden_field');
-        
-        if(customer.classList.contains('active')){
-            field.value = "2";
-        } else if(photograph.classList.contains('active')){
-            field.value = "3";
-        }
-	}
-    
-    window.addEventListener('load', checkType, false);
-</script>
