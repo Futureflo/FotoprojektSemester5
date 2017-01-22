@@ -8,7 +8,9 @@ class PriceProfile extends CI_Controller {
 	public function showSinglePriceProfile($prpr_id) {
 		$price_profile = PriceProfile::getPriceProfile ( $prpr_id );
 		
-		$user_id = $price_profile->prpr_user_id;
+		$prpr_user_id = $price_profile->prpr_user_id;
+		$user_id = $this->session->userdata ( 'user_id' );
+		$user_role = $this->session->userdata ( 'user_role' );
 		
 		// nicht verwendete IDs speichern und in der Auswahl ausschließen
 		$prty_ids = array ();
@@ -17,7 +19,14 @@ class PriceProfile extends CI_Controller {
 		}
 		$this->load->model ( 'product_type_model' );
 		
-		$price_profile->unused_prty = $this->product_type_model->getAllUnusedProductTypeByPriceProfile ( $user_id, $prty_ids );
+		$price_profile->unused_prty = $this->product_type_model->getAllUnusedProductTypeByPriceProfile ( $prpr_user_id, $prty_ids );
+		
+		// Profile des eigenen Fotograf oder Administratoren dürfen Daten verändern
+		if ($prpr_user_id == $user_id || $user_role == UserRole::Admin) {
+			$price_profile->edit_flag = 1;
+		} else
+			$price_profile->edit_flag = 0;
+		
 		$data ['price_profile'] = $price_profile;
 		$this->load->template ( 'price/single_price_profile_view.php', $data );
 	}
@@ -90,19 +99,28 @@ class PriceProfile extends CI_Controller {
 		$user_id = $CI->session->userdata ( 'user_id' );
 		
 		$user = $CI->User_model->get_user_by_id ( $user_id );
-		if ($user [0]->user_role_id == UserRole::Admin)
+		if ($user [0]->user_role_id == UserRole::Admin) {
 			$price_profiles = $CI->PriceProfile_model->getAllPriceProfiles ();
-		else {
+			foreach ( $price_profiles as $p ) {
+				$p->edit_flag = 1;
+			}
+		} else {
 			
 			$price_profiles_sys = $CI->PriceProfile_model->getPriceProfilesByUser ( 0 );
+			foreach ( $price_profiles_sys as $p ) {
+				$p->edit_flag = 0;
+			}
 			
 			// Wenn der Benutzer gesetzt ist dann können die Profile geladen werden
 			if ($user_id != 0) {
 				$price_profiles_user = $CI->PriceProfile_model->getPriceProfilesByUser ( $user_id );
-				// $price_profiles = $price_profiles_user;
+				foreach ( $price_profiles_user as $p ) {
+					$p->edit_flag = 1;
+				}
 				$price_profiles = array_merge ( $price_profiles_sys, $price_profiles_user );
-			} else
+			} else {
 				$price_profiles = $price_profiles_sys;
+			}
 		}
 		
 		foreach ( $price_profiles as $price_profile ) {
