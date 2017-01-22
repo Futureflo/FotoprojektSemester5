@@ -27,6 +27,11 @@ class Admin extends CI_Controller {
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
+	public function nele_users() {
+		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ();
+		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ();
+		$this->load->template ( 'newsletter/nele_admin_view', $data );
+	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
 		$data ['EventsViewHeader'] = "Archivierte Events";
@@ -135,24 +140,22 @@ class Admin extends CI_Controller {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/priceprofile_creation_view', $data );
 	}
-	
-	public function createNewsletterCSV(){
-		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser();
-		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
+	public function createNewsletterCSV() {
+		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser ();
+		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser ();
 		$i = 0;
-		foreach ($newsletterEmails1 as $user ){			
-			echo "title".$newsletterEmails1[$i]-> user_title;
-			echo "firstname".$newsletterEmails1[$i]-> user_firstname;
-			echo "name".$newsletterEmails1[$i]-> user_name;
-			echo $newsletterEmails1[$i]-> user_email;
-			$i++;			
+		foreach ( $newsletterEmails1 as $user ) {
+			echo "title" . $newsletterEmails1 [$i]->user_title;
+			echo "firstname" . $newsletterEmails1 [$i]->user_firstname;
+			echo "name" . $newsletterEmails1 [$i]->user_name;
+			echo $newsletterEmails1 [$i]->user_email;
+			$i ++;
 		}
-		$i = 0;		
-		foreach ($newsletterEmails2 as $unkownUser ){
-			echo $newsletterEmails2[$i]-> nele_email;
-			$i++;
+		$i = 0;
+		foreach ( $newsletterEmails2 as $unkownUser ) {
+			echo $newsletterEmails2 [$i]->nele_email;
+			$i ++;
 		}
-					
 	}
 }
 ?>
