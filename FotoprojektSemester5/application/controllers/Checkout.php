@@ -14,6 +14,7 @@ use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Api\ShippingAddress;
 
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
@@ -44,11 +45,9 @@ class Checkout extends CI_Controller {
 				$_SESSION['order'] = array();
 				$this->adress();
 				break;
-
 			case '1':
 				$this->payment();
 				break;	
-
 			case '2':
 				$this->check();
 				break;	
@@ -242,7 +241,6 @@ class Checkout extends CI_Controller {
 	    	}
 		}
 		else{	
-			echo "test";
 			$this->load->model ( 'shoppingcart_model' );
 			$this->load->model ( 'Product_type_model' );
 			$this->load->model ( 'country_model' );
@@ -257,7 +255,6 @@ class Checkout extends CI_Controller {
 				
 			$CartHasDigitalPosition = false;
 			$CartHasAnalogPosition = false;
-			echo "test1";
 
 			$productTypes = $this->Product_type_model->getAllProductType();
 
@@ -280,7 +277,6 @@ class Checkout extends CI_Controller {
 
 				$shoppingcart_position->product_variant = Product::getProductVariant ( $prod_id, $prty_id );
 			}
-			echo "test2";
 			//Complete Order & enrich order with countrynicename
 			$order['orde_in_adre_coun_nicename'] = $this->country_model->getCountryByID($order['orde_in_adre_coun_id'])->coun_nicename;
 			$order['orde_de_adre_coun_nicename'] = $this->country_model->getCountryByID($order['orde_de_adre_coun_id'])->coun_nicename;
@@ -302,15 +298,14 @@ class Checkout extends CI_Controller {
 
 			$data ['cart'] = $cart;
 			
-			echo "test3";
-
         	//calculate order
         	$order['orde_delivery_charge'] = -1;//wird nicht benötigt ?? Versandkosten für die jeweilige Bestellung
     		$order['orde_commission'] = -1;//wird nicht benötigt ?? "Provisionzuschlag für diese Bestellung (berechnet sich aus der gesamt Bestellungssumme, prozentualer Anteil"
     		
-			echo "test4-".Order::test() ;
-			$order["orde_sum"] = Order::calcOrder ( $shca_id );
-			echo "test5";
+			$sum_values = Order::calcOrder ( $shca_id );
+			//log_message("debug", "order_sum:" . $orde_value [0]);
+	        $order["orde_sum"] = $sum_values [0];
+	        $order["orde_commission"] = $sum_values [1];
 
 			$order['orde_date'] = date ( "Y-m-d H:i:s" );
 
@@ -326,10 +321,13 @@ class Checkout extends CI_Controller {
 	}
 	public function paypal()
 	{
+
+		$this->load->model ( 'country_model' );
+
 		//Load Order From Session
     	$order = $_SESSION['order'];
 
-		    	// After Step 1
+
 		$apiContext = new \PayPal\Rest\ApiContext(
 		    new \PayPal\Auth\OAuthTokenCredential(
 		        'ARL1SCLBSvi9ZzuZmfoaUSx4DSohIrV4Eb-pae0NhgN-DBGMKxigllaqZcv-0fpPEl_VHqLHgiRb_-vJ',     // ClientID
@@ -350,6 +348,29 @@ class Checkout extends CI_Controller {
 		$payer = new Payer();
 		$payer->setPaymentMethod("paypal");
 
+
+		// #Shipping Adress
+		$shipping_address = new ShippingAddress();
+
+		$shipping_address->setCity($order['orde_de_adre_city']);
+		$shipping_address->setCountryCode($this->country_model->getCountryByID($order['orde_in_adre_coun_id'])->coun_iso);
+		$shipping_address->setPostalCode($order['orde_de_adre_zip'] );
+		$shipping_address->setLine1($order['orde_de_adre_street']);
+		//$shipping_address->setState('State');
+		$shipping_address->setRecipientName($order['orde_de_adre_name']);
+
+
+		$item = new Item(); 
+		$item->setName('Snap-Up Bilder') 
+		->setCurrency('EUR') 
+		//->setSku("1")
+		->setPrice($order["orde_sum"])
+		->setQuantity(1);
+
+		$itemList = new ItemList(); 
+		$itemList->setItems(array($item));
+		$itemList->setShippingAddress($shipping_address);
+
 	
 
 		// ### Amount
@@ -358,7 +379,7 @@ class Checkout extends CI_Controller {
 		// such as shipping, tax.
 		$amount = new Amount();
 		$amount->setCurrency("EUR")
-		    ->setTotal(preg_replace("/[^0-9]./","",$order["orde_sum"]));
+		    ->setTotal($order["orde_sum"]);
 
 		// ### Transaction
 		// A transaction defines the contract of a
@@ -366,7 +387,8 @@ class Checkout extends CI_Controller {
 		// is fulfilling it. 
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
-		    ->setDescription($order["orde_date"]);
+			->setItemList($itemList)
+		    ->setDescription("Snap-Up Einkauf " . $order["orde_date"]);
 
 		// ### Redirect urls
 		// Set the urls that the buyer must be redirected to after 
@@ -400,12 +422,19 @@ class Checkout extends CI_Controller {
 		    $payment->create($apiContext);
 
             redirect( $payment->getApprovalLink() , 'refresh');
-		} catch (Exception $ex) {
+		} catch (PayPal\Exception\PayPalConnectionException $ex) {
+			log_message('error', 'Executed Payment');
+			log_message('error', 'Request:.' .$request);
+			log_message('error', 'Response: '. $ex);
+			log_message('error', 'Code: '.  $ex->getCode());
+			log_message('error', 'Data: '.  $ex->getData());
+            redirect( base_url() , 'refresh'); //TODO Fehler.
+		}	catch (Exception $ex) {
 		    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
 		    
-			log_message('error', 'Created Payment Using PayPal. Please visit the URL to Approve.');
-			log_message('error', 'Request:.' .$request);
-			log_message('error', 'Request:.' .$ex);
+			log_message('error', 'Created Payment Using PayPal.');
+			log_message('error', 'request:.' .$request);
+			log_message('error', 'Exception:.' .$ex);
 			//TODO FEHLER
 			//ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
             redirect( base_url() , 'refresh');
@@ -544,6 +573,7 @@ class Checkout extends CI_Controller {
 		$order['orde_payed'] = $payed;
 		$this->order_model->update_order ( $orde_id, $order );
 		
+		//send Mail to User & to all Shippers
 		
 		//Delete Order & Shoppingcart + Redirect to start
 		$this->shoppingcart_model->delete_shopping_cart ( $shca_id );
