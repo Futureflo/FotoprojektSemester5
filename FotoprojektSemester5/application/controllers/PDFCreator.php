@@ -1,7 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
-require('libraries/fpdf/fpdf.php');
+// require('../libraries/tcpdf/tcpdf.php');
 
 // http://www.php-guru.in/2013/html-to-pdf-conversion-in-codeigniter/
 
@@ -29,7 +29,8 @@ class PDFCreator extends CI_Controller {
 	}
 	
 	public function test() {
-		$this->load->library('tcpdf');
+		// load library
+		$this->load->library('tcPDFstart');
 		
 		// send data from controller to view
 		$data['txt'] = <<<EOD
@@ -38,7 +39,7 @@ class PDFCreator extends CI_Controller {
 EOD;
 		
 		// show it
-		$this->load->view('pdf/bill', $data);
+		$this->load->view('pdf/bill_view', $data);
 	}
 	
 	public function example() {

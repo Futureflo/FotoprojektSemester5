@@ -25,7 +25,9 @@
  */
 
 // Include the main TCPDF library (search for installation path).
-require_once('tcpdf_include.php');
+// require_once('../libraries/tcpdf/examples/tcpdf_include.php');
+// $this->load->library('tcPDFstart');
+// require_once('examples/tcpdf_include.php');
 
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -34,7 +36,8 @@ class MYPDF extends TCPDF {
 	//Page header
 	public function Header() {
 		// Logo
-		$image_file = base_url().'images/logo_example.jpg';
+// 		$image_file = base_url().'Images/logo_example.jpg';
+		$image_file = base_url().'Images/google_logo.png';
 		$this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
 		$this->SetFont('helvetica', 'B', 20);
