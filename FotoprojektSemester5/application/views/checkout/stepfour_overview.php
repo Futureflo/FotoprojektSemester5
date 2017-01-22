@@ -37,6 +37,7 @@ echo form_open ( "checkout", '', array (
 		'shca_id' => $cart->shca_id 
 ) );
 ?>
+
 		<div class="col-md-6 col-xs-12">
 				<table class="table table-striped">
 					<thead>
@@ -94,9 +95,6 @@ echo form_open ( "checkout", '', array (
 			
 			// Spalte 5: Button
 			echo '<td>';
-			echo '<button class="btn btn-danger btn-sm">';
-			echo '<i class="fa fa-trash-o"></i>';
-			echo '</button>';
 			echo '</td>';
 			
 			echo "</tr>";
@@ -124,7 +122,7 @@ echo form_open ( "checkout", '', array (
 					<label class="h5" for="payment">Zahlungsmethode</label>
 				</div>
 				<div class="form-group col-xs-12">
-					<?php echo $order['payment']; ?>
+					<?php echo $order['orde_payment']; ?>
 			  <hr>
 </div>
 					
@@ -155,8 +153,8 @@ echo form_open ( "checkout", '', array (
 			<div class="col-md-4 col-sm-4 col-xs-4">
 				<button type="submit" class="btn btn-default" name="action" value="back">Abbrechen</button>
 			</div>
-			<div
-				class="col-md-4 offset-md-4 col-sm-4  col-xs-4">
+			<input type="hidden" name="confirmed">
+			<div class="col-md-4 offset-md-4 col-sm-4  col-xs-4">
 				<button type="submit" class="btn btn-success" name="action" value="next">Zahlungspflichtig bestellen	</button>
 				<?php
 				echo form_close ();
