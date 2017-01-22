@@ -141,7 +141,9 @@ class Admin extends CI_Controller {
 		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
 		$i = 0;
 		foreach ($newsletterEmails1 as $user ){			
-			echo "titel".$newsletterEmails1[$i]-> user_title;
+			echo "title".$newsletterEmails1[$i]-> user_title;
+			echo "firstname".$newsletterEmails1[$i]-> user_firstname;
+			echo "name".$newsletterEmails1[$i]-> user_name;
 			echo $newsletterEmails1[$i]-> user_email;
 			$i++;			
 		}
