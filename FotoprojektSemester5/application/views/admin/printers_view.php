@@ -23,9 +23,10 @@
 				<?php
 				if ($PrintersViewHeader != "Archivierte Druckereien") {
 					echo '<a
-					href="' . base_url () . 'admin/printers_creation/"
-					class="btn btn-primary" role="button" href="printers_creation"> <i
+					href="' . base_url () . 'printers/createPrinter/"
+					class="btn btn-primary" role="button" href="createPrinter"> <i
 					class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
+					// $data ['PrintersCreationViewHeader'] = "Druckerei anlegen";
 				}
 				?>
 			</div>
@@ -85,7 +86,11 @@
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				// echo "<a href='" . base_url () . "printers/editPrinter/' class='btn btn-info' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				// echo '<a href="' . base_url () . 'admin/printers_creation/"
+				// class="btn btn-primary" role="button" href="printers_creation"> <i
+				// class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#edit' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btneditprinter($printer) {
 				echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
@@ -161,7 +166,7 @@
 					action="<?php
 					
 					echo base_url ();
-					?>admin/deletePrinter/"
+					?>printers/deletePrinter/"
 					method="post">
 					<input id="printerDelete_hidden_field" type="hidden"
 						name="printerDelete_hidden_field" value="">
@@ -205,7 +210,7 @@
 					action="<?php
 					
 					echo base_url ();
-					?>admin/recyclePrinter/"
+					?>printers/recyclePrinter/"
 					method="post">
 					<input id="printerRecycle_hidden_field" type="hidden"
 						name="printerRecycle_hidden_field" value="">
@@ -222,6 +227,52 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Druckerei bearbeiten?</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-danger">
+					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
+					die Druckerei "<span id="printerEdit"></span>" bearbeiten?
+				</div>
+			</div>
+			<div class="modal-footer ">
+				<form
+					action="<?php
+					
+					echo base_url ();
+					?>printers/editPrinter/"
+					method="post">
+					<input id="printerEdit_hidden_field" type="hidden"
+						name="printerEdit_hidden_field" value="">
+					<button type="submit" class="btn btn-danger">
+						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei bearbeiten
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>Abbrechen
+					</button>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+
+
+
 
 
 <script type="text/javascript">
