@@ -22,8 +22,11 @@
 					<div class="form-check">
 						<div class="row">
 							<div class="col-sm-3">
-								<label class="form-check-label"> <input type="radio" class="form-check-input" name="gender" value="Frau" checked> Frau
-								</label> <label class="form-check-label"> <input type="radio" class="form-check-input" name="gender" value="Herr"> Herr
+								<label class="form-check-label"> <input type="radio"
+									class="form-check-input" name="gender" value="Frau" checked>
+									Frau
+								</label> <label class="form-check-label"> <input type="radio"
+									class="form-check-input" name="gender" value="Herr"> Herr
 								</label>
 							</div>
 						</div>
@@ -32,10 +35,12 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" class="form-control" name="firstname" value="<?php
-					
-					echo set_value ( 'firstname' );
-					?>" placeholder="Vorname"> <span class="text-danger">
+					<input type="text" class="form-control" name="firstname"
+						value="<?php
+						
+						echo set_value ( 'firstname' );
+						?>"
+						placeholder="Vorname"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'firstname' );
@@ -46,10 +51,12 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" class="form-control" name="lastname" value="<?php
-					
-					echo set_value ( 'lastname' );
-					?>" placeholder="Nachname"> <span class="text-danger">
+					<input type="text" class="form-control" name="lastname"
+						value="<?php
+						
+						echo set_value ( 'lastname' );
+						?>"
+						placeholder="Nachname"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'lastname' );
@@ -74,10 +81,12 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3 col-xs-3">
-					<input type="text" class="form-control" name="zip" value="<?php
-					
-					echo set_value ( 'zip' );
-					?>" placeholder="PLZ"> <span class="text-danger">
+					<input type="text" class="form-control" name="zip"
+						value="<?php
+						
+						echo set_value ( 'zip' );
+						?>"
+						placeholder="PLZ"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'zip' );
@@ -85,10 +94,12 @@
 							</span>
 				</div>
 				<div class="col-sm-9 col-xs-9">
-					<input type="text" class="form-control" name="city"  value="<?php
-					
-					echo set_value ( 'city' );
-					?>"placeholder="Ort"> <span class="text-danger">
+					<input type="text" class="form-control" name="city"
+						value="<?php
+						
+						echo set_value ( 'city' );
+						?>"
+						placeholder="Ort"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'city' );
@@ -99,10 +110,12 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-9 col-xs-9">
-					<input type="text" class="form-control" name="street" value="<?php
-					
-					echo set_value ( 'street' );
-					?>" placeholder="Straße"> <span class="text-danger">
+					<input type="text" class="form-control" name="street"
+						value="<?php
+						
+						echo set_value ( 'street' );
+						?>"
+						placeholder="Straße"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'street' );
@@ -110,10 +123,12 @@
 							</span>
 				</div>
 				<div class="col-sm-3 col-xs-3">
-					<input type="text" class="form-control" name="housenumber" value="<?php
-					
-					echo set_value ( 'housenumber' );
-					?>" placeholder="Hausnr"> <span class="text-danger">
+					<input type="text" class="form-control" name="housenumber"
+						value="<?php
+						
+						echo set_value ( 'housenumber' );
+						?>"
+						placeholder="Hausnr"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'housenumber' );
@@ -128,7 +143,9 @@
 						<?php
 						echo set_value ( 'birthday' );
 						?>"/>  -->
-					<input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Geburtstag" name="birthday" /> <span
+					<input class="form-control" type="text"
+						onfocus="(this.type='date')" onblur="(this.type='text')"
+						placeholder="Geburtstag" name="birthday" /> <span
 						class="text-danger">
 							<?php
 							
@@ -140,10 +157,12 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="email" class="form-control" name="email" value="<?php
-					
-					echo set_value ( 'email' );
-					?>" placeholder="E-Mail"> <span class="text-danger">
+					<input type="email" class="form-control" name="email"
+						value="<?php
+						
+						echo set_value ( 'email' );
+						?>"
+						placeholder="E-Mail"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'email' );
@@ -154,10 +173,12 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="email" class="form-control" name="cemail" value="<?php
-					
-					echo set_value ( 'cemail' );
-					?>" placeholder="E-Mail wiederholen"> <span class="text-danger">
+					<input type="email" class="form-control" name="cemail"
+						value="<?php
+						
+						echo set_value ( 'cemail' );
+						?>"
+						placeholder="E-Mail wiederholen"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'cemail' );
@@ -168,18 +189,20 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input class="form-control" type="password" name="password" placeholder="Passwort"> <span class="text-danger">
+					<input class="form-control" type="password" name="password"
+						placeholder="Passwort"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'password' );
 							?>
 							</span>
 				</div>
-			</div>			
+			</div>
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
-					<input class="form-control" type="password" name="cpassword" placeholder="Passwort wiederholen"> <span class="text-danger">
+					<input class="form-control" type="password" name="cpassword"
+						placeholder="Passwort wiederholen"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'cpassword' );
@@ -191,31 +214,49 @@
 			<div class="col-sm-10">
 				<label>Sind Sie ein Fotograf? &nbsp</label>
 				<ul class="nav nav-pills" role="tablist">
-				<li class="nav-item"><a class="nav-link <?php
-				
-				if ($type_hidden_field == 2) {
-					echo "active";
-				}
-				?>" href="#customer" data-toggle="tab" onmouseout="checkType()">Nein</a></li>
-				<li class="nav-item"><a class="nav-link <?php
-				
-				if ($type_hidden_field == 3) {
-					echo "active";
-				}
-				?>" href="#photographer" data-toggle="tab" onmouseout="checkType()"> &nbspJa&nbsp </a></li>
-			</ul>
-			<br>
+					<li class="nav-item"><a
+						class="nav-link <?php
+						
+						if ($type_hidden_field == 2) {
+							echo "active";
+						}
+						?>"
+						href="#customer" data-toggle="tab" onmouseout="checkType()">Nein</a></li>
+					<li class="nav-item"><a
+						class="nav-link <?php
+						
+						if ($type_hidden_field == 3) {
+							echo "active";
+						}
+						?>"
+						href="#photographer" data-toggle="tab" onmouseout="checkType()">
+							&nbspJa&nbsp </a></li>
+				</ul>
+				<br>
 			</div>
-			<br>
-			<br>
+			<br> <br>
 
 
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane fade in active" id="customer">
+				<div role="tabpanel"
+					class="tab-pane <?php
+					
+					if ($type_hidden_field == 2) {
+						echo "active";
+					}
+					?>"
+					id="customer">
 					<!-- Der Inhalt ist leer, da die Kunden Felder immer angezeigt werden -->
 				</div>
-				<div role="tabpanel" class="tab-pane" id="photographer">
+				<div role="tabpanel"
+					class="tab-pane <?php
+					
+					if ($type_hidden_field == 3) {
+						echo "active";
+					}
+					?>"
+					id="photographer">
 
 					<br>
 					<div id="signupphotographer">
@@ -224,8 +265,8 @@
 								<div class="form-insert_product">
 
 									<div class="col-sm-10">
-										<label>Gewerbeschein: &nbsp</label>
-										<input type="file" name="tradelicense" onchange="checkFile(this)" />
+										<label>Gewerbeschein: &nbsp</label> <input type="file"
+											name="tradelicense" onchange="checkFile(this)" />
 									</div>
 									<span class="text-danger">
 									<?php
@@ -244,10 +285,12 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="accountholder" value="<?php
-								
-								echo set_value ( 'accountholder' );
-								?>" placeholder="Kontoinhaber"> <span class="text-danger">
+								<input type="text" class="form-control" name="accountholder"
+									value="<?php
+									
+									echo set_value ( 'accountholder' );
+									?>"
+									placeholder="Kontoinhaber"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'accountholder' );
@@ -258,10 +301,12 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="iban" value="<?php
-								
-								echo set_value ( 'iban' );
-								?>" placeholder="IBAN"> <span class="text-danger">
+								<input type="text" class="form-control" name="iban"
+									value="<?php
+									
+									echo set_value ( 'iban' );
+									?>"
+									placeholder="IBAN"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'iban' );
@@ -272,10 +317,12 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="bic" value="<?php
-								
-								echo set_value ( 'bic' );
-								?>" placeholder="BIC"> <span class="text-danger">
+								<input type="text" class="form-control" name="bic"
+									value="<?php
+									
+									echo set_value ( 'bic' );
+									?>"
+									placeholder="BIC"> <span class="text-danger">
 							<?php
 							
 							echo form_error ( 'bic' );
@@ -286,13 +333,15 @@
 					</div>
 
 				</div>
-				<br>	
+				<br>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-check">
-							<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="checktermsandconditions"> <a href="<?php
-							
-							echo base_url ()?>/termsandconditions">AGB</a> zustimmen
+							<label class="form-check-label"> <input type="checkbox"
+								class="form-check-input" name="checktermsandconditions"> <a
+								href="<?php
+								
+								echo base_url ()?>/termsandconditions">AGB</a> zustimmen
 							</label> <span class="text-danger">
 							<?php
 							
@@ -305,7 +354,9 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-check">
-							<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="checklegalnotice"> Datenschutzrichtlinien akzeptieren
+							<label class="form-check-label"> <input type="checkbox"
+								class="form-check-input" name="checklegalnotice">
+								Datenschutzrichtlinien akzeptieren
 							</label> <span class="text-danger">
 							<?php
 							
@@ -318,7 +369,9 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-check">
-							<label class="form-check-label"> <input type="checkbox" class="form-check-input" name="checknewsletter"> Newsletter abonnieren
+							<label class="form-check-label"> <input type="checkbox"
+								class="form-check-input" name="checknewsletter"> Newsletter
+								abonnieren
 							</label> <span class="text-danger">
 							<?php
 							
@@ -331,15 +384,17 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<button name="submit" type="submit" class="btn btn-primary btn-md btn-block">Registrieren</button>
+						<button name="submit" type="submit"
+							class="btn btn-primary btn-md btn-block">Registrieren</button>
 					</div>
 				</div>
 
 
 			</div>
-			<input id="type_hidden_field" type="hidden" name="type_hidden_field" value= <?php
-			
-			echo $type_hidden_field?>>
+			<input id="type_hidden_field" type="hidden" name="type_hidden_field"
+				value=<?php
+				
+				echo $type_hidden_field?>>
 			<?php
 			
 			echo form_close ();
@@ -363,7 +418,6 @@
   }  
 
 	function checkType(){
-		console.log('start');
         var customer = document.getElementById('customer');
         var photograph = document.getElementById('photographer');
         var field = document.getElementById('type_hidden_field');
