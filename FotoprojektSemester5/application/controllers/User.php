@@ -237,6 +237,18 @@ class User extends CI_Controller {
 			return false;
 		}
 	}
+	function photographer_dashboard() {
+		$this->load->model ( 'product_model' );
+		$user_id = $this->session->userdata ( 'user_id' );
+		$abo = $this->user_model->getAbo ( $user_id );
+		$size = $this->product_model->getUsedFileSize ( $user_id );
+		$size->prod_filesize = round ( $size->prod_filesize / 1024 / 1024, 2 );
+		$abo->abof_space = round ( $abo->abof_space / 1024 / 1024, 2 );
+		$data ['size'] = $size;
+		$data ['abo'] = $abo;
+		
+		$this->load->template ( 'user/photographer_dashboard', $data );
+	}
 }
 abstract class UserStatus {
 	const undefined = 0;

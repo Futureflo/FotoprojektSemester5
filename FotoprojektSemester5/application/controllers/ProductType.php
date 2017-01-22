@@ -96,7 +96,7 @@ abstract class ProductPrintType {
 	const prints = 1;
 	const download = 2;
 	const mixed = 2;
-	const article = 2;
+	const article = 1;
 }
 abstract class ProductTypeStatus {
 	const undefined = 0;

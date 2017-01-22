@@ -79,6 +79,7 @@ class Printers_model extends CI_Model {
 	Public function getAllActivPrinters() {
 		$this->db->where ( 'prsu_status !=', 2 );
 		$this->db->join ( 'adress', 'prsu_adre_id = adre_id', 'INNER JOIN' );
+		$this->db->join ( 'user', 'prsu_user_id = user_id', 'INNER JOIN' );
 		$query = $this->db->get ( "print_supplier" );
 		return $query->result ();
 	}
@@ -87,6 +88,7 @@ class Printers_model extends CI_Model {
 	Public function getAllArchivedPrinters() {
 		$this->db->where ( 'prsu_status =', 2 );
 		$this->db->join ( 'adress', 'prsu_adre_id = adre_id', 'INNER JOIN' );
+		$this->db->join ( 'user', 'prsu_user_id = user_id', 'INNER JOIN' );
 		$query = $this->db->get ( "print_supplier" );
 		return $query->result ();
 	}
