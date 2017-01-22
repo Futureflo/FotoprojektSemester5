@@ -22,6 +22,15 @@
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
 						?>user/photographer_dashboard/">Mein Abo</a>
+						
+						<a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>ProductType/product_types/">Meine Formate</a>
+						
+						<a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>PriceProfile/price_profiles">Meine Preisprofile</a>
+						
 						<a class="dropdown-item" href="<?php
 						
 						?>event/uebersicht/">&Uuml;bersicht Events</a><a class="dropdown-item" href="<?php

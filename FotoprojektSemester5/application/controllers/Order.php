@@ -1,6 +1,6 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
-include_once (dirname ( __FILE__ ) . "/ShoppingCart.php");
+include_once (dirname ( __FILE__ ) . "/Shoppingcart.php");
 class Order extends CI_Controller {
 	private static $shopping_cart;
 	public function __construct() {

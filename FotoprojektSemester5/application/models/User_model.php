@@ -216,7 +216,7 @@ class User_model extends CI_Model {
 	
 	// get all UserEmails Newsletter
 	function getNewsletterEmailsFromExistingUser() {
-		 $this->db->select('user_email, user_title');
+		 $this->db->select('user_email, user_title, user_name, user_firstname');
 		 $this->db->from('user');
 		 $this->db->where ( 'user_newsletter', TRUE );		 	
 		 $query = $this->db->get()->result();

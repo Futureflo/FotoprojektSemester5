@@ -35,17 +35,18 @@ class ProductType extends CI_Controller {
 		if ($user [0]->user_role_id == UserRole::Admin) {
 			$product_types = $CI->product_type_model->getAllActiveProductType ();
 			foreach ( $product_types as $pt )
-				$pt->user_flag = 1;
+				$pt->edit_flag = 1;
 		} else {
 			
 			// Alle aktiven Formate für den angemeldeten Benutzer
 			$product_types_user = $CI->product_type_model->getAllActiveProductTypeForUser ( $user_id );
-			foreach ( $product_types_user as $pt )
-				$pt->user_flag = 1;
-				// Alle aktiven System-Formate suchen
+			foreach ( $product_types_user as $pt ) {
+				$pt->edit_flag = 1;
+			}
+			// Alle aktiven System-Formate suchen
 			$product_types_sys = $CI->product_type_model->getAllActiveProductTypeForUser ( 0 );
 			foreach ( $product_types_sys as $pt )
-				$pt->user_flag = 0;
+				$pt->edit_flag = 0;
 			
 			$product_types = array_merge ( $product_types_sys, $product_types_user );
 		}

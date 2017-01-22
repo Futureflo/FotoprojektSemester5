@@ -9,5 +9,5 @@ class dashboard_model extends CI_Model {
 		$query = $this->db->get ( "order" );
 		return $query->result ();
 	}
-}	
+}
 ?>

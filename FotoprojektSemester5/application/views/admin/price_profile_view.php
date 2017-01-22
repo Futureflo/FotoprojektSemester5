@@ -55,9 +55,15 @@
 						}
 						function btnedit($price_profile) {
 							echo form_open ( "PriceProfile/showSinglePriceProfile/" . $price_profile->prpr_id );
-							echo "<button class='btn btn-info' name='submit' type='submit' title='Preisprofil: \"" . $price_profile->prpr_description . "\" bearbeiten' aria-label='delete' >
-									<i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i>
-									</button>";
+							
+							echo "<button class='btn btn-info' name='submit' type='submit' title='Preisprofil: \"" . $price_profile->prpr_description . "\" bearbeiten' aria-label='delete' >";
+							
+							if ($price_profile->edit_flag == 1) {
+								echo "<i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i>";
+							} else {
+								echo "<i class='fa fa-eye fa-lg' aria-hidden='True' style='color:white;'></i>";
+							}
+							echo "</button>";
 							echo form_close ();
 						}
 						?>
