@@ -69,12 +69,6 @@
 					echo "</td>";
 					btn_add ();
 					echo form_close ();
-					// Hinzufügen button
-					function btn_add() {
-						echo "<td>";
-						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
-						echo "</td>";
-					}
 					
 					foreach ( $product_types as $pt ) {
 						echo "<tr class='searchable'>";
@@ -107,10 +101,17 @@
 						// echo "<td>" . $pt->prty_height . "</td>";
 						echo "<td>" . $pt->user_name . "</td>";
 						
-						if ($pt->user_flag == 1)
+						if ($pt->edit_flag == 1)
 							btn_delete ( $pt );
 						
 						echo "<tr>";
+					}
+					
+					// Hinzufügen button
+					function btn_add() {
+						echo "<td>";
+						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
+						echo "</td>";
 					}
 					
 					// Löschen button
