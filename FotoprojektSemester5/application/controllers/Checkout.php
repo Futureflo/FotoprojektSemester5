@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/Product.php");
 include_once (dirname ( __FILE__ ) . "/Order.php");
-include_once (dirname ( __FILE__ ) . "/ShoppingCart.php");
+include_once (dirname ( __FILE__ ) . "/Shoppingcart.php");
 
 
 require APPPATH.'libraries/vendor/autoload.php';
@@ -53,8 +53,7 @@ class Checkout extends CI_Controller {
 				$this->check();
 				break;	
 			case '3': 
-			echo "string";
-				$this->paywithpaypal();
+				$this->paypal();
 				break;	
 			case '4':
 				$this->finish();
@@ -109,7 +108,7 @@ class Checkout extends CI_Controller {
 
             	$_SESSION['order'] = $order;
             	$_SESSION['order_step'] = "1";
-				$this->payment();
+           	 	redirect('/checkout', 'refresh');
 
 
         	}
@@ -199,7 +198,7 @@ class Checkout extends CI_Controller {
 
             	$_SESSION['order'] = $order;
             	$_SESSION['order_step'] = "1";
-				$this->payment();
+           	 	redirect('/checkout', 'refresh');
             }
 		}
 	}
@@ -220,30 +219,30 @@ class Checkout extends CI_Controller {
 			$_SESSION['order'] = $order;
         	$_SESSION['order_step'] = "2";
 			
-			$this->check();
+       	 	redirect('/checkout', 'refresh');
 		}else{
 			$this->load->template ( 'checkout/stepthree_payment' );
 		}		
 	}
 	private function check()
 	{		
-		echo "string";
 		//Load Order From Session
     	$order = $_SESSION['order'];
 
 		if(isset($_POST['confirmed'])){
 			if($order['orde_payment'] == "Vorkasse"){
 	    		$_SESSION['order_step'] = "4";	
-	    		$this->finish();
+           	 	redirect('/checkout', 'refresh');
 			}
 			
 	    	else{
 	    		$_SESSION['order_step'] = "3";
 	    		//Weiterleitung nach Paypal	
-	    		$this->paypal();			
+           	 	redirect('/checkout', 'refresh');
 	    	}
 		}
-		else{			
+		else{	
+			echo "test";
 			$this->load->model ( 'shoppingcart_model' );
 			$this->load->model ( 'Product_type_model' );
 			$this->load->model ( 'country_model' );
@@ -258,6 +257,7 @@ class Checkout extends CI_Controller {
 				
 			$CartHasDigitalPosition = false;
 			$CartHasAnalogPosition = false;
+			echo "test1";
 
 			$productTypes = $this->Product_type_model->getAllProductType();
 
@@ -280,7 +280,7 @@ class Checkout extends CI_Controller {
 
 				$shoppingcart_position->product_variant = Product::getProductVariant ( $prod_id, $prty_id );
 			}
-
+			echo "test2";
 			//Complete Order & enrich order with countrynicename
 			$order['orde_in_adre_coun_nicename'] = $this->country_model->getCountryByID($order['orde_in_adre_coun_id'])->coun_nicename;
 			$order['orde_de_adre_coun_nicename'] = $this->country_model->getCountryByID($order['orde_de_adre_coun_id'])->coun_nicename;
@@ -302,13 +302,17 @@ class Checkout extends CI_Controller {
 
 			$data ['cart'] = $cart;
 			
+			echo "test3";
 
         	//calculate order
         	$order['orde_delivery_charge'] = -1;//wird nicht benötigt ?? Versandkosten für die jeweilige Bestellung
     		$order['orde_commission'] = -1;//wird nicht benötigt ?? "Provisionzuschlag für diese Bestellung (berechnet sich aus der gesamt Bestellungssumme, prozentualer Anteil"
     		
+			echo "test4-".Order::test() ;
 			$order["orde_sum"] = Order::calcOrder ( $shca_id );
+			echo "test5";
 
+			$order['orde_date'] = date ( "Y-m-d H:i:s" );
 
 			$data['order'] = $order;
 			//echo '<script type="text/javascript">alert('.$order['orde_type'].');</script>';
@@ -324,7 +328,6 @@ class Checkout extends CI_Controller {
 	{
 		//Load Order From Session
     	$order = $_SESSION['order'];
-    	echo "string";
 
 		    	// After Step 1
 		$apiContext = new \PayPal\Rest\ApiContext(
@@ -355,7 +358,7 @@ class Checkout extends CI_Controller {
 		// such as shipping, tax.
 		$amount = new Amount();
 		$amount->setCurrency("EUR")
-		    ->setTotal(1);
+		    ->setTotal(preg_replace("/[^0-9]./","",$order["orde_sum"]));
 
 		// ### Transaction
 		// A transaction defines the contract of a
@@ -363,8 +366,7 @@ class Checkout extends CI_Controller {
 		// is fulfilling it. 
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
-		    ->setDescription("Payment description")
-		    ->setInvoiceNumber("5");
+		    ->setDescription($order["orde_date"]);
 
 		// ### Redirect urls
 		// Set the urls that the buyer must be redirected to after 
@@ -396,26 +398,27 @@ class Checkout extends CI_Controller {
 		// for payment approval
 		try {
 		    $payment->create($apiContext);
+
+            redirect( $payment->getApprovalLink() , 'refresh');
 		} catch (Exception $ex) {
 		    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-		    // 
-    	echo "string";
+		    
 			log_message('error', 'Created Payment Using PayPal. Please visit the URL to Approve.');
 			log_message('error', 'Request:.' .$request);
 			log_message('error', 'Request:.' .$ex);
 			//TODO FEHLER
-			ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
-			exit();
+			//ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
+            redirect( base_url() , 'refresh');
 		}
 
 		// ### Get redirect url
 		// The API response provides the url that you must redirect
 		// the buyer to. Retrieve the url from the $payment->getApprovalLink()
 		// method
-		$data["approvalUrl"] = $payment->getApprovalLink();
-		$data["request"] = $request;
-		$data["err"] = $ex;
-		$this->load->template ( 'checkout/paypal',$data);
+		//$data["approvalUrl"] = $payment->getApprovalLink();
+		//$data["request"] = $request;
+		//$data["err"] = $ex;
+		//$this->load->template ( 'checkout/paypal',$data);
 
 		
 
@@ -430,19 +433,7 @@ class Checkout extends CI_Controller {
 
 
 	public function paypalconfirm(){
-	    // Get the payment Object by passing paymentId
-	    // payment id was previously stored in session in
-	    // CreatePaymentUsingPayPal.php
-	    $paymentId = $_GET['paymentId'];
-	    $payment = Payment::get($paymentId, $apiContext);
-
-	    // ### Payment Execute
-	    // PaymentExecution object includes information necessary
-	    // to execute a PayPal account payment.
-	    // The payer_id is added to the request query parameters
-	    // when the user is redirected from paypal back to your site
-	    $execution = new PaymentExecution();
-	    $execution->setPayerId($_GET['PayerID']);
+		log_message('debug', 'paypalconfirm called');
 
 	    $apiContext = new \PayPal\Rest\ApiContext(
 		    new \PayPal\Auth\OAuthTokenCredential(
@@ -450,6 +441,24 @@ class Checkout extends CI_Controller {
 		        'EGRxMQghElNNlifxzX5TGld0BHcCaMS6-kuq62Lqd1axEuQ-kWLtJ_pn0zWC0vCh4ZS8yDtjGjOas4hu'      // ClientSecret
 		    )
 		);
+	    // Get the payment Object by passing paymentId
+	    // payment id was previously stored in session in
+	    // CreatePaymentUsingPayPal.php
+	    $paymentId = $_GET['paymentId'];
+		log_message('debug', 'PaymentID: '.$paymentId );
+	    $payment = Payment::get($paymentId, $apiContext);
+		log_message('debug', 'PaymentID from PaymentObj: '. $payment->getId());
+
+
+	    // ### Payment Execute
+	    // PaymentExecution object includes information necessary
+	    // to execute a PayPal account payment.
+	    // The payer_id is added to the request query parameters
+	    // when the user is redirected from paypal back to your site
+	    $execution = new PaymentExecution();
+		log_message('debug', 'PayerID: '.$_GET['PayerID'] );
+	    $execution->setPayerId($_GET['PayerID']);
+
 
 	    try {
 	        // Execute the payment
@@ -457,24 +466,45 @@ class Checkout extends CI_Controller {
 	        $result = $payment->execute($execution, $apiContext);
 
 	        // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-	        ResultPrinter::printResult("Executed Payment", "Payment", $payment->getId(), $execution, $result);
-
+	        //ResultPrinter::printResult("Executed Payment", "Payment", $payment->getId(), $execution, $result);
+			log_message('debug', 'Executed Payment');
+			log_message('debug', 'PaymentID: '. $payment->getId());
+			log_message('debug', 'Request:.' .$execution);
+			log_message('debug', 'Result:.' .$result);
+	        echo 'printResult("Executed Payment'.$payment->getId()."|". $execution."|". $resul;
 	        try {
 	            $payment = Payment::get($paymentId, $apiContext);
-	        } catch (Exception $ex) {
+	        } 
+	        catch (Exception $ex) {
 	            // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-	            ResultPrinter::printError("Get Payment", "Payment", null, null, $ex);
+	            //ResultPrinter::printError("Get Payment", "Payment", null, null, $ex);
+				log_message('error', 'Get Payment');
+				log_message('error', 'Response: '. $ex);
+	            echo 'printError("Get Payment'.$ex;
 	            exit(1);
 	        }
-	    } catch (Exception $ex) {
+	    } catch (PayPal\Exception\PayPalConnectionException $ex) {
+			log_message('error', 'Executed Payment');
+			log_message('error', 'Response: '. $ex);
+			log_message('error', 'Code: '.  $ex->getCode());
+			log_message('error', 'Data: '.  $ex->getData());
+		    die($ex);
+		}
+		catch (Exception $ex) {
 	        // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-	        ResultPrinter::printError("Executed Payment", "Payment", null, null, $ex);
+	        //ResultPrinter::printError("Executed Payment", "Payment", null, null, $ex);
+			log_message('error', 'Executed Payment');
+			log_message('error', 'Response: '. $ex);
+	        echo 'printError("Executed Payment'.$ex;
 	        exit(1);
 	    }
 
 	    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-	    ResultPrinter::printResult("Get Payment", "Payment", $payment->getId(), null, $payment);
-
+	    //ResultPrinter::printResult("Get Payment", "Payment", $payment->getId(), null, $payment);
+	    echo 'printResult("Get Payment';
+		log_message('debug', 'Get Payment');
+		log_message('debug', 'PaymentID: '. $payment->getId());
+		log_message('debug', 'Result:.' .$payment);
 		$this->finish();
 	}
 
@@ -495,7 +525,6 @@ class Checkout extends CI_Controller {
 		$shca_id = $cart->shca_id;
 
 		//Submit Order to DB
-		$order['orde_date'] = date ( "Y-m-d H:i:s" );
     	$order['orde_user_id'] = $user_id;
     	//$order['orde_pain_id'] = -1; //wird nicht benötigt ??"Bezahlungsinformations ID zeit auf die Bezahlungsinformationen in der Tabelle payment_information"
     	//$order['orde_delivery_charge'] = -1;//wird nicht benötigt ?? Versandkosten für die jeweilige Bestellung
