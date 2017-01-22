@@ -120,15 +120,6 @@ class Admin extends CI_Controller {
 		$data ['users'] = $this->user_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function lockUser() {
-		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$userInformation = $this->user_model->get_user_by_id ( $user_id );
-		$data ['UsersViewHeader'] = "Alle Benutzer";
-		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gesperrt";
-		$this->user_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
-		$data ['users'] = $this->user_model->getAllUsers ();
-		$this->load->template ( 'admin/users_view', $data );
-	}
 	public function unlockUser() {
 		$user_id = $this->input->post ( "userUnlock_hidden_field" );
 		$userInformation = $this->user_model->get_user_by_id ( $user_id );
