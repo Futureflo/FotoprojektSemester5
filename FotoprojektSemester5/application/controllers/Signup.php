@@ -42,6 +42,7 @@ class Signup extends CI_Controller
 		$newsletter = $this->input->post('checknewsletter');
 		
 		$role = $this->input->post('type_hidden_field');
+		$commison = "";
 		
 			
 		// set form validation rules
@@ -61,6 +62,7 @@ class Signup extends CI_Controller
 			$this->form_validation->set_rules ( 'accountholder', 'Kontoinhaber', 'trim|required' );
 			$this->form_validation->set_rules ( 'iban', 'IBAN', 'trim|required' );
 			$this->form_validation->set_rules ( 'bic', 'BIC', 'trim|required' );
+			$commison ="0.1";
 			
 			if (empty($_FILES['tradelicense']['name']))
 			{
@@ -83,7 +85,7 @@ class Signup extends CI_Controller
         	$data['type_hidden_field'] = $role;
         	
          	$this->load->template('user/signup_view',$data); 
-
+			echo "aufter Form:".$role;
         }
 		else
 		{
@@ -97,7 +99,7 @@ class Signup extends CI_Controller
 				$confirmCode = generate_salt(10);
 				$CodeExists = $this->user_model->exists('user_confirmcode', $confirmCode);
 			} while ($CodeExists == true);
-			
+			echo $role;
 			//insert user details into db
 			$data = array(
 				'user_title' => $title,
@@ -109,7 +111,8 @@ class Signup extends CI_Controller
 				'user_role_id' => $role,
 				'user_status' => UserStatus::unconfirmed,	
 				'user_salt' => $salt,
-				'user_confirmcode' => $confirmCode	
+				'user_confirmcode' => $confirmCode,
+				'user_commision' => $commison
 			);
 			//insert User in db
 			$user_id = $this->user_model->insert_user($data);
@@ -180,14 +183,12 @@ class Signup extends CI_Controller
 		// if upload failed , display errors
 		if (!$this->upload->do_upload('tradelicense'))
 		{
-			$this->session->set_flashdata('msgReg','Upload des Gerwerbeschein ist fehlgeschlagen. Bitte versuchen Sie es erneut!');
 		}
 		else
 		{
 			//safe url in DB
 			$user_tradelicenseurl= $basefolder.$newfile_name;
 			$this->user_model->update_userTradelicenseByID($user_id,$user_tradelicenseurl);
-			$this->session->set_flashdata('msgReg','Gewerbeschein wurde erfolgreich hochgeladen');
 
 		}
 	}

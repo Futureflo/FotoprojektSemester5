@@ -1,6 +1,8 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
+// require('../libraries/tcpdf/tcpdf.php');
+
 // http://www.php-guru.in/2013/html-to-pdf-conversion-in-codeigniter/
 
 class PDFCreator extends CI_Controller {
@@ -24,6 +26,20 @@ class PDFCreator extends CI_Controller {
 		 ---- ---- ---- ----
 		 */
 		$this->load->view('pdfreport', $data);
+	}
+	
+	public function test() {
+		// load library
+		$this->load->library('tcPDFstart');
+		
+		// send data from controller to view
+		$data['txt'] = <<<EOD
+						TCPDF Example 003	
+						Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
+EOD;
+		
+		// show it
+		$this->load->view('pdf/bill_view', $data);
 	}
 	
 	public function example() {
