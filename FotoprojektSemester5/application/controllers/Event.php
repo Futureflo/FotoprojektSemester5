@@ -217,6 +217,14 @@ class Event extends CI_Controller {
 		}
 		return $product_variants;
 	}
+	function getProductVariantsForPrinterPriceProfileAsJson() {
+		$prpr_id = $this->input->post ( 'priceid' );
+		$prsu_id = $this->input->post ( 'printerid' );
+		
+		$data = $this->getProductVariantsForPrinterPriceProfile ( $prpr_id, $prsu_id );
+		
+		echo json_encode ( $data );
+	}
 }
 abstract class EventStatus {
 	const undefined = 0;
