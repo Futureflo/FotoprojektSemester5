@@ -34,6 +34,12 @@ class PDFCreator extends CI_Controller {
 		
 		// send data from controller to view
 		$data['txt'] = <<<EOD
+						Snap-Gallery Testseite
+				
+						Wir können ja doch etwas!
+				
+				
+				
 						TCPDF Example 003	
 						Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
 EOD;
