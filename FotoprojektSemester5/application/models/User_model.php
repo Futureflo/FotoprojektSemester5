@@ -224,9 +224,9 @@ class User_model extends CI_Model {
 	}
 	// get all UserEmails Newsletter
 	function getNewsletterEmailsFromUnkownUser() {
-		$this->db->select('nele_email');
+		$this->db->select('nele_email as E-Mail');
 		$this->db->from('newsletter');
-		$query = $this->db->get();	
+		$query = $this->db->get();
 		return $query;
 	}
 	// get Abo
@@ -234,7 +234,7 @@ class User_model extends CI_Model {
 		$this->db->join ( 'abo_fotograf', 'user_abof_id = abof_id' );
 		$this->db->where ( 'user_id', $user_id );
 		$query = $this->db->get ( 'user' );
-		$result = $query->result ();
+		$query = $this->db->get();
 		return $result [0];
 	}
 }

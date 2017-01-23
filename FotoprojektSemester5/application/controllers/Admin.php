@@ -28,8 +28,8 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function nele_users() {
-		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ();
-		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ();
+		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ()->result();
+		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ()->result();
 		$this->load->template ( 'newsletter/nele_admin_view', $data );
 	}
 	
@@ -153,10 +153,13 @@ class Admin extends CI_Controller {
 		$newline = "\r\n";
 		$new_report1= $this->dbutil->csv_from_result($newsletterEmails1,$delimiter,$newline,'');
 		$new_report2 = $this->dbutil->csv_from_result($newsletterEmails2,$delimiter,$newline,'');
-	
+		$dirname = "Newsletter_Abonennten/";
+		if (!is_dir($dirname)) {
+			mkdir('./'.$dirname);
+		}
 		/*  Now use it to write file. write_file helper function will do it */
-		write_file('RegisteredEmailswwslette.csv',$new_report1);
-		write_file('UnregisteredEmails.csv',$new_report2);
+		write_file($dirname.'RegisteredEmails.csv',$new_report1);
+		write_file($dirname.'UnregisteredEmails.csv',$new_report2);
 	
 	}
 	
