@@ -19,10 +19,10 @@
 		</p>
 		</div>
 			<div class="col-md-2">
-				<a class="btn btn-success" href=href="<?php
+				<a class="btn btn-success" href="<?php
 				
 				echo base_url ();
-				?>admin/createNewsletterCSV/">>
+				?>admin/createNewsletterCSV/">
 	  			<i class="fa fa-download fa-lg"></i> CSV-Export</a>
 			</div>
 		<div class="col-md-3">
