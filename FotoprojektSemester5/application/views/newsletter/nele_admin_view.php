@@ -19,7 +19,10 @@
 		</p>
 		</div>
 			<div class="col-md-2">
-				<a class="btn btn-success" href="#">
+				<a class="btn btn-success" href=href="<?php
+				
+echo base_url ();
+				?>admin/createNewsletterCSV/">>
 	  			<i class="fa fa-download fa-lg"></i> CSV-Export</a>
 			</div>
 		<div class="col-md-3">
@@ -45,10 +48,10 @@
 			<?php
 			foreach ( $neleRegisteredUser as $user ) {
 				echo "<tr class='searchable'>";
-				echo "<td>" . $user->user_title . "</td>";
-				echo "<td>" . $user->user_name . "</td>";
-				echo "<td>" . $user->user_firstname . "</td>";
-				echo "<td>" . $user->user_email . "</td>";
+				echo "<td>" . $user->Anrede . "</td>";
+				echo "<td>" . $user->Nachname . "</td>";
+				echo "<td>" . $user->Vorname . "</td>";
+				echo "<td>" . $user->E_Mail . "</td>";
 				echo "<td>";
 				echo btnDelete ( $user );
 				echo "</td>";
