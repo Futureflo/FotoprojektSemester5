@@ -138,21 +138,20 @@ class Admin extends CI_Controller {
 	
 	public function createNewsletterCSV(){
 		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser();
-		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
-		$i = 0;
-		foreach ($newsletterEmails1 as $user ){			
-			echo "title".$newsletterEmails1[$i]-> user_title;
-			echo "firstname".$newsletterEmails1[$i]-> user_firstname;
-			echo "name".$newsletterEmails1[$i]-> user_name;
-			echo $newsletterEmails1[$i]-> user_email;
-			$i++;			
-		}
-		$i = 0;		
-		foreach ($newsletterEmails2 as $unkownUser ){
-			echo $newsletterEmails2[$i]-> nele_email;
-			$i++;
-		}
-					
+		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();		
+		$this->load->dbutil();
+		$this->load->helper('file');
+		
+		/*  pass it to db utility function  */
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report1= $this->dbutil->csv_from_result($newsletterEmails1,$delimiter,$newline,'');
+		$new_report2 = $this->dbutil->csv_from_result($newsletterEmails2,$delimiter,$newline,'');
+		
+		/*  Now use it to write file. write_file helper function will do it */
+		write_file('RegisteredEmailswwslette.csv',$new_report1);
+		write_file('UnregisteredEmails.csv',$new_report2);
+				
 	}
 }
 ?>
