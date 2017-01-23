@@ -69,6 +69,7 @@ $route ['product/(:any)'] = 'Product/showSinglePicture/$1';
 $route ['event/uebersicht'] = 'Event/showEvents/';
 $route ['event/(:any)'] = 'Event/showSingleEvent/$1';
 $route ['event/delete/(:any)'] = 'Event/deleteEvent/$1';
+$route ['event/edit/(:any)'] = 'Event/editEvent/$1';
 
 // Static Pages
 $route ['legalnotice'] = 'staticpages/legalnotice';

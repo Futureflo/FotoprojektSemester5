@@ -59,6 +59,13 @@ class Event extends CI_Controller {
 		$data ['events'] = $this->event_model->getEventsFromUser ( $id );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
+	public function editEvent($id = -1) {
+		if($id == -1)
+            redirect('/checkout', 'refresh');
+		$this->load->model ( 'event_model' );
+		$data ['event'] = $this->event_model->getSingleEventById ( $id );
+		$this->load->template ( 'event/edit_event', $data );
+	}
 	
 	// Methoden um den Status zu aendern
 	public function lockEventById($even_id) {
