@@ -7,14 +7,29 @@ echo $this->session->flashdata ( 'msgReg' );
 
 		<div class="row">
 					<?php
-					echo form_open_multipart ( 'PrintersCreation/newPrinter' );
+					if ($PrintersCreationViewHeader == "Druckerei anlegen") {
+						echo form_open_multipart ( 'PrintersCreation/newPrinter' );
+					} else {
+						echo form_open_multipart ( 'PrintersCreation/editPrinter' );
+					}
 					?>
-
+					
+					<?php
+					// $adre_name = $printers->adre_name
+					$prsu_zip = $printers->prsu_zip?>
+	
 				<div class="form-group">
 				<fieldset class="form-group">
 					<div class="row">
 						<div class="col-sm-12">
-							<h3 class="jumbotron-heading">Druckerei Angaben:</h3>
+							<h3 class="jumbotron-heading"><?php
+							if ($PrintersCreationViewHeader == "Druckerei anlegen") {
+								echo $PrintersCreationViewHeader;
+							} else {
+								"Druckerei bearbeiten";
+							}
+							
+							?></h3>
 							<br>
 						</div>
 					</div>
@@ -52,7 +67,7 @@ echo $this->session->flashdata ( 'msgReg' );
 				<div class="col-sm-3 col-xs-3">
 					<input type="text" class="form-control" name="zip" value="<?php
 					
-					echo set_value ( 'zip' );
+					echo $printers->prsu_zip;
 					?>" placeholder="PLZ"> <span class="text-danger">
 							<?php
 							
@@ -141,6 +156,11 @@ echo $this->session->flashdata ( 'msgReg' );
 </section>
 
 
+
+<!-- 				echo $printer->prsu_id; -->
+<!-- 				echo "<td>" . $printer->adre_name . "</td>"; -->
+<!-- 				echo "<td>" . $printer->prsu_createdon . "</td>"; -->
+<!-- 				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>"; -->
 
 <script type="text/javascript">
  	function checkType(){

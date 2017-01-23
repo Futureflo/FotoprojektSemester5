@@ -41,6 +41,40 @@ class Printers extends CI_Controller {
 		$printer [0]->prices = $prices;
 		return $printer [0];
 	}
+	public function editPrinter() {
+		$this->load->model ( 'PrintersCreation_model' );
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerEdit_hidden_field" );
+		// $printer = Printers::getPrinter ( $prsu_id );
+		// $printer->prsu_id;
+		$data ['printers'] = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		// $data ['PrintersCreationViewHeader'] = "Druckerei bearbeiten";
+		$this->load->template ( 'admin/printers_creation_view', $data );
+	}
+	public function createPrinter() {
+		$data ['PrintersCreationViewHeader'] = "Druckerei anlegen";
+		$this->load->template ( 'admin/printers_creation_view', $data );
+	}
+	public function deletePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
+		$data ['printers'] = $this->Printers_model->getAllActivePrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function recyclePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
+		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
 }
 abstract class PrinterStatus {
 	const undefined = 0;
