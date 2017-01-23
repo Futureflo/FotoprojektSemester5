@@ -30,7 +30,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 				<div class="form-group col-md-6 col-sm-12">
-					<h4>Rechnungsadresses</h4>
+					<h4>Rechnungsadresse</h4>
 					<label for=""></label> <select class="form-control" id="invoiceAdressID" name="invoiceAdressID">
 						<?php echo $invoiceAdressesOptions; ?>
 					</select>

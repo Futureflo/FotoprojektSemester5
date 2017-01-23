@@ -16,5 +16,15 @@ class PrintersCreation_model extends CI_Model {
 		$this->db->insert ( 'adress', $data );
 		return $this->db->insert_id ();
 	}
+	// update printer
+	function update_printer($data, $id) {
+		$this->db->where ( 'prsu_id', $id );
+		return $this->db->update ( 'print_supplier', $data );
+	}
+	// update address
+	function update_address($data, $id) {
+		$this->db->where ( 'adre_id', $id );
+		return $this->db->update ( 'adress', $data );
+	}
 }
 ?>

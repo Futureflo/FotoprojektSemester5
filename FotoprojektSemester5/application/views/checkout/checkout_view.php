@@ -135,7 +135,9 @@
 <button name="submit" type="submit"
 			class="btn btn-success btn-block btn-md" id="checkout-btn"
 			<?php
-			
+			if (isset ( $cart->shoppingcart_positions ) == FALSE) {
+				echo " disabled ";
+			}
 			if (! $this->session->userdata ( 'login' )) {
 				echo "data-toggle=\"modal\" data-target=\"#notLogedinModal\"";
 			}
