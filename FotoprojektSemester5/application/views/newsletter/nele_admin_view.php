@@ -21,7 +21,7 @@
 			<div class="col-md-2">
 				<a class="btn btn-success" href=href="<?php
 				
-echo base_url ();
+				echo base_url ();
 				?>admin/createNewsletterCSV/">>
 	  			<i class="fa fa-download fa-lg"></i> CSV-Export</a>
 			</div>
@@ -63,17 +63,17 @@ echo base_url ();
 				echo "<td></td>";
 				echo "<td></td>";
 				echo "<td></td>";
-				echo "<td>" . $user->nele_email . "</td>";
+				echo "<td>" . $user->E_Mail . "</td>";
 				echo "<td>";
 				echo btnDeleteUnknown ( $user );
 				echo "</td>";
 				echo "</tr>";
 			}
 			function btnDelete($user) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->user_name . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnDeleteUnknown($user) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->nele_email . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($user) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#editUser' title='Benutzer \"" . $user->user_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
