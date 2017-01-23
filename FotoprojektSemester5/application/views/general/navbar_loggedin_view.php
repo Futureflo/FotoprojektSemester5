@@ -14,7 +14,14 @@
 				
 				echo base_url ();
 				?>">Home <span class="sr-only"></span></a></li>
-
+<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">Veranstalter</a>
+					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+					<a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>event/uebersicht/">Meine Events</a>
+						</div>
+						</li>
 					<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"
 					id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-lg"
 						aria-hidden="true"></i></a>

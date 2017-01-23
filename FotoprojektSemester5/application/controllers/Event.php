@@ -56,7 +56,8 @@ class Event extends CI_Controller {
 	public function showEvents() {
 		$this->load->model ( 'event_model' );
 		$id = $this->session->userdata ( 'user_id' );
-		$data ['events'] = $this->event_model->getEventsFromUser ( $id );
+		$email = $this->session->userdata ( 'user_email' );
+		$data ['events'] = $this->event_model->getEventsFromUserandEmail ( $id,$email );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	public function editEvent($id = -1) {

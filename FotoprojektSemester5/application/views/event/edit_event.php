@@ -17,7 +17,15 @@
 					<div class="form-group">
 						<div class="col-sm-12">
             				<label class="form-control-label">Eventname:</label>
-							<input type="input" class="form-control input-sm chat-input" placeholder="Eventname" name="edit_even_name" id="edit_even_name">
+							<input type="input" class="form-control input-sm chat-input" placeholder="Eventname" name="edit_even_name" id="edit_even_name" value="<?php echo($event[0]->even_name); ?>">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-sm-12">
+            				<label class="form-control-label">Eventveranstalter (E-Mail Adresse):</label>
+							<input type="input" class="form-control input-sm chat-input" placeholder="Eventverantstalter" name="edit_host_email" id="edit_host_email value="<?php echo($event[0]->even_host_email); ?>"">
 						</div>
 					</div>
 				</div>
@@ -25,7 +33,7 @@
 					<div class="form-group">
 						<div class="col-sm-12">
             				<label class="form-control-label">Datum:</label>
-            				<input type="date" class="form-control input-sm chat-input" placeholder="2017-01-01" name="edit_even_date" id="edit_even_date">
+            				<input type="date" class="form-control input-sm chat-input" placeholder="2017-01-01" name="edit_even_date" id="edit_even_date" value="<?php echo($event[0]->even_date); ?>">
 						</div>
 					</div>
 				</div>
@@ -33,7 +41,7 @@
 					<div class="form-group">
 						<div class="col-sm-12">
             				<label class="form-control-label">Passwort:</label>
-							<input type="input" class="form-control input-sm chat-input" name="edit_even_password" id="edit_even_password">
+							<input type="input" class="form-control input-sm chat-input" name="edit_even_password" id="edit_even_password" value="<?php echo($event[0]->even_password); ?>">
 						</div>
 					</div>
 				</div>
@@ -96,7 +104,7 @@
 				<div class="event-btn-wrapper">
 					<span class="group-btn">
 						<button name="submit" type="submit"
-							class="btn btn-success btn-md">Anlegen</button>
+							class="btn btn-success btn-md">Bearbeiten</button>
 					</span>
 				</div>
 					
