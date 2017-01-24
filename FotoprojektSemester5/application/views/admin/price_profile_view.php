@@ -29,15 +29,18 @@ form {
 	<div class="row">
 		<div class="col-md-7">
 			<p class="h1" id="test" onclick="setPager()">
-			Preisprofile
+			<?php
+			echo $PriceProfileHeader?>
 			</p>
 		</div>
 		<div class="col-md-2">
 				<?php
-				echo '<a
+				if ($archive_flag == 0) {
+					echo '<a
 					href="' . base_url () . 'admin/priceprofile_creation/"
 					class="btn btn-primary" role="button" href="printers_creation"> <i
 					class="fa fa-plus-square fa-lg"></i> Preisprofil</a>';
+				}
 				?>
 			</div>
 	</div>
@@ -50,6 +53,7 @@ form {
 					<tr>
 						<th>ID</th>
 						<th>Bezeichnung</th>
+						<th>Fotograf</th>
 	
 					</tr>
 					</thead>
@@ -60,8 +64,8 @@ form {
 							echo "<td>" . $price_profile->prpr_id . "</td>";
 							echo "<td>" . $price_profile->prpr_description . "</td>";
 							
+							echo "<td>" . $price_profile->user_firstname . ' ' . $price_profile->user_name . "</td>";
 							echo "<td>";
-							
 							echo "<center>";
 							if ($archive_flag == 0) {
 								echo btnedit ( $price_profile );

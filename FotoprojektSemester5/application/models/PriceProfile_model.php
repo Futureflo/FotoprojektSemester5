@@ -6,6 +6,7 @@ class PriceProfile_model extends CI_Model {
 		parent::__construct ();
 	}
 	Public function getAllPriceProfiles() {
+		$this->db->join ( 'user', 'user_id = prpr_user_id', 'INNER JOIN' );
 		$this->db->where ( 'prpr_status', PriceProfileStatus::activ );
 		$query = $this->db->get ( "price_profile" );
 		return $query->result ();
@@ -17,6 +18,7 @@ class PriceProfile_model extends CI_Model {
 		return $query->result ();
 	}
 	Public function getAllArichvedPriceProfiles() {
+		$this->db->join ( 'user', 'user_id = prpr_user_id', 'INNER JOIN' );
 		$this->db->where ( 'prpr_status', PriceProfileStatus::deleted );
 		$query = $this->db->get ( "price_profile" );
 		return $query->result ();

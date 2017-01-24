@@ -19,6 +19,7 @@ class ProductType extends CI_Controller {
 		$product_types = ProductType::getAllProductType ();
 		$data ['product_types'] = $product_types;
 		$data ['users'] = $this->usersforProductType ();
+		$data ['archive_flag'] = false;
 		$this->load->template ( 'admin/product_type_view', $data );
 	}
 	public function archivedProductTypes() {
@@ -100,7 +101,7 @@ class ProductType extends CI_Controller {
 			);
 			
 			$price_profile = $this->product_type_model->insert_product_type ( $data );
-			redirect ( 'ProductType\product_types' );
+			redirect ( 'ProductType\ProductTypes' );
 		}
 	}
 	public function deleteProductType() {
@@ -112,8 +113,19 @@ class ProductType extends CI_Controller {
 				'prty_status' => ProductTypeStatus::deleted 
 		);
 		$this->product_type_model->update_product_type ( $prty_id, $data );
-		redirect ( 'ProductType\product_types' );
+		redirect ( 'ProductType\ProductTypes' );
 		$this->session->set_flashdata ( '', 'Format \"' . $prty_description . '\" gelöscht!' );
+	}
+	public function recycleProductType() {
+		$prty_id = $this->input->post ( 'prty_id' );
+		$prty_description = $this->input->post ( 'prty_description' );
+		
+		$this->load->model ( 'product_type_model' );
+		$data = array (
+				'prty_status' => ProductTypeStatus::activ 
+		);
+		$this->product_type_model->update_product_type ( $prty_id, $data );
+		$this->session->set_flashdata ( '', 'Format \"' . $prty_description . '\" wiederhergestellt!' );
 	}
 }
 abstract class ProductPrintType {

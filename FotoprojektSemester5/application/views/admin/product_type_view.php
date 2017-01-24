@@ -36,39 +36,41 @@
 				</thead>
 				<tbody>
 					<?php
-					echo form_open ( "ProductType/addProductType" );
-					
-					echo "<td>";
-					echo "<input id=\"prty_description\" name=\"prty_description\">";
-					echo "</td>";
-					
-					echo "<td>";
-					echo "<select name=\"prty_type\">";
-					echo "<option value=" . ProductPrintType::prints . ">" . "Druck" . "</option>";
-					echo "<option value=" . ProductPrintType::download . ">" . "Download" . "</option>";
-					echo "<option value=" . ProductPrintType::article . ">" . "Artikel" . "</option>";
-					echo "</select>";
-					echo "</td>";
-					
-					// echo "<td>";
-					// echo "<input id=\"prty_width\" name=\"prty_width\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
-					// echo "</td>";
-					
-					// echo "<td>";
-					// echo "<input id=\"prty_height\" name=\"prty_height\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
-					// echo "</td>";
-					
-					echo "<td>";
-					echo "<select name=\"prty_user_id\">";
-					foreach ( $users as $user ) {
-						echo "<option value=" . $user->user_id . ">";
-						echo $user->user_firstname . " " . $user->user_name;
-						echo "</option>";
+					if (! $archive_flag) {
+						echo form_open ( "ProductType/addProductType" );
+						
+						echo "<td>";
+						echo "<input id=\"prty_description\" name=\"prty_description\">";
+						echo "</td>";
+						
+						echo "<td>";
+						echo "<select name=\"prty_type\">";
+						echo "<option value=" . ProductPrintType::prints . ">" . "Druck" . "</option>";
+						echo "<option value=" . ProductPrintType::download . ">" . "Download" . "</option>";
+						echo "<option value=" . ProductPrintType::article . ">" . "Artikel" . "</option>";
+						echo "</select>";
+						echo "</td>";
+						
+						// echo "<td>";
+						// echo "<input id=\"prty_width\" name=\"prty_width\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
+						// echo "</td>";
+						
+						// echo "<td>";
+						// echo "<input id=\"prty_height\" name=\"prty_height\" type=\"number\" min=\"0\" step=\"1\" value=\"0.00\">";
+						// echo "</td>";
+						
+						echo "<td>";
+						echo "<select name=\"prty_user_id\">";
+						foreach ( $users as $user ) {
+							echo "<option value=" . $user->user_id . ">";
+							echo $user->user_firstname . " " . $user->user_name;
+							echo "</option>";
+						}
+						echo "</select>";
+						echo "</td>";
+						btn_add ();
+						echo form_close ();
 					}
-					echo "</select>";
-					echo "</td>";
-					btn_add ();
-					echo form_close ();
 					
 					foreach ( $product_types as $pt ) {
 						echo "<tr class='searchable'>";
@@ -99,10 +101,14 @@
 						
 						// echo "<td>" . $pt->prty_width . "</td>";
 						// echo "<td>" . $pt->prty_height . "</td>";
-						echo "<td>" . $pt->user_name . "</td>";
+						echo "<td>" . $pt->user_firstname . ' ' . $pt->user_name . "</td>";
 						
-						if ($pt->edit_flag == 1)
-							btn_delete ( $pt );
+						if ($archive_flag) {
+							btn_recycle ( $pt );
+						} else {
+							if ($pt->edit_flag == 1)
+								btn_delete ( $pt );
+						}
 						
 						echo "<tr>";
 					}
@@ -121,18 +127,22 @@
 								'prty_description' => $pt->prty_description 
 						) );
 						echo "<td>";
-						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Löschen\" class=\"btn btn-danger\" />";
+						echo "<button class='btn btn-danger' name='submit' type='submit' title='Format: \"" . $pt->prty_description . "\" löschen' aria-label='delete' >";
+						echo "<i class='fa fa-trash fa-lg' aria-hidden='True' style='color:white;'></i>";
+						echo "</button>";
 						echo "</td>";
 						echo form_close ();
 					}
 					// Recycle button
 					function btn_recycle($pt) {
-						echo form_open ( "ProductType/deleteProductType", '', array (
+						echo form_open ( "ProductType/recycleProductType", '', array (
 								'prty_id' => $pt->prty_id,
 								'prty_description' => $pt->prty_description 
 						) );
 						echo "<td>";
-						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Löschen\" class=\"btn btn-danger\" />";
+						echo "<button class='btn btn-success' name='submit' type='submit' title='Format: \"" . $pt->prty_description . "\" wiederherstellen' aria-label='delete' >";
+						echo "<i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i>";
+						echo "</button>";
 						echo "</td>";
 						echo form_close ();
 					}

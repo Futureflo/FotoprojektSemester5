@@ -34,7 +34,7 @@
 						
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
-						?>ProductType/product_types/">Meine Formate</a>
+						?>ProductType/ProductTypes/">Meine Formate</a>
 						
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
