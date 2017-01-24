@@ -39,7 +39,42 @@
 									class="text-danger"><?php
 									
 									echo form_error ( 'even_name' );
-									?></span> <br>
+									?></span> 
+									<br>
+								<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php
+								
+								echo set_value ( 'even_host_email' );
+								?>"/>  -->
+
+									<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<input type="text" class="form-control input-sm chat-input"
+												placeholder="E-Mail des Veranstalters" name="even_host_email" /> <span class="text-danger"><?php
+												
+												echo form_error ( 'even_host_email' );
+												?></span></span>
+										</div>
+									</div>
+								</div>
+									
+								<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php
+								
+								echo set_value ( 'even_password' );
+								?>"/>  -->
+
+									<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<input type="text" class="form-control input-sm chat-input"
+												placeholder="Passwort (nur bei privaten Events)" name="even_password" /> <span class="text-danger"><?php
+												
+												echo form_error ( 'even_password' );
+												?></span></span>
+										</div>
+									</div>
+								</div>
+									<br>
 								<!--  <input type="date" class="form-control input-sm chat-input" placeholder="Datum" name="even_date" value="<?php
 								
 								echo set_value ( 'even_date' );
@@ -60,6 +95,8 @@
 										</div>
 									</div>
 								</div>
+
+								
 
 								<div class="row">
 									<div class="col-sm-12">
