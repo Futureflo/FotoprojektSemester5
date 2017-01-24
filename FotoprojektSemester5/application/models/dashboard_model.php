@@ -1,5 +1,5 @@
 <?php
-class dashboard_model extends CI_Model {
+class Dashboard_model extends CI_Model {
 	Public function __construct() {
 		parent::__construct ();
 	}
