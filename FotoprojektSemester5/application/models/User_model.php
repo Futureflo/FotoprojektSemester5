@@ -239,15 +239,15 @@ class User_model extends CI_Model {
 	}
 	// delete unregisterd user from newsletter list
 	function update_unableNewsletterForUnregisterdUser($nele_email) {
-	return	$this->db->delete ( 'newsletter', array (
-				'nele_email' => $nele_email));
+		$this->db->where('nele_email', $nele_email);
+		$this->db->delete('newsletter');
 	}
 	// get Abo
 	function getAbo($user_id) {
 		$this->db->join ( 'abo_fotograf', 'user_abof_id = abof_id' );
 		$this->db->where ( 'user_id', $user_id );
 		$query = $this->db->get ( 'user' );
-		$query = $this->db->get();
+		$result = $query->result ();
 		return $result [0];
 	}
 }

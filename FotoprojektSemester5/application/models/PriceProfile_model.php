@@ -1,15 +1,23 @@
 <?php
 include_once (dirname ( __DIR__ ) . "/controllers/ProductType.php");
+include_once (dirname ( __DIR__ ) . "/controllers/PriceProfileStatus.php");
 class PriceProfile_model extends CI_Model {
 	Public function __construct() {
 		parent::__construct ();
 	}
 	Public function getAllPriceProfiles() {
+		$this->db->where ( 'prpr_status', PriceProfileStatus::activ );
 		$query = $this->db->get ( "price_profile" );
 		return $query->result ();
 	}
 	Public function getPriceProfilesByUser($user_id) {
 		$this->db->where ( 'prpr_user_id', $user_id );
+		$this->db->where ( 'prpr_status', PriceProfileStatus::activ );
+		$query = $this->db->get ( "price_profile" );
+		return $query->result ();
+	}
+	Public function getAllArichvedPriceProfiles() {
+		$this->db->where ( 'prpr_status', PriceProfileStatus::deleted );
 		$query = $this->db->get ( "price_profile" );
 		return $query->result ();
 	}

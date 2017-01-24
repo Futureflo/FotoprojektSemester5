@@ -125,6 +125,17 @@
 						echo "</td>";
 						echo form_close ();
 					}
+					// Recycle button
+					function btn_recycle($pt) {
+						echo form_open ( "ProductType/deleteProductType", '', array (
+								'prty_id' => $pt->prty_id,
+								'prty_description' => $pt->prty_description 
+						) );
+						echo "<td>";
+						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Löschen\" class=\"btn btn-danger\" />";
+						echo "</td>";
+						echo form_close ();
+					}
 					?>
 					</tbody>
 				</table>

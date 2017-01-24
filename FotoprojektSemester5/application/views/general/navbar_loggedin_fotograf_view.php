@@ -44,7 +44,20 @@
 						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php
 						echo base_url ();
 						?>printers/showPrinters">&Uuml;bersicht Druckerei</a>
-					</div></li>
+					</div>
+				</li>
+				
+				<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle" href="http://example.com"
+					id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archiv</a>
+					<div class="dropdown-menu dropdown-menu-admin" aria-labelledby="supportedContentDropdown">
+						 <a class="dropdown-item" href="<?php
+							echo base_url ();
+							?>admin/archivedProduct_types/">Formate</a> 
+						 <a class="dropdown-item" href="<?php
+							echo base_url ();
+							?>admin/archivedPrice_profiles/">Preisprofile</a> 
+					</div>
+				</li>
 
 				<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">Event</a>

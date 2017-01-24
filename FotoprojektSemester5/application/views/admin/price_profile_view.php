@@ -1,3 +1,17 @@
+<style type="text/css">
+form {
+     display:inline;
+}
+.button {
+    display: block;
+    width: 99%;
+}
+.btn-sm{   
+    width: 49%;
+}
+</style>
+
+
 <section style="padding-top: 70px">
 	<div class="container">
 		<?php
@@ -5,6 +19,8 @@
 			echo "<div class='alert alert-danger'>";
 			echo $message . "</div>";
 		}
+		
+		echo $this->session->flashdata ( 'PriceProfile' );
 		?>
 </div>
 </section>
@@ -47,12 +63,19 @@
 							echo "<td>";
 							
 							echo "<center>";
-							echo btnedit ( $price_profile );
+							if ($archive_flag == 0) {
+								echo btnedit ( $price_profile );
+								
+								if ($price_profile->edit_flag == 1)
+									echo btndelete ( $price_profile );
+							} else {
+								echo btnrecycle ( $price_profile );
+							}
 							echo "</center>";
-							echo "</td>";
-							
-							echo "<tr>";
 						}
+						echo "</td>";
+						
+						echo "<tr>";
 						function btnedit($price_profile) {
 							echo form_open ( "PriceProfile/showSinglePriceProfile/" . $price_profile->prpr_id );
 							
@@ -63,6 +86,28 @@
 							} else {
 								echo "<i class='fa fa-eye fa-lg' aria-hidden='True' style='color:white;'></i>";
 							}
+							echo "</button>";
+							echo form_close ();
+						}
+						function btndelete($price_profile) {
+							echo form_open ( "PriceProfile/deletePriceProfile", '', array (
+									'prpr_id' => $price_profile->prpr_id,
+									'prpr_description' => $price_profile->prpr_description 
+							) );
+							
+							echo "<button class='btn btn-danger' name='submit' type='submit' title='Preisprofil: \"" . $price_profile->prpr_description . "\" löschen' aria-label='delete' >";
+							echo "<i class='fa fa-trash fa-lg' aria-hidden='True' style='color:white;'></i>";
+							echo "</button>";
+							echo form_close ();
+						}
+						function btnrecycle($price_profile) {
+							echo form_open ( "PriceProfile/recyclePriceProfile", '', array (
+									'prpr_id' => $price_profile->prpr_id,
+									'prpr_description' => $price_profile->prpr_description 
+							) );
+							
+							echo "<button class='btn btn-success' name='submit' type='submit' title='Preisprofil: \"" . $price_profile->prpr_description . "\" löschen' aria-label='delete' >";
+							echo "<i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i>";
 							echo "</button>";
 							echo form_close ();
 						}
