@@ -30,7 +30,7 @@ class Product_type_model extends CI_Model {
 		$this->db->join ( 'user', 'user_id = prty_user_id', 'INNER JOIN' );
 		$this->db->where ( 'prty_status =', ProductTypeStatus::deleted );
 		$query = $this->db->get ( 'product_type' );
-	
+		
 		return $query->result ();
 	}
 	function getAllProductTypeForUser($user_id) {
@@ -69,6 +69,7 @@ class Product_type_model extends CI_Model {
 		}
 		$this->db->join ( 'print_supplier', 'prsu_user_id = prty_user_id OR prty_user_id = 0', 'INNER JOIN' );
 		$this->db->where ( 'prsu_id', $prsu_id );
+		$this->db->where ( 'prty_status', ProductTypeStatus::activ );
 		
 		$query = $this->db->get ( 'product_type' );
 		return $query->result ();

@@ -1,6 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/ProductType.php");
+include_once (dirname ( __FILE__ ) . "/PriceProfileStatus.php");
 class PriceProfile extends CI_Controller {
 	public function index() {
 		$this->price_profiles ();
@@ -32,7 +33,23 @@ class PriceProfile extends CI_Controller {
 	}
 	public function price_profiles() {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
+		$data ['archive_flag'] = false;
 		$this->load->template ( 'admin/price_profile_view', $data );
+	}
+	public function archivedPriceProfiles() {
+		$data ['price_profiles'] = PriceProfile::getAllArichvedPriceProfiles ();
+		$data ['archive_flag'] = true;
+		$this->load->template ( 'admin/price_profile_view', $data );
+	}
+	public static function getAllArichvedPriceProfiles() {
+		$CI = & get_instance ();
+		$CI->load->model ( 'PriceProfile_model' );
+		$price_profiles = $CI->PriceProfile_model->getAllArichvedPriceProfiles ();
+		foreach ( $price_profiles as $pr ) {
+			$pr->edit_flag = 1;
+		}
+		
+		return $price_profiles;
 	}
 	function newPriceProfile() {
 		$prpr_id = $this->input->post ( 'prpr_id' );
@@ -57,7 +74,8 @@ class PriceProfile extends CI_Controller {
 				// insert priceprofile details into db
 				$data = array (
 						'prpr_user_id' => $prpr_user_id,
-						'prpr_description' => $prpr_description 
+						'prpr_description' => $prpr_description,
+						'prpr_status' => PriceProfileStatus::activ 
 				);
 				$this->load->model ( 'PriceProfile_model' );
 				$new_prpr_id = $this->PriceProfile_model->insert_price_profile ( $data );
@@ -89,6 +107,36 @@ class PriceProfile extends CI_Controller {
 			$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
 			redirect ( 'admin/priceprofile_creation' );
 		}
+	}
+	function deletePriceProfile() {
+		$prpr_id = $this->input->post ( 'prpr_id' );
+		$prpr_user_id = $this->session->userdata ( 'user_id' );
+		$prpr_description = $this->input->post ( 'prpr_description' );
+		
+		$this->load->model ( 'PriceProfile_model' );
+		$data = array (
+				'prpr_status' => PriceProfileStatus::deleted 
+		);
+		
+		$this->PriceProfile_model->update_price_profile ( $prpr_id, $data );
+		
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Preisprofil: ' . $prpr_description . ' gelöscht!</div>' );
+		redirect ( 'PriceProfile/price_profiles' );
+	}
+	function recyclePriceProfile() {
+		$prpr_id = $this->input->post ( 'prpr_id' );
+		$prpr_user_id = $this->session->userdata ( 'user_id' );
+		$prpr_description = $this->input->post ( 'prpr_description' );
+		
+		$this->load->model ( 'PriceProfile_model' );
+		$data = array (
+				'prpr_status' => PriceProfileStatus::activ 
+		);
+		
+		$this->PriceProfile_model->update_price_profile ( $prpr_id, $data );
+		
+		$this->session->set_flashdata ( 'PriceProfile', '<div class="alert alert-success text-center">Preisprofil: ' . $prpr_description . ' wiederhergestellt!</div>' );
+		redirect ( 'PriceProfile/price_profiles' );
 	}
 	
 	// Alle Preisprofile des Systems und des Benutzers/Fotograf laden

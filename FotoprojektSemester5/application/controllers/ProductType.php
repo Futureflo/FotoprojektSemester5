@@ -2,28 +2,52 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/UserRole.php");
 class ProductType extends CI_Controller {
+	public function __construct() {
+		parent::__construct ();
+		$this->load->model ( 'product_type_model' );
+		$this->load->model ( 'User_model' );
+	}
 	public function index() {
 		$this->load->template ( 'product/single_product_type_view' );
 	}
 	public function showSingleProductType($prty_id) {
-		$this->load->model ( 'product_type_model' );
 		$data ['product_type'] = $this->product_type_model->get_product_type_by_id ( $prty_id );
 		$this->load->template ( 'product/single_product_type_view', $data );
 	}
-	public function product_types() {
-		$this->load->model ( 'product_type_model' );
-		$this->load->model ( 'User_model' );
+	public function ProductTypes() {
 		$data ['ProductViewHeader'] = "Alle Formate";
-		$data ['product_types'] = ProductType::getAllProductType ();
+		$product_types = ProductType::getAllProductType ();
+		$data ['product_types'] = $product_types;
+		$data ['users'] = $this->usersforProductType ();
+		$this->load->template ( 'admin/product_type_view', $data );
+	}
+	public function archivedProductTypes() {
+		$data ['ProductViewHeader'] = "Archivierte Formate";
+		$data ['product_types'] = ProductType::getAllArichvedProductType ();
+		$data ['users'] = $this->usersforProductType ();
+		$data ['archive_flag'] = true;
 		
+		$this->load->template ( 'admin/product_type_view', $data );
+	}
+	public function usersForProductType() {
 		$user_id = $this->session->userdata ( 'user_id' );
 		$user = $this->User_model->get_user_by_id ( $user_id );
-		if ($user [0]->user_role_id == UserRole::Admin)
+		if ($user [0]->user_role_id == UserRole::Admin) {
 			$users = $this->User_model->getAllPhotographer ( true );
-		else
+		} else {
 			$users = $user;
-		$data ['users'] = $users;
-		$this->load->template ( 'admin/product_type_view', $data );
+		}
+		return $users;
+	}
+	public static function getAllArichvedProductType() {
+		$CI = & get_instance ();
+		$CI->load->model ( 'product_type_model' );
+		$product_types = $CI->product_type_model->getAllArichvedProductType ();
+		foreach ( $product_types as $pt ) {
+			$pt->edit_flag = 1;
+		}
+		
+		return $product_types;
 	}
 	public static function getAllProductType() {
 		$CI = & get_instance ();
