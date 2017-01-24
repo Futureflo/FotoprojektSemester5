@@ -12,39 +12,54 @@
 
 
 <div class="container">
-		<div class="row">
-		<div class="col-md-7">
-		<p class="h1" id="test" onload="setPager()">
-			Benutzer Newsletter
-		</p>
+	<div class="row">
+
+		<div class="col-md-9">
+			<p class="h1" id="test" onload="setPager()">Benutzer Newsletter</p>
 		</div>
-			<div class="col-md-2">
-				<a class="btn btn-success" href="<?php
-				
-				echo base_url ();
-				?>admin/createNewsletterCSV/">
-	  			<i class="fa fa-download fa-lg"></i> CSV-Export</a>
-			</div>
+
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Suche Benutzer..." />
 		</div>
+	</div>
+	<div class="row" align="right" style="padding-bottom: 0.5rem">
+		<div class="col-md-2 offset-md-7">
+			<a class="btn btn-success"
+				href="<?php
+				
+				echo base_url ();
+				?>admin/createNewsletterCsvRegisterd/"> <i class="fa fa-download fa-lg"></i>CSV
+				(registrierte)
+			</a>
 		</div>
-		<div class="row">
+
+
+		<div class="col-md-3">
+			<a class="btn btn-success"
+				href="<?php
+				
+				echo base_url ();
+				?>admin/createNewsletterCsvUnregisterd/"> <i class="fa fa-download fa-lg"></i>CSV
+				(unregistrierte)
+			</a>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-sm-12 col-md-12">
-		<div class="table-responsive">
-			<table id="dataTable"
-				class="table  table-bordered sortable">
-				<thead>
-					<tr>
-						<th>Titel</th>
-						<th>Nachname</th>
-						<th>Vorname</th>
-						<th>e-Mail</th>
-						<th>Aktion</th>
-					</tr>
-				</thead>
-				<tbody id="table_body">
+			<div class="table-responsive">
+				<table id="dataTable" class="table  table-bordered sortable">
+					<thead>
+						<tr>
+							<th>Titel</th>
+							<th>Nachname</th>
+							<th>Vorname</th>
+							<th>e-Mail</th>
+							<th>Aktion</th>
+						</tr>
+					</thead>
+					<tbody id="table_body">
 			<?php
 			foreach ( $neleRegisteredUser as $user ) {
 				echo "<tr class='searchable'>";
@@ -77,11 +92,11 @@
 			}
 			?>
 			</tbody>
-			</table>
-			
+				</table>
+
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 <div class="container">
@@ -109,31 +124,41 @@
 	aria-labelledby="edit" aria-hidden="true">
 	<div class="modal-dialog">
 
-	    <div class="modal-content">
-	    	<div class="modal-header">
-	       		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-	        	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-	        	<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
-	 		</div>
-	   		<div class="modal-body">   
-				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">
-		       		</span>Möchten Sie den Benutzer aus der Newsletterliste entfernen?
-		       	</div>
-	 		</div>
-		  	<div class="modal-footer ">
-		        <form action="<?php
-										
-										echo base_url ();
-										?>admin/deleteUserFromNewsletterlist/" method="post">
-			        <input id="user_hidden_field" type="hidden" name="userDelete_hidden_field" value="">
-			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
-		        </form>
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">User löschen?</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-danger">
+					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
+					den Benutzer aus der Newsletterliste entfernen?
+				</div>
+			</div>
+			<div class="modal-footer ">
+				<form
+					action="<?php
+					
+					echo base_url ();
+					?>admin/deleteUserFromNewsletterlist/"
+					method="post">
+					<input id="user_hidden_field" type="hidden"
+						name="userDelete_hidden_field" value="">
+					<button type="submit" class="btn btn-danger">
+						<span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>Abbrechen
+					</button>
+				</form>
 			</div>
 		</div>
-    	<!-- /.modal-content --> 
+		<!-- /.modal-content -->
 	</div>
-      <!-- /.modal-dialog --> 
+	<!-- /.modal-dialog -->
 </div>
 
 
