@@ -6,6 +6,9 @@
 			echo $message . "</div>";
 		}
 		?>
+		<div id="fehler_span" class="text-danger"><?php
+		echo $this->session->flashdata ( 'msgReg' );
+		?></div>
 </div>
 </section>
 
@@ -26,7 +29,6 @@
 					href="' . base_url () . 'printers/createPrinter/"
 					class="btn btn-primary" role="button" href="createPrinter"> <i
 					class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
-					// $data ['PrintersCreationViewHeader'] = "Druckerei anlegen";
 				}
 				?>
 			</div>
@@ -71,8 +73,8 @@
 				
 				if ($printer->prsu_status == 1) {
 					echo btnEdit ( $printer );
+					echo btneditpriceprofile ( $printer );
 					echo btnDelete ( $printer );
-					echo btneditprinter ( $printer );
 				} elseif ($printer->prsu_status == 2) {
 					echo btnRecycle ( $printer );
 				}
@@ -86,30 +88,11 @@
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
-				// echo "<a href='" . base_url () . "printers/editPrinter/' class='btn btn-info' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-				// echo '<a href="' . base_url () . 'admin/printers_creation/"
-				// class="btn btn-primary" role="button" href="printers_creation"> <i
-				// class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#edit' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			function btneditprinter($printer) {
-				echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
-				echo "<button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\" bearbeiten' aria-label='delete' >
-			<i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
-			</button>";
-				echo form_close ();
+			function btneditpriceprofile($printer) {
+				return "<a href='" . base_url () . "Printers/showPrinterPrice/" . $printer->prsu_id . "' class='btn btn-info' title='Preisprofil bearbeiten' aria-label='edit' style='margin-right:1rem'> <i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i> </a>";
 			}
-			// function btneditprinter($printer) {
-			// // echo form_open ( "Printers/showPrinterPrice/" . $printer->prsu_id );
-			// // redirect ( "Printers/showPrinterPrice/" . $printer->prsu_id );
-			// // "<a href=( 'Printers/showPrinterPrice/' . $printer->prsu_id )></a>";
-			// echo "<button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\"
-			// bearbeiten' aria-label='delete' onClick='redirect(Printers/showPrinterPrice/\"" . $printer->prsu_id . "\")';>
-			
-			// <i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
-			// </button>";
-			// // echo form_close ();
-			// }
 			?>
 			</tbody>
 				</table>
@@ -122,7 +105,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12 offset-md-5">
+		<div class="col-md-7 offset-md-5">
 			<nav aria-label="Page navigation">
 				<ul class="pagination" id="parent_pagination">
 					<li class="page-item" id="first_page"><a class="page-link"
