@@ -22,7 +22,7 @@
 					
 					<a class="dropdown-item" href="<?php
 					echo base_url ();
-					?>user/dashboard/">Meine Dashboard</a>
+					?>user/dashboard/">Mein Dashboard</a>
 					
 					<a class="dropdown-item" href="<?php
 					echo base_url ();
@@ -59,20 +59,7 @@
 					</div>
 				</li>
 
-				<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">Event</a>
-					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-						<a class="dropdown-item" href="<?php
-						
-						echo base_url ();
-						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php
-						
-						echo base_url ();
-						?>event/aFqS/">Einzelnes Event</a> <a class="dropdown-item" href="<?php
-						
-						echo base_url ();
-						?>event/kksd/">Falsches Event</a>
-					</div></li>
+				
 
 
 				<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"
