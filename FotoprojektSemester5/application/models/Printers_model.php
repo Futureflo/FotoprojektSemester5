@@ -53,7 +53,7 @@ class Printers_model extends CI_Model {
 		$Printers = array ();
 		
 		if (! isset ( $GLOBALS ["allPrinters"] ))
-			$GLOBALS ["allPrinters"] = $this->getAllPrinters ();
+			$GLOBALS ["allPrinters"] = $this->getAllActivePrinters ();
 		
 		foreach ( $GLOBALS ["allPrinters"] as $Printer ) {
 			if ($Printer->prsu_user_id == $userid || $Printer->prsu_user_id == 0) {
