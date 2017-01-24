@@ -87,9 +87,10 @@ class DownloadManager extends CI_Controller {
 				"SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.\n\n"
 				."Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.\n"
 				."Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.\n\n"
-				. "<a href='". $downloadLink ."'>" 
+// 				. "<a href='". $downloadLink ."'>" 
     			. $downloadLink
-				. "</a> \n\n"
+// 				. "</a>"
+				. "\n\n"
 				."Ihr Snapup-Team."
 				);
 		$this->email->send();
@@ -121,7 +122,7 @@ class DownloadManager extends CI_Controller {
 			
 			echo "<br>DEBUG: aufruf Download Funktion /DEBUG<br>"; // DEBUG
 			// download the created zip File
-			downloadFile($downloadableZipFile);
+			$this->downloadFile($downloadableZipFile);
 			
 		}// else $this->session->set_flashdata ( 'msg', 'Datensatz existiert nicht.' );
 		echo "<br>DEBUG: step out startDownload() /DEBUG<br>"; // DEBUG
