@@ -57,6 +57,7 @@ class MYPDF extends TCPDF {
 	}
 }
 
+echo "<br>DEBUG: erstelle Dokument /DEBUG<br>"; // DEBUG
 // create new PDF document
 $this->tcPDFstart = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
