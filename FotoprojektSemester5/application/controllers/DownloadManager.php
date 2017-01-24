@@ -118,7 +118,7 @@ class DownloadManager extends CI_Controller {
 				"SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.\n\n"
 				."Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.\n"
 				."Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.\n\n"
-				. "<a href='". $downloadLink ."'>"
+				. "<a href='". $downloadLink ."'>" 
     			. $downloadLink
 				. "</a> \n\n"
 				."Ihr Snapup-Team."
