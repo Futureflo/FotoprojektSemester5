@@ -54,18 +54,21 @@
 									case 1 :
 										echo "<td> Gesperrt </td>";
 										echo "<td>" . btnEventUnlock ( $event );
+										echo btnEdit ( $event );
 										echo btnEventDelete ( $event ) . "</td>";
 										break;
 									case 2 :
 										echo "<td> Privat </td>";
 										echo "<td>" . btnEventLock ( $event );
 										echo btnPublic ( $event );
+										echo btnEdit ( $event );
 										echo btnEventDelete ( $event ) . "</td>";
 										break;
 									case 3 :
 										echo "<td> Öffentlich </td>";
 										echo "<td>" . btnEventLock ( $event );
 										echo btnPrivate ( $event );
+										echo btnEdit ( $event );
 										echo btnEventDelete ( $event ) . "</td>";
 										break;
 									case 4 :
@@ -106,7 +109,7 @@ echo ($event->even_name);
 								echo base_url ();
 								?>event/deleteEventById/<?php
 								
-echo ($event->	);
+echo ($event->even_id	);
 								?>" method="post">
 													<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Event löschen</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
@@ -135,6 +138,9 @@ echo ($event->	);
 							}
 							function btnPublic($event) {
 								return '<button title="Öffentlich setzen" onclick="publicEvent(' . $event->even_id . ')" class="btn btn-info fa fa-share fa-lg" style="margin-right:1rem"></button>';
+							}
+							function btnEdit($event) {
+								return '<button title="Bearbeiten" onclick="location.href=\''.base_url().'/event/edit/'.$event->even_id.'\';" class="btn btn-info fa fa-edit fa-lg" style="margin-right:1rem"></button>';
 							}
 							?>
 						</tbody>

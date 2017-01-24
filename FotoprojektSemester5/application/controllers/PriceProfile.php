@@ -97,9 +97,9 @@ class PriceProfile extends CI_Controller {
 		$CI->load->model ( 'PriceProfile_model' );
 		$CI->load->model ( 'User_model' );
 		$user_id = $CI->session->userdata ( 'user_id' );
+		$user_role = $CI->session->userdata ( 'user_role' );
 		
-		$user = $CI->User_model->get_user_by_id ( $user_id );
-		if ($user [0]->user_role_id == UserRole::Admin) {
+		if ($user_role == UserRole::Admin) {
 			$price_profiles = $CI->PriceProfile_model->getAllPriceProfiles ();
 			foreach ( $price_profiles as $p ) {
 				$p->edit_flag = 1;

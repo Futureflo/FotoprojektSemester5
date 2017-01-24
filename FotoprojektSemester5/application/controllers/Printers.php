@@ -45,10 +45,7 @@ class Printers extends CI_Controller {
 		$this->load->model ( 'PrintersCreation_model' );
 		$this->load->model ( 'Printers_model' );
 		$prsu_id = $this->input->post ( "printerEdit_hidden_field" );
-		// $printer = Printers::getPrinter ( $prsu_id );
-		// $printer->prsu_id;
 		$data ['printers'] = $this->Printers_model->get_printer_by_id ( $prsu_id );
-		// $data ['PrintersCreationViewHeader'] = "Druckerei bearbeiten";
 		$this->load->template ( 'admin/printers_creation_view', $data );
 	}
 	public function createPrinter() {

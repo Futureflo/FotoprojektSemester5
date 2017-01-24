@@ -13,8 +13,9 @@ class PrintersCreation extends CI_Controller {
 		) );
 		$this->load->database ();
 		$this->load->model ( 'user_model' );
-		// $this->load->model ( 'adress_model' );
+		$this->load->model ( 'adress_model' );
 		$this->load->model ( 'PrintersCreation_model' );
+		$this->load->model ( 'Printers_model' );
 	}
 	function newPrinter() {
 		$user_id = $this->session->userdata ( 'user_id' );
@@ -80,20 +81,17 @@ class PrintersCreation extends CI_Controller {
 				$prsu_id = $this->PrintersCreation_model->insert_printer ( $data );
 				
 				if ($address_id = ! NULL && $user_id = ! NULL) {
-					// Printers::generate_url ( $data );
-					// $data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-					// $this->load->template ( 'admin/printers', $data );
 					redirect ( 'admin/printers' );
-					$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center">Druckerei angelegt!</div>' );
+					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei angelegt!</div>' );
 				} else {
 					// error
-					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
+					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
 					redirect ( 'admin/printers_creation' );
 				}
 			}
 		} else {
 			// error
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
+			$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
 			redirect ( 'admin/printers_creation' );
 		}
 	}
@@ -110,6 +108,8 @@ class PrintersCreation extends CI_Controller {
 		$streetAndNr = $street . " " . $houseNr;
 		$email = $this->input->post ( 'email' );
 		$cemail = $this->input->post ( 'cemail' );
+		$prsu_id = $this->input->post ( 'prsu_id_hidden' );
+		$adre_id = $this->input->post ( 'adre_id_hidden' );
 		
 		if ($user_id) {
 			
@@ -139,43 +139,30 @@ class PrintersCreation extends CI_Controller {
 						'adre_street' => $streetAndNr,
 						'adre_name' => $addressname 
 				);
-				// 'adre_user_id' => $user_id,
-				// 'adre_status' => 1
-				// 'adre_coun_id' => '80'
 				
 				$addressIsSet = $this->PrintersCreation_model->update_address ( $address, $adre_id );
 				
-				// Get todays date for prsu_createdon
-				// date_default_timezone_set ( "Europe/Berlin" );
-				// $timestamp = date ( 'Y-m-d H:i:s', time () );
-				
 				// update printer details into db
-				$data = array (
+				$printer = array (
 						'prsu_email' => $email 
 				);
-				// 'prsu_status' => 1,
-				// 'prsu_createdon' => $timestamp,
-				// 'prsu_user_id' => $user_id,
-				// 'prsu_adre_id' => $address_id
 				
-				// insert Printer and address in db
-				$printerIsSet = $this->PrintersCreation_model->update_printer ( $data, $prsu_id );
+				// update Printer in db
+				$printerIsSet = $this->PrintersCreation_model->update_printer ( $printer, $prsu_id );
 				
+				// Open printers_view
 				if ($addressIsSet && $printerIsSet) {
-					// Printers::generate_url ( $data );
-					// $data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-					// $this->load->template ( 'admin/printers', $data );
+					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei gespeichert!</div>' );
 					redirect ( 'admin/printers' );
-					$this->session->set_flashdata ( 'msg', '<div class="alert alert-success text-center">Druckerei angelegt!</div>' );
 				} else {
 					// error
-					$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
+					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
 					redirect ( 'admin/printers_creation' );
 				}
 			}
 		} else {
 			// error
-			$this->session->set_flashdata ( 'msg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
+			$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
 			redirect ( 'admin/printers_creation' );
 		}
 	}
