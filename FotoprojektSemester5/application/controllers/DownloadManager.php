@@ -102,7 +102,7 @@ class DownloadManager extends CI_Controller {
 		// Produkt einfügen
 		$new_dopa_id = $this->Download_Password_model->insertDownloadPassword ( $data );
 		
-		$webPageURL = "http://snap-gallery.de/DownloadManager/startDownload/";
+		$webPageURL = "http://snap-gallery.de/downloadmanager/startdownload/";
 		$downloadLink = $webPageURL . $download_password;
 		return $downloadLink;
 	}
@@ -115,11 +115,13 @@ class DownloadManager extends CI_Controller {
 		$this->email->to($user_email);
 		$this->email->subject('Ihr Download-Link zu Ihrer Bestellung');
 		$this->email->message(
-				'SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.\n\n'
-				.'Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.\n'
-				.'Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.\n\n'
-				. $downloadLink. '\n\n'
-				.'Ihr Snapup-Team.'
+				"SnapUp wünscht Ihnen viel Spaß mit Ihren Bildern.\n\n"
+				."Im Folgenden finden Sie Ihren persönlichen einzigartigen Download-Link, der einmalig nutzbar ist.\n"
+				."Für weitere Downloads rufen Sie einafach Ihre Bibliothek bei SnapUp auf und fordern einen neuen Download an.\n\n"
+				. "<a href='". $downloadLink ."'>"
+    			. $downloadLink
+				. "</a> \n\n"
+				."Ihr Snapup-Team."
 				);
 		$this->email->send();
 	}
@@ -308,9 +310,11 @@ class DownloadManager extends CI_Controller {
 // 		$passwordLink = $this->createDownloadLink(39);
 // 		echo "<br>link: ". $passwordLink;
 		
-		$products = $this->order_model->getProductInformationByOrderId(39);
-		$zipPath = $this->zipDir(39, $products);
-		echo "<br>zipPath: ". $zipPath;
+// 		$products = $this->order_model->getProductInformationByOrderId(39);
+// 		$zipPath = $this->zipDir(39, $products);
+// 		echo "<br>zipPath: ". $zipPath;
+		$this->sendDownloadEmail("Severin.Klug@gmx.de", "http://www.google.de");
+// 		$this->downloadFile("Download_Zip_Archive_39_20170119114553.zip");
 		
 // 		$this->downloadFile($zipPath);
 
