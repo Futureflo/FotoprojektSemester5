@@ -7,7 +7,32 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>FPS5</title>
+<title>SnapUp
+<?php
+if (lh_isUserLoggedin ()) {
+	$userrolle = $this->session->user_role;
+	// TODO: Benutzerrollenspezifische Titel
+	switch ($userrolle) {
+		default :
+		case 0 :
+			break;
+		case 1 :
+			echo "- Admin";
+			break;
+		case 2 :
+			echo "- Benutzer";
+			break;
+		case 3 :
+			echo "- Fotograf";
+			break;
+		case 4 :
+			echo "- Anonymer Besteller";
+			break;
+	}
+}
+?>
+</title>
+						
 <!-- Required meta tags always come first -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -16,17 +41,37 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="<?php echo base_url();?>css/bootstrap.min.css">
+	href="<?php
+	echo base_url ();
+	?>css/bootstrap.min.css">
 
-<link rel="stylesheet" href="<?php echo base_url();?>css/fps5.css"> 
-<link rel="stylesheet" href="<?php echo base_url();?>_sonstiges/bootstrap-4.0.0-alpha.5/dist/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?php
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/cookieconsent.min.css" />
+echo base_url ();
+?>css/fps5.css"> 
+<link rel="stylesheet" href="<?php
 
-<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
-<script src="<?php echo base_url();?>js/lazyload-any.js"></script>
+echo base_url ();
+?>_sonstiges/bootstrap-4.0.0-alpha.5/dist/font-awesome-4.7.0/css/font-awesome.min.css">
 
-<script src="<?php echo base_url();?>js/cookie.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php
+
+echo base_url ();
+?>css/cookieconsent.min.css" />
+
+<script src="<?php
+
+echo base_url ();
+?>js/jquery-3.1.1.min.js"></script>
+<script src="<?php
+
+echo base_url ();
+?>js/lazyload-any.js"></script>
+
+<script src="<?php
+
+echo base_url ();
+?>js/cookie.js"></script>
 <script>
 // Link zur Anleitung für Cookie: https://cookieconsent.insites.com/download/#
 window.addEventListener("load", function(){

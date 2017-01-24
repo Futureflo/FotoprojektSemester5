@@ -20,7 +20,7 @@
 						echo '<h4 class= "mb-0">';
 							//a-section für überschrift
 							echo '<a data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse" href="#collapse' . $order->orde_id . '">';
-							echo 'Bestellnummer: ' . $order->orde_no . ' | Datum: ' . $order->orde_date . ' | Summe: ' . $order->orde_sum . '€';
+							echo 'Bestellnummer: ' . $order->orde_no . ' | Datum: ' . $order->orde_date . ' | Summe: ' . number_format($order->orde_sum,2,',','.' ) . '€';
 							echo '</a>';
 						//Div-Ende für h4
 						echo '</h4>';
@@ -48,7 +48,7 @@
 										echo "<td scope=\"row\">" . $op->even_name . "</td>";
 										echo "<td>" . $op->prod_name . "</td>";
 										echo "<td>" . $op->orpo_amount . "</td>";
-										echo "<td>" . $op->orpo_price . "€</td>";
+										echo "<td>" . number_format($op->orpo_price,2,',','.' ) . "€</td>";
 										echo "<td>" . $op->prty_description . "</td>";
 									
 										if ($op->prty_type == ProductPrintType::download) {
