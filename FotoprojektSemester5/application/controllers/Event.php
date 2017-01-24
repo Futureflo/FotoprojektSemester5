@@ -135,6 +135,10 @@ class Event extends CI_Controller {
 		$this->changeEventStatus ( $even_id, EventStatus::prv );
 		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center"> Dein Event wurde privat gestellt! </div>' );
 	}
+	public function deleteEventByIdForAdmin($even_id) {
+		$this->changeEventStatus ( $even_id, EventStatus::deleted );
+	}
+	
 	public function deleteEventById($even_id) {
 		$this->changeEventStatus ( $even_id, EventStatus::deleted );
 		$this->load->model ( 'event_model' );
