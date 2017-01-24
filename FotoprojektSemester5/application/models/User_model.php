@@ -229,6 +229,19 @@ class User_model extends CI_Model {
 		$query = $this->db->get();
 		return $query;
 	}
+	
+	// delete user from newsletter list
+	function update_unableNewsletterForUser($user_email) {
+		$this->db->set ( 'user_newsletter', FALSE );
+		$this->db->where ( 'user_email', $user_email);
+		$this->db->update ( 'user' );
+		return $afftectedRows = $this->db->affected_rows ();
+	}
+	// delete unregisterd user from newsletter list
+	function update_unableNewsletterForUnregisterdUser($nele_email) {
+	return	$this->db->delete ( 'newsletter', array (
+				'nele_email' => $nele_email));
+	}
 	// get Abo
 	function getAbo($user_id) {
 		$this->db->join ( 'abo_fotograf', 'user_abof_id = abof_id' );
