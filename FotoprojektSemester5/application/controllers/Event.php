@@ -29,12 +29,15 @@ class Event extends CI_Controller {
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
-	public function showEventApproval($shortcode) {
+	public function showEventApproval() {
 		$this->load->model ( 'event_model' );
-		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
-		$data ['event'] = $event [0];
-		$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
+		$user_id = $this->session->userdata ( 'user_id' );
+		$events = $this->event_model->getEventsFromUser ( $user_id );
 		
+		foreach ( $events as $event ) {
+			$event->products_prv = Event::getProductsFromEvent ( $event, true );
+		}
+		$data ['events'] = $events;
 		$this->load->template ( 'event/single_event_approval_view', $data );
 	}
 	public function deleteEvent() {

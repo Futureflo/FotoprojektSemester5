@@ -67,6 +67,7 @@ $route ['product/(:any)'] = 'Product/showSinglePicture/$1';
 
 // Event
 $route ['event/uebersicht'] = 'Event/showEvents/';
+$route ['event/approval'] = 'Event/showEventApproval/';
 $route ['event/(:any)'] = 'Event/showSingleEvent/$1';
 $route ['event/delete/(:any)'] = 'Event/deleteEvent/$1';
 $route ['event/edit/(:any)'] = 'Event/editEvent/$1';
