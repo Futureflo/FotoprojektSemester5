@@ -29,6 +29,14 @@ class Event extends CI_Controller {
 		
 		$this->load->template ( 'event/single_event_view', $data );
 	}
+	public function showEventApproval($shortcode) {
+		$this->load->model ( 'event_model' );
+		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
+		$data ['event'] = $event [0];
+		$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
+		
+		$this->load->template ( 'event/single_event_approval_view', $data );
+	}
 	public function deleteEvent() {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
@@ -63,16 +71,16 @@ class Event extends CI_Controller {
 	public function editEvent($id = -1) {
 		if ($id == - 1)
 			redirect ( '/checkout', 'refresh' );
-		if ($this->input->post('submit')== "back")
+		if ($this->input->post ( 'submit' ) == "back")
 			redirect ( '/event/uebersicht/', 'refresh' );
 		$this->load->model ( 'event_model' );
 		$this->load->model ( 'printers_model' );
-
-		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();		
+		
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$user_id = $this->session->userdata ( 'user_id' );
 		$data ['printers'] = $this->printers_model->getPrintersForUser ( $user_id );
-		$data ['event'] = $this->event_model->getSingleEventById ( $id )[0];
-
+		$data ['event'] = $this->event_model->getSingleEventById ( $id ) [0];
+		
 		$this->load->template ( 'event/edit_event', $data );
 	}
 	
