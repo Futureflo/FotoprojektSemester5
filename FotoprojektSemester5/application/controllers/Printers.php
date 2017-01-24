@@ -1,8 +1,13 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class Printers extends CI_Controller {
+	public function __construct() {
+		parent::__construct ();
+		$this->lh_checkAccess ( 1 );
+	}
 	public function showPrinterPrice($prsu_id) {
 		$this->load->model ( 'Printers_model' );
+		$this->load->helper ( 'login_helper' );
 		
 		$printer = Printers::getPrinter ( $prsu_id );
 		$user_id = $printer->prsu_user_id;
