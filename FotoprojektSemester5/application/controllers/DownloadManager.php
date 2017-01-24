@@ -13,57 +13,24 @@ class DownloadManager extends CI_Controller {
 		echo "indexseite des DownloadManager";
 	}
 	
-	/*
-	 * - Nutzer wählt Bilder zum Kauf aus.
-	 * - Bilder liegen im Warenkorb.
-	 * - Sobald "gekauft" wird, wird aus den Bildern im Warenkorb eine Order erstellt
-	 * - Die Order enthält alle Bilder-IDs und wird in der Datenbank abgelegt.
-	 * - Es wird ein individueller Downloadlink zur Verfügung gestellt.
-	 * - Der Aufruf des Downloadlinks erstellt eine Zip und läd diese herunter.
-	 * - Der Link muss entsprechend auf die Order in der Datenbank verweisen.
-	 * - Die Zip-Funktion erhält also die Info für die zu zippende Order aus dem Link.
-	 *
-	 */
-
-	
 	/**
 	 * Metod to convert a paid order from customers cart into a downloadlink.
 	 * @param unknown $orderID
 	 * @return downloadLink
 	 */
 	public function manageDownload($orderID) {
-// 		$pathArray = orderIDtoImagePathArray($orderID);
-// 		$zipPath =  zipDir($pathArray);
-// 		$downloadLink = createDownloadLink($orderID, $userID);
-// 		return $downloadLink;
-// 		$this->load->model('order_model');
-// 		// Zip passwortschützen
-// 		$mySalt = generate_salt();
-// 		echo $mySalt;	
-// 		$userID = $this->session->userdata('user_id');
-// 		$products = $this->order_model->getProductsFromOrder($orderID);
-// 		foreach ($products as $p)    {
-// 			$path = Product::buildFilePath($p);
-// 			$p->prod_filepath = $path;
-// 		}
-// 		$pfade = array(
-// 				"path" => " "
-// 		);
-// 		foreach ($products as $p)    {
-// 			$path = Product::buildFilePath($p);
-// 			$p->prod_filepath = $path;
-// 			array_push($pfade, $p->prod_filepath);
-// 		}
-		
-// 		$zipPath = zipDir($userID, $orderID, $products);
-		
+		echo "<br>DEBUG: step into manageDownload() /DEBUG<br>"; // DEBUG
+	
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
 		$this->load->model('Download_Password_model');
 		
+		echo "<br>DEBUG: erstelle Link zum Download /DEBUG<br>"; // DEBUG
 		$downloadLink = $this->createDownloadLink($orderID);
 		$userEmail = $this->session->userdata ( 'user_email' );
+		echo "<br>DEBUG: sende mail /DEBUG<br>"; // DEBUG
 		$this->sendDownloadEmail($userEmail, $downloadLink);
+		echo "<br>DEBUG: step out manageDownload() /DEBUG<br>"; // DEBUG
 	}
 	
 	/**
@@ -75,6 +42,7 @@ class DownloadManager extends CI_Controller {
 	 * @param unknown $orderID
 	 */
 	public function createDownloadLink($orderID) {
+		echo "<br>DEBUG: step into createDownloadLink() /DEBUG<br>"; // DEBUG
 		// load helper for generating new salt(simple random integer)
 		$this->load->helper ( array (
 				'hash_helper'
@@ -104,6 +72,7 @@ class DownloadManager extends CI_Controller {
 		
 		$webPageURL = "http://snap-gallery.de/downloadmanager/startdownload/";
 		$downloadLink = $webPageURL . $download_password;
+		echo "<br>DEBUG: step out createDownloadLink() /DEBUG<br>"; // DEBUG
 		return $downloadLink;
 	}
 	
@@ -130,29 +99,32 @@ class DownloadManager extends CI_Controller {
 	 * Method to start the Download of a zipfile. This Method checks the integrity of the download call and initiaties if positive.
 	 */
 	public function startDownload(){
-// 		echo "<br>DEBUG: step into startDownload() /DEBUG<br>"; // DEBUG
+		echo "<br>DEBUG: step into startDownload() /DEBUG<br>"; // DEBUG
 		$this->load->model('Download_Password_model');
 		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 		$path_parts = pathinfo($url);
 		$downloadPasswordArray = $this->Download_Password_model->getDownloadPasswords();
 		
 		// sent passwort is url-addition --> $path_parts['basename'];
+		echo "<br>DEBUG: If-Abfrage: 'existiert Passwort?' /DEBUG<br>"; // DEBUG
 		if($this->existsInArray($path_parts['basename'], $downloadPasswordArray) == true){
+			echo "<br>DEBUG: step into if /DEBUG<br>"; // DEBUG
 			// downloadprocess
 			$this->load->model('order_model');
 			$entry = $this->Download_Password_model->getDownloadPasswordEntryByPassword($path_parts['basename']);
 			$orderID = $entry[0]->dopa_orde_id;
 			$products = $this->order_model->getProductInformationByOrderId($orderID);
 
+			echo "<br>DEBUG: erstelle .zip mit den bildern /DEBUG<br>"; // DEBUG
 			// create the zip File with all pictures from the order
 			$downloadableZipFile = $this->zipDir($orderID, $products);
 			
+			echo "<br>DEBUG: aufruf Download Funktion /DEBUG<br>"; // DEBUG
 			// download the created zip File
 			downloadFile($downloadableZipFile);
 			
-			// path to new zipFile: echo $downloadableZipFile;
 		}// else $this->session->set_flashdata ( 'msg', 'Datensatz existiert nicht.' );
-// 		echo "<br>DEBUG: step out startDownload() /DEBUG<br>"; // DEBUG
+		echo "<br>DEBUG: step out startDownload() /DEBUG<br>"; // DEBUG
 	}
 	
 	private function checkDownloadPasswordIntegrity($filePath) {
@@ -166,8 +138,7 @@ class DownloadManager extends CI_Controller {
 	 * @param unknown $filePath (for example: PDF_Name.pdf).
 	 */
 	public function downloadFile($filePath) {
-// http://localhost/FotoprojektSemester5/FotoprojektSemester5/downloadmanager/downloadfile/Download_Zip_Archive_1_1_20161223140213.zip
-
+		echo "<br>DEBUG: step into downloadFile() /DEBUG<br>"; // DEBUG
 		while (ob_get_level()) {
 			ob_end_clean();
 		}
@@ -182,14 +153,12 @@ class DownloadManager extends CI_Controller {
 		header( "Content-Disposition: attachment; filename=" .$filePath );
 		header( "Content-Length: " . filesize($conjunctedPath) );
 		
-// 		$fp = fopen($conjunctedPath, "r");
-// 		fpassthru($fp);
-// 		fclose($fp);
-		
+		echo "<br>DEBUG: flush + clean + readfile /DEBUG<br>"; // DEBUG
 		ob_flush();
 		ob_clean();
 		readfile($conjunctedPath);
 
+		echo "<br>DEBUG: step out downloadFile() /DEBUG<br>"; // DEBUG
 		exit;
 		redirect("/");
 // 		return true;
@@ -250,27 +219,20 @@ class DownloadManager extends CI_Controller {
 			exit("cannot open <$outZipPath>\n");
 		}
 		
-// 		echo "größe: ". count($productsArray) ."<br>";
 		// Alle Pfade aus dem Array (Parameter1) abarbeiten und datein dem Zip Archiv hinzufügen
 		for ($i = 0; $i < count($productsArray); $i++) {
 			// name der hinzugefügten Datei wird ursprungs
 			// zurück steppen (aus Projektordner heraus) & in ordner Images steppen
 			$pathComplete = Product::buildFilePath($productsArray[$i]);
-// 			echo "pfad: ". $pathComplete ."<br>";
 			$path_parts = pathinfo($pathComplete);
-// 			echo "name: ". $path_parts['basename'] ."<br>";
 			$conjunctedPath = join('/', array(trim("../", '/'), trim($pathComplete, '/')));
-// 			$zipArchive->addFile("../". $pathComplete, $path_parts['basename']);
 			$zipArchive->addFile($conjunctedPath, $path_parts['basename']);
 		}
-// 		if(count($productsArray)==0){
-// 			echo "empty product array";
-// 		}
+		
 		// Zip Archiv schließen
 		$zipArchive->close();
 // 		echo "<br>DEBUG: step out zipDir() /DEBUG<br>"; // DEBUG
 
-// 		return $outZipPath;	
 		return $zipFileName;
 	}
 	
@@ -295,24 +257,7 @@ class DownloadManager extends CI_Controller {
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
 		$this->load->model('Download_Password_model');
-// // 		$products = $this->order_model->getProductInformationByOrderId(39);
-// // 		echo $products[0]->prod_name;
-// // // 		$this->zipDir(1, $products);
-// // // 		$this->createDownloadLink(1);
-// // // 		$this->createDownloadLink(39);
-// // 		$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-// // 		echo $url;
-// 		$sourcePathPrefix = "/hallo/abc/de/";
-// 		$filePath = "/fg/x.php";
-// 		$conjunctedPath = join('/', array(trim($sourcePathPrefix, '/'), trim($filePath, '/')));
-// 		echo $conjunctedPath;
-		
-// 		$passwordLink = $this->createDownloadLink(39);
-// 		echo "<br>link: ". $passwordLink;
-		
-// 		$products = $this->order_model->getProductInformationByOrderId(39);
-// 		$zipPath = $this->zipDir(39, $products);
-// 		echo "<br>zipPath: ". $zipPath;
+
 		$this->sendDownloadEmail("Severin.Klug@gmx.de", "http://www.google.de");
 // 		$this->downloadFile("Download_Zip_Archive_39_20170119114553.zip");
 		
