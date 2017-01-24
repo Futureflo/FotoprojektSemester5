@@ -23,7 +23,7 @@ class Printers extends CI_Controller {
 		$data ['PrintersViewHeader'] = "Druckereien";
 		
 		$user_id = $this->session->userdata ( 'user_id' );
-		$data ['printers'] = $this->Printers_model->getPrintersForUser ( $user_id );
+		$data ['printers'] = $this->Printers_model->getPrintersForUser ( $user_id, false );
 		$this->load->template ( 'printers/printers_view', $data );
 	}
 	public function product_types() {

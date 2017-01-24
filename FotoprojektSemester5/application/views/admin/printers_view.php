@@ -54,7 +54,6 @@
 					<tbody id="table_body">
 			<?php
 			foreach ( $printers as $printer ) {
-				
 				echo "<tr class='searchable'>";
 				echo "<td>" . $printer->prsu_id . "</td>";
 				echo "<td>" . $printer->adre_name . "</td>";

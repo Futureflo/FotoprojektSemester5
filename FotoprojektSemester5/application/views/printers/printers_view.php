@@ -1,4 +1,3 @@
-<br>
 <section style="padding-top: 70px">
 	<div class="container">
 		<?php
@@ -7,6 +6,9 @@
 			echo $message . "</div>";
 		}
 		?>
+		<div id="fehler_span" class="text-danger"><?php
+		echo $this->session->flashdata ( 'msgReg' );
+		?></div>
 </div>
 </section>
 
@@ -14,17 +16,22 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-7">
-			<p class="h1" id="test">
+			<p class="h1" id="test" onload="setPager()">
 		<?php
 		
-		echo $PrintersViewHeader?><br><br>
+		echo $PrintersViewHeader?>
 		</p>
 		</div>
-		<div class="col-md-2">
-			<a class="btn btn-primary" href="#" data-toggle='modal' data-target='#add'  aria-label='edit' style='margin-right:1rem' style="margin-right: 5px; "> <i
-				class="fa fa-plus-square fa-lg"></i> Druckerei anlegen
-			</a>&nbsp;&nbsp;
-		</div>
+			<div class="col-md-2">
+				<?php
+				if ($PrintersViewHeader != "Archivierte Druckereien") {
+					echo '<a
+					href="' . base_url () . 'printers/createPrinter/"
+					class="btn btn-primary" role="button" href="createPrinter"> <i
+					class="fa fa-plus-square fa-lg"></i> Druckerei anlegen</a>';
+				}
+				?>
+			</div>
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 				onkeyup="search()" placeholder="Suche Druckerei.." />
@@ -47,14 +54,12 @@
 					<tbody id="table_body">
 			<?php
 			foreach ( $printers as $printer ) {
-				
-				$phpdate = strtotime( $printer->prsu_createdon );
-				$mysqldate = date( 'd.m.Y', $phpdate );
 				echo "<tr class='searchable'>";
 				echo "<td>" . $printer->prsu_id . "</td>";
 				echo "<td>" . $printer->adre_name . "</td>";
-				echo "<td>" .  $mysqldate . "</td>";
-				echo "<td>" . $printer->prsu_createdby . "</td>";
+				echo "<td>" . $printer->prsu_createdon . "</td>";
+  				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
+				//echo "<td>" . $printer->prsu_createdby . "</td>";
 				switch ($printer->prsu_status) {
 					case 1 :
 						echo "<td> Aktiv </td>";
@@ -67,27 +72,26 @@
 				
 				if ($printer->prsu_status == 1) {
 					echo btnEdit ( $printer );
+					echo btneditpriceprofile ( $printer );
 					echo btnDelete ( $printer );
-					echo btneditprinter ( $printer );
+				} elseif ($printer->prsu_status == 2) {
+					echo btnRecycle ( $printer );
 				}
 				echo "</td>";
 				echo "</tr>";
 			}
 			function btnDelete($printer) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinterDelete(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+			}
+			function btnRecycle($printer) {
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#editPrinter' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinter(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-info' data-toggle='modal' data-target='#edit' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
-			function btneditprinter($printer) {
-				
-				return " &nbsp; &nbsp;<a href='".base_url()."Printers/showPrinterPrice/". $printer->prsu_id ."'><button class='btn btn-info' name='submit' type='submit' title='Printer: \"" . $printer->adre_name . "\" bearbeiten' aria-label='delete' >
-							<i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i>
-							</button></a>";
-				
-				
+			function btneditpriceprofile($printer) {
+				return "<a href='" . base_url () . "Printers/showPrinterPrice/" . $printer->prsu_id . "' class='btn btn-info' title='Preisprofil bearbeiten' aria-label='edit' style='margin-right:1rem'> <i class='fa fa-building fa-lg' aria-hidden='True' style='color:white;'></i> </a>";
 			}
-			
 			?>
 			</tbody>
 				</table>
@@ -100,7 +104,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12 offset-md-5">
+		<div class="col-md-7 offset-md-5">
 			<nav aria-label="Page navigation">
 				<ul class="pagination" id="parent_pagination">
 					<li class="page-item" id="first_page"><a class="page-link"
@@ -136,7 +140,7 @@
 			<div class="modal-body">
 				<div class="alert alert-danger">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
-					die Druckerei "<span id="printer"></span>" unwiderruflich löschen?
+					die Druckerei "<span id="printerDelete"></span>" unwiderruflich löschen?
 				</div>
 			</div>
 			<div class="modal-footer ">
@@ -146,7 +150,7 @@
 					echo base_url ();
 					?>printers/deletePrinter/"
 					method="post">
-					<input id="printer_hidden_field" type="hidden"
+					<input id="printerDelete_hidden_field" type="hidden"
 						name="printerDelete_hidden_field" value="">
 					<button type="submit" class="btn btn-danger">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei löschen
@@ -165,8 +169,7 @@
 
 
 
-
-<div class="modal fade" id="add" tabindex="-1" role="dialog"
+<div class="modal fade" id="recycle" tabindex="-1" role="dialog"
 	aria-labelledby="edit" aria-hidden="true">
 	<div class="modal-dialog">
 
@@ -174,14 +177,14 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">
-					<span class="glyphicon glyphicon-info" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				</button>
-				<h4 class="modal-title custom_align" id="Heading">Druckerei hinzufügen?</h4>
+				<h4 class="modal-title custom_align" id="Heading">Druckerei wiederherstellen?</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-information-sign"> </span>Möchten Sie
-					die Druckerei "<span id="printer"></span>" unwiderruflich löschen?
+				<div class="alert alert-info">
+					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
+					die Druckerei "<span id="printerRecycle"></span>" wiederherstellen? 
 				</div>
 			</div>
 			<div class="modal-footer ">
@@ -189,12 +192,12 @@
 					action="<?php
 					
 					echo base_url ();
-					?>printers/addPrinter/"
+					?>printers/recyclePrinter/"
 					method="post">
-					<input id="printer_hidden_field" type="text"
-						name="name" placeholder="Name der Druckerei">
-					<button type="submit" class="btn btn-danger">
-						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei hinzufügen
+					<input id="printerRecycle_hidden_field" type="hidden"
+						name="printerRecycle_hidden_field" value="">
+					<button type="submit" class="btn btn-info">
+						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei wiederherstellen
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>Abbrechen
@@ -206,6 +209,51 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+	aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+				<h4 class="modal-title custom_align" id="Heading">Druckerei bearbeiten?</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-warning">
+					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
+					die Druckerei "<span id="printerEdit"></span>" bearbeiten?
+				</div>
+			</div>
+			<div class="modal-footer ">
+				<form
+					action="<?php
+					
+					echo base_url ();
+					?>printers/editPrinter/"
+					method="post">
+					<input id="printerEdit_hidden_field" type="hidden"
+						name="printerEdit_hidden_field" value="">
+					<button type="submit" class="btn btn-warning">
+						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei bearbeiten
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>Abbrechen
+					</button>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+
+
 
 
 
@@ -283,11 +331,18 @@
           }
     }
 
-    function whichPrinter(name, id){
-        document.getElementById("printer").innerHTML = name;
-        document.getElementById("printer_hidden_field").value = id;
+    function whichPrinterDelete(name, id){
+        document.getElementById("printerDelete").innerHTML = name;
+        document.getElementById("printerDelete_hidden_field").value = id;
     }
-    
+    function whichPrinterRecycle(name, id){
+        document.getElementById("printerRecycle").innerHTML = name;
+        document.getElementById("printerRecycle_hidden_field").value = id;
+    }
+    function whichPrinterEdit(name, id){
+        document.getElementById("printerEdit").innerHTML = name;
+        document.getElementById("printerEdit_hidden_field").value = id;
+    }
     /**
         Die Daten werden auf 10 Datensätze pro Seite aufgeteilt
     */

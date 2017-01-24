@@ -5,7 +5,7 @@
 	<div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar">
 		<a class="navbar-brand" href="<?php
 		echo base_url ();
-		?>">SNAP-UP</a>
+		?>">SnapUp</a>
 		<ul class="nav navbar-nav">
 
 
@@ -21,51 +21,51 @@
 				<div class="dropdown-menu dropdown-menu-admin" aria-labelledby="supportedContentDropdown">
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/dashboard/">Dashboard</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/users/">Alle Benutzer</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/events/">Alle Events</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/printers/">Alle Druckereien (System)</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/product_types/">Alle Formate</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/price_profiles/">Alle Preisprofile</a>
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/archivedUsers/">Benutzer Archiv</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/archivedEvents/">Event Archiv</a>
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/archivedPrinters/">Druckereien (System) Archiv</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/archivedProduct_types/">Formate Archiv</a> 
 					 <a class="dropdown-item" href="<?php
 						
-echo base_url ();
+						echo base_url ();
 						?>admin/archivedPrice_profiles/">Preisprofile Archiv</a> 
 					  <a class="dropdown-item" href="<?php
 							
-echo base_url ();
+							echo base_url ();
 							?>admin/nele_users/">Benutzer Newsletter</a> 
 				</div></li>
 

@@ -4,9 +4,9 @@
 <div class="contrainer">
 	<div class="row">
 	
-		<h1 class="offset-md-1 col-md-2" ><?php echo $EventsViewHeader; ?></h1>
+		<h1 class="offset-md-1 col-md-4" ><?php echo $EventsViewHeader; ?></h1>
 
-		<div class="offset-md-6 col-md-2">
+		<div class="offset-md-4 col-md-2">
 			<input type="text" id="searchTerm" class="form-control"
 			 onkeyup="search()" placeholder="Search for events..."/>
 		</div>

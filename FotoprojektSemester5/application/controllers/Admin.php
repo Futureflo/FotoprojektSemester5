@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
 	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
-		$data ['EventsViewHeader'] = "Archivierte Events";
+		$data ['EventsViewHeader'] = "Events";
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
