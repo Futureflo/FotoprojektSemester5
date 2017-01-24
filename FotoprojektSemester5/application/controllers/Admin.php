@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
 	public function dashboard() {
 		$this->load->model ( 'Dashboard_model' );
 		$data ['orders'] = $this->Dashboard_model->getInformations ();
-		$data ['DashboardViewHeader'] = "Dashboard";
+		$data ['DashboardViewHeader'] = "Umsatzanzeige";
 		$this->load->template ( 'admin/dashboard', $data );
 	}
 	public function overviewAdmin() {
