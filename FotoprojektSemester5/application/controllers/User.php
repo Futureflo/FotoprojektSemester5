@@ -13,6 +13,13 @@ class User extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'user/settings_view' );
 	}
+	public function dashboard() {
+		$this->load->model ( 'Dashboard_model' );
+		$user_id = $this->session->userdata ( 'user_id' );
+		$data ['orders'] = $this->Dashboard_model->getInformationsByUserID ($user_id);
+		$data ['DashboardViewHeader'] = "Dashboard";
+		$this->load->template ( 'admin/dashboard', $data );
+	}
 	public function call_change_email_view() {
 		$user_id = $this->session->userdata ( 'user_id' );
 		$user = $this->user_model->get_user_by_id ( $user_id );

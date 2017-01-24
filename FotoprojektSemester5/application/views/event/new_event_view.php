@@ -148,7 +148,7 @@
 		                   														 <?php
 																																				
 																																				foreach ( $printers as $printer ) {
-																																					echo '<option value=' . $printer->prsu_id . '>' . $printer->prsu_email . '</option>';
+																																					echo '<option value=' . $printer->prsu_id . '>' . $printer->adre_name . '</option>';
 																																				}
 																																				
 																																				?>
