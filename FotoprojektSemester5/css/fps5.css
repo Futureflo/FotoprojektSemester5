@@ -127,3 +127,9 @@ background-color: #CCCCCC;
 .checkout_overviewelement_active{
     background-color: #b5b5b5;
 }
+
+.kachel {
+	border-style:solid;
+	border-width:1rem;
+	border-color:white;
+}
