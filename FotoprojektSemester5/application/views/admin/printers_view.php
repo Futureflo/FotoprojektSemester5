@@ -2,11 +2,11 @@
 	<div class="container">
 		<?php
 		if (isset ( $message )) {
-			echo "<div class='alert alert-danger'>";
+			echo "<div class='alert alert-success'>";
 			echo $message . "</div>";
 		}
 		?>
-		<div id="fehler_span" class="text-danger"><?php
+		<div id="fehler_span" class="text-info"><?php
 		echo $this->session->flashdata ( 'msgReg' );
 		?></div>
 </div>
@@ -182,7 +182,7 @@
 				<h4 class="modal-title custom_align" id="Heading">Druckerei wiederherstellen?</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-danger">
+				<div class="alert alert-info">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
 					die Druckerei "<span id="printerRecycle"></span>" wiederherstellen? 
 				</div>
@@ -196,7 +196,7 @@
 					method="post">
 					<input id="printerRecycle_hidden_field" type="hidden"
 						name="printerRecycle_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
+					<button type="submit" class="btn btn-info">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei wiederherstellen
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -224,7 +224,7 @@
 				<h4 class="modal-title custom_align" id="Heading">Druckerei bearbeiten?</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-danger">
+				<div class="alert alert-warning">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
 					die Druckerei "<span id="printerEdit"></span>" bearbeiten?
 				</div>
@@ -238,7 +238,7 @@
 					method="post">
 					<input id="printerEdit_hidden_field" type="hidden"
 						name="printerEdit_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
+					<button type="submit" class="btn btn-warning">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei bearbeiten
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">

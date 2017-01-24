@@ -26,6 +26,20 @@ class Printers extends CI_Controller {
 		$data ['printers'] = $this->Printers_model->getPrintersForUser ( $user_id, false );
 		$this->load->template ( 'printers/printers_view', $data );
 	}
+	public function showPrintersAdmin() {
+		$this->load->model ( 'Printers_model' );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		
+		$data ['printers'] = $this->Printers_model->getAllActivePrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function showArchivedPrintersAdmin() {
+		$this->load->model ( 'Printers_model' );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		
+		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
 	public function product_types() {
 		redirect ( 'ProductType/product_types' );
 	}
@@ -57,20 +71,34 @@ class Printers extends CI_Controller {
 		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
 		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
 		$data ['PrintersViewHeader'] = "Druckereien";
-		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
+		// $data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
 		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
-		$data ['printers'] = $this->Printers_model->getAllActivePrinters ();
-		$this->load->template ( 'admin/printers_view', $data );
+		// $data ['printers'] = $this->Printers_model->getAllActivePrinters ();
+		// $this->load->template ( 'admin/printers_view', $data );
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei gelöscht!</div>' );
+		redirect ( base_url () . "printers/showPrintersAdmin" );
+	}
+	public function deletePrinterPhotographer() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		// $data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei gelöscht!</div>' );
+		redirect ( base_url () . "printers/showPrinters" );
 	}
 	public function recyclePrinter() {
 		$this->load->model ( 'Printers_model' );
 		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
 		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
 		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
-		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		// $data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
 		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
-		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
-		$this->load->template ( 'admin/printers_view', $data );
+		// $data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
+		// $this->load->template ( 'admin/printers_view', $data );
+		$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei wiederhergestellt!</div>' );
+		redirect ( base_url () . "printers/showArchivedPrintersAdmin" );
 	}
 }
 abstract class PrinterStatus {

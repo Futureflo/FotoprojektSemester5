@@ -2,11 +2,11 @@
 	<div class="container">
 		<?php
 		if (isset ( $message )) {
-			echo "<div class='alert alert-danger'>";
+			echo "<div class='alert alert-success'>";
 			echo $message . "</div>";
 		}
 		?>
-		<div id="fehler_span" class="text-danger"><?php
+		<div id="fehler_span" class="text-info"><?php
 		echo $this->session->flashdata ( 'msgReg' );
 		?></div>
 </div>
@@ -58,8 +58,8 @@
 				echo "<td>" . $printer->prsu_id . "</td>";
 				echo "<td>" . $printer->adre_name . "</td>";
 				echo "<td>" . $printer->prsu_createdon . "</td>";
-  				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
-				//echo "<td>" . $printer->prsu_createdby . "</td>";
+				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
+				// echo "<td>" . $printer->prsu_createdby . "</td>";
 				switch ($printer->prsu_status) {
 					case 1 :
 						echo "<td> Aktiv </td>";
@@ -148,7 +148,7 @@
 					action="<?php
 					
 					echo base_url ();
-					?>printers/deletePrinter/"
+					?>printers/deletePrinterPhotographer/"
 					method="post">
 					<input id="printerDelete_hidden_field" type="hidden"
 						name="printerDelete_hidden_field" value="">

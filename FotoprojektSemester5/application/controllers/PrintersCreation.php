@@ -81,18 +81,30 @@ class PrintersCreation extends CI_Controller {
 				$prsu_id = $this->PrintersCreation_model->insert_printer ( $data );
 				
 				if ($address_id = ! NULL && $user_id = ! NULL) {
-					redirect ( 'admin/printers' );
 					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei angelegt!</div>' );
+					if ($user_role == UserRole::Admin) {
+						redirect ( 'admin/printers' );
+					} else {
+						redirect ( base_url () . "printers/showPrinters" );
+					}
 				} else {
 					// error
 					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
-					redirect ( 'admin/printers_creation' );
+					if ($user_role == UserRole::Admin) {
+						redirect ( 'admin/printers_creation' );
+					} else {
+						redirect ( base_url () . "printers/printers_creation" );
+					}
 				}
 			}
 		} else {
 			// error
 			$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
-			redirect ( 'admin/printers_creation' );
+			if ($user_role == UserRole::Admin) {
+				redirect ( 'admin/printers_creation' );
+			} else {
+				redirect ( base_url () . "printers/printers_creation" );
+			}
 		}
 	}
 	function editPrinter() {
@@ -153,17 +165,29 @@ class PrintersCreation extends CI_Controller {
 				// Open printers_view
 				if ($addressIsSet && $printerIsSet) {
 					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-success text-center">Druckerei gespeichert!</div>' );
-					redirect ( 'admin/printers' );
+					if ($user_role == UserRole::Admin) {
+						redirect ( 'admin/printers' );
+					} else {
+						redirect ( base_url () . "printers/showPrinters" );
+					}
 				} else {
 					// error
 					$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Oops! Error.  Please try again later!!!</div>' );
-					redirect ( 'admin/printers_creation' );
+					if ($user_role == UserRole::Admin) {
+						redirect ( 'admin/printers_creation' );
+					} else {
+						redirect ( 'printers/printers_creation' );
+					}
 				}
 			}
 		} else {
 			// error
 			$this->session->set_flashdata ( 'msgReg', '<div class="alert alert-danger text-center">Bitte anmelden!!!</div>' );
-			redirect ( 'admin/printers_creation' );
+			if ($user_role == UserRole::Admin) {
+				redirect ( 'admin/printers_creation' );
+			} else {
+				redirect ( 'printers/printers_creation' );
+			}
 		}
 	}
 }
