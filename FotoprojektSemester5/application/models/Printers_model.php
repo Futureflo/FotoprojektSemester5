@@ -75,7 +75,7 @@ class Printers_model extends CI_Model {
 		}
 	}
 	
-	// Hole alle nicht gelöschen Printeers
+	// Get all active Printers
 	Public function getAllActivePrinters() {
 		$this->db->where ( 'prsu_status !=', 2 );
 		$this->db->join ( 'adress', 'prsu_adre_id = adre_id', 'INNER JOIN' );

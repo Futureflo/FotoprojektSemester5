@@ -52,7 +52,7 @@
 				// Spalte 4: Menge
 				echo '<div class="col-md-4 col-sm-3"><h5>Anzahl:</h5> </div>';
 				echo '<div class="form-group col-md-4 col-sm-3">';
-				echo "<p>" . '<input type="text" maxLength="4" onfocusout="updateAmount(this)" onchange="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" >' . "</p>";
+				echo "<p>" . '<input type="text" maxLength="4" onblur="updateAmount(this)" onchange="this.value = minmax(this, 1, 1000)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" class="anzahl" value=' . $amount . ' name="scpo_amount" >' . "</p>";
 				echo '<input type="hidden" class="one" value=' . $price . '>';
 				echo '<input type="hidden" name="amount_hidden" value="">';
 				echo '<input type="hidden" name="scpo_prod_id" value=' . $shoppingcart_position->scpo_prod_id . '>';
