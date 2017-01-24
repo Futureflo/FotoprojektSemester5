@@ -173,8 +173,10 @@ class Admin extends CI_Controller {
 		
 		$email = $this->input->post ( "userDelete_hidden_field" );
 		$this->user_model->update_unableNewsletterForUser($email);
-		$this->user_model->update_unableNewsletterForUnregisterdUser($email);	
-		redirect("admin/nele_users/");
+		
+		$delete= $this->user_model->update_unableNewsletterForUnregisterdUser($email);
+		
+ 		redirect("admin/nele_users/");
 		
 	}
 	

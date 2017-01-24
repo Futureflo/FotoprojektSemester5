@@ -73,7 +73,7 @@
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen'  onclick='whichUser(\"" . $user->E_Mail . "\")'; aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnDeleteUnknown($user) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' onclick='whichUser(\"" . $user->E_Mail . "\")'; aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
 			</tbody>
