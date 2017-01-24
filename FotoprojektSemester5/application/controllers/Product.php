@@ -3,6 +3,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
 include_once (dirname ( __FILE__ ) . "/Event.php");
 include_once (dirname ( __FILE__ ) . "/WaterMark.php");
+include_once (dirname ( __FILE__ ) . "/ProductStatus.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
 	private static $event;
@@ -275,6 +276,18 @@ class Product extends CI_Controller {
 					'prva_prty_id' => $price->prpt_prty_id 
 			);
 			$this->product_model->insert_product_variant ( $data );
+		}
+	}
+	function approveProducts() {
+		$CI = & get_instance ();
+		$CI->load->model ( 'product_model' );
+		$products = $this->input->post ( 'products' );
+		
+		foreach ( $products as $product ) {
+			$data = array (
+					'prod_status' => $product->prod_status 
+			);
+			$CI->product_model->update_product ( $product->prod_id, $data );
 		}
 	}
 }
