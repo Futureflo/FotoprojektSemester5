@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
 	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
-		$data ['EventsViewHeader'] = "Archivierte Events";
+		$data ['EventsViewHeader'] = "Events";
 		$this->load->template ( 'admin/events_view', $data );
 	}
 	public function printers() {
@@ -147,7 +147,8 @@ class Admin extends CI_Controller {
 		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
 		$this->load->dbutil();
 		$this->load->helper('file');
-	
+		$this->load->helper('download');
+		
 		/*  pass it to db utility function  */
 		$delimiter = ",";
 		$newline = "\r\n";
@@ -161,6 +162,19 @@ class Admin extends CI_Controller {
 		write_file($dirname.'RegisteredEmails.csv',$new_report1);
 		write_file($dirname.'UnregisteredEmails.csv',$new_report2);
 	
+		
+		force_download('RegisteredEmails.csv', $new_report1);
+		force_download('UnregisteredEmails.csv', $new_report2);
+		redirect("admin/nele_users/");
+		
+		
+	}
+	public function deleteUserFromNewsletterlist($email){
+
+		$this->user_model->update_unableNewsletterForUser($email);
+		$this->user_model->update_unableNewsletterForUnregisterdUser($email);	
+		redirect("admin/nele_users/");
+		
 	}
 	
 }

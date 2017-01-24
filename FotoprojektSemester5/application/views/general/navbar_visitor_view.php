@@ -5,7 +5,7 @@
 	<div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar">
 		<a class="navbar-brand" href="<?php
 		echo base_url ();
-		?>">SNAP-UP</a>
+		?>">SnapUp</a>
 		<ul class="nav navbar-nav">
 
 

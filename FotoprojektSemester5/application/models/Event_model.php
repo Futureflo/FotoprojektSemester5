@@ -31,9 +31,10 @@ class Event_model extends CI_Model {
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
-	Public function getSingleEventById($id) {
+	Public function getSingleEventById($id, $withuser = true) {
 		$this->db->where ( 'even_id', $id );
-		$this->db->join ( 'user', 'even_user_id = user_id' );
+		if ($withuser)
+			$this->db->join ( 'user', 'even_user_id = user_id' );
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
@@ -42,7 +43,7 @@ class Event_model extends CI_Model {
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
-	public function getEventsFromUserandEmail($id,$email) {
+	public function getEventsFromUserandEmail($id, $email) {
 		$this->db->where ( 'even_user_id', $id );
 		$this->db->or_where ( 'even_host_email', $email );
 		$query = $this->db->get ( "event" );

@@ -5,7 +5,7 @@
 	<div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar">
 		<a class="navbar-brand" href="<?php
 		echo base_url ();
-		?>">SNAP-UP</a>
+		?>">SnapUp</a>
 		<ul class="nav navbar-nav">
 
 			<div class="float-sm-right">
@@ -18,8 +18,8 @@
 					aria-haspopup="true" aria-expanded="false">Veranstalter</a>
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 					<a class="dropdown-item" href="<?php
-						echo base_url ();
-						?>event/uebersicht/">Meine Events</a>
+					echo base_url ();
+					?>event/uebersicht/">Meine Events</a>
 						</div>
 						</li>
 					<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"

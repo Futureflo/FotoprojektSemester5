@@ -14,7 +14,7 @@
 <div class="container">
 		<div class="row">
 		<div class="col-md-7">
-		<p class="h1" id="test" onclick="setPager()">
+		<p class="h1" id="test" onload="setPager()">
 			Benutzer Newsletter
 		</p>
 		</div>
@@ -74,18 +74,6 @@
 			}
 			function btnDeleteUnknown($user) {
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-			}
-			function btnEdit($user) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#editUser' title='Benutzer \"" . $user->user_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichUser(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-			}
-			function btnLockUser($user) {
-				return "<a class='btn btn-warning' data-toggle='modal' data-target='#lockUser' title='Benutzer \"" . $user->user_name . "\" sperren' aria-label='lock' style='margin-right:1rem' onclick='whichUserLock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-ban fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-			}
-			function btnUnlockUser($user) {
-				return "<a class='btn btn-success' data-toggle='modal' data-target='#unlockUser' title='Benutzer \"" . $user->user_name . "\" entsperren' aria-label='unlock' style='margin-right:1rem' onclick='whichUserUnlock(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-unlock fa-lg' aria-hidden='True' style='color:white;'></i></a>";
-			}
-			function btnRecycle($user) {
-				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycleUser' title='Benutzer \"" . $user->user_name . "\" wiederherstellen' aria-label='Recicle' onclick='whichUserRecycle(\"" . $user->user_firstname . "\", \"" . $user->user_name . "\", \"" . $user->user_id . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
 			</tbody>
