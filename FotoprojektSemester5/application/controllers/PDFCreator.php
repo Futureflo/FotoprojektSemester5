@@ -29,10 +29,11 @@ class PDFCreator extends CI_Controller {
 	}
 	
 	public function test() {
-		echo "<br>DEBUG: step into test() /DEBUG<br>"; // DEBUG
-		echo "<br>DEBUG: lade bibliothek /DEBUG<br>"; // DEBUG
+// 		echo "<br>DEBUG: step into test() /DEBUG<br>"; // DEBUG
+// 		echo "<br>DEBUG: lade bibliothek /DEBUG<br>"; // DEBUG
 		// load library
-		$this->load->library('tcPDFstart');
+// 		$this->load->library('tcPDFstart');
+		$this->load->library('tcPDF');
 		
 		// send data from controller to view
 		$data['txt'] = <<<EOD
@@ -46,10 +47,10 @@ class PDFCreator extends CI_Controller {
 						Custom page header and footer are defined by extending the TCPDF class and overriding the Header() and Footer() methods.
 EOD;
 		
-		echo "<br>DEBUG: lade view /DEBUG<br>"; // DEBUG
+// 		echo "<br>DEBUG: lade view /DEBUG<br>"; // DEBUG
 		// show it
 		$this->load->view('pdf/bill_view', $data);
-		echo "<br>DEBUG: step out test() /DEBUG<br>"; // DEBUG
+// 		echo "<br>DEBUG: step out test() /DEBUG<br>"; // DEBUG
 	}
 	
 	public function example() {
