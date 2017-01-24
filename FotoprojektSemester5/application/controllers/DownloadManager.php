@@ -70,7 +70,7 @@ class DownloadManager extends CI_Controller {
 		// Produkt einfügen
 		$new_dopa_id = $this->Download_Password_model->insertDownloadPassword ( $data );
 		
-		$webPageURL = "http://snap-gallery.de/downloadmanager/startdownload/";
+		$webPageURL = "http://snap-gallery.de/DownloadManager/startDownload/";
 		$downloadLink = $webPageURL . $download_password;
 		echo "<br>DEBUG: step out createDownloadLink() /DEBUG<br>"; // DEBUG
 		return $downloadLink;
@@ -196,7 +196,7 @@ class DownloadManager extends CI_Controller {
 	 * @param array $productsArray = Zielordner des Zip Archives.
 	 */
 	public function zipDir($orderID, array $productsArray) {
-// 		echo "<br>DEBUG: step into zipDir() /DEBUG<br>"; // DEBUG
+		echo "<br>DEBUG: step into zipDir() /DEBUG<br>"; // DEBUG
 		// TODO: checken ob ziel und quellordner existieren
 		$this->load->model('order_model');
 		$this->load->helper('hash_helper');
@@ -232,7 +232,7 @@ class DownloadManager extends CI_Controller {
 		
 		// Zip Archiv schließen
 		$zipArchive->close();
-// 		echo "<br>DEBUG: step out zipDir() /DEBUG<br>"; // DEBUG
+		echo "<br>DEBUG: step out zipDir() /DEBUG<br>"; // DEBUG
 
 		return $zipFileName;
 	}
@@ -259,10 +259,17 @@ class DownloadManager extends CI_Controller {
 		$this->load->helper('hash_helper');
 		$this->load->model('Download_Password_model');
 
-		$this->sendDownloadEmail("Severin.Klug@gmx.de", "http://www.google.de");
+// 		$this->sendDownloadEmail("Severin.Klug@gmx.de", "http://www.google.de");
 // 		$this->downloadFile("Download_Zip_Archive_39_20170119114553.zip");
 		
-// 		$this->downloadFile($zipPath);
+// 		$this->downloadFile($zipPath);^
+
+		
+		$entry = $this->Download_Password_model->getDownloadPasswordEntryByPassword("hdwvvswQjSfA4MLTQuFS4Sz5FYHAHZ");
+		$orderID = $entry[0]->dopa_orde_id;
+		$products = $this->order_model->getProductInformationByOrderId($orderID);
+		$downloadableZipFile = $this->zipDir($orderID, $products);
+		$this->downloadFile($downloadableZipFile);
 
 	}
 	
@@ -272,11 +279,12 @@ class DownloadManager extends CI_Controller {
 		$this->load->helper('hash_helper');
 		$this->load->model('Download_Password_model');
 		
-// 		$downloadLink = $this->createDownloadLink(39);
-// 		$this->sendDownloadEmail("Severin.Klug@gmx.de", $downloadLink);
+		$downloadLink = $this->createDownloadLink(57);
+		echo "Link: ". $downloadLink;
+		$this->sendDownloadEmail("Severin.Klug@gmx.de", $downloadLink);
 		
 		
-		$this->downloadFile("Download_Zip_Archive_39_20170119103947.zip");
+// 		$this->downloadFile("Download_Zip_Archive_39_20170119103947.zip");
 		redirect('/');	
 	}
 	
