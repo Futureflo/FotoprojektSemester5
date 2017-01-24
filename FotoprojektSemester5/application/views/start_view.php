@@ -47,7 +47,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 offset-md-1 col-xs-10 offset-xs-1 ui-widget">
-			<input type="text" id="searchEvent" class="form-control" onkeyup="" placeholder="Search for event..." style="margin: 1.25rem 0.625rem" />
+			<input type="text" id="searchEvent" class="form-control" onkeyup="" placeholder="Suche Event..." style="margin: 1.25rem 0.625rem" />
 		</div>
 	</div>
 </div>
