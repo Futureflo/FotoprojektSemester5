@@ -151,7 +151,7 @@
 		
 		<?php
 		if ($this->session->userdata ( 'login' )) {
-			echo form_open ( "Checkout", '' );
+			echo form_open ( "Checkout/reset", '' );
 		}
 		?>
 <button name="submit" type="submit" class="btn btn-success btn-block btn-md" id="checkout-btn"
