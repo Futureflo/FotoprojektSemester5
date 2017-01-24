@@ -85,7 +85,6 @@ class Signup extends CI_Controller
         	$data['type_hidden_field'] = $role;
         	
          	$this->load->template('user/signup_view',$data); 
-			echo "aufter Form:".$role;
         }
 		else
 		{
@@ -99,7 +98,6 @@ class Signup extends CI_Controller
 				$confirmCode = generate_salt(10);
 				$CodeExists = $this->user_model->exists('user_confirmcode', $confirmCode);
 			} while ($CodeExists == true);
-			echo $role;
 			//insert user details into db
 			$data = array(
 				'user_title' => $title,
@@ -129,7 +127,7 @@ class Signup extends CI_Controller
 			);
 			$addressIsSet = $this->adress_model->addAdressObj ( $address );
 			
-			if (UserRole::Photograph) {
+			if (UserRole::Photograph == $role) {
 				
 				$bankaccountData = array(
 						'user_id' => $user_id,
