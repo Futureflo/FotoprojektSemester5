@@ -72,19 +72,50 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	public function editEvent($id = -1) {
+		lh_checkAccess(1);
+
 		if ($id == - 1)
 			redirect ( '/checkout', 'refresh' );
 		if ($this->input->post ( 'submit' ) == "back")
 			redirect ( '/event/uebersicht/', 'refresh' );
-		$this->load->model ( 'event_model' );
-		$this->load->model ( 'printers_model' );
-		
-		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
-		$user_id = $this->session->userdata ( 'user_id' );
-		$data ['printers'] = $this->printers_model->getPrintersForUser ( $user_id );
-		$data ['event'] = $this->event_model->getSingleEventById ( $id ) [0];
-		
-		$this->load->template ( 'event/edit_event', $data );
+
+
+		// set form validation rules
+		$this->form_validation->set_rules ( 'even_name', 'Event Name', 'trim|required|min_length[3]|max_length[30]' );
+		$this->form_validation->set_rules ( 'even_host_email', 'E-Mail Adresse', 'trim|min_length[3]|max_length[100]' );
+		$this->form_validation->set_rules ( 'even_date', 'Datum', 'trim|required|min_length[10]|max_length[10]' );
+		//log_message("debug","status: ".$this->input->post ( 'even_status' ));
+		if($this->input->post ( 'even_status' ) == "2"){
+			//log_message("debug","true: ");
+			$this->form_validation->set_rules ( 'even_password', 'Event Password', 'required|trim|min_length[3]|max_length[30]' );
+		}
+
+
+		if ($this->form_validation->run () == FALSE) {
+			$this->load->model ( 'event_model' );
+			$this->load->model ( 'printers_model' );
+			
+			$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
+			$user_id = $this->session->userdata ( 'user_id' );
+			$data ['printers'] = $this->printers_model->getPrintersForUser ( $user_id );
+			$data ['event'] = $this->event_model->getSingleEventById ( $id ) [0];
+			
+			$this->load->template ( 'event/edit_event', $data );
+		} else {
+			// insert event details into db
+			$event = array (
+					'even_name' => $this->input->post ( 'even_name' ),
+					'even_host_email' => $this->input->post ( 'even_host_email' ),
+					'even_date' => $this->input->post ( 'even_date' ),
+					'even_status' => $this->input->post ( 'even_status' ),
+					'even_password' => $this->input->post ( 'even_password' ),
+					'even_prsu_id' => $this->input->post ( 'even_prsu_id' ),
+					'even_prpr_id' => $this->input->post ( 'even_prpr_id' )
+			);
+			$this->load->model ( 'event_model' );
+			$this->event_model->update_event($this->input->post ( 'even_id' ), $event);
+			redirect ( '/event/uebersicht/', 'refresh' );
+		}
 	}
 	
 	// Methoden um den Status zu aendern
@@ -190,10 +221,6 @@ class Event extends CI_Controller {
 			$even_host_email = $this->input->post ( 'even_host_email' );
 			
 			$even_status = $this->input->post ( 'even_status' );
-			if (isset ( $even_status ))
-				$even_status = EventStatus::prv;
-			else
-				$even_status = EventStatus::pbl;
 				
 				// submit
 			if ($this->form_validation->run () == FALSE) {
