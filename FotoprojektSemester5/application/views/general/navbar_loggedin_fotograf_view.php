@@ -20,8 +20,8 @@
 					aria-haspopup="true" aria-expanded="false">Fotograf</a>
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 					<a class="dropdown-item" href="<?php
-						echo base_url ();
-						?>event/uebersicht/">Meine Events</a>
+					echo base_url ();
+					?>event/uebersicht/">Meine Events</a>
 
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
@@ -36,9 +36,9 @@
 						?>PriceProfile/price_profiles">Meine Preisprofile</a>
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
-						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php						
-						echo base_url ();						
-						?>event/">&Uuml;bersicht Druckerei</a>
+						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>printers/showPrinters">&Uuml;bersicht Druckerei</a>
 					</div></li>
 
 				<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown"
