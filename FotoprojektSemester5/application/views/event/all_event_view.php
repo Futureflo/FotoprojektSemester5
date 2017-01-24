@@ -83,9 +83,26 @@
 									case 1:
 											echo "<td> Gesperrt </td>";
 											echo "<td>" . btnEventUnlock($event);
-											echo btnEventDelete($event) . "</td>";
-											break;									
-								}
+											echo "</td>";
+											break;
+										case 2:
+											echo "<td> Freigegeben </td>";
+											echo "<td>" . btnEventLock($event);
+											
+											echo "</td>";
+											break;
+										case 3:
+											echo "<td> Öffentlich </td>";
+											echo "<td>" . btnEventLock($event);
+											echo btnPrivate($event);
+											echo  "</td>";
+											break;
+										case 4:
+											echo "<td> Gelöscht </td>";
+											echo "<td>" . btnReycle($event) . "</td>";
+											break;
+
+									}
 								}
 								
 								// echo "<td>" . btnEventDelete($event) . "</td>";
