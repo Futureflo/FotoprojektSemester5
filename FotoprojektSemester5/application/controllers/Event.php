@@ -157,6 +157,8 @@ class Event extends CI_Controller {
 			
 			// set form validation rules
 			$this->form_validation->set_rules ( 'even_name', 'Event Name', 'trim|required|min_length[3]|max_length[30]' );
+			$this->form_validation->set_rules ( 'even_password', 'Event Password', 'trim|required|min_length[3]|max_length[30]' );
+			$this->form_validation->set_rules ( 'even_host_email', 'E-Mail Adresse', 'trim|required|min_length[3]|max_length[100]' );
 			$this->form_validation->set_rules ( 'even_date', 'Datum', 'trim|required|min_length[10]|max_length[10]' );
 			$this->form_validation->set_rules ( 'even_status', 'Öffentlich', '' );
 			// $this->form_validation->set_rules('even_url', 'Password', 'trim|required|matches[user_cpassword]');
@@ -165,6 +167,8 @@ class Event extends CI_Controller {
 			
 			$even_prpr_id = $this->input->post ( 'even_prpr_id' );
 			$even_prsu_id = $this->input->post ( 'even_prsu_id' );
+			$even_password = $this->input->post ( 'even_password' );
+			$even_host_email = $this->input->post ( 'even_host_email' );
 			
 			$even_status = $this->input->post ( 'even_status' );
 			if (isset ( $even_status ))
@@ -185,6 +189,8 @@ class Event extends CI_Controller {
 						'even_url' => '',
 						'even_user_id' => $user_id,
 						'even_prpr_id' => $even_prpr_id,
+						'even_password' => $even_password,
+						'even_host_email' => $even_host_email,
 						'even_prsu_id' => $even_prsu_id 
 				);
 				
