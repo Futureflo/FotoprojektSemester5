@@ -110,7 +110,7 @@
 					// Hinzufügen button
 					function btn_add() {
 						echo "<td>";
-						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
+						echo " <button type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" role=\"button\" class=\"btn btn-primary\"> <i class=\"fa fa-plus-square fa-lg\"></i> Hinzufügen</button>";
 						echo "</td>";
 					}
 					
