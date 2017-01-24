@@ -63,8 +63,16 @@ class Event extends CI_Controller {
 	public function editEvent($id = -1) {
 		if ($id == - 1)
 			redirect ( '/checkout', 'refresh' );
+		if ($this->input->post('submit')== "back")
+			redirect ( '/event/uebersicht/', 'refresh' );
 		$this->load->model ( 'event_model' );
-		$data ['event'] = $this->event_model->getSingleEventById ( $id );
+		$this->load->model ( 'printers_model' );
+
+		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();		
+		$user_id = $this->session->userdata ( 'user_id' );
+		$data ['printers'] = $this->printers_model->getPrintersForUser ( $user_id );
+		$data ['event'] = $this->event_model->getSingleEventById ( $id )[0];
+
 		$this->load->template ( 'event/edit_event', $data );
 	}
 	
