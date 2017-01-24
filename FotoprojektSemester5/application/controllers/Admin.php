@@ -22,6 +22,9 @@ class Admin extends CI_Controller {
 		$data ['DashboardViewHeader'] = "Dashboard";
 		$this->load->template ( 'admin/dashboard', $data );
 	}
+	public function overviewAdmin() {
+		$this->load->template ( 'admin/overviewAdmin' );
+	}
 	public function users() {
 		$data ['users'] = $this->user_model->getAllUsers ();
 		$data ['UsersViewHeader'] = "Alle Benutzer";

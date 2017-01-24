@@ -88,6 +88,12 @@
 				<i class="fa fa-envelope-o fa-5x" aria-hidden="true"></i> <br><h3>Newsletter</h3> 
 			</a>
 		
+			<a class="btn btn-info kachel"
+			href="<?php
+			echo base_url ();
+			?>admin/dashboard/">
+				<i class="fa fa-eur fa-5x" aria-hidden="true"></i> <br><h3>Umsatzanzeige</h3> 
+			</a>
 	</div>
 </div>
 
