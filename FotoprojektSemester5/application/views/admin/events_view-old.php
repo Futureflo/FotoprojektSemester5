@@ -15,7 +15,7 @@
 
 		<div class="offset-md-3 col-md-2">
 			<input type="text" id="searchTerm" class="form-control"
-			 onkeyup="search()" placeholder="Search for user..."/>
+			 onkeyup="search()" placeholder="Suche Benutzer..."/>
 		</div>
 
 
@@ -38,32 +38,32 @@
 						</thead>
 						<tbody>
 							<?php
-								foreach ( $events as $event ) {
-									echo "<tr class='searchable'>";
-									echo "<td><input type='checkbox' name='eventsRemove' value='" . $event->even_id."'></td>";
-									echo "<td>" . $event->even_id. "</td>";
-									echo "<td>" . $event->even_name. "</td>";
-									//echo "<td>" . $event->even_status . "</td>";
-									
-									switch ($event->even_status) {
-										case 1:
-											echo "<td> Gesperrt </td>";
-											break;
-										case 2:
-											echo "<td> Privat </td>";
-											break;
-										case 3:
-											echo "<td> Öffentlich </td>";
-											break;
-										case 4:
-											echo "<td> Gelöscht </td>";
-											break;
-									}
-									
-									echo "<td> <a href=http://www.snap-gallery.de/event/" . $event->even_url . " target='_blank'>www.snap-gallery.de/event/" . $event->even_url . "</a></td>";
-									
-									echo "<tr>";
-				 				}
+							foreach ( $events as $event ) {
+								echo "<tr class='searchable'>";
+								echo "<td><input type='checkbox' name='eventsRemove' value='" . $event->even_id . "'></td>";
+								echo "<td>" . $event->even_id . "</td>";
+								echo "<td>" . $event->even_name . "</td>";
+								// echo "<td>" . $event->even_status . "</td>";
+								
+								switch ($event->even_status) {
+									case 1 :
+										echo "<td> Gesperrt </td>";
+										break;
+									case 2 :
+										echo "<td> Privat </td>";
+										break;
+									case 3 :
+										echo "<td> Öffentlich </td>";
+										break;
+									case 4 :
+										echo "<td> Gelöscht </td>";
+										break;
+								}
+								
+								echo "<td> <a href=http://www.snap-gallery.de/event/" . $event->even_url . " target='_blank'>www.snap-gallery.de/event/" . $event->even_url . "</a></td>";
+								
+								echo "<tr>";
+							}
 							?>
 						</tbody>
 					</table>
