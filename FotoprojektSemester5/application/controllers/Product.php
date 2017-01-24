@@ -118,7 +118,9 @@ class Product extends CI_Controller {
 		
 		// Provision ergänzen
 		$price_provision = floatval ( $price_sum ) * floatval ( $user_commision );
+		$price_provision = round ( $price_provision, 2 );
 		$price_sum = $price_sum + floatval ( $price_provision );
+		$price_sum = round ( $price_sum, 2 );
 		
 		$price = array (
 				'price_basic' => $price_basic,
