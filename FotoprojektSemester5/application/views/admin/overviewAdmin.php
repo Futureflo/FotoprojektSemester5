@@ -27,7 +27,7 @@
 			<a class="btn btn-info kachel"
 			href="<?php
 			echo base_url ();
-			?>admin/events_view/">
+			?>admin/events/">
 				<i class="fa fa-calendar fa-5x" aria-hidden="true"></i> <br><h3>Events</h3> 
 			</a>
 			
@@ -41,7 +41,7 @@
 			<a class="btn btn-info kachel"
 			href="<?php
 			echo base_url ();
-			?>admin/printers_view/">
+			?>admin/printers/">
 				<i class="fa fa-print fa-5x" aria-hidden="true"></i> <br><h3>Druckereien</h3> 
 			</a>
 			
@@ -56,7 +56,7 @@
 			<a class="btn btn-info kachel"
 			href="<?php
 			echo base_url ();
-			?>admin/price_profile_view/">
+			?>admin/price_profiles/">
 				<i class="fa fa-money fa-5x" aria-hidden="true"></i> <br><h3>Preisprofile</h3> 
 			</a>
 			
@@ -70,7 +70,7 @@
 			<a class="btn btn-info kachel"
 			href="<?php
 			echo base_url ();
-			?>admin/product_type_view/">
+			?>admin/product_types/">
 				<i class="fa fa-file-text-o fa-5x" aria-hidden="true"></i> <br><h3>Formate</h3> 
 			</a>
 			
