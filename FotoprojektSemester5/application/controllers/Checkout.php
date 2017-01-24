@@ -300,7 +300,7 @@ class Checkout extends CI_Controller {
 			
         	//calculate order
         	$order['orde_delivery_charge'] = -1;//wird nicht benötigt ?? Versandkosten für die jeweilige Bestellung
-    		$order['orde_commission'] = -1;//wird nicht benötigt ?? "Provisionzuschlag für diese Bestellung (berechnet sich aus der gesamt Bestellungssumme, prozentualer Anteil"
+    		//$order['orde_commission'] = -1;//wird nicht benötigt ?? "Provisionzuschlag für diese Bestellung (berechnet sich aus der gesamt Bestellungssumme, prozentualer Anteil"
     		
 			$sum_values = Order::calcOrder ( $shca_id );
 			//log_message("debug", "order_sum:" . $orde_value [0]);
@@ -500,7 +500,7 @@ class Checkout extends CI_Controller {
 			log_message('debug', 'PaymentID: '. $payment->getId());
 			log_message('debug', 'Request:.' .$execution);
 			log_message('debug', 'Result:.' .$result);
-	        echo 'printResult("Executed Payment'.$payment->getId()."|". $execution."|". $resul;
+	        //echo 'printResult("Executed Payment'.$payment->getId()."|". $execution."|". $result;
 	        try {
 	            $payment = Payment::get($paymentId, $apiContext);
 	        } 
@@ -509,7 +509,7 @@ class Checkout extends CI_Controller {
 	            //ResultPrinter::printError("Get Payment", "Payment", null, null, $ex);
 				log_message('error', 'Get Payment');
 				log_message('error', 'Response: '. $ex);
-	            echo 'printError("Get Payment'.$ex;
+	            //echo 'printError("Get Payment'.$ex;
 	            exit(1);
 	        }
 	    } catch (PayPal\Exception\PayPalConnectionException $ex) {
@@ -524,13 +524,13 @@ class Checkout extends CI_Controller {
 	        //ResultPrinter::printError("Executed Payment", "Payment", null, null, $ex);
 			log_message('error', 'Executed Payment');
 			log_message('error', 'Response: '. $ex);
-	        echo 'printError("Executed Payment'.$ex;
+	        //echo 'printError("Executed Payment'.$ex;
 	        exit(1);
 	    }
 
 	    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
 	    //ResultPrinter::printResult("Get Payment", "Payment", $payment->getId(), null, $payment);
-	    echo 'printResult("Get Payment';
+	    //echo 'printResult("Get Payment';
 		log_message('debug', 'Get Payment');
 		log_message('debug', 'PaymentID: '. $payment->getId());
 		log_message('debug', 'Result:.' .$payment);

@@ -70,10 +70,10 @@
 				echo "</tr>";
 			}
 			function btnDelete($user) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen'  onclick='whichUser(\"" . $user->E_Mail . "\")'; aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnDeleteUnknown($user) {
-				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Benutzer \"" . $user->E_Mail . "\" löschen' onclick='whichUser(\"" . $user->E_Mail . "\")'; aria-label='delete'><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			?>
 			</tbody>
@@ -124,7 +124,7 @@
 		        <form action="<?php
 										
 										echo base_url ();
-										?>admin/deleteUser/" method="post">
+										?>admin/deleteUserFromNewsletterlist/" method="post">
 			        <input id="user_hidden_field" type="hidden" name="userDelete_hidden_field" value="">
 			        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-ok-sign"></span>Benutzer löschen</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Abbrechen</button>
@@ -262,6 +262,10 @@ $('.signinform').submit(function() {
         }
         
         li[num].classList.add("active");
+    }
+
+    function whichUser(email){
+        document.getElementById("user_hidden_field").value = email;
     }
     
     /**

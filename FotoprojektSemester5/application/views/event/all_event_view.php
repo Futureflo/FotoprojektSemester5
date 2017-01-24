@@ -55,18 +55,21 @@
 										case 1:
 											echo "<td> Gesperrt </td>";
 											echo "<td>" . btnEventUnlock($event);
+											echo btnEdit($event);
 											echo btnEventDelete($event) . "</td>";
 											break;
 										case 2:
 											echo "<td> Privat </td>";
 											echo "<td>" . btnEventLock($event);
 											echo btnPublic($event);
+											echo btnEdit($event);
 											echo btnEventDelete($event) . "</td>";
 											break;
 										case 3:
 											echo "<td> Öffentlich </td>";
 											echo "<td>" . btnEventLock($event);
 											echo btnPrivate($event);
+											echo btnEdit($event);
 											echo btnEventDelete($event) . "</td>";
 											break;
 										case 4:
@@ -172,6 +175,10 @@ echo ($event->even_id	);
 				 				function btnReycle($event)
 				 				{
 				 					return '<button title="Öffentlich setzen" onclick="setPrivateById(' . $event->even_id .')" class="btn btn-success fa fa-recycle fa-lg" style="margin-right:1rem"></button>';
+				 				}
+				 				function btnEdit($event)
+				 				{
+				 					return '<button title="Bearbeiten" onclick="window.location.href=\''.base_url().'event/edit/'.$event->even_id.'\'" class="btn btn-success fa fa-edit fa-lg" style="margin-right:1rem"></button>';
 				 				}
 							?>
 						</tbody>

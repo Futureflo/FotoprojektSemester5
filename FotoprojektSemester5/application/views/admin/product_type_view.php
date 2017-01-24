@@ -110,12 +110,23 @@
 					// Hinzufügen button
 					function btn_add() {
 						echo "<td>";
-						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" class=\"btn btn-success\" />";
+						echo " <button type=\"submit\" name=\"Bestellen\" value=\"Hinzufügen\" role=\"button\" class=\"btn btn-primary\"> <i class=\"fa fa-plus-square fa-lg\"></i> Hinzufügen</button>";
 						echo "</td>";
 					}
 					
 					// Löschen button
 					function btn_delete($pt) {
+						echo form_open ( "ProductType/deleteProductType", '', array (
+								'prty_id' => $pt->prty_id,
+								'prty_description' => $pt->prty_description 
+						) );
+						echo "<td>";
+						echo " <input type=\"submit\" name=\"Bestellen\" value=\"Löschen\" class=\"btn btn-danger\" />";
+						echo "</td>";
+						echo form_close ();
+					}
+					// Recycle button
+					function btn_recycle($pt) {
 						echo form_open ( "ProductType/deleteProductType", '', array (
 								'prty_id' => $pt->prty_id,
 								'prty_description' => $pt->prty_description 

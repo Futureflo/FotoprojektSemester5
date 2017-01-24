@@ -5,7 +5,7 @@ require('tcPDF/tcpdf.php');
 
 // http://www.php-guru.in/2013/html-to-pdf-conversion-in-codeigniter/
 
-class tcPDFstart extends Tcpdf {
+class tcPDFstart extends tcpdf {
 	public function __construct() {
 		parent::__construct ();
 		$CI =& get_instance();
