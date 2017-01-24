@@ -2,8 +2,7 @@
 <section class="jumbotron text-xs-center">
 	<div class="container">
 		<h1 class="jumbotron-heading">Ihr Warenkorb</h1>
-		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer
-			Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
+		<p class="lead text-muted">Hier können Sie Größe und Anzahl Ihrer Bilder bestimmen, oder diese aus dem Warenkorb entfernen.</p>
 	</div>
 </section>
 <div class="container">
@@ -40,7 +39,30 @@
 				echo '<li><h6>' . $prodname . '</h6></li>';
 				echo '<li>Veranstaltung: ' . $event->even_name . '</li>';
 				echo '<li>Größe: ' . $size . '</li>';
-				echo '<li>Digital/Analog</li>';
+				
+				switch ($shoppingcart_position->product_variant->prty_type) {
+					case ProductPrintType::prints :
+						{
+							echo "<li>" . 'Druck' . "</li>";
+							break;
+						}
+					case ProductPrintType::download :
+						{
+							echo "<li>" . 'Download' . "</li>";
+							break;
+						}
+					case ProductPrintType::article :
+						{
+							echo "<li>" . 'Artikel' . "</li>";
+							break;
+						}
+					default :
+						{
+							echo "<li>" . 'Undefiniert' . "</li>";
+							break;
+						}
+				}
+				
 				echo '</div>';
 				echo '</div>';
 				
@@ -132,8 +154,7 @@
 			echo form_open ( "Checkout", '' );
 		}
 		?>
-<button name="submit" type="submit"
-			class="btn btn-success btn-block btn-md" id="checkout-btn"
+<button name="submit" type="submit" class="btn btn-success btn-block btn-md" id="checkout-btn"
 			<?php
 			if (isset ( $cart->shoppingcart_positions ) == FALSE) {
 				echo " disabled ";
@@ -154,16 +175,14 @@
 
 
 <!-- Modal -->
-<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1"
-	role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="notLogedinModal" class="modal-xl fade modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -171,10 +190,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-8 offset-sm-3">
-						<a onclick="login()" id="login_from_modal" href="#"
-							class="btn btn-primary">Anmelden</a> <a
-							href="<?php
-							echo base_url ()?>checkout"
+						<a onclick="login()" id="login_from_modal" href="#" class="btn btn-primary">Anmelden</a> <a href="<?php
+						echo base_url ()?>checkout"
 							class="btn btn-secondary">Als Gast bestellen</a>
 					</div>
 				</div>
