@@ -130,7 +130,7 @@ function deleteEventID(eventID) {
 		  url: "<?php
 				
 echo site_url ();
-				?>/event/deleteEventById/"+eventID,
+				?>/event/deleteEventByIdForAdmin/"+eventID,
 		  dataType: 'html',
 		});
 	location.reload();
