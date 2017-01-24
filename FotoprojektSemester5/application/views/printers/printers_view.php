@@ -2,11 +2,11 @@
 	<div class="container">
 		<?php
 		if (isset ( $message )) {
-			echo "<div class='alert alert-danger'>";
+			echo "<div class='alert alert-success'>";
 			echo $message . "</div>";
 		}
 		?>
-		<div id="fehler_span" class="text-danger"><?php
+		<div id="fehler_span" class="text-info"><?php
 		echo $this->session->flashdata ( 'msgReg' );
 		?></div>
 </div>
@@ -58,8 +58,8 @@
 				echo "<td>" . $printer->prsu_id . "</td>";
 				echo "<td>" . $printer->adre_name . "</td>";
 				echo "<td>" . $printer->prsu_createdon . "</td>";
-  				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
-				//echo "<td>" . $printer->prsu_createdby . "</td>";
+				echo "<td>" . $printer->user_firstname . " " . $printer->user_name . "</td>";
+				// echo "<td>" . $printer->prsu_createdby . "</td>";
 				switch ($printer->prsu_status) {
 					case 1 :
 						echo "<td> Aktiv </td>";
@@ -84,7 +84,7 @@
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinterDelete(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnRecycle($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#edit' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
@@ -148,7 +148,7 @@
 					action="<?php
 					
 					echo base_url ();
-					?>printers/deletePrinter/"
+					?>printers/deletePrinterPhotographer/"
 					method="post">
 					<input id="printerDelete_hidden_field" type="hidden"
 						name="printerDelete_hidden_field" value="">

@@ -13,11 +13,21 @@ class User extends CI_Controller {
 	public function index() {
 		$this->load->template ( 'user/settings_view' );
 	}
+	public function dashboard() {
+		$this->load->model ( 'Dashboard_model' );
+		$user_id = $this->session->userdata ( 'user_id' );
+		$data ['orders'] = $this->Dashboard_model->getInformationsByUserID ($user_id);
+		$data ['DashboardViewHeader'] = "Dashboard";
+		$this->load->template ( 'admin/dashboard', $data );
+	}
 	public function call_change_email_view() {
 		$user_id = $this->session->userdata ( 'user_id' );
 		$user = $this->user_model->get_user_by_id ( $user_id );
 		$data ['user_email'] = $user [0]->user_email;
 		$this->load->template ( 'user/email_change_view', $data );
+	}
+	public function call_change_address_view() {
+		$this->load->template ( 'user/address_change_view' );
 	}
 	public function call_change_passwordSettings_view() {
 		$user_id = $this->session->userdata ( 'user_id' );
@@ -41,6 +51,8 @@ class User extends CI_Controller {
 		$data ['adre_street'] = $address [0]->adre_street;
 		$data ['adre_zip'] = $address [0]->adre_zip;
 		$data ['adre_city'] = $address [0]->adre_city;
+		
+		$data ['adre'] = $address;
 		
 		$adressId = $address [0]->adre_id;
 		$this->load->template ( 'user/single_user_view', $data );
@@ -85,6 +97,29 @@ class User extends CI_Controller {
 			);
 			$addressIsSet = $this->adress_model->updateAdress ( $address );
 		}
+	}
+	public function newAddress() {
+		$user_id = $this->session->userdata ( 'user_id' );
+		$new_street = $this->input->post ( 'street' );
+		$new_plz = $this->input->post ( 'plz' );
+		$new_city = $this->input->post ( 'city' );
+		$name = $this->input->post ( 'name' );
+		$firstname = $this->input->post ( 'firstname' );
+		$fullname = $firstname . " " . $name;
+		
+		$address = array (
+				'adre_user_id' => $user_id,
+				'adre_zip' => $new_plz,
+				'adre_city' => $new_city,
+				'adre_street' => $new_street,
+				'adre_name' => $fullname,
+				'adre_coun_id' => '80',
+				'adre_status' => '1' 
+		);
+		
+		$this->user_model->insert_address ( $address );
+		
+		redirect ( '/user/1' );
 	}
 	public function changeEmail() {
 		$user_id = $this->session->userdata ( 'user_id' );

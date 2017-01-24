@@ -73,7 +73,7 @@
 					echo '<h4 class= "mb-0">';
 						//a-section für überschrift
 						echo '<a data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse" href="#collapse' . $modeID . '">';
-							echo $titelCollapse . $summeOrder . '€ davon MwSt.: '. $summeMwSt .'€';
+							echo $titelCollapse . number_format($summeOrder,2,',','.' ) . '€ davon MwSt.: '. number_format($summeMwSt,2,',','.' ) .'€';
 							//echo $orderDate . $SumDaily . 'Bestellnummer: ' . $order->orde_no . ' | Datum: ' . $order->orde_date . ' | Summe: ' . $order->orde_sum . '€';
 						echo '</a>';
 						//Div-Ende für h4
@@ -102,7 +102,7 @@
 										echo "<td>" . $order->orde_no . "</td>";
 										echo "<td>" . $order->user_name . "</td>";
 										echo "<td>" . $order->orde_date . "</td>";
-										echo "<td>" . $order->orde_sum . "</td>";
+										echo "<td>" . number_format($order->orde_sum,2,',','.' ) . "€</td>";
 
 										echo "</tr>";
 									}

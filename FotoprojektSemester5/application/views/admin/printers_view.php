@@ -2,11 +2,11 @@
 	<div class="container">
 		<?php
 		if (isset ( $message )) {
-			echo "<div class='alert alert-danger'>";
+			echo "<div class='alert alert-success'>";
 			echo $message . "</div>";
 		}
 		?>
-		<div id="fehler_span" class="text-danger"><?php
+		<div id="fehler_span" class="text-info"><?php
 		echo $this->session->flashdata ( 'msgReg' );
 		?></div>
 </div>
@@ -84,7 +84,7 @@
 				return "<a class='btn btn-danger' data-toggle='modal' data-target='#delete' title='Druckerei \"" . $printer->adre_name . "\" löschen' aria-label='delete' onclick='whichPrinterDelete(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-trash-o fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnRecycle($printer) {
-				return "<a class='btn btn-info' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
+				return "<a class='btn btn-success' data-toggle='modal' data-target='#recycle' title='Druckerei \"" . $printer->adre_name . "\" aktivieren' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterRecycle(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-recycle fa-lg' aria-hidden='True' style='color:white;'></i></a>";
 			}
 			function btnEdit($printer) {
 				return "<a class='btn btn-info' data-toggle='modal' data-target='#edit' title='Druckerei \"" . $printer->adre_name . "\" bearbeiten' aria-label='edit' style='margin-right:1rem' onclick='whichPrinterEdit(\"" . $printer->adre_name . "\", \"" . $printer->prsu_id . "\", \"" . $printer->prsu_email . "\")';><i class='fa fa-pencil fa-lg' aria-hidden='True' style='color:white;'></i></a>";
@@ -182,7 +182,7 @@
 				<h4 class="modal-title custom_align" id="Heading">Druckerei wiederherstellen?</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-danger">
+				<div class="alert alert-info">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
 					die Druckerei "<span id="printerRecycle"></span>" wiederherstellen? 
 				</div>
@@ -196,7 +196,7 @@
 					method="post">
 					<input id="printerRecycle_hidden_field" type="hidden"
 						name="printerRecycle_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
+					<button type="submit" class="btn btn-info">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei wiederherstellen
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -224,7 +224,7 @@
 				<h4 class="modal-title custom_align" id="Heading">Druckerei bearbeiten?</h4>
 			</div>
 			<div class="modal-body">
-				<div class="alert alert-danger">
+				<div class="alert alert-warning">
 					<span class="glyphicon glyphicon-warning-sign"> </span>Möchten Sie
 					die Druckerei "<span id="printerEdit"></span>" bearbeiten?
 				</div>
@@ -238,7 +238,7 @@
 					method="post">
 					<input id="printerEdit_hidden_field" type="hidden"
 						name="printerEdit_hidden_field" value="">
-					<button type="submit" class="btn btn-danger">
+					<button type="submit" class="btn btn-warning">
 						<span class="glyphicon glyphicon-ok-sign"></span>Druckerei bearbeiten
 					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">
