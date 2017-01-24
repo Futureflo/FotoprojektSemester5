@@ -3,7 +3,6 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 include_once (dirname ( __FILE__ ) . "/PriceProfile.php");
 include_once (dirname ( __FILE__ ) . "/Event.php");
 include_once (dirname ( __FILE__ ) . "/WaterMark.php");
-include_once (dirname ( __FILE__ ) . "/ProductStatus.php");
 class Product extends CI_Controller {
 	const base_path = "/Images/";
 	private static $event;
