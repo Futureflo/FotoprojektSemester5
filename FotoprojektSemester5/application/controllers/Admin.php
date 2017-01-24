@@ -27,6 +27,45 @@ class Admin extends CI_Controller {
 		$data ['UsersViewHeader'] = "Alle Benutzer";
 		$this->load->template ( 'admin/users_view', $data );
 	}
+	public function nele_users() {
+		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ()->result();
+		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ()->result();
+		$this->load->template ( 'newsletter/nele_admin_view', $data );
+	}
+	
+	// Funktionen für die View/Controller (DKM -> Wieso hier und nicht in de spez. Models/Controller?)
+	public function deletePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerDelete_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde gelöscht";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::deleted );
+		$data ['printers'] = $this->Printers_model->getAllActivPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function recyclePrinter() {
+		$this->load->model ( 'Printers_model' );
+		$prsu_id = $this->input->post ( "printerRecycle_hidden_field" );
+		$printerInformation = $this->Printers_model->get_printer_by_id ( $prsu_id );
+		$data ['PrintersViewHeader'] = "Archivierte Druckereien";
+		$data ['message'] = "Die Druckerei mit dem Namen: \"" . $printerInformation [0]->adre_name . "\" wurde wiederhergestellt";
+		$this->Printers_model->update_printerStatusByID ( $prsu_id, PrinterStatus::activated );
+		$data ['printers'] = $this->Printers_model->getAllArchivedPrinters ();
+		$this->load->template ( 'admin/printers_view', $data );
+	}
+	public function lockUser() {
+		$user_id = $this->input->post ( "userLock_hidden_field" );
+		$userInformation = $this->user_model->get_user_by_id ( $user_id );
+		$data ['UsersViewHeader'] = "Alle Benutzer";
+		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gesperrt";
+		$this->user_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
+		$data ['users'] = $this->user_model->getAllUsers ();
+		$this->load->template ( 'admin/users_view', $data );
+	}
+	public function printers_creation() {
+		$this->load->template ( 'admin/printers_creation_view' );
+	}
 	public function events() {
 		$data ['events'] = $this->event_model->getAllActivEvents ();
 		$data ['EventsViewHeader'] = "Archivierte Events";
@@ -81,15 +120,6 @@ class Admin extends CI_Controller {
 		$data ['users'] = $this->user_model->getAllUsers ();
 		$this->load->template ( 'admin/users_view', $data );
 	}
-	public function lockUser() {
-		$user_id = $this->input->post ( "userLock_hidden_field" );
-		$userInformation = $this->user_model->get_user_by_id ( $user_id );
-		$data ['UsersViewHeader'] = "Alle Benutzer";
-		$data ['message'] = "Der Benutzer mit der E-Mail Adresse: \"" . $userInformation [0]->user_email . "\" wurde gesperrt";
-		$this->user_model->update_userStatusByID ( $user_id, UserStatus::lockedByAdmin );
-		$data ['users'] = $this->user_model->getAllUsers ();
-		$this->load->template ( 'admin/users_view', $data );
-	}
 	public function unlockUser() {
 		$user_id = $this->input->post ( "userUnlock_hidden_field" );
 		$userInformation = $this->user_model->get_user_by_id ( $user_id );
@@ -112,22 +142,26 @@ class Admin extends CI_Controller {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/priceprofile_creation_view', $data );
 	}
-	public function createNewsletterCSV() {
-		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser ();
-		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser ();
-		$i = 0;
-		foreach ( $newsletterEmails1 as $user ) {
-			echo "title" . $newsletterEmails1 [$i]->user_title;
-			echo "firstname" . $newsletterEmails1 [$i]->user_firstname;
-			echo "name" . $newsletterEmails1 [$i]->user_name;
-			echo $newsletterEmails1 [$i]->user_email;
-			$i ++;
+	public function createNewsletterCSV(){
+		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser();
+		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser();
+		$this->load->dbutil();
+		$this->load->helper('file');
+	
+		/*  pass it to db utility function  */
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report1= $this->dbutil->csv_from_result($newsletterEmails1,$delimiter,$newline,'');
+		$new_report2 = $this->dbutil->csv_from_result($newsletterEmails2,$delimiter,$newline,'');
+		$dirname = "Newsletter_Abonennten/";
+		if (!is_dir($dirname)) {
+			mkdir('./'.$dirname);
 		}
-		$i = 0;
-		foreach ( $newsletterEmails2 as $unkownUser ) {
-			echo $newsletterEmails2 [$i]->nele_email;
-			$i ++;
-		}
+		/*  Now use it to write file. write_file helper function will do it */
+		write_file($dirname.'RegisteredEmails.csv',$new_report1);
+		write_file($dirname.'UnregisteredEmails.csv',$new_report2);
+	
 	}
+	
 }
 ?>

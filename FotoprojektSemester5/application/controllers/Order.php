@@ -31,8 +31,8 @@ class Order extends CI_Controller {
             $orde_sum += $price_sum;
         }
         return array (
-                $orde_sum,
-                $orde_commission 
+                round($orde_sum,2),
+                round($orde_commission,2)
         );
     }
 

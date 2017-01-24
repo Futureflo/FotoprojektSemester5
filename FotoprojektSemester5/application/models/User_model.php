@@ -216,17 +216,17 @@ class User_model extends CI_Model {
 	
 	// get all UserEmails Newsletter
 	function getNewsletterEmailsFromExistingUser() {
-		 $this->db->select('user_email, user_title, user_name, user_firstname');
+		 $this->db->select('user_title as Anrede, user_name as Nachname, user_firstname as Vorname, user_email as E_Mail');
 		 $this->db->from('user');
 		 $this->db->where ( 'user_newsletter', TRUE );		 	
-		 $query = $this->db->get()->result();
+		 $query = $this->db->get();
 		 return $query;		 	
 	}
 	// get all UserEmails Newsletter
 	function getNewsletterEmailsFromUnkownUser() {
-		$this->db->select('nele_email');
+		$this->db->select('nele_email as E_Mail');
 		$this->db->from('newsletter');
-		$query = $this->db->get()->result();	
+		$query = $this->db->get();
 		return $query;
 	}
 	// get Abo
@@ -234,7 +234,7 @@ class User_model extends CI_Model {
 		$this->db->join ( 'abo_fotograf', 'user_abof_id = abof_id' );
 		$this->db->where ( 'user_id', $user_id );
 		$query = $this->db->get ( 'user' );
-		$result = $query->result ();
+		$query = $this->db->get();
 		return $result [0];
 	}
 }

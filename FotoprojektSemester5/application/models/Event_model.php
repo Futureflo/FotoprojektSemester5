@@ -42,6 +42,12 @@ class Event_model extends CI_Model {
 		$query = $this->db->get ( "event" );
 		return $query->result ();
 	}
+	public function getEventsFromUserandEmail($id,$email) {
+		$this->db->where ( 'even_user_id', $id );
+		$this->db->or_where ( 'even_host_email', $email );
+		$query = $this->db->get ( "event" );
+		return $query->result ();
+	}
 	public function getAllEvents() {
 		$query = $this->db->get ( "event" );
 		return $query->result ();
