@@ -28,7 +28,7 @@
 		-->
 		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
-				onkeyup="search()" placeholder="Search for user..." />
+				onkeyup="search()" placeholder="Suche Benutzer..." />
 		</div>
 		</div>
 		<div class="row">
