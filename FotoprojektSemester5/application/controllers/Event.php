@@ -57,12 +57,12 @@ class Event extends CI_Controller {
 		$this->load->model ( 'event_model' );
 		$id = $this->session->userdata ( 'user_id' );
 		$email = $this->session->userdata ( 'user_email' );
-		$data ['events'] = $this->event_model->getEventsFromUserandEmail ( $id,$email );
+		$data ['events'] = $this->event_model->getEventsFromUserandEmail ( $id, $email );
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	public function editEvent($id = -1) {
-		if($id == -1)
-            redirect('/checkout', 'refresh');
+		if ($id == - 1)
+			redirect ( '/checkout', 'refresh' );
 		$this->load->model ( 'event_model' );
 		$data ['event'] = $this->event_model->getSingleEventById ( $id );
 		$this->load->template ( 'event/edit_event', $data );
@@ -97,7 +97,7 @@ class Event extends CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->model ( 'event_model' );
 		
-		$event = $CI->event_model->getSingleEventById ( $even_id );
+		$event = $CI->event_model->getSingleEventById ( $even_id, false );
 		
 		if (isset ( $event [0] )) {
 			
