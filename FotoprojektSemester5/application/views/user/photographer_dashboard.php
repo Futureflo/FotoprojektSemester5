@@ -54,7 +54,7 @@
 			<p class="h3">
 			<?php
 			
-			echo 'Verwendeter Speicherplatz: ' . $size->prod_filesize . ' / ' . $abo->abof_space . ' GB';
+			echo 'Verwendeter Speicherplatz: ' . $size->prod_filesize . ' / ' . $abo->abof_space . ' MB';
 			
 			?>
 			</p>
