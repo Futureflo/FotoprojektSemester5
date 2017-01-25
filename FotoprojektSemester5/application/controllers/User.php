@@ -7,8 +7,11 @@ class User extends CI_Controller {
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'Product_type_model' );
 		$this->load->helper ( array (
-				'hash_helper' 
+				'hash_helper',
+				'login_helper'
 		) );
+		lh_checkAccess();
+		
 	}
 	public function index() {
 		$this->load->template ( 'user/settings_view' );
@@ -144,6 +147,8 @@ class User extends CI_Controller {
 			$emailChanged = $this->user_model->update_userEmailByID ( $user_id, $new_email );
 			if ($emailChanged == 1) {
 				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse wurde erfolgreich geändert.' );
+				$this->session->set_userdata('user_email', $new_email);
+				
 			} else {
 				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse konnte nicht geändert werden. Versuchen Sie es später noch einmal.' );
 			}
@@ -276,6 +281,7 @@ class User extends CI_Controller {
 		}
 	}
 	function photographer_dashboard() {
+		lh_checkAccess(1);
 		$this->load->model ( 'product_model' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$abo = $this->user_model->getAbo ( $user_id );

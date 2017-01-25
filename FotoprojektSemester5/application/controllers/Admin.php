@@ -141,37 +141,62 @@ class Admin extends CI_Controller {
 		$data ['price_profiles'] = PriceProfile::getAllPriceProfiles ();
 		$this->load->template ( 'admin/priceprofile_creation_view', $data );
 	}
-	public function createNewsletterCSV() {
-		$newsletterEmails1 = $this->user_model->getNewsletterEmailsFromExistingUser ();
-		$newsletterEmails2 = $this->user_model->getNewsletterEmailsFromUnkownUser ();
-		$this->load->dbutil ();
-		$this->load->helper ( 'file' );
-		$this->load->helper ( 'download' );
-		
-		/* pass it to db utility function */
+
+	public function createNewsletterCsvUnregisterd(){
+		$newsletterEmails = $this->user_model->getNewsletterEmailsFromUnkownUser();
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+	
+		/*  pass it to db utility function  */
 		$delimiter = ",";
 		$newline = "\r\n";
-		$new_report1 = $this->dbutil->csv_from_result ( $newsletterEmails1, $delimiter, $newline, '' );
-		$new_report2 = $this->dbutil->csv_from_result ( $newsletterEmails2, $delimiter, $newline, '' );
+		$new_report = $this->dbutil->csv_from_result($newsletterEmails,$delimiter,$newline,'');
 		$dirname = "Newsletter_Abonennten/";
-		if (! is_dir ( $dirname )) {
-			mkdir ( './' . $dirname );
+		if (!is_dir($dirname)) {
+			mkdir('./'.$dirname);
 		}
-		/* Now use it to write file. write_file helper function will do it */
-		write_file ( $dirname . 'RegisteredEmails.csv', $new_report1 );
-		write_file ( $dirname . 'UnregisteredEmails.csv', $new_report2 );
-		
-		force_download ( 'RegisteredEmails.csv', $new_report1 );
-		force_download ( 'UnregisteredEmails.csv', $new_report2 );
-		redirect ( "admin/nele_users/" );
+		/*  Now use it to write file. write_file helper function will do it */
+		write_file($dirname.'UnregistrierteEmails.csv',$new_report);
+	
+	
+		force_download('UnregistrierteEmails.csv', $new_report);
+		redirect("admin/nele_users/");
+	
 	}
-	public function deleteUserFromNewsletterlist() {
+	
+	public function createNewsletterCsvRegisterd(){
+		$newsletterEmails = $this->user_model->getNewsletterEmailsFromExistingUser();
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+	
+		/*  pass it to db utility function  */
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report = $this->dbutil->csv_from_result($newsletterEmails,$delimiter,$newline,'');
+		$dirname = "Newsletter_Abonennten/";
+		if (!is_dir($dirname)) {
+			mkdir('./'.$dirname);
+		}
+		/*  Now use it to write file. write_file helper function will do it */
+		write_file($dirname.'RegistrierteEmails.csv',$new_report);
+	
+	
+		force_download('RegistrierteEmails.csv', $new_report);
+		redirect("admin/nele_users/");
+	
+	}
+	
+	public function deleteUserFromNewsletterlist(){
+		
 		$email = $this->input->post ( "userDelete_hidden_field" );
-		$this->user_model->update_unableNewsletterForUser ( $email );
+		$this->user_model->update_unableNewsletterForUser($email);
 		
-		$delete = $this->user_model->update_unableNewsletterForUnregisterdUser ( $email );
+		$delete= $this->user_model->update_unableNewsletterForUnregisterdUser($email);
 		
-		redirect ( "admin/nele_users/" );
+ 		redirect("admin/nele_users/");
+		
 	}
 }
 ?>
