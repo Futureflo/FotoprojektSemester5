@@ -30,14 +30,48 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/single_event_view', $data );
 	}
 	public function showEventApproval() {
+		lh_checkAccess();
 		$this->load->model ( 'event_model' );
+		$this->load->model ( 'product_model' );
 		$user_id = $this->session->userdata ( 'user_id' );
-		$events = $this->event_model->getEventsFromUser ( $user_id );
-		
-		foreach ( $events as $event ) {
-			$event->products_prv = Event::getProductsFromEvent ( $event, true );
+		$user_email = $this->session->userdata ( 'user_email' );
+		$allEvents = $this->event_model->getAllEvents ();
+
+		//filter for deleted events
+		$noDeletedEvents = array();
+		foreach ($allEvents as $event) {
+			if($event->even_status != 4)
+				array_push($noDeletedEvents, $event);
 		}
-		$data ['events'] = $events;
+
+		//add events where user is organiser
+		$userIsOrganiser = array();
+		foreach ($noDeletedEvents as $event) {
+			if(strcasecmp($event->even_host_email, $user_email) == 0)
+				array_push($userIsOrganiser, $event);
+		}
+
+		//add events where user is photograf and no organiser is defined
+		foreach ($noDeletedEvents as $event) {
+			if(strcasecmp($event->even_host_email, "") == 0 && $event->even_user_id == $user_id)
+				array_push($userIsOrganiser, $event);
+		}
+
+		foreach ( $userIsOrganiser as $event ) {
+			$event->all_products = $this->product_model->getAllActiveProductsForEvent ($event->even_id);
+			$event->amount_public = 0;
+			$event->amount_private = 0;
+			foreach ($event->all_products as $product) {
+				if($product->prod_status == 1)
+					$event->amount_public = $event->amount_public+1;
+				if($product->prod_status == 2)
+					$event->amount_private = $event->amount_private+1;
+				$product->FullFilePath = Product::buildFilePath ( $product, true );
+			}
+		}
+
+		$data ['events'] = $userIsOrganiser;
+		$data["debugmsg"] = json_encode($userIsOrganiser);
 		$this->load->template ( 'event/single_event_approval_view', $data );
 	}
 	public function deleteEvent() {

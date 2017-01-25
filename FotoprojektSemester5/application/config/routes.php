@@ -1,4 +1,4 @@
-<?php
+s<?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 /*
@@ -65,6 +65,10 @@ $route ['product/(:num)'] = 'ProductType/showSingleProductType/$1';
 
 // Product
 $route ['product/(:any)'] = 'Product/showSinglePicture/$1';
+$route ['product/deleteProductByID/(:num)'] = 'Product/deleteProductByID/$1';
+$route ['product/lockProductByID/(:num)'] = 'Product/lockProductByID/$1';
+$route ['product/unlockProductByID/(:num)'] = 'Product/unlockProductByID/$1';
+
 
 // Event
 $route ['event/uebersicht'] = 'Event/showEvents/';
