@@ -269,7 +269,7 @@ function createPic(prodfile, prodname, status, id){
         i.style.textAlign = "center";
         i.setAttribute("aria-hidden","true");
         i.setAttribute("id", "place"+count);
-        i.onclick = function(){proofEvent(this, id);};
+        //i.onclick = function(){proofEvent(this, id);};
         count++;
         
         div.appendChild(i);

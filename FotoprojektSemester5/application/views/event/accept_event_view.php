@@ -10,8 +10,8 @@
 </section>
 
 <div class="container">
-				<div class="row">
-					<div class="col-md-10 offset-md-1">
+	<div class="row">
+		<div class="col-md-10 offset-md-1">
 						
 <?php
 $attributes = array (
@@ -22,13 +22,25 @@ echo form_open ( "Event/checkCode", '', array (
 		'even_url' => $event->even_url 
 ) );
 ?>
-<input type="password" class="form-control input-sm chat-input"
-												placeholder="Passwort" name="password" />
-												<input type="submit" name="open"
-								value="Event öffnen" class="btn btn-success" />
+
+<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2">
+						<input type="password" class="form-control input-sm chat-input" placeholder="Passwort" name="password" />
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-2 offset-sm-5 col-md-4 offset-md-4">
+						<input type="submit" name="open" value="Event öffnen" class="btn btn-primary btn-block" />
+					</div>
+				</div>
+			</div>
+
+			
 <?php
 
 form_close ()?>
 					</div>
-					</div>
-					</div>
+	</div>
+</div>
