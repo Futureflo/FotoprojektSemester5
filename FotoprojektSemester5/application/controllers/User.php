@@ -5,13 +5,13 @@ class User extends CI_Controller {
 		parent::__construct ();
 		$this->load->library ( 'session' );
 		$this->load->model ( 'user_model' );
+		$this->load->model ( 'adress_model' );
 		$this->load->model ( 'Product_type_model' );
 		$this->load->helper ( array (
 				'hash_helper',
-				'login_helper'
+				'login_helper' 
 		) );
-		lh_checkAccess();
-		
+		lh_checkAccess ();
 	}
 	public function index() {
 		$this->load->template ( 'user/settings_view' );
@@ -53,6 +53,7 @@ class User extends CI_Controller {
 		$data ['user_email'] = $user [0]->user_email;
 		$data ['user_birthday'] = $user [0]->user_birthday;
 		
+		$data ['adre_id'] = $address [0]->adre_id;
 		$data ['adre_name'] = $address [0]->adre_name;
 		$data ['adre_street'] = $address [0]->adre_street;
 		$data ['adre_zip'] = $address [0]->adre_zip;
@@ -62,15 +63,17 @@ class User extends CI_Controller {
 		
 		$adressId = $address [0]->adre_id;
 		$this->load->template ( 'user/single_user_view', $data );
-		
+	}
+	public function changeUserDataAdress() {
 		// changeUserData
 		$title = $this->input->post ( 'gender' );
 		$name = $this->input->post ( 'lastname' );
 		$firstname = $this->input->post ( 'firstname' );
+		$adressId = $this->input->post ( 'adressID' );
 		$fullname = $firstname . " " . $name;
 		$zip = $this->input->post ( 'zip' );
 		$city = $this->input->post ( 'city' );
-		$street = $this->input->post ( 'street' );
+		$streetAndNr = $this->input->post ( 'street' );
 		$birthday = $this->input->post ( 'birthday' );
 		
 		$this->form_validation->set_rules ( 'firstname', 'Vorname', 'trim|required|min_length[3]|max_length[30]' );
@@ -79,8 +82,30 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules ( 'city', 'Stadt', 'trim|required' );
 		$this->form_validation->set_rules ( 'street', 'Straße', 'trim|required' );
 		$this->form_validation->set_rules ( 'birthday', 'Geburtsdatum', 'required' );
+		$this->form_validation->set_rules ( 'fullname', 'Adressname', 'required' );
+		
 		// submit
 		if ($this->form_validation->run () == FALSE) {
+			$user_id = $this->session->userdata ( 'user_id' );
+			$user = $this->user_model->get_user_by_id ( $user_id );
+			$address = $this->user_model->get_address_by_id ( $user_id );
+			
+			$data ['user_title'] = $user [0]->user_title;
+			$data ['user_name'] = $user [0]->user_name;
+			$data ['user_firstname'] = $user [0]->user_firstname;
+			$data ['user_email'] = $user [0]->user_email;
+			$data ['user_birthday'] = $user [0]->user_birthday;
+			
+			$data ['adre_id'] = $address [0]->adre_id;
+			$data ['adre_name'] = $address [0]->adre_name;
+			$data ['adre_street'] = $address [0]->adre_street;
+			$data ['adre_zip'] = $address [0]->adre_zip;
+			$data ['adre_city'] = $address [0]->adre_city;
+			
+			$data ['adre'] = $address;
+			
+			$adressId = $address [0]->adre_id;
+			$this->load->template ( 'user/single_user_view', $data );
 		} else {
 			$data = array (
 					'user_id' => $user_id = $this->session->userdata ( 'user_id' ),
@@ -102,6 +127,7 @@ class User extends CI_Controller {
 					'adre_name' => $fullname 
 			);
 			$addressIsSet = $this->adress_model->updateAdress ( $address );
+			$this->load->template ( 'user/single_user_view', $data );
 		}
 	}
 	public function newAddress() {
@@ -147,8 +173,7 @@ class User extends CI_Controller {
 			$emailChanged = $this->user_model->update_userEmailByID ( $user_id, $new_email );
 			if ($emailChanged == 1) {
 				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse wurde erfolgreich geändert.' );
-				$this->session->set_userdata('user_email', $new_email);
-				
+				$this->session->set_userdata ( 'user_email', $new_email );
 			} else {
 				$this->session->set_flashdata ( 'emailChange', 'Die E-Mail Adresse konnte nicht geändert werden. Versuchen Sie es später noch einmal.' );
 			}
@@ -164,6 +189,7 @@ class User extends CI_Controller {
 			$data ['user_email'] = $user [0]->user_email;
 			$data ['user_birthday'] = $user [0]->user_birthday;
 			
+			$data ['adre_id'] = $address [0]->adre_id;
 			$data ['adre_name'] = $address [0]->adre_name;
 			$data ['adre_street'] = $address [0]->adre_street;
 			$data ['adre_zip'] = $address [0]->adre_zip;
@@ -206,6 +232,7 @@ class User extends CI_Controller {
 			$data ['user_email'] = $user [0]->user_email;
 			$data ['user_birthday'] = $user [0]->user_birthday;
 			
+			$data ['adre_id'] = $address [0]->adre_id;
 			$data ['adre_name'] = $address [0]->adre_name;
 			$data ['adre_street'] = $address [0]->adre_street;
 			$data ['adre_zip'] = $address [0]->adre_zip;
@@ -281,7 +308,7 @@ class User extends CI_Controller {
 		}
 	}
 	function photographer_dashboard() {
-		lh_checkAccess(1);
+		lh_checkAccess ( 1 );
 		$this->load->model ( 'product_model' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$abo = $this->user_model->getAbo ( $user_id );
