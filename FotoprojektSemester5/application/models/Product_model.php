@@ -103,5 +103,14 @@ class Product_model extends CI_Model {
 	function insert_product_variant($data) {
 		return $this->db->insert ( 'product_variant', $data );
 	}
+
+	
+	Public function getAllActiveProductsForEvent($even_id) {
+		$this->db->where ( 'prod_even_id', $even_id );
+		$this->db->where ( 'prod_status!=', "3" );
+		$query = $this->db->get ( "product" );
+		return $query->result ();
+	}
+	
 }
 ?>

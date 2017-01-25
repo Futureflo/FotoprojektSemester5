@@ -19,7 +19,7 @@
 					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
 					<a class="dropdown-item" href="<?php
 					echo base_url ();
-					?>event/uebersicht/">Meine Events</a>
+					?>event/approval/">Eventbilder bearbeiten</a>
 						</div>
 						</li>
 					<li class="nav-item dropdown aria-labelledby="exCollapsingNavbar""><a class="nav-link dropdown" href="http://example.com"

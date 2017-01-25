@@ -321,6 +321,30 @@ class Product extends CI_Controller {
 			// buildFilePath
 		}
 	}
+
+
+	function deleteProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '3');
+		return $this->product_model->update_product($id, $data);
+	}
+	function lockProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '1');
+		return $this->product_model->update_product($id, $data);
+	}
+	function unlockProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '2');
+		return $this->product_model->update_product($id, $data);
+	}
+	
 }
 abstract class ProductStatus {
 	const undefined = 0;
