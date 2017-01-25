@@ -107,7 +107,7 @@ class User extends CI_Controller {
 			$adressId = $address [0]->adre_id;
 			$this->load->template ( 'user/single_user_view', $data );
 		} else {
-			$data = array (
+			$udata = array (
 					'user_id' => $user_id = $this->session->userdata ( 'user_id' ),
 					'user_firstname' => $title,
 					'user_firstname' => $firstname,
@@ -115,7 +115,7 @@ class User extends CI_Controller {
 					'user_birthday' => $birthday 
 			);
 			// insert User in db
-			$UserIsSet = $this->user_model->update_user ( $data );
+			$UserIsSet = $this->user_model->update_user ( $udata );
 			
 			// insert address
 			$address = array (
@@ -126,7 +126,7 @@ class User extends CI_Controller {
 					'adre_street' => $streetAndNr,
 					'adre_name' => $fullname 
 			);
-			$addressIsSet = $this->adress_model->updateAdress ( $address );
+			$addressIsSet = $this->adress_model->update_adress ( $address );
 			$this->load->template ( 'user/single_user_view', $data );
 		}
 	}
