@@ -11,6 +11,10 @@
 					echo "<div id='fehler_span' class='alert alert-success'>";
 					echo $this->session->flashdata ( 'pwChange' );
 					echo "</div>";
+				} elseif ($this->session->flashdata ( 'contactChange' ) != "") {
+					echo "<div id='fehler_span' class='alert alert-success'>";
+					echo $this->session->flashdata ( 'contactChange' );
+					echo "</div>";
 				}
 				?>
 	</div>
@@ -25,7 +29,7 @@
 			?>
 		<div class="row">
 		<div class="col-md-6 col-sm-12">
-			<h2 style="text-decoration: underline;">Persönliche Daten</h2>
+			<h2>Persönliche Daten</h2>
 
 			<div class="form-group col-xs-12">
 				<label for="gender">Anrede</label> <select class="form-control" id="gender" name="gender">
@@ -77,7 +81,7 @@
 		</div>
 
 		<div class="col-md-6 col-sm-12">
-			<h2 style="text-decoration: underline;">Adresse</h2>
+			<h2>Adresse</h2>
 			<div class="form-group col-xs-12">
 				<label for="address-chooser">Adressauswahl</label> <select onclick="changeAddresses(this)" class="selectpicker form-control"
 					data-style="btn-primary">
@@ -151,14 +155,14 @@
 	<br>
 	<div class="row">
 		<div class="form-group col-xs-6">
-			<button type="submit" id="save-user-btn" class="btn btn-success btn-md">Speichern</button>
+			<button type="submit" id="save-user-btn" class="btn btn-success btn-md">Änderung speichern</button>
 		</div>
 		<div class="form-group col-xs-6">
 			<a class="active" href="<?php
 			
 			echo base_url ();
 			?>user/call_change_address_view">
-				<button type="button" id="sa-user-btn" class="btn btn-primary btn-md">Neue Adresse</button>
+				<button type="button" id="sa-user-btn" class="btn btn-primary btn-md">Neue Adresse hinzufügen</button>
 			</a>
 		</div>
 	</div>
