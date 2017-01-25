@@ -5,17 +5,17 @@
 <div class="contrainer">
 
 	<div class="row">
-	
-		<h1 class="offset-md-1 col-md-4" >Meine Events</h1>
-<br>
+	<div class=" offset-md-1 col-md-7">
+		<p class="h1">Meine Events</p>
+	</div>
 
-		<div class="offset-md-6 col-md-2">
+		<div class="col-md-3">
 			<input type="text" id="searchTerm" class="form-control"
 			 onkeyup="search()" placeholder="Suche ..."/>
 		</div>
+</div>
 
-
-	</div>
+	
 	
 	
 	<div class="row">
@@ -191,7 +191,7 @@ function deleteEventID(eventID) {
 		  type: "POST",
 		  url: "<?php
 				
-echo site_url ();
+				echo site_url ();
 				?>event/deleteEventById/"+eventID,
 		  dataType: 'html',
 		});
@@ -203,7 +203,7 @@ function lockEvent(eventID) {
 	    		  type: "POST",
 	    		  url: "<?php
 									
-echo site_url ();
+									echo site_url ();
 									?>event/lockEventById/"+eventID,
 	    		  dataType: 'html',
 	    		});
@@ -216,7 +216,7 @@ function unlockEvent(eventID) {
 		  type: "POST",
 		  url: "<?php
 				
-echo site_url ();
+				echo site_url ();
 				?>event/unlockEventById/"+eventID,
 		  dataType: 'html',
 		});
@@ -229,7 +229,7 @@ function setPublicById(eventID) {
 		  type: "POST",
 		  url: "<?php
 				
-echo site_url ();
+				echo site_url ();
 				?>event/changeStateToPublicById/"+eventID,
 		  dataType: 'html',
 		});
@@ -242,7 +242,7 @@ function setPrivateById(eventID) {
 		  type: "POST",
 		  url: "<?php
 				
-echo site_url ();
+				echo site_url ();
 				?>event/changeStateToPrivateById/"+eventID,
 		  dataType: 'html',
 		});
