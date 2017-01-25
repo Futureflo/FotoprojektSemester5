@@ -10,7 +10,7 @@
 				<h1>Email-Adresse ändern</h1>
 				<br>
 
-					<label for="mail"><h4>Aktuelle Email-Adresse:</h4></label> <input type="text" class="form-control" id="mail" value="<?php
+					<label for="mail"><h4>Aktuelle Email-Adresse:</h4></label> <input type="text" class="form-control" name= "mail" id="mail" value="<?php
 					
 					echo $user_email;
 					?>" readonly>
