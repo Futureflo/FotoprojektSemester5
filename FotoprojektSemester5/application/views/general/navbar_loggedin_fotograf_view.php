@@ -22,7 +22,7 @@
 					
 					<a class="dropdown-item" href="<?php
 					echo base_url ();
-					?>user/dashboard/">Mein Dashboard</a>
+					?>user/overviewPhotographer/">Mein Dashboard</a>
 					
 					<a class="dropdown-item" href="<?php
 					echo base_url ();
@@ -43,7 +43,10 @@
 						echo base_url ();
 						?>event/">Neues Event</a> <a class="dropdown-item" href="<?php
 						echo base_url ();
-						?>printers/showPrinters">&Uuml;bersicht Druckerei</a>
+						?>printers/showPrinters/">&Uuml;bersicht Druckerei</a>
+						<a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>user/dashboard/">Umsatzanzeige</a>
 					</div>
 				</li>
 				
