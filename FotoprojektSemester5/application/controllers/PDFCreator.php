@@ -78,8 +78,31 @@ EOD;
 		$obj_pdf->writeHTML($content, true, false, true, false, '');
 		$obj_pdf->Output('output.pdf', 'I');
 	}
+	public function exampleCallBillFunction() {
+		$bild1 = array("Name Bild 1", 10.00);
+		$bild2 = array("Name Bild 2", 84.03);
+		$bild3 = array("Name Bild 3", 100.99);
+		$bild4 = array("Name Bild 4", 123.01);
+		
+		$positions = array($bild1, $bild2, $bild3, $bild4);
+		$this->bill($positions);
+	}
 	
-	
+	public function bill($positions) {
+		$this->load->library('tcPDF');
+		
+		// send data from controller to view
+
+// 		$data['txt'] = <<<EOD
+// 						Snap-Gallery Rechnung
+
+// EOD;
+
+		$data['positions'] = $positions;
+		// 		echo "<br>DEBUG: lade view /DEBUG<br>"; // DEBUG
+		// show it
+		$this->load->view('pdf/bill_view', $data);
+	}
 	
 }
 ?>
