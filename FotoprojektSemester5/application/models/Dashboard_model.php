@@ -6,6 +6,7 @@ class Dashboard_model extends CI_Model {
 
 	public function getInformations() {
 		$this->db->join ( 'user', 'orde_user_id = user_id' );
+		$this->db->group_by("orde_id");
 		$query = $this->db->get ( "order" );
 		return $query->result ();
 	}
@@ -16,6 +17,7 @@ class Dashboard_model extends CI_Model {
 		$this->db->join ( 'product', 'orpo_prod_id = prod_id');
 		$this->db->join ( 'event', 'prod_even_id = even_id');
 		$this->db->join ( 'user', 'even_user_id = user_id');
+		$this->db->group_by("orde_id");
 		$query = $this->db->get ( "order" );
 		return $query->result ();
 	}
