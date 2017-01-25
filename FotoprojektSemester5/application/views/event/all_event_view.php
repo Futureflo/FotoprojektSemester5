@@ -44,6 +44,8 @@
 						<tbody>
 							<?php
 							foreach ( $events as $event ) {
+								if($event->even_status == 4)
+									continue;
 								echo "<tr class='searchable'>";
 								echo "<td>" . $event->even_id . "</td>";
 								echo "<td>" . $event->even_name . "</td>";
@@ -166,11 +168,11 @@ echo ($event->even_id	);
 				 				}
 				 				function btnPrivate($event)
 				 				{
-				 					return '<button title="Privat setzen" onclick="setPrivateById(' . $event->even_id .')" class="btn btn-primary fa fa-minus-circle fa-lg" style="margin-right:1rem"></button>';
+				 					return ;//'<button title="Privat setzen" onclick="setPrivateById(' . $event->even_id .')" class="btn btn-primary fa fa-minus-circle fa-lg" style="margin-right:1rem"></button>';
 				 				}
 				 				function btnPublic($event)
 				 				{
-				 					return '<button title="Öffentlich setzen" onclick="setPublicById(' . $event->even_id .')" class="btn btn-info fa fa-share fa-lg" style="margin-right:1rem"></button>';
+				 					return ;//'<button title="Öffentlich setzen" onclick="setPublicById(' . $event->even_id .')" class="btn btn-info fa fa-share fa-lg" style="margin-right:1rem"></button>';
 				 				}
 				 				function btnReycle($event)
 				 				{

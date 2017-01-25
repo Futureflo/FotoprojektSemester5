@@ -14,7 +14,7 @@
 <div class="container">
 		<div class="row">
 		<div class="col-md-9">
-		<p class="h1" id="test" onclick="setPager()">
+		<p class="h1" id="test" onload="setPager()">
 		<?php
 		
 		echo $UsersViewHeader?>
