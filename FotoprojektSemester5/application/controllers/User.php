@@ -33,7 +33,12 @@ class User extends CI_Controller {
 		$this->load->template ( 'user/email_change_view', $data );
 	}
 	public function call_change_address_view() {
-		$this->load->template ( 'user/address_change_view' );
+		$data ['firstname'] = "";
+		$data ['name'] = "";
+		$data ['zip'] = "";
+		$data ['city'] = "";
+		$data ['street'] = "";
+		$this->load->template ( 'user/address_change_view', $data );
 	}
 	public function call_change_passwordSettings_view() {
 		$user_id = $this->session->userdata ( 'user_id' );
@@ -152,25 +157,57 @@ class User extends CI_Controller {
 	public function newAddress() {
 		$user_id = $this->session->userdata ( 'user_id' );
 		$new_street = $this->input->post ( 'street' );
-		$new_plz = $this->input->post ( 'plz' );
+		$new_plz = $this->input->post ( 'zip' );
 		$new_city = $this->input->post ( 'city' );
 		$name = $this->input->post ( 'name' );
 		$firstname = $this->input->post ( 'firstname' );
 		$fullname = $firstname . " " . $name;
 		
-		$address = array (
-				'adre_user_id' => $user_id,
-				'adre_zip' => $new_plz,
-				'adre_city' => $new_city,
-				'adre_street' => $new_street,
-				'adre_name' => $fullname,
-				'adre_coun_id' => '80',
-				'adre_status' => '1' 
-		);
+		$this->form_validation->set_rules ( 'firstname', 'Vorname', 'required' );
+		$this->form_validation->set_rules ( 'name', 'Nachname', 'required' );
+		$this->form_validation->set_rules ( 'street', 'Straße', 'trim|required' );
+		$this->form_validation->set_rules ( 'zip', 'PLZ', 'trim|required' );
+		$this->form_validation->set_rules ( 'city', 'Stadt', 'trim|required' );
 		
-		$this->user_model->insert_address ( $address );
-		
-		redirect ( '/user/1' );
+		if ($this->form_validation->run () == FALSE) {
+			// validation fail
+			$this->load->template ( 'user/address_change_view' );
+		} else {
+			
+			$address = array (
+					'adre_user_id' => $user_id,
+					'adre_zip' => $new_plz,
+					'adre_city' => $new_city,
+					'adre_street' => $new_street,
+					'adre_name' => $fullname,
+					'adre_coun_id' => '80',
+					'adre_status' => '1' 
+			);
+			
+			$this->user_model->insert_address ( $address );
+			
+			$user_id = $this->session->userdata ( 'user_id' );
+			$user = $this->user_model->get_user_by_id ( $user_id );
+			$address = $this->user_model->get_address_by_id ( $user_id );
+			
+			$data ['user_title'] = $user [0]->user_title;
+			$data ['user_name'] = $user [0]->user_name;
+			$data ['user_firstname'] = $user [0]->user_firstname;
+			$data ['user_email'] = $user [0]->user_email;
+			$data ['user_birthday'] = $user [0]->user_birthday;
+			
+			$data ['adre_id'] = $address [0]->adre_id;
+			$data ['adre_name'] = $address [0]->adre_name;
+			$data ['adre_street'] = $address [0]->adre_street;
+			$data ['adre_zip'] = $address [0]->adre_zip;
+			$data ['adre_city'] = $address [0]->adre_city;
+			
+			$adressId = $address [0]->adre_id;
+			
+			$data ['adre'] = $address;
+			$this->session->set_flashdata ( 'contactChange', 'Eine neue Adresse wurde hinzugefügt' );
+			$this->load->template ( 'user/single_user_view', $data );
+		}
 	}
 	public function changeEmail() {
 		$user_id = $this->session->userdata ( 'user_id' );
@@ -214,6 +251,7 @@ class User extends CI_Controller {
 			$data ['adre_zip'] = $address [0]->adre_zip;
 			$data ['adre_city'] = $address [0]->adre_city;
 			
+			$data ['adre'] = $address;
 			$adressId = $address [0]->adre_id;
 			$this->load->template ( 'user/single_user_view', $data );
 		}
@@ -257,6 +295,7 @@ class User extends CI_Controller {
 			$data ['adre_zip'] = $address [0]->adre_zip;
 			$data ['adre_city'] = $address [0]->adre_city;
 			
+			$data ['adre'] = $address;
 			$adressId = $address [0]->adre_id;
 			$this->load->template ( 'user/single_user_view', $data );
 		}

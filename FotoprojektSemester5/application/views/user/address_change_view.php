@@ -7,26 +7,80 @@
 			echo form_open ( 'user/newAddress' );
 			?>
 
-				<h1>Adresse ändern</h1>
+				<h1>Adresse hinzufügen</h1>
 					<br>
 					<div class="form-group col-sm-12">
-						<label for="vorname">Vorname</label> <input type="text" class="form-control" id="del_vorname" name="firstname" value="">
+						<input type="text" class="form-control" placeholder="Vorname" id="del_vorname" name="firstname" value="<?php
+						
+						echo $firstname;
+						?>">
+						
+											<?php
+											if (validation_errors ( 'firstname' ) != null) {
+												if (form_error ( 'firstname' ) != "") {
+													echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'firstname' ) . "</div>";
+												}
+											}
+											?>
 					</div>
 					<div class="form-group col-sm-12">
-						<label for="nachname">Nachname</label> <input type="text" class="form-control" id="del_nachname" name="name" value="">
+						 <input type="text" class="form-control" placeholder="Nachname" id="del_nachname" name="name" value="<?php
+							
+							echo $name;
+							
+							?>">
+											<?php
+											if (validation_errors ( 'name' ) != null) {
+												if (form_error ( 'name' ) != "") {
+													echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'name' ) . "</div>";
+												}
+											}
+											?>
 					</div>
 					<div class="form-group col-sm-12">
-						<label for="street">Straße und Hausnummer</label> <input type="text" class="form-control" id="del_street" name="street" value="">
+						<input type="text" class="form-control" placeholder="Straße" id="del_street" name="street" value="<?php
+						
+						echo $street;
+						?>">
+											<?php
+											if (validation_errors ( 'street' ) != null) {
+												if (form_error ( 'street' ) != "") {
+													echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'street' ) . "</div>";
+												}
+											}
+											?>
 					</div>
 					<div class="form-group col-sm-12">
-						<label for="plz">PLZ</label> <input class="form-control" type="text" id="del_plz" name="plz" value="">
+						<input class="form-control" type="text" placeholder="PLZ" id="del_plz" name="zip" value="<?php
+						
+						echo $zip;
+						
+						?>">
+											<?php
+											if (validation_errors ( 'zip' ) != null) {
+												if (form_error ( 'zip' ) != "") {
+													echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'zip' ) . "</div>";
+												}
+											}
+											?>
 					</div>
 					<div class="form-group col-sm-12">
-						<label for="city">Stadt</label> <input type="text" class="form-control" id="del_city" name="city" value="">
+						<input type="text" class="form-control" placeholder="Stadt" id="del_city" name="city" value="<?php
+						
+						echo $city;
+						
+						?>">
+											<?php
+											if (validation_errors ( 'city' ) != null) {
+												if (form_error ( 'city' ) != "") {
+													echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'city' ) . "</div>";
+												}
+											}
+											?>
 					</div>
 
 					<br>
-					<button name="submit" type="submit" id="save-address-btn" class="btn btn-success btn-md">Adresse ändern</button>
+					<button name="submit" type="submit" id="save-address-btn" class="btn btn-success btn-md">Adresse hinzufügen</button>
 
 					</form>
 				</div>
