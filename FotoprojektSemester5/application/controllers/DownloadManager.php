@@ -111,7 +111,7 @@ class DownloadManager extends CI_Controller {
 			
 			// echo "<br>DEBUG: aufruf Download Funktion /DEBUG<br>"; // DEBUG
 			// download the created zip File
-			// $this->downloadFile ( $downloadableZipFile );
+			$this->downloadFile ( $downloadableZipFile );
 		} // else $this->session->set_flashdata ( 'msg', 'Datensatz existiert nicht.' );
 			  // echo "<br>DEBUG: step out startDownload() /DEBUG<br>"; // DEBUG
 	}
