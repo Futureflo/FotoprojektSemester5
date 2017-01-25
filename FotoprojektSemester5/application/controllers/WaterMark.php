@@ -47,17 +47,17 @@ class Watermarkdemo extends \CI_Controller {
 		$CI->load->library ( 'image_lib' );
 		
 		$config ['source_image'] = $filepath;
-                $config['wm_overlay_path'] = './Images/logo.png';
-                $config['wm_type'] = 'overlay';
-                $config['width'] = '50';
-                $config['height'] = '50';
-                $config['padding'] = '50';
-                $config['wm_opacity'] = '100';
-                $config['wm_vrt_alignment'] = 'bottom';
-                $config['wm_hor_alignment'] = 'right';
-                $config['wm_vrt_offset'] = '100';
-		//$config ['wm_text'] = 'Copyright 2016 - FPS5';
-		//$config ['wm_type'] = 'text';
+		$config ['wm_overlay_path'] = './Images/logo.png';
+		$config ['wm_type'] = 'overlay';
+		$config ['width'] = '50';
+		$config ['height'] = '50';
+		$config ['padding'] = '50';
+		$config ['wm_opacity'] = '100';
+		$config ['wm_vrt_alignment'] = 'bottom';
+		$config ['wm_hor_alignment'] = 'right';
+		$config ['wm_vrt_offset'] = '100';
+		// $config ['wm_text'] = 'Copyright 2016 - FPS5';
+		// $config ['wm_type'] = 'text';
 		
 		$CI->image_lib->initialize ( $config );
 		$CI->image_lib->watermark ();
@@ -67,7 +67,6 @@ class Watermarkdemo extends \CI_Controller {
 		$CI = & get_instance ();
 		$CI->load->library ( 'image_lib' );
 		
-		echo "<br>" . $filepath;
 		$config ['source_image'] = $filepath;
 		$config ['maintain_ratio'] = TRUE;
 		$config ['width'] = 304;
