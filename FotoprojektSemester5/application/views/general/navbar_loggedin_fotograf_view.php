@@ -55,10 +55,10 @@
 					<div class="dropdown-menu dropdown-menu-admin" aria-labelledby="supportedContentDropdown">
 						 <a class="dropdown-item" href="<?php
 							echo base_url ();
-							?>admin/archivedProduct_types/">Formate</a> 
+							?>ProductType/archivedProductTypes/">Formate</a> 
 						 <a class="dropdown-item" href="<?php
 							echo base_url ();
-							?>admin/archivedPrice_profiles/">Preisprofile</a> 
+							?>PriceProfile/archivedPriceProfiles/">Preisprofile</a> 
 					</div>
 				</li>
 
