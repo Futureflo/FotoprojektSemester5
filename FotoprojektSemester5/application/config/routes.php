@@ -59,7 +59,7 @@ $route ['confirm/(:any)'] = 'User/confirmAccount';
 $route ['user/(:num)'] = 'User/showSingleUser/$1';
 
 // ProductType
-$route ['product/repair'] = 'Product/repairWatermark/$1';
+$route ['product/repair/(:any)'] = 'Product/repairWatermark/$1';
 $route ['product/(:any)'] = 'ProductType/product_types';
 $route ['product/(:num)'] = 'ProductType/showSingleProductType/$1';
 
