@@ -70,7 +70,7 @@ class User extends CI_Controller {
 		$name = $this->input->post ( 'lastname' );
 		$firstname = $this->input->post ( 'firstname' );
 		$adressId = $this->input->post ( 'adressID' );
-		$fullname = $firstname . " " . $name;
+		$fullname = $this->input->post ( 'fullname' );
 		$zip = $this->input->post ( 'zip' );
 		$city = $this->input->post ( 'city' );
 		$streetAndNr = $this->input->post ( 'street' );
@@ -107,7 +107,7 @@ class User extends CI_Controller {
 			$adressId = $address [0]->adre_id;
 			$this->load->template ( 'user/single_user_view', $data );
 		} else {
-			$udata = array (
+			$data = array (
 					'user_id' => $user_id = $this->session->userdata ( 'user_id' ),
 					'user_firstname' => $title,
 					'user_firstname' => $firstname,
@@ -115,7 +115,7 @@ class User extends CI_Controller {
 					'user_birthday' => $birthday 
 			);
 			// insert User in db
-			$UserIsSet = $this->user_model->update_user ( $udata );
+			$UserIsSet = $this->user_model->update_user ( $data );
 			
 			// insert address
 			$address = array (
@@ -126,7 +126,26 @@ class User extends CI_Controller {
 					'adre_street' => $streetAndNr,
 					'adre_name' => $fullname 
 			);
+			
 			$addressIsSet = $this->adress_model->update_adress ( $address );
+			
+			$user = $this->user_model->get_user_by_id ( $user_id );
+			$address = $this->user_model->get_address_by_id ( $user_id );
+			
+			$data ['user_title'] = $user [0]->user_title;
+			$data ['user_name'] = $user [0]->user_name;
+			$data ['user_firstname'] = $user [0]->user_firstname;
+			$data ['user_email'] = $user [0]->user_email;
+			$data ['user_birthday'] = $user [0]->user_birthday;
+			
+			$data ['adre_id'] = $address [0]->adre_id;
+			$data ['adre_name'] = $address [0]->adre_name;
+			$data ['adre_street'] = $address [0]->adre_street;
+			$data ['adre_zip'] = $address [0]->adre_zip;
+			$data ['adre_city'] = $address [0]->adre_city;
+			
+			$data ['adre'] = $address;
+			$this->session->set_flashdata ( 'contactChange', 'Die Kontaktdaten wurde geändert.' );
 			$this->load->template ( 'user/single_user_view', $data );
 		}
 	}
