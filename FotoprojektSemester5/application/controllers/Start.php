@@ -11,11 +11,7 @@ class Start extends CI_Controller {
 		$this->load->template ( 'start_view', $data );
 	}
 	public function search() {
-		$search = $this->uri->segment ( 3 );
-		
-		if (strpos ( $search, '%20' ) !== false) {
-			$search = str_replace ( '%20', ' ', $search );
-		}
+		$search = $this->input->post ( 'search' );
 		
 		$data ['events'] = Event::searchEvents ( $search );
 		echo json_encode ( $data );

@@ -189,9 +189,9 @@ function searchEvent(ev){
     		  type: "POST",
     		  url: "<?php
 								
-								echo site_url ();
-								?>/Start/search/"+ev,
-    		  dataType: 'html',
+								echo base_url ();
+								?>/Start/search",
+    		  data: {search: ev},
     		  success:function(data){
     			  try{  
     				  //console.log(data);
