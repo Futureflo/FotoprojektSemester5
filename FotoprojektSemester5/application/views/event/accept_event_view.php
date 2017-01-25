@@ -22,7 +22,7 @@ echo form_open ( "Event/checkCode", '', array (
 		'even_url' => $event->even_url 
 ) );
 ?>
-<input type="text" class="form-control input-sm chat-input"
+<input type="password" class="form-control input-sm chat-input"
 												placeholder="Passwort" name="password" />
 												<input type="submit" name="open"
 								value="Event öffnen" class="btn btn-success" />
