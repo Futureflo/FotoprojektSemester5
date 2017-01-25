@@ -23,7 +23,7 @@ class User extends CI_Controller {
 		$this->load->model ( 'Dashboard_model' );
 		$user_id = $this->session->userdata ( 'user_id' );
 		$data ['orders'] = $this->Dashboard_model->getInformationsByUserID ( $user_id );
-		$data ['DashboardViewHeader'] = "Dashboard";
+		$data ['DashboardViewHeader'] = "Umsatzanzeige";
 		$this->load->template ( 'admin/dashboard', $data );
 	}
 	public function call_change_email_view() {
