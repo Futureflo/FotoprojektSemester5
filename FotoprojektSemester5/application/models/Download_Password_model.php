@@ -11,23 +11,24 @@ class Download_Password_model extends CI_Model {
 		return $query->result ();
 	}
 	
-	Public function getDownloadPasswordStatusByPassword($downloadPassword) {
-		$query = $this->db->get ( 'download_password' );
-		$this->db->where ( 'dopa_password',  $downloadPassword);
-		// TODO: select only Status
-		return $query->result ();
-	}
+// 	Public function getDownloadPasswordStatusByPassword($downloadPassword) {
+// 		$query = $this->db->get ( 'download_password' );
+// 		$this->db->where ( 'dopa_password',  $downloadPassword);
+// 		// TODO: select only Status
+// 		return $query->result ();
+// 	}
 	
-	Public function getDownloadPasswordOrderIDByPassword($downloadPassword) {
-		$query = $this->db->get ( 'download_password' );
-		$this->db->where ( 'dopa_password',  $downloadPassword);
-		// TODO: select only orderID
-		return $query->result ();
-	}
+// 	Public function getDownloadPasswordOrderIDByPassword($downloadPassword) {
+// 		$this->db->where ( 'dopa_password',  $downloadPassword);
+// 		$query = $this->db->get ( 'download_password' );
+
+// 		// TODO: select only orderID
+// 		return $query->result ();
+// 	}
 	
 	Public function getDownloadPasswordEntryByPassword($downloadPassword) {
-		$query = $this->db->get ( 'download_password' );
 		$this->db->where ( 'dopa_password',  $downloadPassword);
+		$query = $this->db->get ( 'download_password' );
 		return $query->result ();
 	}
 	
