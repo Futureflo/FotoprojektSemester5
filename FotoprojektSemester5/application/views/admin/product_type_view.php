@@ -32,6 +32,7 @@
 		<!-- 					<th>Breite</th> -->
 		<!-- 					<th>Höhe</th> -->
 						<th>Fotograf</th>
+						<th>Aktion</th>
 					</tr>
 				</thead>
 				<tbody>
