@@ -62,12 +62,26 @@
 								
 								echo set_value ( 'even_password' );
 								?>"/>  -->
-
+<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<select class="form-control" name="even_status" id="even_status" onchange="showhidePasswordfield()">
+												<option value="3">&Ouml;ffentlich</option>
+												<option value="2">Privat</option>
+											</select> <span class="text-danger">
+												<?php
+												
+												echo form_error ( 'even_status' );
+												?>
+												</span>
+										</div>
+									</div>
+								</div>
 									<div class="row">
 									<div class="col-sm-12">
 										<div class="form-group">
 											<input type="text" class="form-control input-sm chat-input"
-												placeholder="Passwort (nur bei privaten Events)" name="even_password" /> <span class="text-danger"><?php
+												placeholder="Passwort (nur bei privaten Events)" name="even_password" id="even_password" /> <span class="text-danger"><?php
 												
 												echo form_error ( 'even_password' );
 												?></span></span>
@@ -98,21 +112,7 @@
 
 								
 
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="form-group">
-											<select class="form-control" name="even_status">
-												<option value="">&Ouml;ffentlich</option>
-												<option value="">Privat</option>
-											</select> <span class="text-danger">
-												<?php
-												
-												echo form_error ( 'even_status' );
-												?>
-												</span>
-										</div>
-									</div>
-								</div>
+								
 
 
 
@@ -209,6 +209,16 @@
 
 	<script type="text/javascript">
 
+	
+	function showhidePasswordfield(){
+		if($("#even_status").val() == 2){
+			$("#even_password").show();
+		}
+		else{
+			$("#even_password").hide();
+		}
+	};
+
 	function getProductVariants() {
 		var prpr_element = document.getElementById('even_prpr_id');
 		var even_prpr_id = prpr_element.options[prpr_element.selectedIndex].value;
@@ -262,6 +272,7 @@
 
 	$( document ).ready(function() {
 		getProductVariants();
+		showhidePasswordfield();
 	});
 	</script>
 

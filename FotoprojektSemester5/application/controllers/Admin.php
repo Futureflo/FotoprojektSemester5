@@ -19,8 +19,11 @@ class Admin extends CI_Controller {
 	public function dashboard() {
 		$this->load->model ( 'Dashboard_model' );
 		$data ['orders'] = $this->Dashboard_model->getInformations ();
-		$data ['DashboardViewHeader'] = "Dashboard";
+		$data ['DashboardViewHeader'] = "Umsatzanzeige";
 		$this->load->template ( 'admin/dashboard', $data );
+	}
+	public function overviewAdmin() {
+		$this->load->template ( 'admin/overviewAdmin' );
 	}
 	public function users() {
 		$data ['users'] = $this->user_model->getAllUsers ();
@@ -28,8 +31,8 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/users_view', $data );
 	}
 	public function nele_users() {
-		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ()->result();
-		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ()->result();
+		$data ['neleRegisteredUser'] = $this->user_model->getNewsletterEmailsFromExistingUser ()->result ();
+		$data ['neleUnknownUser'] = $this->user_model->getNewsletterEmailsFromUnkownUser ()->result ();
 		$this->load->template ( 'newsletter/nele_admin_view', $data );
 	}
 	
@@ -78,7 +81,7 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function product_types() {
-		redirect ( 'ProductType/product_types' );
+		redirect ( 'ProductType/ProductTypes' );
 	}
 	public function price_profiles() {
 		redirect ( 'PriceProfile/price_profiles' );
@@ -100,14 +103,10 @@ class Admin extends CI_Controller {
 		$this->load->template ( 'admin/printers_view', $data );
 	}
 	public function archivedProduct_types() {
-		$this->load->model ( 'product_type_model' );
-		$this->load->model ( 'User_model' );
-		$data ['ProductViewHeader'] = "Archivierte Formate";
-		$data ['product_types'] = $this->product_type_model->getAllArichvedProductType ();
-		$this->load->template ( 'admin/product_type_view', $data );
+		redirect ( 'ProductType/archivedProductTypes' );
 	}
 	public function archivedPrice_profiles() {
-		$this->load->model ( 'price_type_model' );
+		redirect ( 'PriceProfile/archivedPriceProfiles' );
 	}
 	
 	// Funktionen für die View/Controller (DKM -> Wieso hier und nicht in de spez. Models/Controller?)
@@ -164,8 +163,8 @@ class Admin extends CI_Controller {
 		force_download('UnregistrierteEmails.csv', $new_report);
 		redirect("admin/nele_users/");
 	
-	
 	}
+	
 	public function createNewsletterCsvRegisterd(){
 		$newsletterEmails = $this->user_model->getNewsletterEmailsFromExistingUser();
 		$this->load->dbutil();
@@ -187,8 +186,8 @@ class Admin extends CI_Controller {
 		force_download('RegistrierteEmails.csv', $new_report);
 		redirect("admin/nele_users/");
 	
-	
 	}
+	
 	public function deleteUserFromNewsletterlist(){
 		
 		$email = $this->input->post ( "userDelete_hidden_field" );
@@ -199,6 +198,5 @@ class Admin extends CI_Controller {
  		redirect("admin/nele_users/");
 		
 	}
-	
 }
 ?>

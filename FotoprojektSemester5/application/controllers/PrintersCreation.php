@@ -3,6 +3,7 @@ defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 class PrintersCreation extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
+		lh_checkAccess ( 1 );
 		$this->load->helper ( array (
 				'form',
 				'hash_helper',

@@ -277,6 +277,18 @@ class Product extends CI_Controller {
 			$this->product_model->insert_product_variant ( $data );
 		}
 	}
+	function approveProducts() {
+		$CI = & get_instance ();
+		$CI->load->model ( 'product_model' );
+		$products = $this->input->post ( 'products' );
+		
+		foreach ( $products as $product ) {
+			$data = array (
+					'prod_status' => $product->prod_status 
+			);
+			$CI->product_model->update_product ( $product->prod_id, $data );
+		}
+	}
 }
 abstract class ProductStatus {
 	const undefined = 0;

@@ -17,7 +17,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?php
 					echo base_url ();
-					?>admin/dashboard/">Dashboard 
+					?>admin/overviewAdmin/">Dashboard 
 					</a>
 				</li>
 				
@@ -50,6 +50,10 @@
 						<a class="dropdown-item" href="<?php
 						echo base_url ();
 						?>admin/nele_users/">Benutzer Newsletter</a> 
+						
+						<a class="dropdown-item" href="<?php
+						echo base_url ();
+						?>admin/dashboard/">Umsatzanzeige</a>
 						</div>
 				</li>
 				
