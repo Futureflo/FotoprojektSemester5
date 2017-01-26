@@ -17,6 +17,13 @@
 				<i class="fa fa-calendar fa-5x" aria-hidden="true"></i> <br><h3>Meine Events</h3> 
 			</a>
 			
+			<a class="btn btn-success kachel" style="width:18.75rem"
+			href="<?php
+			echo base_url ();
+			?>event/">
+				<i class="fa fa-calendar fa-5x" aria-hidden="true"></i> <br><h3>Neues Event</h3> 
+			</a>
+			
 			<a class="btn btn-info kachel" style="width:18.75rem"
 			href="<?php
 			echo base_url ();
@@ -28,7 +35,7 @@
 			<a class="btn btn-info kachel" style="width:18.75rem"
 			href="<?php
 			echo base_url ();
-			?>PriceProfile/price_profiles">
+			?>priceProfile/price_profiles">
 				<i class="fa fa-money fa-5x" aria-hidden="true"></i> <br><h3>Meine Preisprofile</h3> 
 			</a>
 			
