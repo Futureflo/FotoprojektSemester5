@@ -12,6 +12,7 @@ class PriceProfile_model extends CI_Model {
 		return $query->result ();
 	}
 	Public function getPriceProfilesByUser($user_id) {
+		$this->db->join ( 'user', 'user_id = prpr_user_id', 'INNER JOIN' );
 		$this->db->where ( 'prpr_user_id', $user_id );
 		$this->db->where ( 'prpr_status', PriceProfileStatus::activ );
 		$query = $this->db->get ( "price_profile" );

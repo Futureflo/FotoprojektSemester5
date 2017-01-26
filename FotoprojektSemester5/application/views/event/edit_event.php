@@ -1,9 +1,12 @@
 <head>
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-</head><section class="jumbotron">
+</head>
+<section class="jumbotron">
 	<div class="container">
 		<h1 class="jumbotron-heading">Event bearbeiten</h1>
 		<?php echo form_open("event/edit/".$event->even_id); ?>
+		<?php echo validation_errors(); ?>
+		<input type="hidden" name="even_id" id="even_id" value="<?php echo($event->even_id); ?>">
 		<br>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label col-form-label-lg">Eventname</label>
@@ -49,20 +52,6 @@
 			</div>
 		</div>
 
-
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label col-form-label-lg">Preisprofil</label>
-			<div class="col-sm-10">
-				<select class="form-control" name="even_prpr_id" id="even_prpr_id" onchange="getProductVariants()">
-                <?php
-					foreach ($price_profiles as $price_profile) {
-					    echo '<option value=' . $price_profile->prpr_id . '>' . $price_profile->prpr_description . '</option>';
-					}
-				?>
-                </select>
-			</div>
-		</div>
-
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label col-form-label-lg">Druckerei</label>
 			<div class="col-sm-10">
@@ -71,6 +60,18 @@
 				 	foreach ($printers as $printer) {
 				 		echo '<option value=' . $printer->prsu_id . '>' . $printer->prsu_email . '</option>';
 				 	}
+				?>
+                </select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label col-form-label-lg">Preisprofil</label>
+			<div class="col-sm-10">
+				<select class="form-control" name="even_prpr_id" id="even_prpr_id" onchange="getProductVariants()">
+                <?php
+					foreach ($price_profiles as $price_profile) {
+					    echo '<option value=' . $price_profile->prpr_id . '>' . $price_profile->prpr_description . '</option>';
+					}
 				?>
                 </select>
 			</div>
@@ -109,10 +110,6 @@
 
 <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function() {
-     $( "#even_date" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
-     if ($( "#even_date" )) {}
-});
 	
 	function showhidePasswordfield(){
 		if($("#even_status").val() == 2){
@@ -121,9 +118,7 @@ $(function() {
 		else{
 			$("#even_password_div").hide();
 		}
-	}
-	$("#even_status").val(<?php echo $event->even_status; ?>);
-	showhidePasswordfield();
+	};
 
 
     function getProductVariants() {
@@ -175,7 +170,12 @@ $(function() {
         table.appendChild(tr);
     }    
 
-    $( document ).ready(function() {
-        getProductVariants();
-    });
+	$( document ).ready(function() {
+	    $( "#even_date" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
+		$("#even_status").val(<?php echo $event->even_status; ?>);
+		$("#even_prsu_id").val(<?php echo $event->even_prsu_id; ?>);
+		$("#even_prpr_id").val(<?php echo $event->even_prpr_id; ?>);
+		showhidePasswordfield();
+	    getProductVariants();
+	});
 </script>

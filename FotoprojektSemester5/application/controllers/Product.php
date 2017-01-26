@@ -203,6 +203,7 @@ class Product extends CI_Controller {
 				$newPath = $this->upload ( '.' . Product::base_path, $file );
 				
 				// // Wasserzeichen hochladen erzeugen
+				ini_set ( "memory_limit", - 1 );
 				Watermarkdemo::watermark ( $newPath );
 				Watermarkdemo::thumb ( $newPath );
 				
@@ -289,6 +290,61 @@ class Product extends CI_Controller {
 			$CI->product_model->update_product ( $product->prod_id, $data );
 		}
 	}
+	function repairWatermark($even_id = 0) {
+		$this->load->model ( 'product_model' );
+		$products = $this->product_model->getAllProducts ( $even_id );
+		
+		for($i = 0; $i < count ( $products ); $i ++) {
+			// for($i = 0; $i < 5; $i ++) {
+			$product = $products [$i];
+			$product->prod_filepath = Product::buildFilePath ( $product, false );
+			echo $product->prod_filepath;
+			echo "<br>";
+			// echo "<img src=\"";
+			// echo "../.." . $product->prod_filepath;
+			// echo "\"</img>";
+			
+			$src = ".." . $product->prod_filepath;
+			$dest = "." . $product->prod_filepath;
+			
+			unlink ( $dest );
+			
+			copy ( $src, $dest );
+			
+			ini_set ( "memory_limit", - 1 );
+			Watermarkdemo::watermark ( $dest );
+			Watermarkdemo::thumb ( $dest );
+			
+			echo $src . " --> " . $dest;
+			echo "<br>";
+			
+			// buildFilePath
+		}
+	}
+
+
+	function deleteProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '3');
+		return $this->product_model->update_product($id, $data);
+	}
+	function lockProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '1');
+		return $this->product_model->update_product($id, $data);
+	}
+	function unlockProductByID($id = -1){
+		if($id==-1)
+			return false;
+		$this->load->model ( 'product_model' );
+		$data = array('prod_status' => '2');
+		return $this->product_model->update_product($id, $data);
+	}
+	
 }
 abstract class ProductStatus {
 	const undefined = 0;

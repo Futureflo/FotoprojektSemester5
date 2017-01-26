@@ -7,6 +7,7 @@ include_once (dirname ( __FILE__ ) . "/Printers.php");
 class Admin extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
+		lh_checkAccess(2);
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'event_model' );
 		$data ['UsersViewHeader'] = "Alle Benutzer";

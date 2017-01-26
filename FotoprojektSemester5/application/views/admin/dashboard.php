@@ -91,6 +91,7 @@
 									echo "<th><h5>Besteller</h5></th>";
 									echo "<th><h5>Bestelldatum</h5></th>";
 									echo "<th><h5>Bestellsumme</h5></th>";
+									echo "<th><h5>Bestellung</h5></th>";
 									echo "</tr>";
 								echo '</thead>';
 								
@@ -103,6 +104,7 @@
 										echo "<td>" . $order->user_name . "</td>";
 										echo "<td>" . $order->orde_date . "</td>";
 										echo "<td>" . number_format($order->orde_sum,2,',','.' ) . "€</td>";
+										echo "<td>" . btnDownloadOrder($order) . "</td>";
 
 										echo "</tr>";
 									}
@@ -125,7 +127,13 @@
 		echo '</div>';
 		echo '<br></br>';
 	}
-		
+	
+		function btnDownloadOrder($order)
+		{
+			return '<button title="Download" onclick="fktDownloadOrder(' . $order->orde_id .')" class="btn btn-info fa fa-download fa-lg" style="margin-right:1rem"></button>';
+		}
+				
+			
 		function checkerDate($order, $modeID)
 		{
 			
@@ -172,6 +180,16 @@
 
 		}
 		
-	
-	
 ?>
+
+<script>
+function fktDownloadOrder(OrderID) {
+	$.ajax({
+		type: "POST",
+		url: "<?php echo site_url (); ?>/pdfcreator/exampleCallBillFunction/"+OrderID,
+		dataType: 'html',
+	});
+		alert ('Email wurde versendet!');
+		location.reload();
+}
+</script>

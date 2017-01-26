@@ -538,7 +538,9 @@ class Checkout extends CI_Controller {
 	}
 
 	public function paypalabort(){
-		echo "paypalabort";
+		$this->load->template ( 'checkout/paypal_abourt' );
+		$this->load->helper('html');
+		echo meta('refresh', '3;'.base_url().'checkout/reset', 'equiv');
 	}
 
 			

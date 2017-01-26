@@ -178,6 +178,14 @@
 		// addAdressObj ( $adressObj );
 		// }
 		
+		public function update_adress($data) {
+			if (empty ( $data ) || ! isset ( $data ["adre_id"] ))
+				return FALSE;
+				$this->db->where ( 'adre_id', $data ["adre_id"] );
+// 				unset ( $data ["user_id"] );
+				return $this->db->update ( 'adress', $data );
+		}
+		
 		// TODO: NACH USER UMZIEHEN SOBALD DER FERTIG IST
 		Public function getPreferedDeliveryAdress($userid) {
 			$query = $this->db->get_where ( 'user', array (

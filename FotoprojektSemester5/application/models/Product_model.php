@@ -3,6 +3,17 @@ class Product_model extends CI_Model {
 	Public function __construct() {
 		parent::__construct ();
 	}
+	Public function getAllProducts($even_id = 0) {
+		$this->db->distinct ();
+		
+		$this->db->select ( 'prod_filepath, prod_name, prod_date' );
+		
+		if ($even_id != 0) {
+			$this->db->where ( 'prod_even_id', $even_id );
+		}
+		$query = $this->db->get ( "product" );
+		return $query->result ();
+	}
 	Public function getProductsByEvent($even_id) {
 		$this->db->join ( 'product_variant', 'prod_id = prva_prod_id', 'INNER JOIN' );
 		$this->db->where ( 'prod_even_id', $even_id );
@@ -92,5 +103,14 @@ class Product_model extends CI_Model {
 	function insert_product_variant($data) {
 		return $this->db->insert ( 'product_variant', $data );
 	}
+
+	
+	Public function getAllActiveProductsForEvent($even_id) {
+		$this->db->where ( 'prod_even_id', $even_id );
+		$this->db->where ( 'prod_status!=', "3" );
+		$query = $this->db->get ( "product" );
+		return $query->result ();
+	}
+	
 }
 ?>

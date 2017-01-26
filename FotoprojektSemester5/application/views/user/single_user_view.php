@@ -11,6 +11,10 @@
 					echo "<div id='fehler_span' class='alert alert-success'>";
 					echo $this->session->flashdata ( 'pwChange' );
 					echo "</div>";
+				} elseif ($this->session->flashdata ( 'contactChange' ) != "") {
+					echo "<div id='fehler_span' class='alert alert-success'>";
+					echo $this->session->flashdata ( 'contactChange' );
+					echo "</div>";
 				}
 				?>
 	</div>
@@ -21,42 +25,63 @@
 
 <div class="container">
 			<?php
-			echo form_open ( 'user/' );
+			echo form_open ( 'user/changeUserDataAdress' );
 			?>
 		<div class="row">
 		<div class="col-md-6 col-sm-12">
-			<h2 style="text-decoration: underline;">Persönliche Daten</h2>
+			<h2>Persönliche Daten</h2>
 
 			<div class="form-group col-xs-12">
-				<label for="gender">Anrede</label> <select class="form-control" id="gender">
+				<label for="gender">Anrede</label> <select class="form-control" id="gender" name="gender">
 					<option>Herr</option>
 					<option>Frau</option>
 				</select>
 			</div>
 			<div class="form-group col-xs-12">
-				<label for="vorname">Vorname</label> <input type="text" class="form-control" id="vorname"
+				<label for="vorname">Vorname</label> <input type="text" class="form-control" id="vorname" name="firstname"
 					value="<?php
 					
 					echo $user_firstname;
 					?>">
+										<?php
+										if (validation_errors ( 'firstname' ) != null) {
+											if (form_error ( 'firstname' ) != "") {
+												echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'firstname' ) . "</div>";
+											}
+										}
+										?>
 			</div>
 			<div class="form-group col-xs-12">
-				<label for="nachname">Nachname</label> <input type="text" class="form-control" id="nachname" value="<?php
+				<label for="nachname">Nachname</label> <input type="text" class="form-control" id="nachname" name="lastname" value="<?php
 				
 				echo $user_name;
 				?>">
+										<?php
+										if (validation_errors ( 'lastname' ) != null) {
+											if (form_error ( 'lastname' ) != "") {
+												echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'lastname' ) . "</div>";
+											}
+										}
+										?>
 			</div>
 			<div class="form-group col-xs-12">
-				<label for="birthday">Geburtsdatum</label> <input class="form-control" type="date" id="birthday"
+				<label for="birthday">Geburtsdatum</label> <input class="form-control" type="date" id="birthday" name="birthday"
 					value="<?php
 					
 					echo $user_birthday;
 					?>">
+										<?php
+										if (validation_errors ( 'birthday' ) != null) {
+											if (form_error ( 'birthday' ) != "") {
+												echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'birthday' ) . "</div>";
+											}
+										}
+										?>
 			</div>
 		</div>
 
 		<div class="col-md-6 col-sm-12">
-			<h2 style="text-decoration: underline;">Adresse</h2>
+			<h2>Adresse</h2>
 			<div class="form-group col-xs-12">
 				<label for="address-chooser">Adressauswahl</label> <select onclick="changeAddresses(this)" class="selectpicker form-control"
 					data-style="btn-primary">
@@ -70,42 +95,74 @@
 					</select>
 			</div>
 			<div class="form-group col-xs-12">
-				<label for="number">Name</label> <input type="text" class="form-control" id="name" value="<?php
+				<input id="adressID" type="hidden" name="adressID" value="<?php
+				
+				echo $adre_id;
+				?>">
+				<label for="number">Name</label> <input type="text" class="form-control" id="name" name="fullname" value="<?php
 				
 				echo $adre_name;
 				?>">
+														<?php
+														if (validation_errors ( 'fullname' ) != null) {
+															if (form_error ( 'fullname' ) != "") {
+																echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'fullname' ) . "</div>";
+															}
+														}
+														?>
 			</div>
 			<div class="form-group col-xs-12">
-				<label for="street">Straße</label> <input type="text" class="form-control" id="street" value="<?php
+				<label for="street">Straße</label> <input type="text" class="form-control" id="street" name="street" value="<?php
 				
 				echo $adre_street;
 				?>">
+																		<?php
+																		if (validation_errors ( 'street' ) != null) {
+																			if (form_error ( 'street' ) != "") {
+																				echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'street' ) . "</div>";
+																			}
+																		}
+																		?>
 			</div>
 			<div class="form-group col-xs-3">
-				<label for="plz">PLZ</label> <input class="form-control" type="text" id="plz" value="<?php
+				<label for="plz">PLZ</label> <input class="form-control" type="text" id="plz" name="zip" value="<?php
 				
 				echo $adre_zip;
 				?>">
+																						<?php
+																						if (validation_errors ( 'zip' ) != null) {
+																							if (form_error ( 'zip' ) != "") {
+																								echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'zip' ) . "</div>";
+																							}
+																						}
+																						?>
 			</div>
 			<div class="form-group col-xs-9">
-				<label for="city">Stadt</label> <input type="text" class="form-control" id="city" value="<?php
+				<label for="city">Stadt</label> <input type="text" class="form-control" id="city" name="city" value="<?php
 				
 				echo $adre_city;
 				?>">
+																						<?php
+																						if (validation_errors ( 'city' ) != null) {
+																							if (form_error ( 'city' ) != "") {
+																								echo "<div class='alert alert-danger' style='margin-top: 1rem'>" . form_error ( 'city' ) . "</div>";
+																							}
+																						}
+																						?>
+			</div>
 			</div>
 		</div>
-	</div>
 	<br>
 	<div class="row">
 		<div class="form-group col-xs-6">
-			<button type="button" id="save-user-btn" class="btn btn-success btn-md">Speichern</button>
+			<button type="submit" id="save-user-btn" class="btn btn-success btn-md">Änderung speichern</button>
 		</div>
 		<div class="form-group col-xs-6">
 			<a class="active" href="<?php
 			
 			echo base_url ();
 			?>user/call_change_address_view">
-				<button type="button" id="sa-user-btn" class="btn btn-primary btn-md">Neue Adresse</button>
+				<button type="button" id="sa-user-btn" class="btn btn-primary btn-md">Neue Adresse hinzufügen</button>
 			</a>
 		</div>
 	</div>
@@ -122,8 +179,14 @@
 		?>user/call_change_email_view" method="post">
 
 			<div class="col-md-8 col-sm-8">
-				<h2>Benutzerdaten ändern</h2>
-
+				<h2>Benutzerdaten</h2>
+				<div class="form-group col-xs-12">
+				<span class="label label-primary"><?php
+				
+				echo $user_email;
+				?></span>
+				
+</div>
 				<div class="form-group col-xs-12">
 					<button name="submit" type="submit" id="save-mail-btn" class="btn btn-success btn-md">E-Mail Adresse ändern</button>
 					<a class="active" href="<?php
@@ -192,6 +255,7 @@
 				?>;
 
     function changeAddresses(select){
+    	document.getElementById('adressID').value = addresses[select.selectedIndex].adre_id;
 		document.getElementById('name').value = addresses[select.selectedIndex].adre_name;
 		document.getElementById('street').value = addresses[select.selectedIndex].adre_street;
 		document.getElementById('plz').value = addresses[select.selectedIndex].adre_zip;

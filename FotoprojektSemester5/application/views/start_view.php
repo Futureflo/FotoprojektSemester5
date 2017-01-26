@@ -1,4 +1,4 @@
-<section class="section-white" style="margin: 3.25rem 0rem 0rem 0rem;">
+<section class="section-white" style="margin: 1.8rem 0rem 0rem 0rem;">
 
 	<div id="carousel-example-generic" class="carousel slide float-md-left" data-ride="carousel">
 		<!-- Indicators -->
@@ -189,9 +189,9 @@ function searchEvent(ev){
     		  type: "POST",
     		  url: "<?php
 								
-								echo site_url ();
-								?>/Start/search/"+ev,
-    		  dataType: 'html',
+								echo base_url ();
+								?>/Start/search",
+    		  data: {search: ev},
     		  success:function(data){
     			  try{  
     				  //console.log(data);
@@ -269,7 +269,7 @@ function createPic(prodfile, prodname, status, id){
         i.style.textAlign = "center";
         i.setAttribute("aria-hidden","true");
         i.setAttribute("id", "place"+count);
-        i.onclick = function(){proofEvent(this, id);};
+        //i.onclick = function(){proofEvent(this, id);};
         count++;
         
         div.appendChild(i);

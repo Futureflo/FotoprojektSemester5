@@ -109,8 +109,8 @@ form {
 						echo "</td>";
 						
 						echo "<td>";
-						echo '<button class="btn btn-info btn-sm" style="width:50%">';
-						echo '<i class="fa fa-refresh fa-lg"> Aktualisieren</i>';
+						echo '<button class="btn btn-info btn-sm" title="Preis aktualisieren">';
+						echo '<i class="fa fa-refresh fa-lg"></i>';
 						echo '</button>';
 						echo form_close ();
 					}
@@ -121,8 +121,8 @@ form {
 								'prty_id' => $price->prty_id 
 						) );
 						
-						echo '<button class="btn btn-danger btn-sm">';
-						echo '<i class="fa fa-trash fa-lg"> Löschen</i>';
+						echo '<button class="btn btn-danger btn-sm" title="Format löschen">';
+						echo '<i class="fa fa-trash fa-lg"></i>';
 						echo '</button>';
 						echo form_close ();
 					}

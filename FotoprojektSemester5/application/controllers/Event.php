@@ -20,24 +20,87 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/new_event_view', $data );
 	}
 	public function showSingleEvent($shortcode) {
+		echo '<div class=\"modal hide\" id=\"myModal\">';
+		echo '</div>';
+		
 		$this->load->model ( 'event_model' );
 		$event = $this->event_model->getSingleEventByShortcode ( $shortcode );
 		$data ['event'] = $event [0];
 		
-		$data ['products_pbl'] = Event::getProductsFromEvent ( $event [0], false );
-		$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
+		if ($event [0]->even_status == EventStatus::pbl) {
+			
+			$data ['products_pbl'] = Event::getProductsFromEvent ( $event [0], false );
+			$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
+			
+			$this->load->template ( 'event/single_event_view', $data );
+		} else
+			$this->load->template ( 'event/accept_event_view', $data );
+	}
+	public function checkCode() {
+		$password = $this->input->post ( 'password' );
+		$event_id = $this->input->post ( 'even_id' );
+		$even_url = $this->input->post ( 'even_url' );
 		
-		$this->load->template ( 'event/single_event_view', $data );
+		$this->load->model ( 'event_model' );
+		$checked = $this->event_model->checkCode ( $event_id, $password );
+		echo $password . "<br>";
+		echo $checked;
+		
+		if ($checked) {
+			$event = $this->event_model->getSingleEventByShortcode ( $even_url );
+			$data ['event'] = $event [0];
+			$data ['products_pbl'] = Event::getProductsFromEvent ( $event [0], false );
+			$data ['products_prv'] = Event::getProductsFromEvent ( $event [0], true );
+			
+			$this->load->template ( 'event/single_event_view', $data );
+		} else {
+			$this->session->set_flashdata ( 'wrong_code', '<div class="alert alert-danger text-center">Falscher Bestätigungscode!</div>' );
+			redirect ( 'event/' . $even_url );
+		}
 	}
 	public function showEventApproval() {
+		lh_checkAccess ();
 		$this->load->model ( 'event_model' );
+		$this->load->model ( 'product_model' );
 		$user_id = $this->session->userdata ( 'user_id' );
-		$events = $this->event_model->getEventsFromUser ( $user_id );
+		$user_email = $this->session->userdata ( 'user_email' );
+		$allEvents = $this->event_model->getAllEvents ();
 		
-		foreach ( $events as $event ) {
-			$event->products_prv = Event::getProductsFromEvent ( $event, true );
+		// filter for deleted events
+		$noDeletedEvents = array ();
+		foreach ( $allEvents as $event ) {
+			if ($event->even_status != 4)
+				array_push ( $noDeletedEvents, $event );
 		}
-		$data ['events'] = $events;
+		
+		// add events where user is organiser
+		$userIsOrganiser = array ();
+		foreach ( $noDeletedEvents as $event ) {
+			if (strcasecmp ( $event->even_host_email, $user_email ) == 0)
+				array_push ( $userIsOrganiser, $event );
+		}
+		
+		// add events where user is photograf and no organiser is defined
+		foreach ( $noDeletedEvents as $event ) {
+			if (strcasecmp ( $event->even_host_email, "" ) == 0 && $event->even_user_id == $user_id)
+				array_push ( $userIsOrganiser, $event );
+		}
+		
+		foreach ( $userIsOrganiser as $event ) {
+			$event->all_products = $this->product_model->getAllActiveProductsForEvent ( $event->even_id );
+			$event->amount_public = 0;
+			$event->amount_private = 0;
+			foreach ( $event->all_products as $product ) {
+				if ($product->prod_status == 1)
+					$event->amount_public = $event->amount_public + 1;
+				if ($product->prod_status == 2)
+					$event->amount_private = $event->amount_private + 1;
+				$product->FullFilePath = Product::buildFilePath ( $product, true );
+			}
+		}
+		
+		$data ['events'] = $userIsOrganiser;
+		$data ["debugmsg"] = json_encode ( $userIsOrganiser );
 		$this->load->template ( 'event/single_event_approval_view', $data );
 	}
 	public function deleteEvent() {
@@ -72,25 +135,23 @@ class Event extends CI_Controller {
 		$this->load->template ( 'event/all_event_view', $data );
 	}
 	public function editEvent($id = -1) {
-		lh_checkAccess(1);
-
+		lh_checkAccess ( 1 );
+		
 		if ($id == - 1)
 			redirect ( '/checkout', 'refresh' );
 		if ($this->input->post ( 'submit' ) == "back")
 			redirect ( '/event/uebersicht/', 'refresh' );
-
-
-		// set form validation rules
+			
+			// set form validation rules
 		$this->form_validation->set_rules ( 'even_name', 'Event Name', 'trim|required|min_length[3]|max_length[30]' );
 		$this->form_validation->set_rules ( 'even_host_email', 'E-Mail Adresse', 'trim|min_length[3]|max_length[100]' );
 		$this->form_validation->set_rules ( 'even_date', 'Datum', 'trim|required|min_length[10]|max_length[10]' );
-		//log_message("debug","status: ".$this->input->post ( 'even_status' ));
-		if($this->input->post ( 'even_status' ) == "2"){
-			//log_message("debug","true: ");
+		// log_message("debug","status: ".$this->input->post ( 'even_status' ));
+		if ($this->input->post ( 'even_status' ) == "2") {
+			// log_message("debug","true: ");
 			$this->form_validation->set_rules ( 'even_password', 'Event Password', 'required|trim|min_length[3]|max_length[30]' );
 		}
-
-
+		
 		if ($this->form_validation->run () == FALSE) {
 			$this->load->model ( 'event_model' );
 			$this->load->model ( 'printers_model' );
@@ -110,10 +171,10 @@ class Event extends CI_Controller {
 					'even_status' => $this->input->post ( 'even_status' ),
 					'even_password' => $this->input->post ( 'even_password' ),
 					'even_prsu_id' => $this->input->post ( 'even_prsu_id' ),
-					'even_prpr_id' => $this->input->post ( 'even_prpr_id' )
+					'even_prpr_id' => $this->input->post ( 'even_prpr_id' ) 
 			);
 			$this->load->model ( 'event_model' );
-			$this->event_model->update_event($this->input->post ( 'even_id' ), $event);
+			$this->event_model->update_event ( $this->input->post ( 'even_id' ), $event );
 			redirect ( '/event/uebersicht/', 'refresh' );
 		}
 	}
@@ -138,7 +199,6 @@ class Event extends CI_Controller {
 	public function deleteEventByIdForAdmin($even_id) {
 		$this->changeEventStatus ( $even_id, EventStatus::deleted );
 	}
-	
 	public function deleteEventById($even_id) {
 		$this->changeEventStatus ( $even_id, EventStatus::deleted );
 		$this->load->model ( 'event_model' );
@@ -225,8 +285,8 @@ class Event extends CI_Controller {
 			$even_host_email = $this->input->post ( 'even_host_email' );
 			
 			$even_status = $this->input->post ( 'even_status' );
-				
-				// submit
+			
+			// submit
 			if ($this->form_validation->run () == FALSE) {
 				// fails
 				$this->load->view ( 'event/new_event_view' );

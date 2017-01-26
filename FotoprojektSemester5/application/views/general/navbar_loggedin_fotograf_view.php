@@ -49,16 +49,24 @@
 						?>user/dashboard/">Umsatzanzeige</a>
 					</div>
 				</li>
+			<li class="nav-item dropdown "><a class="nav-link dropdown-toggle" href="#" id="supportedContentDropdown" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">Veranstalter</a>
+					<div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+					<a class="dropdown-item" href="<?php
+					echo base_url ();
+					?>event/approval/">Eventbilder bearbeiten</a>
+						</div>
+						</li>
 				
 				<li class="nav-item dropdown" aria-labelledby="exCollapsingNavbar"><a class="nav-link dropdown-toggle" href="http://example.com"
 					id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archiv</a>
 					<div class="dropdown-menu dropdown-menu-admin" aria-labelledby="supportedContentDropdown">
 						 <a class="dropdown-item" href="<?php
 							echo base_url ();
-							?>admin/archivedProduct_types/">Formate</a> 
+							?>ProductType/archivedProductTypes/">Formate</a> 
 						 <a class="dropdown-item" href="<?php
 							echo base_url ();
-							?>admin/archivedPrice_profiles/">Preisprofile</a> 
+							?>PriceProfile/archivedPriceProfiles/">Preisprofile</a> 
 					</div>
 				</li>
 
